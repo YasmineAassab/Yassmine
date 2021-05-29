@@ -1,0 +1,36 @@
+<div class="card">
+  <div class="card-header font-italic font-weight-bold">
+    LISTE DES TACHES
+  </div>
+  <div class="card-body">
+    <table class="table-bordered">
+      <thead>
+      <th>Libelle</th>
+      <th>Date</th>
+      <th>Responsable</th>
+      <th>Categorie Tache</th>
+      <th>Action
+        <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#myModal">+
+        </button>
+      </th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let c of taches;index as i">
+        <td>{{c.libelle}}</td>
+        <td>{{c.dateDemarrageEffective}}</td>
+        <td>{{c.responsable.nom}} {{c.responsable.prenom}}</td>
+        <td>{{c.categorieTache.code}}</td>
+        <td>
+          <span class="btn btn-outline-danger btn-sm mr-2" >
+            <i class="fa fa-trash"></i>
+          </span>
+          <span class="btn btn-outline-warning btn-sm">
+              <i class="fa fa-edit"></i>
+          </span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer"></div>
+</div>

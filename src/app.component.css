@@ -1,0 +1,6 @@
+.globale{
+  display: flex;
+}
+.nav-bar{
+  z-index: 1000;
+}

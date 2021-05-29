@@ -1,0 +1,48 @@
+<div class="card row">
+  <div class="card-header font-italic font-weight-bold">
+    LISTE DES GROUPES DES TACHES
+  </div>
+  <div class="card-body ">
+    <table class="table-bordered table-hover">
+      <thead>
+      <tr>
+        <th>Equipe</th>
+        <th>Categorie</th>
+        <th>Libelle</th>
+        <th>Lot</th>
+        <th>Date Demarrage</th>
+        <th>Action
+          <!--
+          <span class="btn btn-info fa fa-plus " (click)="open(relative)">
+          -->
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let c of groupeTaches;index as i">
+        <td>{{c.equipe.libelle}}</td>
+        <td>{{c.lot.code}}</td>
+        <td>{{c.libelle}}</td>
+        <td>{{c.lot.libelle}}</td>
+        <td>{{c.dateDemarrageEffective}}</td>
+        <td>
+          <span class="btn btn-outline-danger btn-sm mr-2" (click)="deleteGroupeTache(i)">
+            <i class="fa fa-trash"></i>
+          </span>
+          <span class="btn btn-outline-primary btn-sm mr-2" (click)="findTaches(c)">
+              <i class="fa fa-search"></i>
+          </span>
+          <span class="btn btn-outline-warning btn-sm">
+              <i class="fa fa-edit"></i>
+          </span>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot></tfoot>
+    </table>
+  </div>
+  <div class="card-footer "></div>
+
+
+
+
