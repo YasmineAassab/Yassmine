@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {MessageService} from 'primeng/api';
-import {DeclarationISService} from "../../../../controller/service/declaration-is.service";
-import {Table} from "primeng/table";
-import {DeclarationIsObject} from "../../../../controller/model/declaration-is-object.model";
-import {Facture} from "../../../../controller/model/facture.model";
-import {DeclarationIS} from "../../../../controller/model/declaration-is.model";
-import {Router} from "@angular/router";
+import {DeclarationISService} from '../../../../controller/service/declaration-is.service';
+import {Table} from 'primeng/table';
+import {DeclarationIsObject} from '../../../../controller/model/declaration-is-object.model';
+import {Facture} from '../../../../controller/model/facture.model';
+import {DeclarationIS} from '../../../../controller/model/declaration-is.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-declaration-is-edit',
@@ -19,8 +19,8 @@ export class DeclarationIsEditComponent implements OnInit {
 
   constructor(private messageService: MessageService, private service: DeclarationISService, private router: Router) {
     this.etat = [
-      "valider",
-      "brouillon"
+      'valider',
+      'brouillon'
     ];
   }
 
@@ -29,7 +29,7 @@ export class DeclarationIsEditComponent implements OnInit {
       {label: 'Débit', value: 'debit'},
       {label: 'Ctédit', value: 'credit'}
     ];
-       this.service.findFactures().subscribe(data => this.selected.factures = data );
+     this.service.findFactures().subscribe(data => this.selected.factures = data );
   }
 
   public edit(selected: DeclarationIS){
@@ -43,7 +43,7 @@ export class DeclarationIsEditComponent implements OnInit {
               life: 3000
             });
             this.selected = new DeclarationIS();
-            this.router.navigateByUrl('/view/commande');
+            this.router.navigateByUrl('/view/declarationIS');
           }
         }, error => {
           this.messageService.add({
