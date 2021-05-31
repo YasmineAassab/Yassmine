@@ -1,0 +1,22 @@
+
+/*div.p-inputgroup{
+    width: 200px;
+    padding-right: 50px;
+}*/
+div.footer{
+    display: flex;
+    justify-content: center;
+    /*margin-right: 150px;*/
+
+}
+
+/*
+p-button.my-button{
+    align-self: center;
+    justify-self: center;
+}
+*/
+div.card-header{
+    display: flex;
+    justify-content: center;
+}

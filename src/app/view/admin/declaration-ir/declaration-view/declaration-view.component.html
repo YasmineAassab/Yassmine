@@ -1,0 +1,27 @@
+<p-dialog [(visible)]="viewDialog" [style]="{width: '450px'}" header="Commande Details" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="p-field">
+            <label for="ref">CIN :</label>
+            <input type="text" pInputText id="ref" [(ngModel)]="selected.employe.cin" disabled />
+        </div>
+        <div class="p-field">
+            <label for="total">Nom :</label>
+            <input type="text" pInputText id="total" [(ngModel)]="selected.employe.nom" disabled />
+        </div>
+        <div class="p-field">
+            <label for="total">Prenom :</label>
+            <input type="text" pInputText id="total" [(ngModel)]="selected.employe.prenom" disabled />
+        </div>
+        <div class="p-field">
+            <label for="total">Salaire :</label>
+            <input type="text" pInputText id="total" [(ngModel)]="selected.employe.salaire" disabled />
+        </div>
+
+
+
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Fermer" icon="pi pi-times" class="p-button-text" (click)="hideViewDialog()"></button>
+    </ng-template>
+</p-dialog>

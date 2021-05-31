@@ -37,19 +37,31 @@ import {AppNotfoundComponent} from './pages/app.notfound.component';
 import {AppErrorComponent} from './pages/app.error.component';
 import {AppAccessdeniedComponent} from './pages/app.accessdenied.component';
 import {AppLoginComponent} from './pages/app.login.component';
-//import {CommandesComponent} from './view/admin/commandes/commandes.component';
-import {DeclarationIsCreateComponent} from "./view/admin/declarations-is/declaration-is-create/declaration-is-create.component";
-import {DeclarationIsEditComponent} from "./view/admin/declarations-is/declaration-is-edit/declaration-is-edit.component";
-import {DeclarationsISComponent} from "./view/admin/declarations-is/declarations-is.component";
+
+import {LoginComponent} from './Security/login/login.component';
+import {DeclarationsISComponent} from './view/admin/declarations-is/declarations-is.component';
+import {DeclarationIsCreateComponent} from './view/admin/declarations-is/declaration-is-create/declaration-is-create.component';
+import {DeclarationIsEditComponent} from './view/admin/declarations-is/declaration-is-edit/declaration-is-edit.component';
+import {SignUpComponent} from './pages/sign-up/sign-up.component';
+import {HomePageComponent} from './home-page/home-page.component';
+import {DeclarationIrComponent} from './view/admin/declaration-ir/declaration-ir.component';
+import {ProfileComponent} from './Security/profile/profile.component';
 
 @NgModule({
     imports: [
         RouterModule.forRoot([
+            {path: '', component: AppLoginComponent},
+            {path: 'sign-up', component: SignUpComponent},
             {
                 path: '', component: AppMainComponent,
                 children: [
-                    {path: '', component: DashboardDemoComponent},
-                    {path: 'view/declarationIS', component: DeclarationsISComponent},
+                    {path: 'home-page', component: HomePageComponent},
+                    {path: 'declaration-ir', component: DeclarationIrComponent},
+                    {path: 'profile', component: ProfileComponent},
+
+                   /* {path: '', component: DashboardDemoComponent},*/
+
+                    {path: 'declaration-is', component: DeclarationsISComponent},
                     {path: 'view/declarations-is/create', component: DeclarationIsCreateComponent},
                     {path: 'view/declarations-is/edit', component: DeclarationIsEditComponent},
                     {path: 'uikit/formlayout', component: FormLayoutDemoComponent},

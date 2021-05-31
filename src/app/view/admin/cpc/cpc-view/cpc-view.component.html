@@ -1,0 +1,424 @@
+<div class="card"><div class="row"><div class="col-md-11"><h2 align="center"  style="color: #0772b3"><i>CPC  CREATE</i></h2></div>
+<div class="col-md-1">
+            <button pButton pRipple type="button" style="margin-right: 8px" label="Chercher Cpc" class="p-button-rounded" routerLink="cpc-recherch" routerLinkActive="active"></button>
+</div></div>
+   </div>
+<div class="card">
+    <div class="p-formgroup-inline" style="margin-left: 30%">
+        <div class="p-field" >
+            <label class="p-sr-only">Date min</label>
+            <input id="firstname" type="date" pInputText [(ngModel)]="calCpcVo.datemin">
+        </div>
+        <div class="p-field">
+            <label class="p-sr-only">Date max</label>
+            <input id="lastname" type="date" pInputText [(ngModel)]="calCpcVo.datemax">
+        </div>
+        <button pButton type="button" [disabled]="calCpcVo.datemin == null || calCpcVo.datemax==null" class="p-button-outlined" label="Search" (click)="find();init();detaille()"></button>
+    </div>
+
+
+</div>
+    <div id="tab" class="card" style="background-color: transparent">
+
+        <p-tabView styleClass="tabview-custom">
+            <p-tabPanel>
+                <ng-template pTemplate="header">
+                    <i class="pi pi-calendar"></i>
+                    <span>Produits D'Exploitations</span>
+                </ng-template>
+                <p-table #dt [value]="items" [columns]="cols2" [rows]="4" [paginator]="true"
+                         [rowHover]="true" dataKey="id"
+                         styleClass="p-datatable-customers"
+                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+                    <ng-template pTemplate="caption">Factures
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Ref</th>
+                            <th>Societe Source</th>
+                            <th>Societe Distination</th>
+                            <th>libelle</th>
+                            <th>MHT</th>
+                            <th>tva</th>
+                            <th>MTVA</th>
+                            <th>MTTC</th>
+                            <th>Annee</th>
+                            <th>mois</th>
+                            <th>trim</th>
+                            <th>Operation</th>
+                            <th>comptable</th>
+                            <th>action</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-c  >
+                        <tr>
+                           <td>{{c.ref}}</td>
+                            <td><!--{{c.societeSource.ice}}--></td>
+                            <td><!--{{c.societeDistination.ice}}--></td>
+                            <td>{{c.libelle}} </td>
+                            <td>{{c.montantHorsTaxe}}<i>$</i></td>
+                            <td><!--{{c.tva.valeur}}--><i>%</i></td>
+                            <td>{{c.montantTVA}}<i>$</i></td>
+                            <td>{{c.montantTTC}}<i>$</i></td>
+                            <td>{{c.annee}}</td>
+                            <td>{{c.mois}}</td>
+                            <td>{{c.trim}}</td>
+                            <td>{{c.typeOperation}}</td>
+                            <td>{{c.compteComptable.code}}</td>
+                            <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(c,items);click()"></button></td>
+                        </tr>
+                    </ng-template>
+
+                </p-table>
+            </p-tabPanel>
+            <p-tabPanel header="Header II">
+                <ng-template pTemplate = "header">
+                    <i class="pi pi-user"></i>
+                    <span>Charges D'Exploitation</span>
+                </ng-template>
+                <p-table #dt [value]="items1" [columns]="cols2" [rows]="4" [paginator]="true" [globalFilterFields]="['reference','total','totalPaye']"
+                         [rowHover]="true" dataKey="id"
+                         styleClass="p-datatable-customers"
+                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+                    <ng-template pTemplate="caption">Factures
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Ref</th>
+                            <th>Societe Source</th>
+                            <th>Societe Distination</th>
+                            <th>libelle</th>
+                            <th>MHT</th>
+                            <th>tva</th>
+                            <th>MTVA</th>
+                            <th>MTTC</th>
+                            <th>Annee</th>
+                            <th>mois</th>
+                            <th>trim</th>
+                            <th>Operation</th>
+                            <th>comptable</th>
+                            <th>action</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-c>
+                        <tr>
+                            <td>{{c.ref}}</td>
+                            <td><!--{{c.societeSource.ice}}--></td>
+                            <td><!--{{c.societeDistination.ice}}--></td>
+                            <td>{{c.libelle}} </td>
+                            <td>{{c.montantHorsTaxe}}<i>$</i></td>
+                            <td><!--{{c.tva.valeur}}--><i>%</i></td>
+                            <td>{{c.montantTVA}}<i>$</i></td>
+                            <td>{{c.montantTTC}}<i>$</i></td>
+                            <td>{{c.annee}}</td>
+                            <td>{{c.mois}}</td>
+                            <td>{{c.trim}}</td>
+                            <td>{{c.typeOperation}}</td>
+                            <td>{{c.compteComptable.code}}</td>
+                            <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(c,items1);find();init();detaille();click()"></button></td>
+                        </tr>
+                    </ng-template>
+
+                </p-table>
+            </p-tabPanel>
+            <p-tabPanel header="Header III">
+                <ng-template pTemplate = "header">
+                    <i class="pi pi-user"></i>
+                    <span>Produits Financiers</span>
+                </ng-template>
+                <p-table #dt [value]="items2" [columns]="cols2" [rows]="4" [paginator]="true" [globalFilterFields]="['reference','total','totalPaye']"
+                         [rowHover]="true" dataKey="id"
+                         styleClass="p-datatable-customers"
+                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+                    <ng-template pTemplate="caption">Factures
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Ref</th>
+                            <th>Societe Source</th>
+                            <th>Societe Distination</th>
+                            <th>libelle</th>
+                            <th>MHT</th>
+                            <th>tva</th>
+                            <th>MTVA</th>
+                            <th>MTTC</th>
+                            <th>Annee</th>
+                            <th>mois</th>
+                            <th>trim</th>
+                            <th>Operation</th>
+                            <th>comptable</th>
+                            <th>action</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-c>
+                        <tr>
+                            <td>{{c.ref}}</td>
+                            <td><!--{{c.societeSource.ice}}--></td>
+                            <td><!--{{c.societeDistination.ice}}--></td>
+                            <td>{{c.libelle}} </td>
+                            <td>{{c.montantHorsTaxe}}<i>$</i></td>
+                            <td><!--{{c.tva.valeur}}--><i>%</i></td>
+                            <td>{{c.montantTVA}}<i>$</i></td>
+                            <td>{{c.montantTTC}}<i>$</i></td>
+                            <td>{{c.annee}}</td>
+                            <td>{{c.mois}}</td>
+                            <td>{{c.trim}}</td>
+                            <td>{{c.typeOperation}}</td>
+                            <td>{{c.compteComptable.code}}</td>
+                            <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(c,items2);find();init();detaille();click()"></button></td>
+                        </tr>
+                    </ng-template>
+
+                </p-table>
+            </p-tabPanel>
+            <p-tabPanel header="Header IV">
+                <ng-template pTemplate = "header">
+                    <i class="pi pi-user"></i>
+                    <span>Charges Financiers</span>
+                </ng-template>
+                <p-table #dt [value]="items3" [columns]="cols2" [rows]="4" [paginator]="true" [globalFilterFields]="['reference','total','totalPaye']"
+                         [rowHover]="true" dataKey="id"
+                         styleClass="p-datatable-customers"
+                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+                    <ng-template pTemplate="caption">Factures
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Ref</th>
+                            <th>Societe Source</th>
+                            <th>Societe Distination</th>
+                            <th>libelle</th>
+                            <th>MHT</th>
+                            <th>tva</th>
+                            <th>MTVA</th>
+                            <th>MTTC</th>
+                            <th>Annee</th>
+                            <th>mois</th>
+                            <th>trim</th>
+                            <th>Operation</th>
+                            <th>comptable</th>
+                            <th>action</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-c>
+                        <tr>
+                            <td>{{c.ref}}</td>
+                            <td><!--{{c.societeSource.ice}}--></td>
+                            <td><!--{{c.societeDistination.ice}}--></td>
+                            <td>{{c.libelle}} </td>
+                            <td>{{c.montantHorsTaxe}}<i>$</i></td>
+                            <td><!--{{c.tva.valeur}}--><i>%</i></td>
+                            <td>{{c.montantTVA}}<i>$</i></td>
+                            <td>{{c.montantTTC}}<i>$</i></td>
+                            <td>{{c.annee}}</td>
+                            <td>{{c.mois}}</td>
+                            <td>{{c.trim}}</td>
+                            <td>{{c.typeOperation}}</td>
+                            <td>{{c.compteComptable.code}}</td>
+                            <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(c,items3);find();init();detaille();click()"></button></td>
+                        </tr>
+                    </ng-template>
+
+                </p-table>
+            </p-tabPanel>
+            <p-tabPanel header="Header V">
+                <ng-template pTemplate = "header">
+                    <i class="pi pi-user"></i>
+                    <span>Produits Non Courants</span>
+                </ng-template>
+                <p-table #dt [value]="items4" [columns]="cols2" [rows]="4" [paginator]="true" [globalFilterFields]="['reference','total','totalPaye']"
+                         [rowHover]="true" dataKey="id"
+                         styleClass="p-datatable-customers"
+                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+                    <ng-template pTemplate="caption">Factures
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Ref</th>
+                            <th>Societe Source</th>
+                            <th>Societe Distination</th>
+                            <th>libelle</th>
+                            <th>MHT</th>
+                            <th>tva</th>
+                            <th>MTVA</th>
+                            <th>MTTC</th>
+                            <th>Annee</th>
+                            <th>mois</th>
+                            <th>trim</th>
+                            <th>Operation</th>
+                            <th>comptable</th>
+                            <th>action</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-c>
+                        <tr>
+                            <td>{{c.ref}}</td>
+                            <td><!--{{c.societeSource.ice}}--></td>
+                            <td><!--{{c.societeDistination.ice}}--></td>
+                            <td>{{c.libelle}} </td>
+                            <td>{{c.montantHorsTaxe}}<i>$</i></td>
+                            <td><!--{{c.tva.valeur}}--><i>%</i></td>
+                            <td>{{c.montantTVA}}<i>$</i></td>
+                            <td>{{c.montantTTC}}<i>$</i></td>
+                            <td>{{c.annee}}</td>
+                            <td>{{c.mois}}</td>
+                            <td>{{c.trim}}</td>
+                            <td>{{c.typeOperation}}</td>
+                            <td>{{c.compteComptable.code}}</td>
+                            <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(c,items4);find();init();detaille();click()"></button></td>
+                        </tr>
+                    </ng-template>
+
+                </p-table>
+            </p-tabPanel>
+            <p-tabPanel header="Header VI">
+                <ng-template pTemplate = "header">
+                    <i class="pi pi-user"></i>
+                    <span>Charges Non Courants</span>
+                </ng-template>
+                <p-table #dt [value]="items5" [columns]="cols2" [rows]="4" [paginator]="true" [globalFilterFields]="['reference','total','totalPaye']"
+                         [rowHover]="true" dataKey="id"
+                         styleClass="p-datatable-customers"
+                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+                    <ng-template pTemplate="caption">Factures
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Ref</th>
+                            <th>Societe Source</th>
+                            <th>Societe Distination</th>
+                            <th>libelle</th>
+                            <th>MHT</th>
+                            <th>tva</th>
+                            <th>MTVA</th>
+                            <th>MTTC</th>
+                            <th>Annee</th>
+                            <th>mois</th>
+                            <th>trim</th>
+                            <th>Operation</th>
+                            <th>comptable</th>
+                            <th>action</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-c>
+                        <tr >
+                            <td>{{c.ref}}</td>
+                            <td><!--{{c.societeSource.ice}}--></td>
+                            <td><!--{{c.societeDistination.ice}}--></td>
+                            <td>{{c.libelle}} </td>
+                            <td>{{c.montantHorsTaxe}}<i>$</i></td>
+                            <td><!--{{c.tva.valeur}}--><i>%</i></td>
+                            <td>{{c.montantTVA}}<i>$</i></td>
+                            <td>{{c.montantTTC}}<i>$</i></td>
+                            <td>{{c.annee}}</td>
+                            <td>{{c.mois}}</td>
+                            <td>{{c.trim}}</td>
+                            <td>{{c.typeOperation}}</td>
+                            <td>{{c.compteComptable.code}}</td>
+                            <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(c,items5);find();init();detaille();click()"></button></td>
+                        </tr>
+                    </ng-template>
+
+                </p-table>
+            </p-tabPanel>
+        </p-tabView>
+    </div>
+
+<div class="p-grid">
+    <div class="p-col-12">
+        <div class="card">
+
+
+<p-table [value]="cpcTable" >  <!-- [scrollable]="true" scrollHeight="200px"-->
+    <ng-template pTemplate="caption">
+        Compte Des Produits Et Des Charges
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Numero</th>
+            <th>Libelle</th>
+            <th>Montant(DH)</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body">
+        <tr>
+            <td>I</td>
+            <td>Produits d'exploitation</td>
+            <td>{{produitExp}}</td>
+
+        </tr>
+        <tr>
+            <td>II</td>
+            <td>Charges d'exploitation</td>
+            <td>{{chargEx}}</td>
+        </tr>
+        <tr>
+            <td>III</td>
+            <td>Resultat d'exploitation(I - II)</td>
+            <td>{{resultatExploi}}</td>
+
+        </tr>
+        <tr>
+            <td>IV</td>
+            <td>Produits financiers</td>
+            <td>{{prodFinance}}</td>
+
+        </tr>
+        <tr>
+            <td>V</td>
+            <td>Charges financiers</td>
+            <td>{{chargFinance}}</td>
+
+        </tr>
+        <tr>
+            <td>VI</td>
+            <td>Resultat financiers(IV - V)</td>
+            <td>{{resultatFinance}}</td>
+        </tr>
+        <tr>
+            <td>VII</td>
+            <td>Resultat courant(III - VI)</td>
+            <td>{{resultatCourant}}</td>
+        </tr>
+        <tr>
+            <td>VIII</td>
+            <td>Produits non courants</td>
+            <td>{{prodNCourant}}</td>
+        </tr>
+        <tr>
+            <td>IX</td>
+            <td>Charges non courants</td>
+            <td>{{chargNCourant}}</td>
+
+        </tr>
+        <tr>
+            <td>X</td>
+            <td>Resultat non courant(VII - IX)</td>
+            <td>{{resultatNonCourant}}</td>
+
+        </tr>
+        <tr>
+            <td>XI</td>
+            <td>Resultat avant impots(VII + X)</td>
+            <td>{{resultatAvantImpots}}</td>
+
+        </tr>
+        <tr>
+            <td>XII</td>
+            <td>Impots sur les Resultats</td>
+            <td>{{surImpots}}</td>
+        </tr>
+        <tr>
+            <td>XIII</td>
+            <td>Resultat net(XI - XII)</td>
+            <td>{{resultatNet}}</td>
+        </tr>
+    </ng-template>
+</p-table>
+    </div>
+        <div class="card" style="background-color: transparent; border-color: transparent">
+            <button type="button" class="btn btn-outline-dark" (click)="save()">save</button>
+       </div>
+</div>
+</div>
+

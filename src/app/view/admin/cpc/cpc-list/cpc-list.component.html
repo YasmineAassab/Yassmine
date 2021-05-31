@@ -1,0 +1,59 @@
+<p-dialog [(visible)]="viewDialog" p-dialog   [style]="{width: '50vw'}" [baseZIndex]="10000">
+    <h2 style="text-align: center">Facture </h2>
+    <ng-template pTemplate="content">
+        <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-12 p-md-4">
+            <label for="ref">Ref</label>
+            <input type="text" pInputText id="ref" [(ngModel)]="selected.ref" required autofocus />
+        </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label for="libelle">Libelle</label>
+                <input type="text" pInputText id="libelle" [(ngModel)]="selected.libelle" required autofocus />
+            </div>
+        <div class="p-field p-col-12 p-md-4">
+            <label for="annee">Annee</label>
+            <input type="number" pInputText id="annee"   [(ngModel)]="selected.annee" required autofocus />
+        </div>
+
+        <div class="p-field p-col-12 p-md-4">
+            <label for="mois">Mois</label>
+            <input type="number" pInputText id="mois"  [(ngModel)]="selected.mois" required autofocus />
+        </div>
+        <div class="p-field p-col-12 p-md-4">
+            <label for="date">Date</label>
+            <input type="date" pInputText id="date" [(ngModel)]="selected.dateOperation" required autofocus />
+        </div>
+        <div class="p-field p-col-12 p-md-4">
+            <label for="trim">Trim</label>
+            <input type="number" pInputText id="trim" [(ngModel)]="selected.trim" required autofocus />
+        </div>
+        <div class="p-field p-col-12 p-md-4">
+            <label for="mntHt">Montant Hors Taxe</label>
+            <input type="number" pInputText id="mntHt" [(ngModel)]="selected.montantHorsTaxe" required autofocus />
+        </div>
+        <div class="p-field p-col-12 p-md-4">
+            <label for="mnTva">Montant TVA</label>
+            <input type="number" pInputText id="mnTva" [(ngModel)]="selected.montantTVA" required autofocus />
+        </div>
+        <div class="p-field p-col-12 p-md-4">
+            <label for="mnTtc">Montant TTC</label>
+            <input type="number" pInputText id="mnTtc" [(ngModel)]="selected.montantTTC" required autofocus />
+        </div>
+        <div class="p-field p-col-12 p-md-4">
+            <label for="compteComptable">Compte Comptable</label>
+            <input type="text" pInputText id="compteComptable" [(ngModel)]="selected.compteComptable.code" required autofocus />
+        </div>
+
+     <!--   <div class="p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="totalPaye">Total Paye</label>
+                <p-inputNumber id="totalPaye" [(ngModel)]=""></p-inputNumber>
+            </div>
+        </div>-->
+        </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideCreateDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="save()"></button>
+    </ng-template>
+</p-dialog>

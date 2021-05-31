@@ -1,0 +1,160 @@
+<div class="card">
+    <div class="card-header p-text-center">
+    <h3 class="text-center ">Creation de Declaration IR </h3>
+    </div>
+    <div class="card-body">
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="firstname1">Reference :</label>
+                <input id="firstname1" type="text" pInputText [(ngModel)]="declarationIR.ref">
+            </div>
+            <div class="p-field p-col">
+                <label >IS de Societe :</label>
+                <input  type="text" pInputText>
+            </div>
+            <div class="p-field p-col">
+                <label >Mois :</label>
+                <input type="number" pInputText [(ngModel)]="declarationIR.mois">
+            </div>
+            <div class="p-field p-col">
+                <label>Annee :</label>
+                <input  type="number" pInputText [(ngModel)]="declarationIR.annee">
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-center">
+        <p-button [disabled]="isCreated" label="cree" icon="pi pi-check" iconPos="left" (click)="creeDeclarationIR()" ></p-button>
+    </div>
+</div>
+
+<!--
+
+<p-card>
+    <ng-template pTemplate="header">
+        <h2 class="text-center">Creation de Declaration IR </h2>
+    </ng-template>
+    <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col">
+            <label for="firstname1">Reference :</label>
+            <input id="firstname1" type="text" pInputText [(ngModel)]="declarationIR.ref">
+        </div>
+        <div class="p-field p-col">
+            <label >IS de Societe :</label>
+            <input  type="text" pInputText>
+        </div>
+        <div class="p-field p-col">
+            <label >Mois :</label>
+            <input type="number" pInputText [(ngModel)]="declarationIR.mois">
+        </div>
+        <div class="p-field p-col">
+            <label>Annee :</label>
+            <input  type="number" pInputText [(ngModel)]="declarationIR.annee">
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+
+        <div class="p-text-center">
+        <p-button label="cree" icon="pi pi-check" iconPos="left" (click)="creeDeclarationIR()" ></p-button>
+        </div>
+    </ng-template>
+</p-card>
+
+-->
+
+
+
+
+
+
+
+
+
+
+<div class="p-grid p-mt-3">
+    <div class="p-col-12">
+
+        <p-toast></p-toast>
+
+        <div class="card">
+            <p-toolbar styleClass="p-mb-4">
+                <ng-template pTemplate="left">
+                    <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2 p-mb-2" (click)="openCreate()"></button>
+                    <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger p-mb-2" (click)="deleteMultiple()" [disabled]="!selectes || !selectes.length"></button>
+                </ng-template>
+
+                <ng-template pTemplate="right">
+                    <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="p-mr-2 p-mb-2 p-d-inline-block"></p-fileUpload>
+                    <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help p-mb-2" (click)="convert()"></button>
+                </ng-template>
+            </p-toolbar>
+
+            <p-table #dt [value]="items" [columns]="cols" [rows]="6" [paginator]="true" [globalFilterFields]="['reference','total','totalPaye']"
+                     [(selection)]="selectes" [rowHover]="true" dataKey="id"
+                     styleClass="p-datatable-customers"
+                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+                <ng-template pTemplate="caption">
+                    <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
+                        <h5 class="p-m-0">Manage Commandes</h5>
+                        <span class="p-input-icon-left">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text"  placeholder="Search..." />
+                    </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                        <th pSortableColumn="reference">CIN <!--<p-sortIcon field="reference"></p-sortIcon>--></th>
+                        <th pSortableColumn="total">Salaire Net <!--<p-sortIcon field="total"></p-sortIcon>--></th>
+                        <th pSortableColumn="totalPaye">Salaire Brut <!--<p-sortIcon field="totalPaye"></p-sortIcon>--></th>
+                        <th pSortableColumn="totalPaye">Montant IR <!--<p-sortIcon field="totalPaye"></p-sortIcon>--></th>
+                        <th></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-commande>
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="commande"></p-tableCheckbox>
+                        </td>
+                        <td>{{commande.employe.cin}}</td>
+                        <td>{{commande.salaireNet}}</td>
+                        <td>{{commande.salaireBrut}}</td>
+                        <td>{{commande.montantIR}}</td>
+
+
+
+
+
+
+                        <td>
+                            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="edit(commande)"></button>
+                            <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info p-mr-2" (click)="view(commande)"></button>
+                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="delete(commande)"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        In total there are {{items ? items.length : 0 }} items.
+                    </div>
+                    <div class="footer ">
+
+                       <!-- <div class="footer-two">-->
+                       <!-- <p-button  [disabled]="isSaved" class=" p-button-danger" label="save" icon="pi pi-save" iconPos="left" (click)="save()"></p-button>-->
+                        <button pButton [disabled]="isSaved" type="button" class="p-button-danger" label="save" icon="pi pi-save" iconPos="left" (click)="save()"></button>
+                        <!-- </div>-->
+
+                    </div>
+                </ng-template>
+
+            </p-table>
+        </div>
+
+        <app-declaration-create></app-declaration-create>
+        <app-declaration-edit></app-declaration-edit>
+       <app-declaration-view></app-declaration-view>
+        <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    </div>
+</div>

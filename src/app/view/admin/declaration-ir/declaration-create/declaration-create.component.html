@@ -1,0 +1,39 @@
+<p-dialog [(visible)]="createDialog" [style]="{width: '450px'}" header="Commande Details" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <!--<div class="p-field">
+            <label for="ref">CIN :</label>
+            <input type="text" pInputText id="ref" [(ngModel)]="selected.reference" required autofocus />
+            &lt;!&ndash;<small class="p-invalid" *ngIf="submitted && !selected.reference">ref is required.</small>&ndash;&gt;
+        </div>-->
+        <div class="p-field">
+            <label for="cin">CIN :</label>
+            <input type="text" pInputText id="cin" [(ngModel)]="selected.employe.cin" required autofocus />
+            <small class="p-invalid" *ngIf="submitted && !selected.employe.cin">total is required.</small>
+        </div>
+        <div class="p-field">
+            <label for="salaireNet">Salaire Net :</label>
+            <input type="number" pInputText id="salaireNet" [(ngModel)]="selected.salaireNet" required autofocus />
+            <small class="p-invalid" *ngIf="submitted && !selected.salaireNet">total is required.</small>
+        </div>
+        <div class="p-field">
+            <label for="salaireBrut">Salaire Brut :</label>
+            <input type="number" pInputText id="salaireBrut" [(ngModel)]="selected.salaireBrut" required autofocus />
+            <small class="p-invalid" *ngIf="submitted && !selected.salaireBrut">total is required.</small>
+        </div>
+
+
+
+
+        <div class="p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="montantIR">Montant IR</label>
+                <p-inputNumber id="montantIR" [(ngModel)]="selected.montantIR"></p-inputNumber>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideCreateDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="save()"></button>
+    </ng-template>
+</p-dialog>

@@ -1,0 +1,181 @@
+/*
+
+.card{
+    background: white;
+    width: 280px;
+    height: 200px ;
+    margin-top:10px ;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+    padding-left: 0;
+    padding-right: 0;
+    border-radius: 18px;
+    margin: 30px;
+    transition: 0.5s ease;
+    cursor: pointer;
+    margin: 50px;
+
+
+
+
+}
+.card-text{
+    color: grey;
+    font-size: 15px;
+    font-weight: 300;
+}
+
+.card:hover{
+    transform: scale(1.2);
+    box-shadow: 5px 5px 15px rgb(0,0,0,0.6);
+}
+
+
+
+.card {
+    margin: 40px;
+    background: white;
+
+
+
+    -moz-box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
+    -webkit-box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
+    box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
+
+    filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30)";
+    zoom: 1;
+
+    !* i chooooose this *!
+
+    box-shadow:
+            0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+            0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+            0 12.5px 10px rgba(0, 0, 0, 0.06),
+            0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+            0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+            0 100px 80px rgba(0, 0, 0, 0.12)
+;
+
+
+}
+.card:hover {
+
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    animation-name: example;
+    animation-duration: 0.25s;
+    border: 1px solid grey ;
+    border-left: 8px solid red;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.card{
+    box-shadow:
+            0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+            0 6.7px 5.3px grey,
+            0 12.5px 10px rgba(0, 0, 0, 0.06),
+            0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+            0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+            0 100px 80px rgba(0, 0, 0, 0.12)
+;
+}
+.card{
+    border: 1px solid red ;
+
+}
+.card-footer{
+
+    color: black;
+    font-size: 15px;
+    font-weight: 300;
+
+}
+div.contain{
+    width: 280px;
+    height: 280px;
+}
+div.container{
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    !*margin-right: 90px;*!
+}
+*/
+div.container{
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+   /* margin-right: 90px;*/
+    width: 1000px;
+    margin-right: 300px;
+    margin-top: -100px;
+}
+div.contain{
+    width: 280px;
+    height: 280px;
+
+}
+div.card{
+    width: 300px;
+    border: 2px solid #0772b3 ;
+
+}
+.card{
+    background: white;
+    width: 280px;
+    height: 200px ;
+
+    padding-left: 0;
+    padding-right: 0;
+    border-radius: 18px;
+    margin: 30px;
+    transition: 0.5s ease;
+    cursor: pointer;
+    margin: 50px;
+
+
+
+
+}
+.card-text{
+    color: grey;
+    font-size: 15px;
+    font-weight: 300;
+}
+div.card-footer{
+    padding-bottom: 10px;
+    border-bottom-right-radius: 18px ;
+    border-bottom-left-radius: 18px;
+}
+div.card{
+    padding-bottom: 5px;
+
+}
+.card:hover{
+    transform: scale(1.2);
+    box-shadow: 5px 5px 15px rgb(0,0,0,0.6);
+}
+.card:hover {
+
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    animation-name: example;
+    animation-duration: 0.25s;
+    border: 1px solid grey ;
+    border-left: 8px solid #0772b3;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+h3.prix{
+    font-family: Black Jack;
+
+
+}
+h3{
+    text-align: center;
+}

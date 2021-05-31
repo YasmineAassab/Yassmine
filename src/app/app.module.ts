@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
@@ -147,13 +147,37 @@ import { CommandeEditComponent } from './view/admin/commandes/commande-edit/comm
 import { CommandeViewComponent } from './view/admin/commandes/commande-view/commande-view.component';
 */
 import { DeclarationIsListComponent } from './view/admin/declarations-is/declaration-is-list/declaration-is-list.component';
-import {ConfirmationService, MessageService} from "primeng/api";
+
 import { DeclarationIsCreateComponent } from './view/admin/declarations-is/declaration-is-create/declaration-is-create.component';
 import { DeclarationIsEditComponent } from './view/admin/declarations-is/declaration-is-edit/declaration-is-edit.component';
 import { DeclarationIsViewComponent } from './view/admin/declarations-is/declaration-is-view/declaration-is-view.component';
 import { FactureDialogComponent } from './view/admin/declarations-is/facture-dialog/facture-dialog.component';
 import { ViewFactureComponent } from './view/admin/declarations-is/view-facture/view-facture.component';
 import { DeclarationsISComponent } from './view/admin/declarations-is/declarations-is.component';
+import {SignUpComponent} from './pages/sign-up/sign-up.component';
+import {HomePageComponent} from './home-page/home-page.component';
+import {OurServiceComponent} from './home-page/our-service/our-service.component';
+import {DeclarationIrComponent} from './view/admin/declaration-ir/declaration-ir.component';
+import {DeclarationCreateComponent} from './view/admin/declaration-ir/declaration-create/declaration-create.component';
+import {DeclarationEditComponent} from './view/admin/declaration-ir/declaration-edit/declaration-edit.component';
+import {DeclarationViewComponent} from './view/admin/declaration-ir/declaration-view/declaration-view.component';
+import {ConfirmationService, MessageService} from 'primeng/api';
+import {AuthInterceptor} from './Security/auth-interceptor.service';
+import {ProfileComponent} from './Security/profile/profile.component';
+import {ClassComponent} from './view/admin/classe/class.component';
+import {ClasseCreateComponent} from './view/admin/classe/classe-comptable/classe-create/classe-create.component';
+import {ClasseListeComponent} from './view/admin/classe/classe-comptable/classe-liste/classe-liste.component';
+import {ClasseComptableComponent} from './view/admin/classe/classe-comptable/classe-comptable.component';
+import {CompteCreateComponent} from './view/admin/classe/compte-comptable/compte-create/compte-create.component';
+import {CompteListeComponent} from './view/admin/classe/compte-comptable/compte-liste/compte-liste.component';
+import {CompteComptableComponent} from './view/admin/classe/compte-comptable/compte-comptable.component';
+import {SousCreateComponent} from './view/admin/classe/sous-classe-comptable/sous-create/sous-create.component';
+import {SousListeComponent} from './view/admin/classe/sous-classe-comptable/sous-liste/sous-liste.component';
+import {SousClasseComptableComponent} from './view/admin/classe/sous-classe-comptable/sous-classe-comptable.component';
+import {CpcListComponent} from './view/admin/cpc/cpc-list/cpc-list.component';
+import {CpcRecherchComponent} from './view/admin/cpc/cpc-recherch/cpc-recherch.component';
+import {CpcViewComponent} from './view/admin/cpc/cpc-view/cpc-view.component';
+import {CpcComponent} from './view/admin/cpc/cpc.component';
 
 @NgModule({
     imports: [
@@ -296,10 +320,32 @@ import { DeclarationsISComponent } from './view/admin/declarations-is/declaratio
         FactureDialogComponent,
         ViewFactureComponent,
         DeclarationsISComponent,
+        SignUpComponent,
+        HomePageComponent,
+        OurServiceComponent,
+        DeclarationIrComponent,
+        DeclarationCreateComponent,
+        DeclarationEditComponent,
+        DeclarationViewComponent,
+        ProfileComponent,
+        /*ClassComponent,
+        ClasseCreateComponent,
+        ClasseListeComponent,
+        ClasseComptableComponent,
+        CompteCreateComponent,
+        CompteListeComponent,
+        CompteComptableComponent,
+        SousCreateComponent,
+        SousListeComponent,
+        SousClasseComptableComponent,
+        CpcListComponent,
+        CpcRecherchComponent,
+        CpcViewComponent,
+        CpcComponent*/
 
     ],
     providers: [
-        {provide: LocationStrategy, useClass: HashLocationStrategy},
+        {provide: LocationStrategy, useClass: HashLocationStrategy},{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
         CountryService, CustomerService, EventService, IconService, NodeService,
         PhotoService, ProductService, MenuService, MessageService, ConfirmationService,
     ],

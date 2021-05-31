@@ -1,0 +1,102 @@
+
+<div class=" container  ">
+
+    <div class="contain" *ngFor="let c of categorieServices">
+        <div class="card p-shadow-5 " routerLink="/{{c.lien}}" routerLinkActive="active">
+
+            <div class="card-body" >
+                <h3 class="card-title text-center">{{c.titre}}</h3>
+                <p class="card-text text-center">{{c.description}}</p>
+            </div>
+            <div class="card-footer text-center">
+                <h3 class="prix">{{c.montant}}DH/Mo</h3>
+            </div>
+        </div>
+
+
+
+
+
+        <!-- <div class="row">
+         <div class="card col-md-4 card__front" routerLink="/creation" routerLinkActive="active">
+
+           <div class="card-body" >
+             <h1 class="card-title text-center">{{creation.titre}}</h1>
+             <p class="card-text text-center">{{creation.description}}</p>
+           </div>
+           <div class="card-footer text-center">
+             <h1>{{creation.montant}}$/Mo</h1>
+           </div>
+         </div>
+
+
+
+         <div class="card col-md-4" routerLink="/liquidation" routerLinkActive="active">
+
+           <div class="card-body" >
+             <h1 class="card-title text-center">{{liquidation.titre}}</h1>
+             <p class="card-text text-center">{{liquidation.description}}</p>
+           </div>
+           <div class="card-footer text-center">
+             <h1>{{liquidation.montant}}$/Mo</h1>
+           </div>
+         </div>
+
+
+
+
+         <div class="card col-md-4" routerLink="/declaration-tva" routerLinkActive="active">
+
+           <div class="card-body">
+             <h1 class="card-title text-center">{{declarationTVA.titre}}</h1>
+             <p class="card-text text-center"> {{declarationTVA.description}}</p>
+           </div>
+           <div class="card-footer text-center">
+             <h1>{{declarationTVA.montant}}$/Mo</h1>
+           </div>
+         </div>
+         </div>
+
+
+
+
+         <div class="row">
+         <div class="card col-md-4" routerLink="/declaration-ir" routerLinkActive="active">
+
+           <div class="card-body">
+             <h1 class="card-title text-center">{{declarationIR.titre}}</h1>
+             <p class="card-text text-center">{{declarationIR.description}} </p>
+           </div>
+           <div class="card-footer text-center">
+             <h1>{{declarationIR.montant}}$/Mo</h1>
+           </div>
+         </div>
+
+
+
+           <div class="card col-md-4" routerLink="/declaration-is" routerLinkActive="active">
+
+             <div class="card-body">
+               <h1 class="card-title text-center">{{declarationIS.titre}}</h1>
+               <p class="card-text text-center">{{declarationIS.description}} </p>
+             </div>
+             <div class="card-footer text-center">
+               <h1>{{declarationIS.montant}}$/Mo</h1>
+             </div>
+           </div>
+
+
+           <div class="card col-md-4" routerLink="/facture" routerLinkActive="active">
+
+             <div class="card-body">
+               <h1 class="card-title text-center">{{facture.titre}}</h1>
+               <p class="card-text text-center" >{{facture.description}} </p>
+             </div>
+             <div class="card-footer text-center">
+               <h1>{{facture.montant}}$/Mo</h1>
+             </div>
+           </div>
+         </div> -->
+    </div>
+</div>
+

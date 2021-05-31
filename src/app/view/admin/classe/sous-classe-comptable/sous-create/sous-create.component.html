@@ -1,0 +1,23 @@
+<p-dialog [(visible)]="createDialog">
+    <h3 style="text-align: center">Save Sous Classe Comptable</h3>
+    <div class="container">
+        <div class="card">
+            <div class="p-fluid" >
+                <div class="p-field" >
+                    <label>Numero :</label>
+                    <input type="number" pInputText [(ngModel)]="selected.numero" placeholder="numero">
+                </div>
+                <div class="p-field" >
+                    <label>Libelle :</label>
+                    <input type="text" pInputText [(ngModel)]="selected.libelle" placeholder="libelle">
+                </div>
+            </div>
+
+            <button pButton pRipple type="button" label="Save" class="p-button-outlined" (click)="save()"></button>
+
+        </div>
+    </div>
+
+</p-dialog>
+
+

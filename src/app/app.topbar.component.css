@@ -1,0 +1,33 @@
+li a{
+    color: white;
+    font-size: 20px;
+
+}
+div.layout-topbar{
+    z-index: 2;
+}
+a.navbar-brand{
+    font-size: 25px;
+}
+nav.navbar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+
+}
+div.layout-topbar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+
+}
+a.nav-link{
+    margin-right: 15px;
+    margin-left: 15px;
+}
+div.layout-topbar{
+    position: relative;
+    width: 100%;
+}

@@ -1,0 +1,33 @@
+<div class="container">
+    <div  align="center">
+        <button type="button" class="btn btn-outline-primary" style="margin-bottom: 20px" (click)="openCreate()">+</button>
+    </div>
+    <div class="card">
+        <p-table #dt [value]="items" [columns]="cols" [rows]="5" [paginator]="true" [globalFilterFields]="['reference','total','totalPaye']"
+                 [rowHover]="true" dataKey="id"
+                 styleClass="p-datatable-customers"
+                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+            <ng-template pTemplate="caption">
+                <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
+                    <h5 class="p-m-0">Sous Classe Comptable</h5>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <th><i>NUMERO</i></th>
+                <th><i>LIBELLE</i></th>
+                <th><i>Action</i></th>
+            </ng-template>
+            <ng-template pTemplate="body" let-Sousclasse>
+                <tr>
+                    <td>{{Sousclasse.numero}}</td>
+                    <td>{{Sousclasse.libelle}}</td>
+                    <td>
+                        <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info p-mr-2" style="margin-right: 2px" (click)="find(Sousclasse.numero);num2=Sousclasse.numero"></button>
+                        <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(Sousclasse.numero)"></button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+<app-sous-create></app-sous-create>
