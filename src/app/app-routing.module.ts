@@ -46,6 +46,8 @@ import {SignUpComponent} from './pages/sign-up/sign-up.component';
 import {HomePageComponent} from './home-page/home-page.component';
 import {DeclarationIrComponent} from './view/admin/declaration-ir/declaration-ir.component';
 import {ProfileComponent} from './Security/profile/profile.component';
+import {DemandeDeclarationComponent} from './view/admin/demande-declaration/demande-declaration.component';
+import {DeclarationsComponent} from './view/admin/declarations/declarations.component';
 
 @NgModule({
     imports: [
@@ -55,11 +57,14 @@ import {ProfileComponent} from './Security/profile/profile.component';
             {
                 path: '', component: AppMainComponent,
                 children: [
+                    /* {path: '', component: DashboardDemoComponent},*/
                     {path: 'home-page', component: HomePageComponent},
                     {path: 'declaration-ir', component: DeclarationIrComponent},
                     {path: 'profile', component: ProfileComponent},
+                    {path: 'demande', component: DemandeDeclarationComponent},
+                    {path: 'declarations', component: DeclarationsComponent},
 
-                   /* {path: '', component: DashboardDemoComponent},*/
+
 
                     {path: 'declaration-is', component: DeclarationsISComponent},
                     {path: 'view/declarations-is/create', component: DeclarationIsCreateComponent},
