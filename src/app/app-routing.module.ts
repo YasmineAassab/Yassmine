@@ -46,6 +46,9 @@ import {SignUpComponent} from './pages/sign-up/sign-up.component';
 import {HomePageComponent} from './home-page/home-page.component';
 import {DeclarationIrComponent} from './view/admin/declaration-ir/declaration-ir.component';
 import {ProfileComponent} from './Security/profile/profile.component';
+import {DemandeListComponent} from "./view/admin/demande-list/demande-list.component";
+import {DeclarationIsListComponent} from "./view/admin/declarations-is/declaration-is-list/declaration-is-list.component";
+import {ChartsComponent} from "./view/admin/charts/charts.component";
 
 @NgModule({
     imports: [
@@ -61,9 +64,11 @@ import {ProfileComponent} from './Security/profile/profile.component';
 
                    /* {path: '', component: DashboardDemoComponent},*/
 
-                    {path: 'declaration-is', component: DeclarationsISComponent},
+                    {path: 'declaration-is', component: DemandeListComponent},
+                    {path: 'view/declaration-is/list', component: DeclarationIsListComponent},
                     {path: 'view/declarations-is/create', component: DeclarationIsCreateComponent},
                     {path: 'view/declarations-is/edit', component: DeclarationIsEditComponent},
+                    {path: 'view/declarations-is/charts', component: ChartsComponent},
                     {path: 'uikit/formlayout', component: FormLayoutDemoComponent},
                     {path: 'uikit/floatlabel', component: FloatLabelDemoComponent},
                     {path: 'uikit/invalidstate', component: InvalidStateDemoComponent},

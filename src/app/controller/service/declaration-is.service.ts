@@ -50,7 +50,7 @@ export class DeclarationISService {
   }
 
   public deleteBySocieteIceAndAnnee(): Observable<number> {
-    return this.http.delete<number>(this.url + '/societe/ice/'+ this.selected.societe.ice + '/annee/' + this.selected.annee);
+    return this.http.delete<number>(this.url + 'societe/ice/'+ this.selected.societe.ice + '/annee/' + this.selected.annee);
   }
 
   public findFactures(): Observable<Array<Facture>> {

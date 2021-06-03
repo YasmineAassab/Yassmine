@@ -21,7 +21,7 @@ export class DeclarationIsListComponent implements OnInit {
   constructor(private messageService: MessageService, private confirmationService: ConfirmationService,
               private service: DeclarationISService, private router: Router) {}
 
-
+  activeIndex: number = 0;
   navigateToEdit(selected: DeclarationIS) {
     this.selected = selected;
     this.findFactures(selected);

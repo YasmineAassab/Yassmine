@@ -178,6 +178,8 @@ import {CpcListComponent} from './view/admin/cpc/cpc-list/cpc-list.component';
 import {CpcRecherchComponent} from './view/admin/cpc/cpc-recherch/cpc-recherch.component';
 import {CpcViewComponent} from './view/admin/cpc/cpc-view/cpc-view.component';
 import {CpcComponent} from './view/admin/cpc/cpc.component';
+import { DemandeListComponent } from './view/admin/demande-list/demande-list.component';
+import { ChartsComponent } from './view/admin/charts/charts.component';
 
 @NgModule({
     imports: [
@@ -328,6 +330,8 @@ import {CpcComponent} from './view/admin/cpc/cpc.component';
         DeclarationEditComponent,
         DeclarationViewComponent,
         ProfileComponent,
+        DemandeListComponent,
+        ChartsComponent,
         /*ClassComponent,
         ClasseCreateComponent,
         ClasseListeComponent,
