@@ -8,6 +8,7 @@ import {DeclarationIREmploye} from '../model/declaration-iremploye.model';
 import {DeclarationIR} from '../model/declaration-ir.model';
 import {Employe} from '../model/employe.model';
 import {CategorieService} from '../model/categorie-service.model';
+import {User} from '../../Security/model/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class DemandeService {
 
   private _societe: Societe;
   private _demande: Demande;
-  private url = environment.baseUrl;
+  private url = environment.baseUrl+'demande/';
   private _items:Array<Demande>;
   private _selectes: Array<Demande>;
 
@@ -31,12 +32,25 @@ export class DemandeService {
   private _viewDialog: boolean;
   private _submitted: boolean;
   private _selected:Demande;
+  private _user: User;
+/*  acceptDemande(selected:Demande):Observable<any>{
+    return this.http.put(this.url+'demande/',selected);
+  }*/
 
 
+  get user(): User {
+    if (this._user==null){
+      this._user=new User();
+    }
+    return this._user;
+  }
 
+  set user(value: User) {
+    this._user = value;
+  }
 
   deleteDemande(selected:Demande):Observable<any>{
-    return this.http.delete(this.url+'demande/ref/'+selected.ref);
+    return this.http.delete(this.url+'ref/'+selected.ref);
   }
 
   get selected(): Demande {
@@ -127,13 +141,13 @@ export class DemandeService {
   }
   save(): Observable<any> {
     console.log(this.demande);
-    return this.http.post<number>(this.url+'demande/',this.demande);
+    return this.http.post<number>(this.url,this.demande);
   }
 
 
 
   findAllDemande(){
-     this.http.get<Array<Demande>>(this.url+ 'demande/').subscribe(
+     this.http.get<Array<Demande>>(this.url).subscribe(
         data =>{
           this.items =data;
           console.log(this.items);

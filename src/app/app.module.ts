@@ -180,6 +180,7 @@ import {CpcViewComponent} from './view/admin/cpc/cpc-view/cpc-view.component';
 import {CpcComponent} from './view/admin/cpc/cpc.component';
 import { DemandeDeclarationComponent } from './view/admin/demande-declaration/demande-declaration.component';
 import { DeclarationsComponent } from './view/admin/declarations/declarations.component';
+import { ViewComptableComponent } from './view/admin/declarations/view-comptable/view-comptable.component';
 
 @NgModule({
     imports: [
@@ -332,6 +333,7 @@ import { DeclarationsComponent } from './view/admin/declarations/declarations.co
         ProfileComponent,
         DemandeDeclarationComponent,
         DeclarationsComponent,
+        ViewComptableComponent,
         /*ClassComponent,
         ClasseCreateComponent,
         ClasseListeComponent,

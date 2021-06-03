@@ -22,6 +22,15 @@ export class UserService {
   }
 
   constructor(private http: HttpClient) { }
+  getUsersComptable(){
+    this.http.get<any>(API_URL + 'userRole/').subscribe(
+        data=>{
+          console.log(data);
+        },error => {
+          console.log(error);
+        }
+    );
+  }
 
   getPublicContent(): Observable<any> {
     return this.http.get(API_URL + 'all', { responseType: 'text' });

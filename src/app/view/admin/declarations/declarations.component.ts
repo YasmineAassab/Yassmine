@@ -6,6 +6,8 @@ import {DeclarationIrService} from '../../../controller/service/declaration-ir.s
 import {DeclarationIREmploye} from '../../../controller/model/declaration-iremploye.model';
 import {Employe} from '../../../controller/model/employe.model';
 import {DeclarationIR} from '../../../controller/model/declaration-ir.model';
+import {User} from '../../../Security/model/user.model';
+import {UserService} from '../../../Security/_services/user.service';
 
 @Component({
   selector: 'app-declarations',
@@ -17,17 +19,14 @@ export class DeclarationsComponent implements OnInit {
   isCreated:boolean=false;
   isSaved:boolean=true;
   // total:number;
-  constructor(private messageService: MessageService, private confirmationService: ConfirmationService,
-          private service: DemandeService) {
+  constructor(private messageService: MessageService, private confirmationService: ConfirmationService,private service: DemandeService,private userService:UserService) {
   }
-   generateID() {
-    for (let i = 0; i < this.items.length; i++) {
-      this.items[i].id = i;
-    }
-  }
+
   ngOnInit(): void {
+
     this.initCol();
     this.service.findAllDemande();
+    this.userService.getUsersComptable();
 
     //  this.service.findAll().subscribe(data => this.items = data);
   }
@@ -111,7 +110,7 @@ export class DeclarationsComponent implements OnInit {
   public delete(selected: Demande) {
     this.selected = selected;
     this.confirmationService.confirm({
-      message: 'Are you sure you want to delete ' + selected.ref+'?',
+      message: 'Are you sure you want to refuse this Request ?',
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
@@ -140,6 +139,39 @@ export class DeclarationsComponent implements OnInit {
       }
     });
   }
+  get viewDialog(): boolean {
+    return this.service.viewDialog;
+  }
+
+  set viewDialog(value: boolean) {
+    this.service.viewDialog = value;
+  }
+
+  get user(): User {
+
+    return this.service.user;
+  }
+
+  set user(value: User) {
+    this.service.user = value;
+  }
+
+
+  public accept(selected: Demande) {
+    this.viewDialog= true;
+    this.selected = selected;
+
+          this.viewDialog=true;
+
+              console.log(this.selected);
+
+
+      }
+
+
+
+
+
 
   public deleteMultiple() {
     this.confirmationService.confirm({
@@ -232,13 +264,7 @@ export class DeclarationsComponent implements OnInit {
     this.service.editDialog = value;
   }
 
-  get viewDialog(): boolean {
-    return this.service.viewDialog;
-  }
 
-  set viewDialog(value: boolean) {
-    this.service.viewDialog = value;
-  }
 
   get selectes(): Array<Demande> {
     return this.service.selectes;

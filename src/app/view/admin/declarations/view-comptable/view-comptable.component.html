@@ -1,0 +1,26 @@
+<p-dialog [(visible)]="viewDialog" [style]="{width: '450px'}" header="Affectation du Comptable" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="p-field">
+            <label for="ref">Ref</label>
+            <input type="text" pInputText id="ref" [(ngModel)]="selected.reference" disabled />
+        </div>
+        <div class="p-field">
+            <label for="total">Total</label>
+            <input type="text" pInputText id="total" [(ngModel)]="selected.total" disabled />
+        </div>
+
+
+
+        <div class="p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="totalPaye">Total Paye</label>
+                <p-inputNumber id="totalPaye" [(ngModel)]="selected.totalPaye" disabled></p-inputNumber>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideViewDialog()"></button>
+        <button pButton pRipple label="Affect" icon="pi pi-check" class="p-button-text" (click)="affect()"></button>
+    </ng-template>
+</p-dialog>
