@@ -3,7 +3,7 @@ import {DeclarationIrService} from '../../../controller/service/declaration-ir.s
 import {CategorieService} from '../../../controller/model/categorie-service.model';
 import {Societe} from '../../../controller/model/societe.model';
 import {DemandeService} from '../../../controller/service/demande.service';
-import {Demande} from '../../../controller/model/demande';
+import {Demande} from "../../../controller/model/demande.model";
 
 interface City {
   name: string,

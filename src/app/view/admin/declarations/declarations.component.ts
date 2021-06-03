@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {DemandeService} from '../../../controller/service/demande.service';
-import {Demande} from '../../../controller/model/demande';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {DeclarationIrService} from '../../../controller/service/declaration-ir.service';
 import {DeclarationIREmploye} from '../../../controller/model/declaration-iremploye.model';
@@ -8,6 +7,7 @@ import {Employe} from '../../../controller/model/employe.model';
 import {DeclarationIR} from '../../../controller/model/declaration-ir.model';
 import {User} from '../../../Security/model/user.model';
 import {UserService} from '../../../Security/_services/user.service';
+import {Demande} from "../../../controller/model/demande.model";
 
 @Component({
   selector: 'app-declarations',
