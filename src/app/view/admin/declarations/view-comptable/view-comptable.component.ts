@@ -3,8 +3,8 @@ import {MessageService} from 'primeng/api';
 import {CommandeService} from '../../../../controller/service/commande.service';
 import {Commande} from '../../../../controller/model/commande.model';
 import {DemandeService} from '../../../../controller/service/demande.service';
-import {Demande} from '../../../../controller/model/demande';
 import {User} from '../../../../Security/model/user.model';
+import {Demande} from "../../../../controller/model/demande.model";
 interface Comptable {
   name: string,
   code: string

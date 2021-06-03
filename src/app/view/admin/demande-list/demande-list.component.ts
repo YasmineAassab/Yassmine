@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {DemandeService} from "../../../controller/service/demande.service";
 import {Router} from "@angular/router";
 import {Demande} from "../../../controller/model/demande.model";
-import {DeclarationIsCreateComponent} from "../declarations-is/declaration-is-create/declaration-is-create.component";
+
 
 @Component({
   selector: 'app-demande-list',
@@ -15,16 +15,15 @@ export class DemandeListComponent implements OnInit {
   constructor(private service: DemandeService, private router: Router) { }
 
   public navigateToSearch(){
-    this.router.navigateByUrl('view/declaration-is/list');
+    this.router.navigateByUrl('view/declarations-is/list');
   }
 
   public navigateToCreate(selected: Demande){
-
     this.router.navigateByUrl('view/declarations-is/create');
   }
 
   public navigateToCharts(){
-    this.router.navigateByUrl('view/declarations-is/charts');
+    this.router.navigateByUrl('view/declarations-is/chart');
   }
 
   ngOnInit(): void {

@@ -181,6 +181,8 @@ import {CpcComponent} from './view/admin/cpc/cpc.component';
 import { DemandeDeclarationComponent } from './view/admin/demande-declaration/demande-declaration.component';
 import { DeclarationsComponent } from './view/admin/declarations/declarations.component';
 import { ViewComptableComponent } from './view/admin/declarations/view-comptable/view-comptable.component';
+import {DemandeListComponent} from "./view/admin/demande-list/demande-list.component";
+import {ChartsComponent} from "./view/admin/charts/charts.component";
 
 @NgModule({
     imports: [
@@ -331,6 +333,8 @@ import { ViewComptableComponent } from './view/admin/declarations/view-comptable
         DeclarationEditComponent,
         DeclarationViewComponent,
         ProfileComponent,
+        ChartsComponent,
+        DemandeListComponent,
         DemandeDeclarationComponent,
         DeclarationsComponent,
         ViewComptableComponent,
