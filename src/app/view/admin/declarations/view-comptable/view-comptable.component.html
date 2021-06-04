@@ -1,5 +1,35 @@
-<p-dialog [(visible)]="viewDialog" [style]="{width: '450px'}" header="Affectation du Comptable" [modal]="true" styleClass="p-fluid">
-    <ng-template pTemplate="content">
+<p-dialog [(visible)]="viewDialog" [style]="{width: '600px'}" header="Affectation du Comptable" [modal]="true" styleClass="p-fluid">
+
+    <p-table   [value]="UserItemsFiltered">
+        <ng-template pTemplate="header" let-comptable>
+            <tr>
+                <th>Nom de Comptable</th>
+                <th>Email</th>
+                <th></th>
+
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-comptable >
+            <tr>
+              <td>{{comptable.username}}</td>
+              <td>{{comptable.email}}</td>
+                <td><button pButton pRipple icon="pi pi-check" class="p-button-rounded p-button-help"
+                            (click)="affectDemande(comptable)"></button></td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+
+
+
+
+
+
+
+
+
+
+    <!--<ng-template pTemplate="content">
         <div class="p-field">
             <label for="ref">Ref</label>
             <input type="text" pInputText id="ref" [(ngModel)]="selected.reference" disabled />
@@ -22,5 +52,5 @@
     <ng-template pTemplate="footer">
         <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideViewDialog()"></button>
         <button pButton pRipple label="Affect" icon="pi pi-check" class="p-button-text" (click)="affect()"></button>
-    </ng-template>
+    </ng-template>-->
 </p-dialog>

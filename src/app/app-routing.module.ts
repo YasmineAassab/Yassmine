@@ -48,21 +48,25 @@ import {DeclarationIrComponent} from './view/admin/declaration-ir/declaration-ir
 import {ProfileComponent} from './Security/profile/profile.component';
 import {DemandeDeclarationComponent} from './view/admin/demande-declaration/demande-declaration.component';
 import {DeclarationsComponent} from './view/admin/declarations/declarations.component';
+import {StatistiqueComponent} from './view/admin/statistique/statistique.component';
 
 @NgModule({
     imports: [
         RouterModule.forRoot([
-            {path: '', component: AppLoginComponent},
-            {path: 'sign-up', component: SignUpComponent},
+           /* {path: '', component: AppLoginComponent},*/
+           /* {path: 'sign-up', component: SignUpComponent},*/
             {
                 path: '', component: AppMainComponent,
                 children: [
                     /* {path: '', component: DashboardDemoComponent},*/
+                    {path: '', component: HomePageComponent},
                     {path: 'home-page', component: HomePageComponent},
+
                     {path: 'declaration-ir', component: DeclarationIrComponent},
                     {path: 'profile', component: ProfileComponent},
                     {path: 'demande', component: DemandeDeclarationComponent},
                     {path: 'declarations', component: DeclarationsComponent},
+                    {path: 'statistique', component: StatistiqueComponent},
 
 
 
@@ -101,6 +105,8 @@ import {DeclarationsComponent} from './view/admin/declarations/declarations.comp
                     {path: 'documentation', component: DocumentationComponent}
                 ]
             },
+            {path: '', component: AppLoginComponent},
+             {path: 'sign-up', component: SignUpComponent},
             {path: 'error', component: AppErrorComponent},
             {path: 'accessdenied', component: AppAccessdeniedComponent},
             {path: '404', component: AppNotfoundComponent},

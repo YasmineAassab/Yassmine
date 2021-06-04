@@ -5,9 +5,11 @@ import {DeclarationIrService} from '../../../controller/service/declaration-ir.s
 import {DeclarationIREmploye} from '../../../controller/model/declaration-iremploye.model';
 import {Employe} from '../../../controller/model/employe.model';
 import {DeclarationIR} from '../../../controller/model/declaration-ir.model';
-import {User} from '../../../Security/model/user.model';
+
 import {UserService} from '../../../Security/_services/user.service';
 import {Demande} from "../../../controller/model/demande.model";
+import {User} from '../../../Security/model/user.model';
+
 
 @Component({
   selector: 'app-declarations',
@@ -18,7 +20,8 @@ export class DeclarationsComponent implements OnInit {
   cols: any[];
   isCreated:boolean=false;
   isSaved:boolean=true;
-  // total:number;
+  Useritems=new Array<User>();
+  Useritemsfiltered=new Array<User>();
   constructor(private messageService: MessageService, private confirmationService: ConfirmationService,private service: DemandeService,private userService:UserService) {
   }
 
@@ -26,57 +29,39 @@ export class DeclarationsComponent implements OnInit {
 
     this.initCol();
     this.service.findAllDemande();
-    this.userService.getUsersComptable();
+    this.getUsersComptable();
 
-    //  this.service.findAll().subscribe(data => this.items = data);
   }
 
-  /*  get total(): number {
-      return this.service.total;
-    }*/
 
- /* public convert() {
+  get UserItemsFiltered(): Array<User> {
+    return this.service.UserItemsFiltered;
+  }
 
-    this.declarationIR.declarationsIREmployes = this.items;
-    return this.service.convert().subscribe(
+  set UserItemsFiltered(value: Array<User>) {
+    this.service.UserItemsFiltered = value;
+  }
+  getUsersComptable(){
+    this.userService.getUsersComptable().subscribe(
         data => {
-          /!* this.file = data;
-           console.log(this.file.type);
-
-           const a = document.createElement('a');
-           document.body.appendChild(a);
-           const blob = new Blob([data], { type: '.xml' });
-           const url = window.URL.createObjectURL(blob);
-           a.href = url;
-           a.download = "hello";
-           a.click();
-           window.URL.revokeObjectURL(url);*!/
-
-
-          //const decodedString = atob(textToDecode);
           console.log(data);
-          this.file=data;
-          const fileName = "fileXml1";
-          const fileType = '.xml';
+        this.Useritems=data;
+        for (let i=0;i<this.Useritems.length; i++){
+          if (this.Useritems[i].roles[0].name== "ROLE_SOCIETE"){
+            console.log("*****");
+            this.Useritemsfiltered.push(this.Useritems[i]);
+          }
 
-          const blob = new Blob([this.file], { type: fileType });
 
-          const a = document.createElement('a');
-          a.download = fileName;
-          a.href = URL.createObjectURL(blob);
-          a.dataset.downloadurl = [fileType, a.download, a.href].join(':');
-          a.style.display = "none";
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          setTimeout(function() { URL.revokeObjectURL(a.href); }, 1500);
-
-          console.log('ela slaaamtna 2');
+        }
+          this.service.UserItemsFiltered=this.Useritemsfiltered;
+          console.log(this.Useritemsfiltered);
+        }, error => {
+          console.log(error);
         }
     );
-
   }
-*/
+
 
   public save() {
 
