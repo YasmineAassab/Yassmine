@@ -50,6 +50,8 @@ import {DemandeDeclarationComponent} from './view/admin/demande-declaration/dema
 import {DeclarationsComponent} from './view/admin/declarations/declarations.component';
 import {DeclarationIsListComponent} from "./view/admin/declarations-is/declaration-is-list/declaration-is-list.component";
 import {ChartsComponent} from "./view/admin/charts/charts.component";
+import {DeclarationTvaCreateComponent} from "./view/admin/declarationTva/declaration-tva-create/declaration-tva-create.component";
+import {DeclarationTvaListComponent} from "./view/admin/declarationTva/declaration-tva-list/declaration-tva-list.component";
 
 @NgModule({
     imports: [
@@ -73,6 +75,8 @@ import {ChartsComponent} from "./view/admin/charts/charts.component";
                     {path: 'view/declarations-is/create', component: DeclarationIsCreateComponent},
                     {path: 'view/declarations-is/edit', component: DeclarationIsEditComponent},
                     {path: 'view/declarations-is/chart', component: ChartsComponent},
+
+                    {path: 'declaration-tva', component: DeclarationTvaListComponent},
                     {path: 'uikit/formlayout', component: FormLayoutDemoComponent},
                     {path: 'uikit/floatlabel', component: FloatLabelDemoComponent},
                     {path: 'uikit/invalidstate', component: InvalidStateDemoComponent},

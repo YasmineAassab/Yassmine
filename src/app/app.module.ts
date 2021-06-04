@@ -183,6 +183,8 @@ import { DeclarationsComponent } from './view/admin/declarations/declarations.co
 import { ViewComptableComponent } from './view/admin/declarations/view-comptable/view-comptable.component';
 import {DemandeListComponent} from "./view/admin/demande-list/demande-list.component";
 import {ChartsComponent} from "./view/admin/charts/charts.component";
+import { DeclarationTvaCreateComponent } from './view/admin/declarationTva/declaration-tva-create/declaration-tva-create.component';
+import { DeclarationTvaListComponent } from './view/admin/declarationTva/declaration-tva-list/declaration-tva-list.component';
 
 @NgModule({
     imports: [
@@ -338,6 +340,8 @@ import {ChartsComponent} from "./view/admin/charts/charts.component";
         DemandeDeclarationComponent,
         DeclarationsComponent,
         ViewComptableComponent,
+        DeclarationTvaCreateComponent,
+        DeclarationTvaListComponent,
         /*ClassComponent,
         ClasseCreateComponent,
         ClasseListeComponent,
