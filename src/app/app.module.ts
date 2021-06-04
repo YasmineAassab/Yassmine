@@ -184,6 +184,9 @@ import { FactureListComponent } from './view/admin/facture/facture-list/facture-
 import { FactureEditComponent } from './view/admin/facture/facture-edit/facture-edit.component';
 import { FactureViewComponent } from './view/admin/facture/facture-view/facture-view.component';
 import {DeclarationTvaListComponent} from "./view/admin/declarationTva/declaration-tva-list/declaration-tva-list.component";
+import {DemandeListComponent} from "./view/admin/demande-list/demande-list.component";
+import {ChartsComponent} from "./view/admin/charts/charts.component";
+import {DemandeDeclarationComponent} from "./view/admin/demande-declaration/demande-declaration.component";
 
 @NgModule({
     imports: [
@@ -319,6 +322,8 @@ import {DeclarationTvaListComponent} from "./view/admin/declarationTva/declarati
         AppAccessdeniedComponent,
         AppLoginComponent,
 
+        DemandeListComponent,
+        ChartsComponent,
         DeclarationIsListComponent,
         DeclarationIsCreateComponent,
         DeclarationIsEditComponent,
@@ -329,6 +334,7 @@ import {DeclarationTvaListComponent} from "./view/admin/declarationTva/declarati
         SignUpComponent,
         HomePageComponent,
         OurServiceComponent,
+        DemandeDeclarationComponent,
         DeclarationIrComponent,
         DeclarationCreateComponent,
         DeclarationEditComponent,
