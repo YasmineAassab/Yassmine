@@ -1,0 +1,48 @@
+<p-dialog [(visible)]="viewDialog" [style]="{width: '450px'}" header="Commande Details" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="p-field">
+            <label for="ref">Ref</label>
+            <input type="text" pInputText id="ref" [(ngModel)]="selected.ref" disabled />
+        </div>
+        <div class="p-field">
+            <label for="total">Libelle</label>
+            <input type="text" pInputText id="total" [(ngModel)]="selected.libelle" disabled />
+        </div>
+        <div class="p-field">
+            <label for="total">date Operation</label>
+            <input type="date" pInputText id="total" [(ngModel)]="selected.dateOperation" disabled />
+        </div>
+        <div class="p-field">
+            <label for="total">Montan hors taxe</label>
+            <input type="number" pInputText id="total" [(ngModel)]="selected.montantHorsTaxe" disabled />
+        </div>
+        <div class="p-field">
+            <label for="total">tva</label>
+            <input type="number" pInputText id="total" [(ngModel)]="selected.tva.valeur" disabled />
+        </div>
+        <div class="p-field">
+            <label for="total">typeOperation </label>
+            <input type="text" pInputText id="total" [(ngModel)]="selected.typeOperation" disabled />
+        </div>
+        <div class="p-field">
+            <label for="total">etatPaiement </label>
+            <input type="text" pInputText id="total" [(ngModel)]="selected.etatPaiement.libelle" disabled />
+        </div>
+        <div class="p-field">
+            <label for="total">etatFacture </label>
+            <input type="text" pInputText id="total" [(ngModel)]="selected.etatFacture.libelle" disabled />
+        </div>
+        <div class="p-field">
+            <label for="total">societe Distination</label>
+            <input type="text" pInputText id="total" [(ngModel)]="selected.societeDistination.ice" disabled />
+        </div>
+        <div class="p-field">
+            <label for="total">societe Source</label>
+            <input type="text" pInputText id="total" [(ngModel)]="selected.societeSource.ice" disabled />
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Fermer" icon="pi pi-times" class="p-button-text" (click)="hideViewDialog()"></button>
+    </ng-template>
+</p-dialog>

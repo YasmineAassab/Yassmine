@@ -178,6 +178,11 @@ import {CpcListComponent} from './view/admin/cpc/cpc-list/cpc-list.component';
 import {CpcRecherchComponent} from './view/admin/cpc/cpc-recherch/cpc-recherch.component';
 import {CpcViewComponent} from './view/admin/cpc/cpc-view/cpc-view.component';
 import {CpcComponent} from './view/admin/cpc/cpc.component';
+import { FactureComponent } from './view/admin/facture/facture.component';
+import { FactureCreateComponent } from './view/admin/facture/facture-create/facture-create.component';
+import { FactureListComponent } from './view/admin/facture/facture-list/facture-list.component';
+import { FactureEditComponent } from './view/admin/facture/facture-edit/facture-edit.component';
+import { FactureViewComponent } from './view/admin/facture/facture-view/facture-view.component';
 
 @NgModule({
     imports: [
@@ -328,6 +333,11 @@ import {CpcComponent} from './view/admin/cpc/cpc.component';
         DeclarationEditComponent,
         DeclarationViewComponent,
         ProfileComponent,
+        FactureComponent,
+        FactureCreateComponent,
+        FactureListComponent,
+        FactureEditComponent,
+        FactureViewComponent,
         /*ClassComponent,
         ClasseCreateComponent,
         ClasseListeComponent,

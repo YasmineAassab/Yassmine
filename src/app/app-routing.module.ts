@@ -46,6 +46,8 @@ import {SignUpComponent} from './pages/sign-up/sign-up.component';
 import {HomePageComponent} from './home-page/home-page.component';
 import {DeclarationIrComponent} from './view/admin/declaration-ir/declaration-ir.component';
 import {ProfileComponent} from './Security/profile/profile.component';
+import {FactureCreateComponent} from './view/admin/facture/facture-create/facture-create.component';
+import {FactureComponent} from './view/admin/facture/facture.component';
 
 @NgModule({
     imports: [
@@ -60,10 +62,11 @@ import {ProfileComponent} from './Security/profile/profile.component';
                     {path: 'profile', component: ProfileComponent},
 
                    /* {path: '', component: DashboardDemoComponent},*/
-
                     {path: 'declaration-is', component: DeclarationsISComponent},
                     {path: 'view/declarations-is/create', component: DeclarationIsCreateComponent},
                     {path: 'view/declarations-is/edit', component: DeclarationIsEditComponent},
+                    {path: 'facture', component: FactureComponent},
+                    {path: 'view/facture/create', component: FactureCreateComponent},
                     {path: 'uikit/formlayout', component: FormLayoutDemoComponent},
                     {path: 'uikit/floatlabel', component: FloatLabelDemoComponent},
                     {path: 'uikit/invalidstate', component: InvalidStateDemoComponent},
