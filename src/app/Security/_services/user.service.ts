@@ -22,6 +22,9 @@ export class UserService {
   }
 
   constructor(private http: HttpClient) { }
+  getUsersComptable(): Observable<any> {
+   return  this.http.get<any>(API_URL );
+  }
 
   getPublicContent(): Observable<any> {
     return this.http.get(API_URL + 'all', { responseType: 'text' });

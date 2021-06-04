@@ -25,7 +25,7 @@
                 <div style="margin: 15px"><button pButton pRipple type="button" label="Search" icon="pi pi-search" iconPos="right" style="width:20rem; height: 10px" class="p-col-6 p-mb-2 p-offset-5" (click)="searchCriteria()"></button></div>
 
             <div>
-                <p-tabView>
+                <p-tabView  [(activeIndex)]="activeIndex">
                     <p-tabPanel header="Declaration IS">
                         <div>
                             <p-toolbar styleClass="p-mb-4">
@@ -41,7 +41,7 @@
                                 </ng-template>
 
                             </p-toolbar>
-                            <p-table #dt [value]="items" [columns]="cols" [rows]="4" [paginator]="true" [globalFilterFields]="['reference','annee','societe', 'totalHTDiff','montantISCalcul','montantISPaye', 'etat declaration']"
+                            <p-table #dt [value]="items" [columns]="cols" [rows]="10" [paginator]="true" [globalFilterFields]="['reference','annee','societe', 'totalHTDiff','montantISCalcul','montantISPaye', 'etat declaration']"
                                      [(selection)]="selectes" [rowHover]="true"
                                      styleClass="p-datatable-customers"
                                      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true" dataKey="id">
@@ -75,7 +75,7 @@
                                         <td>{{declarationIS.montantISPaye | currency: 'MAD&nbsp;'}}</td>
                                         <td>{{declarationIS.etatDeclaration.libelle}}</td>
                                         <td>
-                                            <button type="button" pButton pRipple [pRowToggler]="declarationIS" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-times' : 'pi pi-search'" (click)="findFactures(declarationIS)"></button>
+                                            <button type="button" pButton pRipple [pRowToggler]="declarationIS" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-times' : 'pi pi-search'" (click)="findFactures(declarationIS)" (click)="activeIndex = 1"></button>
                                         </td>
                                         <td>
                                             <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-warning p-mr-2" (click)="navigateToEdit(declarationIS)"></button>
