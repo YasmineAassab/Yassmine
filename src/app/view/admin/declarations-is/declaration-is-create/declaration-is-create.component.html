@@ -24,18 +24,18 @@
             <div class="p-d-flex">
                 <div class="p-mr-2 p-offset-4">
                     <span class="p-float-label col-md-5">
-                        <input id="float-input" type="text" pInputText [(ngModel)]="ice">
+                        <input id="float-input" type="text" pInputText [(ngModel)]="object.societe.ice">
                         <label for="float-input">Societe ice</label>
                     </span>
                 </div>
                 <div class="p-mr-2">
                     <span class="p-float-label col-md-5">
-                        <input id="float-input1" type="text" pInputText [(ngModel)]="annee">
+                        <input id="float-input1" type="text" pInputText [(ngModel)]="object.annee">
                         <label for="float-input1">Année</label>
                     </span>
                 </div>
                 <div class="p-mr-2">
-                    <p-button label="Rechercher" (click)="afficheObject(ice, annee)"></p-button>
+                    <p-button label="Rechercher" (click)="afficheObject11()"></p-button>
                 </div>
             </div>
             <div class="infor" *ngIf="val == true"><p><mark>Cette déclaration est déjà validée</mark></p></div>
@@ -51,12 +51,12 @@
                                     <div class="p-col-4 p-offset-1">
                                         <div style="padding: 5px"><label>Total gain</label></div>
                                         <div class="p-inputgroup">
-                                            <input type="number" pInputText disabled [value]="selected.totalHTGain">
+                                            <input type="number" pInputText disabled [value]="object.totalHTGain">
                                             <span class="p-inputgroup-addon">MAD</span>
                                         </div>
                                     </div>
                                 </div>
-                                <p-table [value]="selected.factureC" [rows]="6" [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+                                <p-table [value]="object.factureC" [rows]="6" [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
                                     <ng-template pTemplate="header">
                                         <tr>
                                             <th pSortableColumn="ref" style="width: 7rem">Ref<p-sortIcon field="ref"></p-sortIcon></th>
@@ -89,13 +89,13 @@
                                     <div class="p-col-4 p-offset-1">
                                             <div style="padding: 5px"><label>Total charge</label></div>
                                             <div class="p-inputgroup">
-                                                <input type="number" pInputText disabled [value]="selected.totalHTCharge">
+                                                <input type="number" pInputText disabled [value]="object.totalHTCharge">
                                                 <span class="p-inputgroup-addon">MAD</span>
                                             </div>
                                     </div>
                                 </div>
 
-                                <p-table [value]="selected.factureD" [rows]="6" [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+                                <p-table [value]="object.factureD" [rows]="6" [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
                                     <ng-template pTemplate="header">
                                         <tr>
                                             <th pSortableColumn="ref" style="width: 7rem">Ref <p-sortIcon field="ref"></p-sortIcon></th>
@@ -135,35 +135,35 @@
                     <div class="p-col">
                         <div style="padding: 5px"><label>Résultat fiscal</label></div>
                         <div class="p-inputgroup">
-                            <input type="number" pInputText disabled [value]="selected.totalHTDiff">
+                            <input type="number" pInputText disabled [value]="object.totalHTDiff">
                             <span class="p-inputgroup-addon">MAD</span>
                         </div>
                     </div>
                      <div class="p-col">
                         <div style="padding: 5px"><label>Montant calculé</label></div>
                         <div class="p-inputgroup">
-                            <input type="number" pInputText disabled [value]="selected.montantISCalcule">
+                            <input type="number" pInputText disabled [value]="object.montantISCalcule">
                             <span class="p-inputgroup-addon">MAD</span>
                         </div>
                     </div>
                     <div class="p-col-2">
                         <div style="padding: 5px"><label>Taux appliqué</label></div>
                         <div class="p-inputgroup">
-                            <input type="number" pInputText disabled [value]="selected.tauxIS.pourcentage">
+                            <input type="number" pInputText disabled [value]="object.tauxIS.pourcentage">
                             <span class="p-inputgroup-addon">%</span>
                         </div>
                     </div>
                      <div class="p-col">
                         <div style="padding: 5px"><label>Cotisation minimale {{selected.annee}}</label></div>
                         <div class="p-inputgroup">
-                            <input type="number" pInputText disabled [value]="selected.tauxIsConfig.cotisationMinimale">
+                            <input type="number" pInputText disabled [value]="object.tauxIsConfig.cotisationMinimale">
                             <span class="p-inputgroup-addon">MAD</span>
                         </div>
                     </div>
                      <div class="p-col">
                         <div style="padding: 5px"><label>Montant payé</label></div>
                         <div class="p-inputgroup">
-                            <input type="number" pInputText disabled [value]="selected.montantISPaye">
+                            <input type="number" pInputText disabled [value]="object.montantISPaye">
                             <span class="p-inputgroup-addon">MAD</span>
                         </div>
                     </div>

@@ -11,8 +11,11 @@
             <ng-template pTemplate="header">
                 <tr>
                     <th>Reference</th>
-                    <th>Date</th>
-                    <th>Societe</th>
+                    <th>Date de demande</th>
+                    <th>Société</th>
+                    <th>Opération</th>
+                    <th>Année</th>
+                    <th>Mois</th>
                     <th></th>
                 </tr>
 
@@ -27,6 +30,14 @@
                     </td>
                     <td>
                         {{demande.societe.ice}}
+                    </td>
+                    <td>
+                        {{demande.operation}}
+                    </td><td>
+                        {{demande.annee}}
+                    </td>
+                    <td>
+                        {{demande.mois}}
                     </td>
                     <td>
                         <button pButton pRipple label="Traiter" icon="pi pi-pencil" class="p-button-success p-mr-2" (click)="navigateToCreate(demande)"></button>

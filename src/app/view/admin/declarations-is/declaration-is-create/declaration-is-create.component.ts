@@ -30,6 +30,10 @@ export class DeclarationIsCreateComponent implements OnInit {
     return this.service.findByAnnee(annee).subscribe(data => this.selected = data);
   }
 
+  public afficheObject11() {
+    return this.service.afficheObject11().subscribe(data => this.object = data);
+  }
+
   public afficheObject(ice: string, annee: number){
     return this.service.afficheObject(ice, annee).subscribe(data => {
       this.selected = data;
@@ -50,11 +54,14 @@ export class DeclarationIsCreateComponent implements OnInit {
   }
 
   public save(etat: string){
+    this.ice = this.object.societe.ice;
+    this.annee = this.object.annee;
     return this.service.save(this.ice, this.annee, etat).subscribe(data => {
       console.log(data);
       if (data > 0){
         this.messageService.add({severity: 'success', summary: 'Successful', detail: 'Declaration IS Created', life: 4000});
         this.selected = null;
+        this.object = null;
         this.annee = null;
         this.ice = null;
       }else {
@@ -143,6 +150,14 @@ export class DeclarationIsCreateComponent implements OnInit {
 
   set selectedFact(value: Facture) {
     this.service.selectedFact = value;
+  }
+
+  get object(): DeclarationIsObject {
+    return this.service.object;
+  }
+
+  set object(value: DeclarationIsObject) {
+    this.service.object = value;
   }
 
   fileChanged(e) {

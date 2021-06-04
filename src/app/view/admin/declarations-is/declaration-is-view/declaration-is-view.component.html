@@ -60,6 +60,31 @@
                 </div>
             </div>
 
+            <div class="p-col-6">
+                <div class="p-field">
+                    <label for="acomptesAnnee">Année acompte </label>
+                    <input *ngIf="selected.acomptes != null" type="text" pInputText id="acomptesAnnee" [(ngModel)]="selected.acomptes.anneePaye" disabled />
+                    <div *ngIf="selected.acomptes == null"><span>aucun acompte payé</span></div>
+                </div>
+            </div>
+
+            <div class="p-col-6">
+                <div class="p-field">
+                    <label for="acomptesNumero">Numéro acompte </label>
+                    <p-inputNumber *ngIf="selected.acomptes != null" id="acomptesNumero" [(ngModel)]="selected.acomptes.numero" disabled></p-inputNumber>
+                    <div *ngIf="selected.tauxIS == null"><span>aucun acompte payé</span></div>
+                </div>
+            </div>
+
+
+            <div class="p-col-6">
+                <div class="p-field">
+                    <label for="acomptesMontant">Montant acompte </label>
+                    <p-inputNumber *ngIf="selected.acomptes != null" id="acomptesMontant" [(ngModel)]="selected.acomptes.montant" inputId="locale-user" mode="currency" currency="MAD" [minFractionDigits]="2" disabled></p-inputNumber>
+                    <input  *ngIf="selected.acomptes == null" type="text" pInputText value="0.00 MAD" disabled />
+                </div>
+            </div>
+
         </div>
 
     </ng-template>

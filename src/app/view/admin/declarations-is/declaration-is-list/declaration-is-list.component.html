@@ -56,6 +56,7 @@
                                         <th pSortableColumn="totalHTDiff">Résultat fiscal <p-sortIcon field="totalHTDiff"></p-sortIcon></th>
                                         <th pSortableColumn="montantISCalcule">Montant calculé <p-sortIcon field="montantISCalcule"></p-sortIcon></th>
                                         <th pSortableColumn="montantISPaye">Montant payé <p-sortIcon field="montantISPaye"></p-sortIcon></th>
+                                        <th pSortableColumn="acomptes">Montant acompte <p-sortIcon field="acomptes"></p-sortIcon></th>
                                         <th pSortableColumn="etatDeclaration" style="width: 7rem">État <p-sortIcon field="etatDeclaration"></p-sortIcon></th>
                                         <th pSortableColumn="factures" style="width: 9rem">Factures<p-sortIcon field="factures"></p-sortIcon></th>
                                         <th></th>
@@ -73,9 +74,15 @@
                                         <td>{{declarationIS.totalHTDiff | currency: 'MAD&nbsp;'}}</td>
                                         <td>{{declarationIS.montantISCalcule | currency: 'MAD&nbsp;'}}</td>
                                         <td>{{declarationIS.montantISPaye | currency: 'MAD&nbsp;'}}</td>
+                                        <td *ngIf="declarationIS.acomptes != null">
+                                            {{declarationIS.acomptes.montant | currency: 'MAD&nbsp;'}}
+                                        </td>
+                                        <td *ngIf="declarationIS.acomptes == null">
+                                            {{0 | currency: 'MAD&nbsp;'}}
+                                        </td>
                                         <td>{{declarationIS.etatDeclaration.libelle}}</td>
                                         <td>
-                                            <button type="button" pButton pRipple [pRowToggler]="declarationIS" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-times' : 'pi pi-search'" (click)="findFactures(declarationIS)" (click)="activeIndex = 1"></button>
+                                            <button type="button" pButton pRipple [pRowToggler]="declarationIS" style="margin-left: 15px;" class="p-button-text p-button-rounded" [icon]="expanded ? 'pi pi-times' : 'pi pi-search'" (click)="findFactures(declarationIS)" (click)="activeIndex = 1"></button>
                                         </td>
                                         <td>
                                             <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-warning p-mr-2" (click)="navigateToEdit(declarationIS)"></button>
