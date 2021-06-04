@@ -48,6 +48,7 @@ import {DeclarationIrComponent} from './view/admin/declaration-ir/declaration-ir
 import {ProfileComponent} from './Security/profile/profile.component';
 import {FactureCreateComponent} from './view/admin/facture/facture-create/facture-create.component';
 import {FactureComponent} from './view/admin/facture/facture.component';
+import {DeclarationTvaListComponent} from "./view/admin/declarationTva/declaration-tva-list/declaration-tva-list.component";
 
 @NgModule({
     imports: [
@@ -67,6 +68,7 @@ import {FactureComponent} from './view/admin/facture/facture.component';
                     {path: 'view/declarations-is/edit', component: DeclarationIsEditComponent},
                     {path: 'facture', component: FactureComponent},
                     {path: 'view/facture/create', component: FactureCreateComponent},
+                    {path: 'declaration-tva', component: DeclarationTvaListComponent},
                     {path: 'uikit/formlayout', component: FormLayoutDemoComponent},
                     {path: 'uikit/floatlabel', component: FloatLabelDemoComponent},
                     {path: 'uikit/invalidstate', component: InvalidStateDemoComponent},

@@ -183,6 +183,7 @@ import { FactureCreateComponent } from './view/admin/facture/facture-create/fact
 import { FactureListComponent } from './view/admin/facture/facture-list/facture-list.component';
 import { FactureEditComponent } from './view/admin/facture/facture-edit/facture-edit.component';
 import { FactureViewComponent } from './view/admin/facture/facture-view/facture-view.component';
+import {DeclarationTvaListComponent} from "./view/admin/declarationTva/declaration-tva-list/declaration-tva-list.component";
 
 @NgModule({
     imports: [
@@ -352,6 +353,8 @@ import { FactureViewComponent } from './view/admin/facture/facture-view/facture-
         CpcRecherchComponent,
         CpcViewComponent,
         CpcComponent*/
+        DeclarationCreateComponent,
+        DeclarationTvaListComponent
 
     ],
     providers: [
