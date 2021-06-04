@@ -1,0 +1,16 @@
+<div class="p-fluid p-formgrid p-grid">
+    <div class="p-field p-col">
+        <label for="firstname1">Annee :</label>
+        <input [(ngModel)]="searchAnnee" id="firstname1" type="text" pInputText>
+    </div>
+    <div class="p-field p-col">
+        <label for="lastname1">Ice :</label>
+        <input [(ngModel)]="searchIce" id="lastname1" type="text" pInputText>
+    </div>
+    <div><button pButton (click)="declarationSociete()" type="button" icon="pi pi-check" iconPos="left"></button></div>
+
+</div>
+<div class="card">
+    <h5>Vertical</h5>
+    <p-chart type="bar" [data]="basicData" [options]="basicOptions"></p-chart>
+</div>

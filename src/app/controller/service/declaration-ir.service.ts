@@ -28,12 +28,35 @@ export class DeclarationIrService {
   private _submitted: boolean;
   private _declarationIR: DeclarationIR;
   private _employe: Employe;
-  private _categorieServices:Array<CategorieService>;
+  private _categorieServices: Array<CategorieService>;
+  private _searchAnnee: number;
+  private _searchIce: string;
+
+
+  get searchAnnee(): number {
+    return this._searchAnnee;
+  }
+
+  set searchAnnee(value: number) {
+    this._searchAnnee = value;
+  }
+
+  get searchIce(): string {
+    return this._searchIce;
+  }
+
+  set searchIce(value: string) {
+    this._searchIce = value;
+  }
+
+  public declarationSociete(): Observable<any> {
+    return  this.http.get<Array<any>>(this.url + 'ice/' + this.searchIce + '/annee/' + this.searchAnnee);
+  }
 
 
   get categorieServices(): Array<CategorieService> {
-    if (this._categorieServices==null){
-      this._categorieServices=new Array<CategorieService>();
+    if (this._categorieServices == null){
+      this._categorieServices = new Array<CategorieService>();
     }
     return this._categorieServices;
   }
@@ -43,14 +66,14 @@ export class DeclarationIrService {
   }
 
   public convert(): Observable<any>{
-   return  this.http.post<any>(this.url+'xml',this.declarationIR);
+   return  this.http.post<any>(this.url + 'xml', this.declarationIR);
   }
 
 
   public findCard(){
-    this.http.get<Array<CategorieService>>('http://localhost:8036/gestion-comptabilite/categorieService'+'/').subscribe(
-        data=>{
-          this.categorieServices= data;
+    this.http.get<Array<CategorieService>>('http://localhost:8036/gestion-comptabilite/categorieService' + '/').subscribe(
+        data => {
+          this.categorieServices = data;
           console.log(this.categorieServices);
 
 
@@ -64,8 +87,8 @@ export class DeclarationIrService {
 
 
   get employe(): Employe {
-    if (this._employe==null){
-      this._employe=new Employe();
+    if (this._employe == null){
+      this._employe = new Employe();
     }
     return this._employe;
   }
@@ -83,17 +106,17 @@ export class DeclarationIrService {
 
 
   public calculTotal(){
-    let total=0;
-    for (let i=0;i<this.items.length;i++){
-      total+=this.items[i].montantIR;
+    let total = 0;
+    for (let i = 0; i < this.items.length; i++){
+      total += this.items[i].montantIR;
     }
-    this.declarationIR.total=total;
+    this.declarationIR.total = total;
   }
 
 
 
   public creeDeclarationIR(): Observable<Array<DeclarationIREmploye>> {
-    return this.http.post<Array<DeclarationIREmploye>>(this.url+'createDeclarationIr',this.declarationIR);
+    return this.http.post<Array<DeclarationIREmploye>>(this.url + 'createDeclarationIr', this.declarationIR);
   }
 
 
@@ -102,7 +125,7 @@ export class DeclarationIrService {
   }
 
   public save(): Observable<DeclarationIREmploye> {
-    return this.http.post<DeclarationIREmploye>(this.url+'saveModification', this.declarationIR);
+    return this.http.post<DeclarationIREmploye>(this.url + 'saveModification', this.declarationIR);
   }
 
   public edit(): Observable<DeclarationIREmploye> {
@@ -198,8 +221,8 @@ export class DeclarationIrService {
 
 
   get declarationIR(): DeclarationIR {
-    if (this._declarationIR==null){
-      this._declarationIR=new DeclarationIR();
+    if (this._declarationIR == null){
+      this._declarationIR = new DeclarationIR();
     }
     return this._declarationIR;
   }

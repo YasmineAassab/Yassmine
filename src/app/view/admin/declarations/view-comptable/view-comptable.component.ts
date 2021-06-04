@@ -5,34 +5,38 @@ import {Commande} from '../../../../controller/model/commande.model';
 import {DemandeService} from '../../../../controller/service/demande.service';
 import {User} from '../../../../Security/model/user.model';
 import {Demande} from "../../../../controller/model/demande.model";
-interface Comptable {
-  name: string,
-  code: string
-}
+
 @Component({
   selector: 'app-view-comptable',
   templateUrl: './view-comptable.component.html',
   styleUrls: ['./view-comptable.component.scss']
 })
 export class ViewComptableComponent implements OnInit {
-  cities: Comptable[];
-
-  selectedCity: Comptable;
+  //cols:any;
 
   constructor(private messageService: MessageService, private service: DemandeService) {
 
-    this.cities = [
-      {name: 'New York', code: 'NY'},
-      {name: 'Rome', code: 'RM'},
-      {name: 'London', code: 'LDN'},
-      {name: 'Istanbul', code: 'IST'},
-      {name: 'Paris', code: 'PRS'}
-    ];
+
   }
 
   ngOnInit(): void {
+
+  }
+  affectDemande(selectedComptable: User){
+    console.log(this.selected);
+    this.selected.user = selectedComptable;
+    //this.selected.mois=1;
+    this.service.updateDemande();
+    this.viewDialog=false;
+    this.selected=new Demande();
+  }
+  get UserItemsFiltered(): Array<User> {
+    return this.service.UserItemsFiltered;
   }
 
+  set UserItemsFiltered(value: Array<User>) {
+    this.service.UserItemsFiltered = value;
+  }
 
   get submitted(): boolean {
     return this.service.submitted;
