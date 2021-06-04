@@ -1,14 +1,14 @@
 <h1>Admin</h1>
-Login : 
-Password: 
+Login : admin
+Password: 123456
 
 <h1>Societe</h1>
-Login : 
-Password: 
+Login : societe
+Password: 123456
 
 <h1>Comptable</h1>
-Login : 
-Password: 
+Login : comptable
+Password: 123456
 
 
 # PrimeNG Roma

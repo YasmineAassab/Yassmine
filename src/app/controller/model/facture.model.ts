@@ -10,7 +10,6 @@ import {DeclarationIR} from './declaration-ir.model';
 import {DeclarationTva} from './declaration-tva.model';
 
 export class Facture {
-
   public id: number;
   public ref: string;
   public libelle: string;
@@ -22,14 +21,15 @@ export class Facture {
   public montantTTC: number;
   public montantTVA: number;
   public typeOperation: string;
-  public societeSource = new Societe();
-  public societeDistination = new Societe();
-  public tva = new Tva();
+  public credit: string;
+  public debit: string;
+  public societeSource = new Societe;
+  public societeDistination = new Societe;
+  public tva = new Tva;
+  public etatFacture = new EtatFacture();
+  public etatPaiement = new EtatPaiement();
   public classComptable = new ClasseComptable();
-  public compteComptable = new CompteComptable();
-  public  declarationIS = new DeclarationIS();
+  public declarationIS = new DeclarationIS;
   public declarationTva = new DeclarationTva();
   public declarationIR = new DeclarationIR();
-  public etatPaiement = new EtatPaiement();
-  public etatFacture = new EtatFacture();
 }

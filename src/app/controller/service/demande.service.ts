@@ -27,11 +27,48 @@ export class DemandeService {
   private _submitted: boolean;
   private _selected:Demande;
   private _user: User;
+  private _UserItemsFiltered: Array<User>;
+  private _selectedDemande:Demande;
+
+
+  public updateDemande(){
+
+    this.http.put(this.url,this.selected).subscribe(
+        data=>{
+          console.log("mchaaat");
+          console.log(data);
+        },error => {
+          console.log(error);
+        }
+    );
+  }
+
+  get selectedDemande(): Demande {
+    if (this._selectedDemande==null){
+      this._selectedDemande=new Demande();
+    }
+    return this._selectedDemande;
+  }
+
+  set selectedDemande(value: Demande) {
+    this._selectedDemande = value;
+  }
 
   constructor(private http: HttpClient) { }
 
 
-/*  acceptDemande(selected:Demande):Observable<any>{
+  get UserItemsFiltered(): Array<User> {
+    if (this._UserItemsFiltered==null){
+      this._UserItemsFiltered= new Array<User>();
+    }
+    return this._UserItemsFiltered;
+  }
+
+  set UserItemsFiltered(value: Array<User>) {
+    this._UserItemsFiltered = value;
+  }
+
+  /*  acceptDemande(selected:Demande):Observable<any>{
     return this.http.put(this.url+'demande/',selected);
   }*/
   save(): Observable<any> {

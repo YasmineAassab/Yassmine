@@ -1,0 +1,186 @@
+<div class="container-fluid">
+
+    <p-toast></p-toast>
+    <p-toast position="top-left" key="tl"></p-toast>
+
+    <div class="card" id="card1">
+        <p-toolbar styleClass="p-mb-4">
+
+            <h1 id="yt">Création d'une declaration TVA</h1>
+
+            <ng-template pTemplate="right">
+
+                <label>{{fileName}} &nbsp;</label>
+                <input type="file" id="file" accept=".xml" (change)="fileChanged($event)">
+                <label for="file">
+                    <i class="pi pi-plus"></i> &nbsp;
+                    Importer
+                </label>
+                <button *ngIf="a2==true" pButton pRipple icon="pi pi-arrow-down" class="p-button-help" style="margin-left: 7px; height: 40px; width: 40px"></button>
+            </ng-template>
+        </p-toolbar>
+
+        <div class="card-body" style="margin-top: 30px">
+            <div class="p-d-flex">
+                <div class="p-mr-2 p-offset-3">
+                    <span class="p-float-label col-md-5">
+                        <input id="float-input" type="text" pInputText [(ngModel)]="selected.societe.ice">
+                        <label for="float-input">Societe</label>
+                    </span>
+                </div>
+                <div class="p-mr-2 p-offset-1">
+                    <span class="p-float-label col-md-5">
+                        <input id="float-input1" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="TDTV1" pInputText [(ngModel)]="selected.typeDeclarationTva.ref">
+                        <label for="float-input1">Trimestriel</label>
+                    </span>
+                </div>
+                <div class="p-mr-2 p-offset-1">
+                    <span class="p-float-label col-md-5">
+                        <input id="float-input2" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="TDTV2" pInputText [(ngModel)]="selected.typeDeclarationTva.ref">
+                        <label for="float-input1">Mensuelle</label>
+                    </span>
+                </div> <br>
+            </div>
+            <div class="p-mr-2 p-col-6 p-offset-5" >
+                <p-button label="OK" (click)="test()"></p-button>
+            </div>
+            <div class="p-d-flex">
+                <div class="p-mr-2 p-offset-3" *ngIf="a">
+                    <span class="p-float-label col-md-5">
+                        <input id="float-input3" type="number" pInputText [(ngModel)]="selected.annee">
+                        <label for="float-input">Annee</label>
+                    </span>
+                </div>
+                <div class="p-mr-2 p-offset-1" *ngIf="b">
+                    <span class="p-float-label col-md-5">
+                        <input id="float-input4" type="number" pInputText [(ngModel)]="selected.trim">
+                        <label for="float-input">Trim</label>
+                    </span>
+                </div>
+                <div class="p-mr-2 p-offset-1" *ngIf="c">
+                    <span class="p-float-label col-md-5">
+                        <input id="float-input5" type="number" pInputText [(ngModel)]="selected.mois">
+                        <label for="float-input">Mois</label>
+                    </span>
+                </div>
+            </div>
+            <div class="p-mr-2 p-col-6 p-offset-5" *ngIf="a">
+                <p-button label="OK" (click)="afficheObject()"></p-button>
+            </div>
+            <div class="infor" *ngIf="val == true"><p><mark>Cette déclaration est déjà validée</mark></p></div>
+            <div class="infor" *ngIf="bro == true"><p><mark>cette facture est enregistrée en tant que brouillon</mark></p></div>
+            <p></p>
+            <div>
+                <div class="card" id="haw">
+                    <div class="p-grid">
+                        <div class="p-col">
+                            <div class="card factCard">
+                                <div class="p-grid">
+                                    <div class="p-col-3"><h5>Factures CRÉDIT</h5><span><button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2 p-mb-2" (click)="openCreate()"></button></span></div>
+                                </div>
+                                <p-table [value]="object2.listfactureachat" [rows]="6" [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+                                    <ng-template pTemplate="header">
+                                        <tr>
+                                            <th pSortableColumn="ref" style="width: 7rem">Ref<p-sortIcon field="ref"></p-sortIcon></th>
+                                            <th pSortableColumn="MontantHorsTaxe" style="width: 13rem">Montant hors taxe <p-sortIcon field="MontantHorsTaxe"></p-sortIcon></th>
+                                            <th pSortableColumn="category" style="width: 10rem">Sté source <p-sortIcon field="category"></p-sortIcon></th>
+                                            <th pSortableColumn="quantity" style="width: 12rem">Sté destination <p-sortIcon field="quantity"></p-sortIcon></th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-facture>
+                                        <tr>
+                                            <td>{{facture.ref}}</td>
+                                            <td>{{facture.montantHorsTaxe | currency: 'MAD&nbsp;'}}</td>
+                                            <td>{{facture.societeSource.ice}}</td>
+                                            <td>{{facture.societeDistination.ice}}</td>
+                                            <td>
+                                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"></button>
+                                                <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info p-mr-2"></button>
+                                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"></button>
+                                            </td>
+                                        </tr>
+                                    </ng-template>
+                                </p-table>
+                            </div>
+                        </div>
+                        <div class="p-col">
+                            <div class="card factCard">
+                                <div class="p-grid">
+                                    <div class="p-col-3"><h5>Factures DÉBIT</h5><span><button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2 p-mb-2" (click)="openCreate1()"></button></span></div>
+                                </div>
+
+                                <p-table [value]="object2.listfacturevente" [rows]="6" [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+                                    <ng-template pTemplate="header">
+                                        <tr>
+                                            <th pSortableColumn="ref" style="width: 7rem">Ref <p-sortIcon field="ref"></p-sortIcon></th>
+                                            <th pSortableColumn="MontantHorsTaxe" style="width: 13rem">Montant hors taxe <p-sortIcon field="MontantHorsTaxe"></p-sortIcon></th>
+                                            <th pSortableColumn="category" style="width: 10rem">Sté source <p-sortIcon field="category"></p-sortIcon></th>
+                                            <th pSortableColumn="quantity" style="width: 12rem">Sté destination <p-sortIcon field="quantity"></p-sortIcon></th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </ng-template>
+                                    <ng-template pTemplate="body" let-facture>
+                                        <tr>
+                                            <td>{{facture.ref}}</td>
+                                            <td>{{facture.montantHorsTaxe | currency: 'MAD&nbsp;'}}</td>
+                                            <td>{{facture.societeSource.ice}}</td>
+                                            <td>{{facture.societeDistination.ice}}</td>
+                                            <td>
+                                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"></button>
+                                                <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info p-mr-2"></button>
+                                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"></button>
+                                            </td>
+                                        </tr>
+                                    </ng-template>
+                                    <div class="p-grid">
+                                        <div class="p-col-5">
+                                            <div class="p-inputgroup">
+                                                <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                                                <input type="text" pInputText placeholder="Username">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </p-table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-grid">
+                    <div class="p-col">
+                        <div style="padding: 5px"><label>TVA Collectée</label></div>
+                        <div class="p-inputgroup">
+                            <input type="number" pInputText disabled [value]="object2.tvacollecter">
+                            <span class="p-inputgroup-addon">MAD</span>
+                        </div>
+                    </div>
+                    <div class="p-col">
+                        <div style="padding: 5px"><label>TVA Déductible</label></div>
+                        <div class="p-inputgroup">
+                            <input type="number" pInputText disabled [value]="object2.tvadeductible">
+                            <span class="p-inputgroup-addon">MAD</span>
+                        </div>
+                    </div>
+                    <div class="p-col">
+                        <div style="padding: 5px"><label>Différence TVA</label></div>
+                        <div class="p-inputgroup">
+                            <input type="number" pInputText disabled [value]="object2.differencetva">
+                            <span class="p-inputgroup-addon">MAD</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <p></p>
+
+        <div class="card-footer">
+            <div class="p-grid" style="padding: 20px">
+                <button pButton pRipple type="button" label="Enregistrer BROUILLON" style="width:20rem" class="p-offset-4 p-mr-6 p-mb-2" (click)="savebrouillon()"></button>
+                <button pButton pRipple type="button" label="VALIDER" style="width:20rem" class="p-col-6 p-mb-2" (click)="save()"></button>
+            </div>
+        </div>
+    </div>
+    <app-facture-dialog></app-facture-dialog>
+    <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+</div>

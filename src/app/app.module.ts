@@ -178,11 +178,12 @@ import {CpcListComponent} from './view/admin/cpc/cpc-list/cpc-list.component';
 import {CpcRecherchComponent} from './view/admin/cpc/cpc-recherch/cpc-recherch.component';
 import {CpcViewComponent} from './view/admin/cpc/cpc-view/cpc-view.component';
 import {CpcComponent} from './view/admin/cpc/cpc.component';
-import { DemandeDeclarationComponent } from './view/admin/demande-declaration/demande-declaration.component';
-import { DeclarationsComponent } from './view/admin/declarations/declarations.component';
-import { ViewComptableComponent } from './view/admin/declarations/view-comptable/view-comptable.component';
-import {DemandeListComponent} from "./view/admin/demande-list/demande-list.component";
-import {ChartsComponent} from "./view/admin/charts/charts.component";
+import { FactureComponent } from './view/admin/facture/facture.component';
+import { FactureCreateComponent } from './view/admin/facture/facture-create/facture-create.component';
+import { FactureListComponent } from './view/admin/facture/facture-list/facture-list.component';
+import { FactureEditComponent } from './view/admin/facture/facture-edit/facture-edit.component';
+import { FactureViewComponent } from './view/admin/facture/facture-view/facture-view.component';
+import {DeclarationTvaListComponent} from "./view/admin/declarationTva/declaration-tva-list/declaration-tva-list.component";
 
 @NgModule({
     imports: [
@@ -333,11 +334,11 @@ import {ChartsComponent} from "./view/admin/charts/charts.component";
         DeclarationEditComponent,
         DeclarationViewComponent,
         ProfileComponent,
-        ChartsComponent,
-        DemandeListComponent,
-        DemandeDeclarationComponent,
-        DeclarationsComponent,
-        ViewComptableComponent,
+        FactureComponent,
+        FactureCreateComponent,
+        FactureListComponent,
+        FactureEditComponent,
+        FactureViewComponent,
         /*ClassComponent,
         ClasseCreateComponent,
         ClasseListeComponent,
@@ -352,6 +353,8 @@ import {ChartsComponent} from "./view/admin/charts/charts.component";
         CpcRecherchComponent,
         CpcViewComponent,
         CpcComponent*/
+        DeclarationCreateComponent,
+        DeclarationTvaListComponent
 
     ],
     providers: [
