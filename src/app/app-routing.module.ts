@@ -51,6 +51,7 @@ import {FactureComponent} from './view/admin/facture/facture.component';
 import {DeclarationTvaListComponent} from "./view/admin/declarationTva/declaration-tva-list/declaration-tva-list.component";
 import {ChartsComponent} from "./view/admin/charts/charts.component";
 import {DeclarationIsListComponent} from "./view/admin/declarations-is/declaration-is-list/declaration-is-list.component";
+import {DemandeDeclarationComponent} from "./view/admin/demande-declaration/demande-declaration.component";
 
 @NgModule({
     imports: [
@@ -65,6 +66,7 @@ import {DeclarationIsListComponent} from "./view/admin/declarations-is/declarati
                     {path: 'profile', component: ProfileComponent},
 
                    /* {path: '', component: DashboardDemoComponent},*/
+                    {path: 'demande', component: DemandeDeclarationComponent},
                     {path: 'declaration-is', component: DeclarationsISComponent},
                     {path: 'view/declarations-is/create', component: DeclarationIsCreateComponent},
                     {path: 'view/declarations-is/edit', component: DeclarationIsEditComponent},

@@ -71,7 +71,7 @@ export class DemandeService {
   /*  acceptDemande(selected:Demande):Observable<any>{
     return this.http.put(this.url+'demande/',selected);
   }*/
-  save(): Observable<any> {
+  save(): Observable<number> {
     console.log(this.demande);
     return this.http.post<number>(this.url,this.demande);
   }
