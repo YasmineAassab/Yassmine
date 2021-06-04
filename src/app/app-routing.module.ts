@@ -46,35 +46,27 @@ import {SignUpComponent} from './pages/sign-up/sign-up.component';
 import {HomePageComponent} from './home-page/home-page.component';
 import {DeclarationIrComponent} from './view/admin/declaration-ir/declaration-ir.component';
 import {ProfileComponent} from './Security/profile/profile.component';
-import {DemandeDeclarationComponent} from './view/admin/demande-declaration/demande-declaration.component';
-import {DeclarationsComponent} from './view/admin/declarations/declarations.component';
-import {StatistiqueComponent} from './view/admin/statistique/statistique.component';
-import {DeclarationTvaListComponent} from "./view/admin/declarationTva/declaration-tva-list/declaration-tva-list.component";
+import {FactureCreateComponent} from './view/admin/facture/facture-create/facture-create.component';
+import {FactureComponent} from './view/admin/facture/facture.component';
 
 @NgModule({
     imports: [
         RouterModule.forRoot([
-           /* {path: '', component: AppLoginComponent},*/
-           /* {path: 'sign-up', component: SignUpComponent},*/
+            {path: '', component: AppLoginComponent},
+            {path: 'sign-up', component: SignUpComponent},
             {
                 path: '', component: AppMainComponent,
                 children: [
-                    /* {path: '', component: DashboardDemoComponent},*/
-                    {path: '', component: HomePageComponent},
                     {path: 'home-page', component: HomePageComponent},
-
                     {path: 'declaration-ir', component: DeclarationIrComponent},
                     {path: 'profile', component: ProfileComponent},
-                    {path: 'demande', component: DemandeDeclarationComponent},
-                    {path: 'declarations', component: DeclarationsComponent},
-                    {path: 'statistique', component: StatistiqueComponent},
 
-
-
+                   /* {path: '', component: DashboardDemoComponent},*/
                     {path: 'declaration-is', component: DeclarationsISComponent},
                     {path: 'view/declarations-is/create', component: DeclarationIsCreateComponent},
                     {path: 'view/declarations-is/edit', component: DeclarationIsEditComponent},
-                    {path: 'declaration-tva', component: DeclarationTvaListComponent},
+                    {path: 'facture', component: FactureComponent},
+                    {path: 'view/facture/create', component: FactureCreateComponent},
                     {path: 'uikit/formlayout', component: FormLayoutDemoComponent},
                     {path: 'uikit/floatlabel', component: FloatLabelDemoComponent},
                     {path: 'uikit/invalidstate', component: InvalidStateDemoComponent},
@@ -107,8 +99,6 @@ import {DeclarationTvaListComponent} from "./view/admin/declarationTva/declarati
                     {path: 'documentation', component: DocumentationComponent}
                 ]
             },
-            {path: '', component: AppLoginComponent},
-             {path: 'sign-up', component: SignUpComponent},
             {path: 'error', component: AppErrorComponent},
             {path: 'accessdenied', component: AppAccessdeniedComponent},
             {path: '404', component: AppNotfoundComponent},

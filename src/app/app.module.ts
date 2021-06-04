@@ -178,14 +178,11 @@ import {CpcListComponent} from './view/admin/cpc/cpc-list/cpc-list.component';
 import {CpcRecherchComponent} from './view/admin/cpc/cpc-recherch/cpc-recherch.component';
 import {CpcViewComponent} from './view/admin/cpc/cpc-view/cpc-view.component';
 import {CpcComponent} from './view/admin/cpc/cpc.component';
-import { DemandeDeclarationComponent } from './view/admin/demande-declaration/demande-declaration.component';
-import { DeclarationsComponent } from './view/admin/declarations/declarations.component';
-import { ViewComptableComponent } from './view/admin/declarations/view-comptable/view-comptable.component';
-import {StatistiqueComponent} from './view/admin/statistique/statistique.component';
-import { StatisiqueEmployeComponent } from './view/admin/statisique-employe/statisique-employe.component';
-import {DemandeListComponent} from './view/admin/demande-list/demande-list.component';
-import {DeclarationTvaCreateComponent} from "./view/admin/declarationTva/declaration-tva-create/declaration-tva-create.component";
-import {DeclarationTvaListComponent} from "./view/admin/declarationTva/declaration-tva-list/declaration-tva-list.component";
+import { FactureComponent } from './view/admin/facture/facture.component';
+import { FactureCreateComponent } from './view/admin/facture/facture-create/facture-create.component';
+import { FactureListComponent } from './view/admin/facture/facture-list/facture-list.component';
+import { FactureEditComponent } from './view/admin/facture/facture-edit/facture-edit.component';
+import { FactureViewComponent } from './view/admin/facture/facture-view/facture-view.component';
 
 @NgModule({
     imports: [
@@ -336,12 +333,11 @@ import {DeclarationTvaListComponent} from "./view/admin/declarationTva/declarati
         DeclarationEditComponent,
         DeclarationViewComponent,
         ProfileComponent,
-        DemandeDeclarationComponent,
-        DeclarationsComponent,
-        ViewComptableComponent,
-        StatistiqueComponent,
-        StatisiqueEmployeComponent,
-        DemandeListComponent,
+        FactureComponent,
+        FactureCreateComponent,
+        FactureListComponent,
+        FactureEditComponent,
+        FactureViewComponent,
         /*ClassComponent,
         ClasseCreateComponent,
         ClasseListeComponent,
@@ -356,8 +352,7 @@ import {DeclarationTvaListComponent} from "./view/admin/declarationTva/declarati
         CpcRecherchComponent,
         CpcViewComponent,
         CpcComponent*/
-        DeclarationTvaCreateComponent,
-        DeclarationTvaListComponent
+
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
