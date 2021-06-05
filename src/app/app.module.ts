@@ -178,13 +178,15 @@ import {CpcListComponent} from './view/admin/cpc/cpc-list/cpc-list.component';
 import {CpcRecherchComponent} from './view/admin/cpc/cpc-recherch/cpc-recherch.component';
 import {CpcViewComponent} from './view/admin/cpc/cpc-view/cpc-view.component';
 import {CpcComponent} from './view/admin/cpc/cpc.component';
-import { DemandeDeclarationComponent } from './view/admin/demande-declaration/demande-declaration.component';
-import { DeclarationsComponent } from './view/admin/declarations/declarations.component';
-import { ViewComptableComponent } from './view/admin/declarations/view-comptable/view-comptable.component';
-import {StatistiqueComponent} from './view/admin/statistique/statistique.component';
-import { StatisiqueEmployeComponent } from './view/admin/statisique-employe/statisique-employe.component';
-import {DemandeListComponent} from './view/admin/demande-list/demande-list.component';
-import { ChercherDeclarationIRComponent } from './view/admin/chercher-declaration-ir/chercher-declaration-ir.component';
+import { FactureComponent } from './view/admin/facture/facture.component';
+import { FactureCreateComponent } from './view/admin/facture/facture-create/facture-create.component';
+import { FactureListComponent } from './view/admin/facture/facture-list/facture-list.component';
+import { FactureEditComponent } from './view/admin/facture/facture-edit/facture-edit.component';
+import { FactureViewComponent } from './view/admin/facture/facture-view/facture-view.component';
+import {DeclarationTvaListComponent} from "./view/admin/declarationTva/declaration-tva-list/declaration-tva-list.component";
+import {DemandeListComponent} from "./view/admin/demande-list/demande-list.component";
+import {ChartsComponent} from "./view/admin/charts/charts.component";
+import {DemandeDeclarationComponent} from "./view/admin/demande-declaration/demande-declaration.component";
 
 @NgModule({
     imports: [
@@ -320,6 +322,8 @@ import { ChercherDeclarationIRComponent } from './view/admin/chercher-declaratio
         AppAccessdeniedComponent,
         AppLoginComponent,
 
+        DemandeListComponent,
+        ChartsComponent,
         DeclarationIsListComponent,
         DeclarationIsCreateComponent,
         DeclarationIsEditComponent,
@@ -330,18 +334,17 @@ import { ChercherDeclarationIRComponent } from './view/admin/chercher-declaratio
         SignUpComponent,
         HomePageComponent,
         OurServiceComponent,
+        DemandeDeclarationComponent,
         DeclarationIrComponent,
         DeclarationCreateComponent,
         DeclarationEditComponent,
         DeclarationViewComponent,
         ProfileComponent,
-        DemandeDeclarationComponent,
-        DeclarationsComponent,
-        ViewComptableComponent,
-        StatistiqueComponent,
-        StatisiqueEmployeComponent,
-        DemandeListComponent,
-        ChercherDeclarationIRComponent,
+        FactureComponent,
+        FactureCreateComponent,
+        FactureListComponent,
+        FactureEditComponent,
+        FactureViewComponent,
         /*ClassComponent,
         ClasseCreateComponent,
         ClasseListeComponent,
@@ -356,6 +359,8 @@ import { ChercherDeclarationIRComponent } from './view/admin/chercher-declaratio
         CpcRecherchComponent,
         CpcViewComponent,
         CpcComponent*/
+        DeclarationCreateComponent,
+        DeclarationTvaListComponent
 
     ],
     providers: [

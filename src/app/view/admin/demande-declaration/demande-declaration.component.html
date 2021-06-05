@@ -8,26 +8,26 @@
     <div class="p-fluid p-formgrid ">
         <div class="p-grid">
             <div class="p-field p-col">
-                <label for="firstname1">Reference :</label>
-                <input [(ngModel)]="demande.ref" id="firstname1" type="text" pInputText>
+                <label for="ref">Reference :</label>
+                <input [(ngModel)]="demande.ref" id="ref" type="text" pInputText>
             </div>
             <div class="p-field p-col">
-                <label for="firstname1">Operation :</label>
-                <p-dropdown [options]="cities" [(ngModel)]="selectedCity" optionLabel="name"></p-dropdown>
+                <label for="operation">Operation :</label>
+                <p-dropdown id="operation" [options]="cities" [(ngModel)]="selectedCity" optionLabel="name"></p-dropdown>
             </div>
         </div>
         <div class="p-grid">
             <div class="p-field p-col">
-                <label for="firstname1">Annee :</label>
-                <input [(ngModel)]="demande.annee" id="firstname1" type="text" pInputText>
+                <label for="annee">Annee :</label>
+                <input [(ngModel)]="demande.annee" id="annee" type="text" pInputText>
             </div>
             <div class="p-field p-col">
-                <label for="lastname1">Mois :</label>
-                <input [(ngModel)]="demande.mois" id="lastname1" type="text" pInputText>
+                <label for="mois">Mois :</label>
+                <input [(ngModel)]="demande.mois" id="mois" type="text" pInputText>
             </div>
             <div class="p-field p-col">
-                <label for="lastname1">ice Societe :</label>
-                <input [(ngModel)]="demande.societe.ice" id="lastname1" type="text" pInputText>
+                <label for="societe">ice Societe :</label>
+                <input [(ngModel)]="demande.societe.ice" id="societe" type="text" pInputText>
             </div>
         </div>
     </div>

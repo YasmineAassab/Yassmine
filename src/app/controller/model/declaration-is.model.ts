@@ -3,6 +3,7 @@ import {Facture} from './facture.model';
 import {TauxIS} from './taux-is.model';
 import {TauxIsConfig} from "./taux-is-config.model";
 import {EtatDeclaration} from "./etat-declaration.model";
+import {Acomptes} from "./acomptes.model";
 
 export class DeclarationIS {
   public id: number;
@@ -13,8 +14,10 @@ export class DeclarationIS {
   public totalHTDiff: number;
   public montantISCalcule: number;
   public montantISPaye: number;
+  public totalPaye: number;
   public societe = new Societe();
   public tauxIS = new TauxIS();
+  public acomptes = new Acomptes();
   public tauxIsConfig = new TauxIsConfig();
   public etatDeclaration = new EtatDeclaration();
   public factureD  = new Array<Facture>();

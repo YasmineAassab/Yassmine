@@ -65,6 +65,10 @@ export class DeclarationISService {
     return this.http.get<DeclarationIS>(this.url + 'afficheDecIS/ice/'+ ice +'/annee/'+ annee);
   }
 
+  public afficheObject11(): Observable<DeclarationIsObject>{
+    return this.http.post<DeclarationIsObject>(this.url + 'find-declarationIS-object/', this.object);
+  }
+
   public calculTotalHT(factures: Array<Facture>): Observable<number>{
     return this.http.post<number>(this.url + 'calcul-totalHT/', factures);
   }

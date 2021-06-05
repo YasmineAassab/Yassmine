@@ -55,12 +55,15 @@ export class DemandeDeclarationComponent implements OnInit {
 
     this.demandeService.save().subscribe(
         data=>{
-         this.demandeService.demande.societe=new Societe();
-          console.log(this.demandeService.demande.societe);
-          this.demande=new Demande();
+          if (data > 0){
+            //this.demandeService.demande.societe=new Societe();
+            console.log(this.demandeService.demande.societe);
+            this.demande=new Demande();
 
-          console.log(this.demande);
-          console.log("mchaat demande");
+            console.log(this.demande);
+            console.log("mchaat demande");
+          }
+         else console.log(data);
 
         },error => {
           console.log(error);
