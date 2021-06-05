@@ -184,6 +184,7 @@ import { ViewComptableComponent } from './view/admin/declarations/view-comptable
 import {StatistiqueComponent} from './view/admin/statistique/statistique.component';
 import { StatisiqueEmployeComponent } from './view/admin/statisique-employe/statisique-employe.component';
 import {DemandeListComponent} from './view/admin/demande-list/demande-list.component';
+import { ChercherDeclarationIRComponent } from './view/admin/chercher-declaration-ir/chercher-declaration-ir.component';
 
 @NgModule({
     imports: [
@@ -340,6 +341,7 @@ import {DemandeListComponent} from './view/admin/demande-list/demande-list.compo
         StatistiqueComponent,
         StatisiqueEmployeComponent,
         DemandeListComponent,
+        ChercherDeclarationIRComponent,
         /*ClassComponent,
         ClasseCreateComponent,
         ClasseListeComponent,

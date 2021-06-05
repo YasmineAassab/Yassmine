@@ -1,0 +1,93 @@
+<div class="card">
+    <div class="card-header text-center">  <h2 class="text-center"> Search</h2></div>
+    <div class="card-body">
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="lastname1">year :</label>
+                <span class="p-input-icon-left">
+    <i class="pi pi-search"></i>
+    <input type="number" pInputText [(ngModel)]="annee"  pTooltip="Enter year" tooltipPosition="top"placeholder="Search">
+</span>
+            </div>
+            <div class="p-field p-col">
+                <label for="firstname1">First month :</label>
+                <span class="p-input-icon-left">
+    <i class="pi pi-search"></i>
+    <input type="number" pInputText [(ngModel)]="moiMin"  pTooltip="Enter first month" tooltipPosition="top"placeholder="Search">
+</span>
+            </div>
+            <div class="p-field p-col">
+                <label for="lastname1">Second month :</label>
+                <span class="p-input-icon-left">
+    <i class="pi pi-search"></i>
+    <input type="number" pInputText [(ngModel)]="moisMax"  pTooltip="Enter second month" tooltipPosition="top"placeholder="Search">
+</span>
+            </div>
+
+
+
+        </div>
+
+
+        </div>
+    <div class="card-footer text-center"><p-button (onClick)="search(annee,moiMin,moisMax)" label="Search" icon="pi pi-search" ></p-button></div>
+
+</div>
+
+<div class="card">
+    <h3>Declaration IR</h3>
+    <p-table [value]="searchItems">
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="Reference">Reference <p-sortIcon field="ref"></p-sortIcon></th>
+                <th pSortableColumn="Mois">Mois <p-sortIcon field="mois"></p-sortIcon></th>
+                <th pSortableColumn="Annee">Annee <p-sortIcon field="annee"></p-sortIcon></th>
+
+                <th pSortableColumn="Total">Total <p-sortIcon field="total"></p-sortIcon></th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-delcaration>
+            <tr>
+                <td>{{delcaration.ref}}</td>
+                <td>{{delcaration.mois}}</td>
+                <td>{{delcaration.annee}}</td>
+
+                <td>{{delcaration.total}}DH</td>
+                <td>
+                    <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-warning" (click)="details(delcaration)"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+
+
+
+
+<div class="card" >
+    <h3>Declaration IR Employe</h3>
+    <p-table [value]="searchItemsEmploye">
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="Reference">CIN <p-sortIcon field="ref"></p-sortIcon></th>
+                <th pSortableColumn="Mois">Salaire Net <p-sortIcon field="mois"></p-sortIcon></th>
+                <th pSortableColumn="Annee">Salaire Brut <p-sortIcon field="annee"></p-sortIcon></th>
+
+                <th pSortableColumn="Total">Montant IR <p-sortIcon field="total"></p-sortIcon></th>
+
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-delcarationIR>
+            <tr>
+                <td>{{delcarationIR.employe.cin}}</td>
+                <td>{{delcarationIR.salaireNet}}</td>
+                <td>{{delcarationIR.salaireBrut}}</td>
+
+                <td>{{delcarationIR.montantIR}}DH</td>
+
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

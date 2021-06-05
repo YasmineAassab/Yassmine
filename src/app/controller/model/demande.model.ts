@@ -8,6 +8,6 @@ export class Demande {
     public annee: number;
     public mois: number;
     public dateDemande: string;
-    public societe = new Societe();
-    public user = new User();
+    public societe: Societe;
+    public user: User;
 }

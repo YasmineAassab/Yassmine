@@ -9,6 +9,8 @@ import {CategorieService} from '../model/categorie-service.model';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
+import {DeclarationIrVo} from '../model/declaration-ir-vo.model';
+import {Societe} from '../model/societe.model';
 
 
 
@@ -31,6 +33,44 @@ export class DeclarationIrService {
   private _categorieServices: Array<CategorieService>;
   private _searchAnnee: number;
   private _searchIce: string;
+  private _declarationIRSearch:DeclarationIR;
+  private _declarationIrVo:DeclarationIrVo;
+
+public details(declaration:DeclarationIR) :Observable<any>{
+  console.log(declaration.ref);
+  return this.http.get<Array<DeclarationIREmploye>>( environment.baseUrl+'declarationiremploye/declarationir/ref/'+declaration.ref);
+}
+
+  get declarationIrVo(): DeclarationIrVo {
+    if (this._declarationIrVo==null){
+      this._declarationIrVo=new DeclarationIrVo();
+    }
+    return this._declarationIrVo;
+  }
+
+  set declarationIrVo(value: DeclarationIrVo) {
+    this._declarationIrVo = value;
+  }
+
+  get declarationIRSearch(): DeclarationIR {
+    if (this._declarationIRSearch==null){
+      this._declarationIRSearch=new DeclarationIR();
+    }
+    return this._declarationIRSearch;
+  }
+
+  set declarationIRSearch(value: DeclarationIR) {
+    this._declarationIRSearch = value;
+  }
+
+  public search(annee:number,moiMin:number,moisMax:number): Observable<any> {
+    this.declarationIrVo.annee=annee;
+    this.declarationIrVo.moisMin=moiMin;
+    this.declarationIrVo.moisMax=moisMax;
+    console.log("***************");
+    console.log(this.declarationIrVo);
+    return this.http.post(this.url+'search',this.declarationIrVo);
+  }
 
 
   get searchAnnee(): number {
@@ -116,6 +156,8 @@ export class DeclarationIrService {
 
 
   public creeDeclarationIR(): Observable<Array<DeclarationIREmploye>> {
+    console.log("haa declaration IR li ghatsifet");
+    console.log(this.declarationIR);
     return this.http.post<Array<DeclarationIREmploye>>(this.url + 'createDeclarationIr', this.declarationIR);
   }
 
@@ -223,6 +265,9 @@ export class DeclarationIrService {
   get declarationIR(): DeclarationIR {
     if (this._declarationIR == null){
       this._declarationIR = new DeclarationIR();
+    }
+    if (this._declarationIR.societe==null){
+      this._declarationIR.societe=new Societe();
     }
     return this._declarationIR;
   }

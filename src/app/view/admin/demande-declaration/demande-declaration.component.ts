@@ -4,6 +4,7 @@ import {CategorieService} from '../../../controller/model/categorie-service.mode
 import {Societe} from '../../../controller/model/societe.model';
 import {DemandeService} from '../../../controller/service/demande.service';
 import {Demande} from "../../../controller/model/demande.model";
+import {TokenStorageService} from '../../../Security/_services/token-storage.service';
 
 interface City {
   name: string,
@@ -27,7 +28,7 @@ export class DemandeDeclarationComponent implements OnInit {
 
 
 
-  constructor(private service: DeclarationIrService, private demandeService: DemandeService) {
+  constructor(private service: DeclarationIrService, private demandeService: DemandeService,private tokenStorageService:TokenStorageService) {
 
     this.cities = [
       {name: 'Declaration IR', code: 'NY'},
@@ -44,6 +45,10 @@ export class DemandeDeclarationComponent implements OnInit {
     this.demandeService.demande = value;
   }
   save(){
+    console.log("*****this is tockenv****");
+    console.log(this.tokenStorageService.getUser().societe);
+    console.log(this.tokenStorageService.getUser());
+
     this.demandeService.demande.operation=this.selectedCity.name;
     console.log(this.demandeService.demande.operation);
 
@@ -80,6 +85,7 @@ export class DemandeDeclarationComponent implements OnInit {
   ngOnInit(): void {
     this.service.findCard();
     this.demandeService.demande.societe=new Societe();
+   // this.demandeService.jibemp();
 
 
   }

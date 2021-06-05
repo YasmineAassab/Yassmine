@@ -49,6 +49,7 @@ import {ProfileComponent} from './Security/profile/profile.component';
 import {DemandeDeclarationComponent} from './view/admin/demande-declaration/demande-declaration.component';
 import {DeclarationsComponent} from './view/admin/declarations/declarations.component';
 import {StatistiqueComponent} from './view/admin/statistique/statistique.component';
+import {ChercherDeclarationIRComponent} from './view/admin/chercher-declaration-ir/chercher-declaration-ir.component';
 
 @NgModule({
     imports: [
@@ -67,6 +68,7 @@ import {StatistiqueComponent} from './view/admin/statistique/statistique.compone
                     {path: 'demande', component: DemandeDeclarationComponent},
                     {path: 'declarations', component: DeclarationsComponent},
                     {path: 'statistique', component: StatistiqueComponent},
+                    {path: 'chercher-declarationIR', component: ChercherDeclarationIRComponent},
 
 
 
