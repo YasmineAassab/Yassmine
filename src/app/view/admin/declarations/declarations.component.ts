@@ -47,7 +47,7 @@ export class DeclarationsComponent implements OnInit {
           console.log(data);
         this.Useritems=data;
         for (let i=0;i<this.Useritems.length; i++){
-          if (this.Useritems[i].roles[0].name== "ROLE_SOCIETE"){
+          if (this.Useritems[i].roles[0].name== "ROLE_COMPTABLE"){
             console.log("*****");
             this.Useritemsfiltered.push(this.Useritems[i]);
           }
@@ -143,7 +143,7 @@ export class DeclarationsComponent implements OnInit {
 
 
   public accept(selected: Demande) {
-    this.viewDialog= true;
+    this.editDialog=true;
     this.selected = selected;
 
           this.viewDialog=true;

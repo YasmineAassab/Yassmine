@@ -27,7 +27,7 @@ export class ViewComptableComponent implements OnInit {
     this.selected.user = selectedComptable;
     //this.selected.mois=1;
     this.service.updateDemande();
-    this.viewDialog=false;
+   // this.viewDialog=false;
     this.selected=new Demande();
   }
   get UserItemsFiltered(): Array<User> {
@@ -37,26 +37,10 @@ export class ViewComptableComponent implements OnInit {
   set UserItemsFiltered(value: Array<User>) {
     this.service.UserItemsFiltered = value;
   }
+  public edit() {
 
-  get submitted(): boolean {
-    return this.service.submitted;
-  }
-
-  set submitted(value: boolean) {
-    this.service.submitted = value;
-  }
-  get user(): User {
-
-    return this.service.user;
-  }
-
-  set user(value: User) {
-    this.service.user = value;
-  }
-
-/*  public affect() {
     this.submitted = true;
-    if (this.selected.reference.trim()) {
+    if (this.selected.ref.trim()) {
       if (this.selected.id) {
         this.items[this.service.findIndexById(this.selected.id)] = this.selected;
         this.service.edit().subscribe(data => {
@@ -70,15 +54,13 @@ export class ViewComptableComponent implements OnInit {
         });
       }
       this.editDialog = false;
-      this.selected = new Commande();
+      this.selected = new Demande();
     }
-  }*/
-
-
-  public hideViewDialog() {
-    this.viewDialog = false;
   }
 
+  public hideEditDialog() {
+    this.editDialog = false;
+  }
   get selected(): Demande {
     return this.service.selected;
   }
@@ -87,13 +69,29 @@ export class ViewComptableComponent implements OnInit {
     this.service.selected = value;
   }
 
-  get viewDialog(): boolean {
-    return this.service.viewDialog;
+  get editDialog(): boolean {
+    return this.service.editDialog;
   }
 
-  set viewDialog(value: boolean) {
-
-    this.service.viewDialog = value;
+  set editDialog(value: boolean) {
+    this.service.editDialog = value;
   }
+
+  get submitted(): boolean {
+    return this.service.submitted;
+  }
+
+  set submitted(value: boolean) {
+    this.service.submitted = value;
+  }
+
+  get items(): Array<Demande> {
+    return this.service.items;
+  }
+
+  set items(value: Array<Demande>) {
+    this.service.items = value;
+  }
+
 
 }

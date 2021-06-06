@@ -9,6 +9,7 @@ import {Employe} from '../model/employe.model';
 import {CategorieService} from '../model/categorie-service.model';
 import {User} from '../../Security/model/user.model';
 import {Demande} from "../model/demande.model";
+import {Commande} from '../model/commande.model';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,10 @@ export class DemandeService {
 
 
 
+  public edit(): Observable<Demande> {
+    return this.http.put<Demande>(this.url, this.selected);
+  }
+
 
   public updateDemande(){
 
@@ -44,6 +49,18 @@ export class DemandeService {
           console.log(error);
         }
     );
+  }
+
+
+  public findIndexById(id: number): number {
+    let index = -1;
+    for (let i = 0; i < this.items.length; i++) {
+      if (this.items[i].id === id) {
+        index = i;
+        break;
+      }
+    }
+    return index;
   }
 
   get selectedDemande(): Demande {

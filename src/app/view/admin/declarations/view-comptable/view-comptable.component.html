@@ -1,3 +1,56 @@
+<p-dialog [(visible)]="editDialog" [style]="{width: '450px'}" header="Commande Details" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="p-field">
+            <label for="total">Reference :</label>
+            <input type="text" pInputText id="total" [(ngModel)]="selected.ref"  />
+        </div>
+        <div class="p-field">
+            <label for="total">Mois :</label>
+            <input type="text" pInputText id="total" [(ngModel)]="selected.mois"  />
+        </div>
+        <div class="p-field">
+            <label for="total">Annee :</label>
+            <input type="text" pInputText id="total" [(ngModel)]="selected.annee"  />
+        </div>
+        <div class="p-field">
+            <label for="total">Operation :</label>
+            <input type="text" pInputText id="total" [(ngModel)]="selected.operation"  />
+        </div>
+        <div class="p-field">
+            <label for="total">Reference :</label>
+            <input type="text" pInputText id="total" [(ngModel)]="selected.mois"  />
+        </div>
+
+
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="firstname1">Comptable traiteur :</label>
+                <p-dropdown [options]="cities" [(ngModel)]="selectedCity" optionLabel="name"></p-dropdown>
+            </div>
+            <div class="p-field p-col">
+                <label for="lastname1">Comptable Validateur :</label>
+                <p-dropdown [options]="cities" [(ngModel)]="selectedCity" optionLabel="name"></p-dropdown>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideEditDialog()"></button>
+        <button pButton pRipple label="Edit" icon="pi pi-check" class="p-button-text" (click)="edit()"></button>
+    </ng-template>
+</p-dialog>
+
+
+
+
+
+
+
+
+
+
+
+<!--
 <p-dialog [(visible)]="viewDialog" [style]="{width: '600px'}" header="Affectation du Comptable" [modal]="true" styleClass="p-fluid">
 
     <p-table   [value]="UserItemsFiltered">
@@ -29,7 +82,7 @@
 
 
 
-    <!--<ng-template pTemplate="content">
+    &lt;!&ndash;<ng-template pTemplate="content">
         <div class="p-field">
             <label for="ref">Ref</label>
             <input type="text" pInputText id="ref" [(ngModel)]="selected.reference" disabled />
@@ -52,5 +105,6 @@
     <ng-template pTemplate="footer">
         <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideViewDialog()"></button>
         <button pButton pRipple label="Affect" icon="pi pi-check" class="p-button-text" (click)="affect()"></button>
-    </ng-template>-->
+    </ng-template>&ndash;&gt;
 </p-dialog>
+-->
