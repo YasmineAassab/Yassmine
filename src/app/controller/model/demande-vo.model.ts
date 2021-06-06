@@ -7,5 +7,4 @@ export class DemandeVo {
     public societe: string;
     public comptableTraiteur: string;
     public comptableValidateur: string;
-
 }

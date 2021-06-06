@@ -5,7 +5,7 @@ import {Demande} from "../../../controller/model/demande.model";
 import {DeclarationISService} from "../../../controller/service/declaration-is.service";
 import {DeclarationIsObject} from "../../../controller/model/declaration-is-object.model";
 import {DeclarationIrService} from '../../../controller/service/declaration-ir.service';
-import {Societe} from '../../../controller/model/societe.model';
+import {DemandeVo} from "../../../controller/model/demande-vo.model";
 
 
 @Component({
@@ -18,6 +18,10 @@ export class DemandeListComponent implements OnInit {
 
   constructor(private service: DemandeService, private router: Router, private service2: DeclarationISService,
               private declarationIRService: DeclarationIrService,private demandeService:DemandeService) { }
+
+  public searchCriteria(){
+    this.service.searchCriteria().subscribe(data => this.items = data);
+  }
 
   public navigateToSearch(){
     this.router.navigateByUrl('view/declarations-is/list');
@@ -61,16 +65,19 @@ export class DemandeListComponent implements OnInit {
 
     );
     if (selected.operation == 'Declaration IS'){
-      this.router.navigateByUrl('view/declarations-is/create');
+      this.router.navigateByUrl('declarations-is/create');
     }
     if (selected.operation == 'Declaration IR'){
       this.router.navigateByUrl('declaration-ir');
+    }
+    if (selected.operation == 'Declaration TVA'){
+      this.router.navigateByUrl('declaration-tva/create');
     }
 
   }
 
   public navigateToCharts(){
-    this.router.navigateByUrl('view/declarations-is/chart');
+    //this.router.navigateByUrl('view/declarations-is/chart');
   }
 
   ngOnInit(): void {
@@ -99,6 +106,14 @@ export class DemandeListComponent implements OnInit {
 
   set object(value: DeclarationIsObject) {
     this.service2.object = value;
+  }
+
+  get demandeVo(): DemandeVo {
+    return this.service.demandeVo;
+  }
+
+  set demandeVo(value: DemandeVo) {
+    this.service.demandeVo = value;
   }
 
 }

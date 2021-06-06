@@ -9,6 +9,7 @@ import {Employe} from '../model/employe.model';
 import {CategorieService} from '../model/categorie-service.model';
 import {User} from '../../Security/model/user.model';
 import {Demande} from "../model/demande.model";
+import {DemandeVo} from "../model/demande-vo.model";
 
 @Injectable({
   providedIn: 'root'
@@ -30,9 +31,14 @@ export class DemandeService {
   private _UserItemsFiltered: Array<User>;
   private _selectedDemande:Demande;
 
+  private _demandeVo: DemandeVo;
+
+  constructor(private http: HttpClient) { }
 
 
-
+  public searchCriteria(): Observable<Array<Demande>>{
+    return this.http.post<Array<Demande>>(this.url + 'recherche-multi-critere/', this.demandeVo);
+  }
 
   public updateDemande(){
 
@@ -56,9 +62,6 @@ export class DemandeService {
   set selectedDemande(value: Demande) {
     this._selectedDemande = value;
   }
-
-  constructor(private http: HttpClient) { }
-
 
   get UserItemsFiltered(): Array<User> {
     if (this._UserItemsFiltered==null){
@@ -207,6 +210,17 @@ export class DemandeService {
 
   set societe(value: Societe) {
     this._societe = value;
+  }
+
+  get demandeVo(): DemandeVo {
+    if (this._demandeVo == null){
+      this._demandeVo = new DemandeVo();
+    }
+    return this._demandeVo;
+  }
+
+  set demandeVo(value: DemandeVo) {
+    this._demandeVo = value;
   }
 
   public getDemande(selected:Demande) :Observable<any> {
