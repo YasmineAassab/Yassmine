@@ -6,6 +6,7 @@ import {Employe} from '../../../controller/model/employe.model';
 import {DeclarationIR} from '../../../controller/model/declaration-ir.model';
 import {DemandeService} from '../../../controller/service/demande.service';
 import {Demande} from '../../../controller/model/demande.model';
+import {Societe} from '../../../controller/model/societe.model';
 
 
 @Component({
@@ -24,6 +25,17 @@ export class DeclarationIrComponent implements OnInit {
     // total:number;
     constructor(private messageService: MessageService, private confirmationService: ConfirmationService,
                 private service: DeclarationIrService,private demandeService :DemandeService) {
+    }
+
+
+
+    get currentDemande(): Demande {
+
+        return this.service.currentDemande;
+    }
+
+    set currentDemande(value: Demande) {
+        this.service.currentDemande = value;
     }
 
     ngOnInit(): void {
@@ -137,7 +149,7 @@ export class DeclarationIrComponent implements OnInit {
         }
     }
 
-    public getDemande(){
+/*    public getDemande(){
         this.demandeService.getDemande().subscribe(
             data=>{
                 console.log("d5ul lmera 2");
@@ -153,12 +165,14 @@ export class DeclarationIrComponent implements OnInit {
                 console.log(error);
             }
         );
-    }
+    }*/
 
     public creeDeclarationIR() {
   //  this.getDemande();
 
         console.log("**haa demande dialek***");
+        console.log(this.currentDemande);
+        this.declarationIR.societe=this.currentDemande.societe;
        // console.log(this.demande);
       //  console.log("***************ha societe li setitha*****");
        // this.declarationIR.societe=this.demande.societe;

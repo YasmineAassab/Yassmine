@@ -11,6 +11,7 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {DeclarationIrVo} from '../model/declaration-ir-vo.model';
 import {Societe} from '../model/societe.model';
+import {Demande} from '../model/demande.model';
 
 
 
@@ -35,6 +36,23 @@ export class DeclarationIrService {
   private _searchIce: string;
   private _declarationIRSearch:DeclarationIR;
   private _declarationIrVo:DeclarationIrVo;
+  private _currentDemande:Demande;
+
+  get currentDemande(): Demande {
+    if (this._currentDemande==null){
+      this._currentDemande=new Demande();
+    }
+    if (this._currentDemande.societe==null){
+      this._currentDemande.societe=new Societe();
+    }
+    return this._currentDemande;
+  }
+
+  set currentDemande(value: Demande) {
+    this._currentDemande = value;
+  }
+
+
 
 public details(declaration:DeclarationIR) :Observable<any>{
   console.log(declaration.ref);

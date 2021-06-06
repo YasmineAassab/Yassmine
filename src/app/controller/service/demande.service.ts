@@ -31,6 +31,9 @@ export class DemandeService {
   private _selectedDemande:Demande;
 
 
+
+
+
   public updateDemande(){
 
     this.http.put(this.url,this.selected).subscribe(
@@ -206,9 +209,9 @@ export class DemandeService {
     this._societe = value;
   }
 
-  public getDemande() :Observable<any> {
+  public getDemande(selected:Demande) :Observable<any> {
     console.log("d5ul lmera 1");
-    return  this.http.get<Demande>(environment.baseUrl+'demande/ref/new');
+    return  this.http.get<Demande>(environment.baseUrl+'demande/ref/'+selected.ref);
 
   }
 
