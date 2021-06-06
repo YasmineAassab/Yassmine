@@ -97,6 +97,8 @@ export class DeclarationISService {
     return this.http.post<number>(this.url + 'delete-multiple-by-societe-ice-and-annee' , this.selectes);
   }
 
+
+
   public findIndexById(id: number): number {
     let index = -1;
     for (let i = 0; i < this.items.length; i++) {
@@ -112,6 +114,7 @@ export class DeclarationISService {
     this.items.splice(this.findIndexById(id), 1);
   }
 
+
   public deleteMultipleIndexById() {
     for (const item of this.selectes){
       this.deleteIndexById(item.id);
@@ -124,12 +127,12 @@ export class DeclarationISService {
     return this.http.post<number>(environment.baseUrl + 'facture/', this.selectedFact);
   }
 
-  public editFact(): Observable<Facture> {
-    return this.http.put<Facture>(environment.baseUrl + 'facture/', this.selectedFact);
+  public editFact(): Observable<number> {
+    return this.http.put<number>(environment.baseUrl + 'facture/', this.selectedFact);
   }
 
-  public deleteFactByRef(): Observable<number> {
-    return this.http.delete<number>(environment.baseUrl + 'facture/ref/' + this.selectedFact.ref);
+  public deleteFactByRef(selectedFact: Facture): Observable<number> {
+    return this.http.delete<number>(environment.baseUrl + 'facture/ref/' + selectedFact.ref);
   }
 
   public findFactureBySocieteSourceIceAndAnneeAndTypeOperation(typeOperation: string): Observable<Array<Facture>> {
@@ -137,6 +140,16 @@ export class DeclarationISService {
         +'/annee/'+ this.selected.annee+'/typeoperation/' + typeOperation);
   }
 
+  public findFacturesIndexById(id: number, items: Array<any>): number {
+    let index = -1;
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].id === id) {
+        index = i;
+        break;
+      }
+    }
+    return index;
+  }
 
   get selectedFact(): Facture {
     if (this._selectedFact == null){

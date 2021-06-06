@@ -28,6 +28,10 @@ export class DeclarationIsListComponent implements OnInit {
     this.router.navigateByUrl('/view/declarations-is/edit');
   }
 
+  public return(){
+    this.router.navigateByUrl('demande/list');
+  }
+
   navigateToCreate(){
     this.selected = null;
     this.router.navigateByUrl('view/declarations-is/create');
@@ -57,6 +61,7 @@ export class DeclarationIsListComponent implements OnInit {
   public searchCriteria(){
     return this.service.searchCriteria().subscribe(data => this.items = data);
   }
+
   public delete(selected: DeclarationIS) {
     this.selected = selected;
     this.confirmationService.confirm({
@@ -77,6 +82,7 @@ export class DeclarationIsListComponent implements OnInit {
       }
     });
   }
+
   public deleteMultiple() {
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete the selected declarations IS?',
@@ -107,6 +113,7 @@ export class DeclarationIsListComponent implements OnInit {
     this.selected = {...declarationIS};
     this.editDialog = true;
   }
+
   public view(declarationIS: DeclarationIS) {
     this.selected = {...declarationIS};
     this.viewDialog = true;

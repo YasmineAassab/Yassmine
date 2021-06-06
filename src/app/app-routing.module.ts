@@ -52,6 +52,8 @@ import {DeclarationTvaListComponent} from "./view/admin/declarationTva/declarati
 import {ChartsComponent} from "./view/admin/charts/charts.component";
 import {DeclarationIsListComponent} from "./view/admin/declarations-is/declaration-is-list/declaration-is-list.component";
 import {DemandeDeclarationComponent} from "./view/admin/demande-declaration/demande-declaration.component";
+import {DemandeListComponent} from "./view/admin/demande-list/demande-list.component";
+import {DeclarationTvaCreateComponent} from "./view/admin/declarationTva/declaration-tva-create/declaration-tva-create.component";
 
 @NgModule({
     imports: [
@@ -67,6 +69,7 @@ import {DemandeDeclarationComponent} from "./view/admin/demande-declaration/dema
 
                    /* {path: '', component: DashboardDemoComponent},*/
                     {path: 'demande', component: DemandeDeclarationComponent},
+                    {path: 'demande/list', component: DemandeListComponent},
                     {path: 'declaration-is', component: DeclarationsISComponent},
                     {path: 'view/declarations-is/create', component: DeclarationIsCreateComponent},
                     {path: 'view/declarations-is/edit', component: DeclarationIsEditComponent},
@@ -75,6 +78,7 @@ import {DemandeDeclarationComponent} from "./view/admin/demande-declaration/dema
                     {path: 'facture', component: FactureComponent},
                     {path: 'view/facture/create', component: FactureCreateComponent},
                     {path: 'declaration-tva', component: DeclarationTvaListComponent},
+                    {path: 'declaration-tva/create', component: DeclarationTvaCreateComponent},
                     {path: 'uikit/formlayout', component: FormLayoutDemoComponent},
                     {path: 'uikit/floatlabel', component: FloatLabelDemoComponent},
                     {path: 'uikit/invalidstate', component: InvalidStateDemoComponent},

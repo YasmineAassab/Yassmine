@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {DeclarationISService} from "../../../controller/service/declaration-is.service";
 import {DeclarationIS} from "../../../controller/model/declaration-is.model";
 import {Subscription} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-charts',
@@ -24,7 +25,11 @@ export class ChartsComponent implements OnInit {
   public data1 = new Array<number>();
   public data2 = new Array<number>();
 
-  constructor(private service: DeclarationISService) { }
+  constructor(private service: DeclarationISService, private router: Router) { }
+
+  public return(){
+    this.router.navigateByUrl('demande/list');
+  }
 
   public findAll(){
     this.service.findAll().subscribe(data => {
