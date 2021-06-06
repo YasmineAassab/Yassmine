@@ -1,5 +1,6 @@
 import {Societe} from "./societe.model";
 import {User} from "../../Security/model/user.model";
+import {Comptable} from "./comptable.model";
 
 export class Demande {
     public id: number;
@@ -7,7 +8,10 @@ export class Demande {
     public operation: string;
     public annee: number;
     public mois: number;
+    public trimestre: number;
     public dateDemande: string;
-    public societe: Societe;
-    public user: User;
+    public societe = new Societe();
+    public user = new User();
+    public comptableTraiteur = new Comptable();
+    public comptableValidateur = new Comptable();
 }

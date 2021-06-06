@@ -3,6 +3,8 @@
 
         <p-toast></p-toast>
 
+        <div><button pButton pRipple label="Retour" icon="pi pi-arrow-left" class="p-button-success p-mr-2 p-mb-5" (click)="return()"></button></div>
+
         <div class="card">
             <h4 style="margin: 10px">Recherche multi-critère</h4>
                 <div class="p-grid p-fluid">
@@ -103,7 +105,7 @@
 
                     </p-tabPanel>
                     <p-tabPanel header="Facture">
-                        <p-table [value]="selected.factures" dataKey="id" [rows]="3" [paginator]="true"
+                        <p-table [value]="selected.factures" dataKey="id" [rows]="10" [paginator]="true"
                                  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
                             <ng-template pTemplate="header">
                                 <tr>

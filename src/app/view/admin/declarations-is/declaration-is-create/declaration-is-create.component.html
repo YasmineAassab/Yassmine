@@ -3,10 +3,13 @@
     <p-toast></p-toast>
     <p-toast position="top-left" key="tl"></p-toast>
 
+    <div><button pButton pRipple label="Retour" icon="pi pi-arrow-left" class="p-button-success p-mr-2 p-mb-5" (click)="return()"></button></div>
+
     <div class="card" id="card1">
         <p-toolbar styleClass="p-mb-4">
 
-            <h1 id="yt">Création d'une declaration IS</h1>
+            <!--<h1 id="yt">Création d'une declaration IS</h1>-->
+            <h3>Création d'une déclaration IS</h3>
 
             <ng-template pTemplate="right">
 
@@ -20,7 +23,7 @@
             </ng-template>
         </p-toolbar>
 
-        <div class="card-body" style="margin-top: 30px">
+        <div class="card-body" style="margin-top: 20px">
             <div class="p-d-flex">
                 <div class="p-mr-2 p-offset-4">
                     <span class="p-float-label col-md-5">
@@ -167,6 +170,16 @@
                             <span class="p-inputgroup-addon">MAD</span>
                         </div>
                     </div>
+
+                </div>
+                <div *ngIf="object.montantISPaye > object.tauxIsConfig.cotisationMinimale">
+                    <p-messages severity="error">
+                        <ng-template pTemplate>
+                            <div class="p-ml-2">
+                                <h5>Votre société a réalisé des bénéfices, vous devez payez l'acompte pour l'année {{object.annee + 1}}.</h5>
+                                <h5>L'acompte est égale à 25% du montant de l'impôt de la déclaration IS</h5></div>
+                        </ng-template>
+                    </p-messages>
 
                 </div>
             </div>

@@ -1,54 +1,75 @@
-<div><button pButton pRipple label="Recherche dans l'archive" icon="pi pi-search" class="p-button-success p-mr-2 p-mb-2" (click)="navigateToSearch()"></button></div>
-<div><button pButton pRipple label="Statistiques" icon="pi pi-search" class="p-button-success p-mr-2 p-mb-2" (click)="navigateToCharts()"></button></div>
-<div class="card">
-    <div style="margin: 7px"><h3>Demandes d'opération</h3></div>
-    <div style="min-height: 750px">
-        <p-table #dt2 [value]="items" dataKey="id"
-                 [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[15,25,50]" styleClass="p-datatable-customers"
-                 [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-                 [globalFilterFields]="['ref','date','societe']">
+<div class="p-grid">
+    <div class="p-col-12">
 
-            <ng-template pTemplate="header">
-                <tr>
-                    <th>Reference</th>
-                    <th>Date de demande</th>
-                    <th>Société</th>
-                    <th>Opération</th>
-                    <th>Année</th>
-                    <th>Mois</th>
-                    <th></th>
-                </tr>
+        <p-toast></p-toast>
 
-            </ng-template>
-            <ng-template pTemplate="body" let-demande>
-                <tr>
-                    <td>
-                        {{demande.ref}}
-                    </td>
-                    <td>
-                        {{demande.dateDemande}}
-                    </td>
-                    <td>
-                        {{demande.societe.ice}}
-                    </td>
-                    <td>
-                        {{demande.operation}}
-                    </td><td>
-                        {{demande.annee}}
-                    </td>
-                    <td>
-                        {{demande.mois}}
-                    </td>
-                    <td>
-                        <button pButton pRipple label="Traiter" icon="pi pi-pencil" class="p-button-success p-mr-2" (click)="navigateToCreate(demande)"></button>
-                    </td>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="emptymessage">
-                <tr>
-                    <td colspan="4">No customers found.</td>
-                </tr>
-            </ng-template>
-        </p-table>
+        <div class="card">
+            <h4 style="margin: 10px">Recherche multi-critère</h4>
+            <div class="p-grid p-fluid">
+                <div class="p-col-12  p-md-2 p-offset-1"><div style="margin-bottom: 5px"><label>Référence </label></div>
+                    <input type="text" pInputText placeholder="reference" [(ngModel)]="demandeVo.ref">
+                </div>
+                <div class="p-col-12  p-md-2"><div style="margin-bottom: 5px"><label>Opération </label></div>
+                    <input type="text" pInputText placeholder="opération" [(ngModel)]="demandeVo.operation">
+                </div>
+                <div class="p-col-12  p-md-2"><div style="margin-bottom: 5px"><label>Société </label></div>
+                    <input type="text" pInputText placeholder="ice socété" [(ngModel)]="demandeVo.societe">
+                </div>
+                <div class="p-col-12  p-md-2"><div style="margin-bottom: 5px"><label>Comptable traiteur</label></div>
+                    <input type="text" pInputText placeholder="nom du comptable" [(ngModel)]="demandeVo.comptableTraiteur">
+                </div>
+                <div class="p-col-12  p-md-2"><div style="margin-bottom: 5px"><label>Comptable validateur </label></div>
+                    <input type="text" pInputText placeholder="nom du comptable" [(ngModel)]="demandeVo.comptableValidateur">
+                </div>
+
+            </div>
+            <div style="margin: 15px"><button pButton pRipple type="button" label="Search" icon="pi pi-search" iconPos="right" style="width:20rem; height: 10px" class="p-col-6 p-mb-2 p-offset-5" (click)="searchCriteria()"></button></div>
+
+            <div class="card">
+                <h3>Liste des demandes</h3>
+                <p-table #dt [value]="items" [rows]="10" [paginator]="true" [rowHover]="true"
+                         styleClass="p-datatable-customers"
+                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true" dataKey="id">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th pSortableColumn="reference">Reference <p-sortIcon field="reference"></p-sortIcon></th>
+                            <th pSortableColumn="annee">Date de demande <p-sortIcon field="annee"></p-sortIcon></th>
+                            <th pSortableColumn="societe" style="width: 10rem">Société <p-sortIcon field="societe"></p-sortIcon></th>
+                            <th pSortableColumn="totalHTDiff">Opération <p-sortIcon field="totalHTDiff"></p-sortIcon></th>
+                            <th pSortableColumn="totalHTDiff" style="width: 10rem">Année <p-sortIcon field="totalHTDiff"></p-sortIcon></th>
+                            <th pSortableColumn="totalHTDiff" style="width: 8rem">Mois <p-sortIcon field="totalHTDiff"></p-sortIcon></th>
+                            <th pSortableColumn="totalHTDiff" style="width: 9rem">Trim <p-sortIcon field="totalHTDiff"></p-sortIcon></th>
+                            <th pSortableColumn="montantISCalcule">Comptable traiteur<p-sortIcon field="montantISCalcule"></p-sortIcon></th>
+                            <th pSortableColumn="montantISCalcule"style="width: 15rem">Comptable validateur<p-sortIcon field="montantISCalcule"></p-sortIcon></th>
+                            <th></th>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template pTemplate="body" let-demande let-expanded="expanded">
+                        <tr>
+                            <td>{{demande.ref}}</td>
+                            <td>{{demande.dateDemande}}</td>
+                            <td>{{demande.societe.ice}}</td>
+                            <td>{{demande.operation}}</td>
+                            <td>{{demande.annee}}</td>
+                            <td>{{demande.mois}}</td>
+                            <td>{{demande.trimestre}}</td>
+                            <td>{{demande.comptableTraiteur}}</td>
+                            <td>{{demande.comptableValidateur}}</td>
+                            <td>
+                                <button pButton pRipple label="Traiter" icon="pi pi-pencil" class="p-button-success p-mr-2" (click)="navigateToCreate(demande)"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+
+                </p-table>
+                <ng-template pTemplate="summary">
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        In total there are {{items ? items.length : 0 }} declarations IS.
+                    </div>
+                </ng-template>
+            </div>
+
+        </div>
     </div>
 </div>

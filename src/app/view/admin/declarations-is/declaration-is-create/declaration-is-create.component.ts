@@ -5,6 +5,7 @@ import {DeclarationIsObject} from "../../../../controller/model/declaration-is-o
 import {DeclarationIS} from "../../../../controller/model/declaration-is.model";
 import {Facture} from "../../../../controller/model/facture.model";
 import {Observable} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-declaration-is-create',
@@ -20,12 +21,15 @@ export class DeclarationIsCreateComponent implements OnInit {
     public val: boolean;
     public bro: boolean;
 
-  constructor(private messageService: MessageService, private service: DeclarationISService) {
+  constructor(private messageService: MessageService, private service: DeclarationISService, private router: Router) {
   }
 
   ngOnInit(): void {
   }
 
+  public return(){
+    this.router.navigateByUrl('demande/list');
+  }
   public findByAnnee(annee: number){
     return this.service.findByAnnee(annee).subscribe(data => this.selected = data);
   }

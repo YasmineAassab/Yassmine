@@ -9,7 +9,7 @@ import {Employe} from '../model/employe.model';
 import {CategorieService} from '../model/categorie-service.model';
 import {User} from '../../Security/model/user.model';
 import {Demande} from "../model/demande.model";
-import {Commande} from '../model/commande.model';
+import {DemandeVo} from "../model/demande-vo.model";
 
 @Injectable({
   providedIn: 'root'
@@ -31,13 +31,14 @@ export class DemandeService {
   private _UserItemsFiltered: Array<User>;
   private _selectedDemande:Demande;
 
+  private _demandeVo: DemandeVo;
+
+  constructor(private http: HttpClient) { }
 
 
-
-  public edit(): Observable<Demande> {
-    return this.http.put<Demande>(this.url, this.selected);
+  public searchCriteria(): Observable<Array<Demande>>{
+    return this.http.post<Array<Demande>>(this.url + 'recherche-multi-critere/', this.demandeVo);
   }
-
 
   public updateDemande(){
 
@@ -51,18 +52,6 @@ export class DemandeService {
     );
   }
 
-
-  public findIndexById(id: number): number {
-    let index = -1;
-    for (let i = 0; i < this.items.length; i++) {
-      if (this.items[i].id === id) {
-        index = i;
-        break;
-      }
-    }
-    return index;
-  }
-
   get selectedDemande(): Demande {
     if (this._selectedDemande==null){
       this._selectedDemande=new Demande();
@@ -73,9 +62,6 @@ export class DemandeService {
   set selectedDemande(value: Demande) {
     this._selectedDemande = value;
   }
-
-  constructor(private http: HttpClient) { }
-
 
   get UserItemsFiltered(): Array<User> {
     if (this._UserItemsFiltered==null){
@@ -224,6 +210,17 @@ export class DemandeService {
 
   set societe(value: Societe) {
     this._societe = value;
+  }
+
+  get demandeVo(): DemandeVo {
+    if (this._demandeVo == null){
+      this._demandeVo = new DemandeVo();
+    }
+    return this._demandeVo;
+  }
+
+  set demandeVo(value: DemandeVo) {
+    this._demandeVo = value;
   }
 
   public getDemande(selected:Demande) :Observable<any> {
