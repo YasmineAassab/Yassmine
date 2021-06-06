@@ -27,7 +27,7 @@ export class AppTopBarComponent implements OnInit{
             this.roles = user.roles;
 
             this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-            this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+            this.showModeratorBoard = this.roles.includes('ROLE_COMPTABLE');
 
             this.username = user.username;
         }

@@ -4,6 +4,8 @@ import {Router} from "@angular/router";
 import {Demande} from "../../../controller/model/demande.model";
 import {DeclarationISService} from "../../../controller/service/declaration-is.service";
 import {DeclarationIsObject} from "../../../controller/model/declaration-is-object.model";
+import {DeclarationIrService} from '../../../controller/service/declaration-ir.service';
+import {Societe} from '../../../controller/model/societe.model';
 
 
 @Component({
@@ -14,15 +16,50 @@ import {DeclarationIsObject} from "../../../controller/model/declaration-is-obje
 export class DemandeListComponent implements OnInit {
 
 
-  constructor(private service: DemandeService, private router: Router, private service2: DeclarationISService) { }
+  constructor(private service: DemandeService, private router: Router, private service2: DeclarationISService,
+              private declarationIRService: DeclarationIrService,private demandeService:DemandeService) { }
 
   public navigateToSearch(){
     this.router.navigateByUrl('view/declarations-is/list');
+  }
+  get currentDemande(): Demande {
+
+    return this.declarationIRService.currentDemande;
+  }
+  set currentDemande(value: Demande) {
+    this.declarationIRService.currentDemande = value;
+  }
+  get demande(): Demande {
+
+    return this.declarationIRService.currentDemande;
+  }
+
+  set demande(value: Demande) {
+    this.demandeService.demande = value;
   }
 
   public navigateToCreate(selected: Demande){
     this.object.societe = selected.societe;
     this.object.annee = selected.annee;
+    this.demandeService.getDemande(selected).subscribe(
+        data=>{
+          console.log("d5ul lmera 2");
+          console.log(data);
+
+          this.demande= data;
+          this.currentDemande=data;
+          console.log(this.demande);
+          console.log(this.currentDemande);
+         // this.declarationIR.societe=this.demande.societe;
+          console.log("*haaa societe am3elem li tsetaat**");
+         // console.log(this.declarationIR.societe);
+
+         // console.log(this.demande.societe.employes);
+        },error => {
+          console.log(error);
+        }
+
+    );
     if (selected.operation == 'Declaration IS'){
       this.router.navigateByUrl('view/declarations-is/create');
     }

@@ -31,6 +31,9 @@ export class DemandeService {
   private _selectedDemande:Demande;
 
 
+
+
+
   public updateDemande(){
 
     this.http.put(this.url,this.selected).subscribe(
@@ -184,6 +187,9 @@ export class DemandeService {
     if (this._demande== null){
       this._demande= new Demande();
     }
+    if(this._demande.societe==null){
+      this._demande.societe=new Societe();
+    }
     return this._demande;
   }
 
@@ -195,11 +201,18 @@ export class DemandeService {
     if (this._societe==null){
       this._societe=new Societe();
     }
+
     return this._societe;
   }
 
   set societe(value: Societe) {
     this._societe = value;
+  }
+
+  public getDemande(selected:Demande) :Observable<any> {
+    console.log("d5ul lmera 1");
+    return  this.http.get<Demande>(environment.baseUrl+'demande/ref/'+selected.ref);
+
   }
 
 

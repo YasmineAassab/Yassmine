@@ -26,7 +26,7 @@ export class DeclarationsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+  //this.service.jibemp();
     this.initCol();
     this.service.findAllDemande();
     this.getUsersComptable();

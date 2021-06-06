@@ -4,6 +4,9 @@ import {DeclarationIrService} from '../../../controller/service/declaration-ir.s
 import {DeclarationIREmploye} from '../../../controller/model/declaration-iremploye.model';
 import {Employe} from '../../../controller/model/employe.model';
 import {DeclarationIR} from '../../../controller/model/declaration-ir.model';
+import {DemandeService} from '../../../controller/service/demande.service';
+import {Demande} from '../../../controller/model/demande.model';
+import {Societe} from '../../../controller/model/societe.model';
 
 
 @Component({
@@ -18,9 +21,21 @@ export class DeclarationIrComponent implements OnInit {
     file: Blob;
     isCreated:boolean=false;
     isSaved:boolean=true;
+    demande: Demande;
     // total:number;
     constructor(private messageService: MessageService, private confirmationService: ConfirmationService,
-                private service: DeclarationIrService) {
+                private service: DeclarationIrService,private demandeService :DemandeService) {
+    }
+
+
+
+    get currentDemande(): Demande {
+
+        return this.service.currentDemande;
+    }
+
+    set currentDemande(value: Demande) {
+        this.service.currentDemande = value;
     }
 
     ngOnInit(): void {
@@ -114,6 +129,7 @@ export class DeclarationIrComponent implements OnInit {
                 this.isCreated=false;
                 this.declarationIR.total=0;
                // this.declarationIR=null;
+               // this.declarationIR=new DeclarationIR();
                 this.messageService.add({
                     severity: 'success',
                     summary: 'Successful',
@@ -133,7 +149,33 @@ export class DeclarationIrComponent implements OnInit {
         }
     }
 
+/*    public getDemande(){
+        this.demandeService.getDemande().subscribe(
+            data=>{
+                console.log("d5ul lmera 2");
+                console.log(data);
+
+                this.demande= data;
+                this.declarationIR.societe=this.demande.societe;
+                console.log("*haaa societe am3elem li tsetaat**");
+                console.log(this.declarationIR.societe);
+                console.log(this.demande);
+                console.log(this.demande.societe.employes);
+            },error => {
+                console.log(error);
+            }
+        );
+    }*/
+
     public creeDeclarationIR() {
+  //  this.getDemande();
+
+        console.log("**haa demande dialek***");
+        console.log(this.currentDemande);
+        this.declarationIR.societe=this.currentDemande.societe;
+       // console.log(this.demande);
+      //  console.log("***************ha societe li setitha*****");
+       // this.declarationIR.societe=this.demande.societe;
         return this.service.creeDeclarationIR().subscribe(
             data => {
                 console.log(data);
