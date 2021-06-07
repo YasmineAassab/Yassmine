@@ -191,6 +191,8 @@ import {ComptableBoardComponent} from "./view/admin/comptable-board/comptable-bo
 import {DeclarationsComponent} from "./view/admin/declarations/declarations.component";
 import {ViewComptableComponent} from "./view/admin/declarations/view-comptable/view-comptable.component";
 import {DeclarationTvaCreateComponent} from "./view/admin/declarationTva/declaration-tva-create/declaration-tva-create.component";
+import { AcomptesCreateComponent } from './view/admin/declarations-is/acomptes-create/acomptes-create.component';
+import {EditFactureComponent} from "./view/admin/declarations-is/edit-facture/edit-facture.component";
 
 @NgModule({
     imports: [
@@ -328,6 +330,7 @@ import {DeclarationTvaCreateComponent} from "./view/admin/declarationTva/declara
 
         DemandeListComponent,
         ChartsComponent,
+        EditFactureComponent,
         DeclarationIsListComponent,
         DeclarationIsCreateComponent,
         DeclarationIsEditComponent,
@@ -368,7 +371,8 @@ import {DeclarationTvaCreateComponent} from "./view/admin/declarationTva/declara
         DeclarationTvaCreateComponent,
         ComptableBoardComponent,
         DeclarationsComponent,
-        ViewComptableComponent
+        ViewComptableComponent,
+        AcomptesCreateComponent
 
     ],
     providers: [

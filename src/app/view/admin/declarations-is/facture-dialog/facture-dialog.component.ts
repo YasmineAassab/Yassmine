@@ -4,8 +4,7 @@ import {DeclarationISService} from "../../../../controller/service/declaration-i
 import {Facture} from "../../../../controller/model/facture.model";
 import {DeclarationIS} from "../../../../controller/model/declaration-is.model";
 import {DeclarationIsObject} from "../../../../controller/model/declaration-is-object.model";
-import {Observable} from "rxjs";
-import {TauxIS} from "../../../../controller/model/taux-is.model";
+
 
 @Component({
   selector: 'app-facture-dialog',
@@ -46,22 +45,6 @@ export class FactureDialogComponent implements OnInit {
           this.calculMontantIS(this.selected.totalHTDiff);
           this.findTauxIS(this.selected.totalHTDiff);
           this.montantPaye(this.selected.societe.age, this.selected.tauxIsConfig.cotisationMinimale, this.selected.montantISCalcule);
-/*
-          this.selected.factures.push({...this.selectedFact});
-          if (this.selectedFact.typeOperation == 'credit'){
-            this.selected.totalHTGain += this.selectedFact.montantHorsTaxe;
-          }
-          if (this.selectedFact.typeOperation == 'debit'){
-            this.selected.totalHTCharge += this.selectedFact.montantHorsTaxe;
-          }
-          this.selected.totalHTDiff = this.selected.totalHTGain - this.selected.totalHTCharge;
-          console.log('selected');
-          this.calculMontantIS(this.selected.totalHTDiff);
-          this.findTauxIS(this.selected.totalHTDiff);
-          this.montantPaye(this.selected.societe.age, this.selected.tauxIsConfig.cotisationMinimale, this.selected.montantISCalcule);
-          this.service.afficheObject(this.selectedFact.societeSource.ice, this.selectedFact.annee);
-
- */
           this.messageService.add({severity: 'success', summary: 'Successful', detail: 'Facture Created', life: 4000});
           this.selectedFact = null;
         }

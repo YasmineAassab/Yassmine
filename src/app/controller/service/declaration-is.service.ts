@@ -31,10 +31,17 @@ export class DeclarationISService {
   private _viewDialog2: boolean;
   private _selectedVo: DeclarationIsVo;
 
+  private _disabledSave: boolean;
+  private _montant: number;
+
   constructor(private http: HttpClient) { }
 
+  public validateSave(): boolean{
+    return this.object.montantISPaye > this.object.tauxIsConfig.cotisationMinimale && this.disabledSave == false;
+  }
+
   public findAll(): Observable<Array<DeclarationIS>> {
-    return this.http.get<Array<DeclarationIS>>(this._url);
+    return this.http.get<Array<DeclarationIS>>(this.url);
   }
   
   public save(ice: string, annee: number, etat: string): Observable<number> {
@@ -43,10 +50,6 @@ export class DeclarationISService {
 
   public edit(): Observable<number> {
     return this.http.put<number>(this.url, this.selected);
-  }
-
-  public findByAnnee(annee: number): Observable<DeclarationIS>{
-    return this.http.get<DeclarationIS>(this.url + 'annee/' + annee);
   }
 
   public deleteBySocieteIceAndAnnee(): Observable<number> {
@@ -61,11 +64,7 @@ export class DeclarationISService {
     return this.http.get<DeclarationIS>(this.url + 'xmlToDec/fileName/' + fileName);
   }
 
-  public afficheObject(ice: string, annee: number): Observable<DeclarationIS>{
-    return this.http.get<DeclarationIS>(this.url + 'afficheDecIS/ice/'+ ice +'/annee/'+ annee);
-  }
-
-  public afficheObject11(): Observable<DeclarationIsObject>{
+  public afficheObject(): Observable<DeclarationIsObject>{
     return this.http.post<DeclarationIsObject>(this.url + 'find-declarationIS-object/', this.object);
   }
 
@@ -96,8 +95,6 @@ export class DeclarationISService {
   public deleteMultipleBySocieteIceAndAnnee(): Observable<number> {
     return this.http.post<number>(this.url + 'delete-multiple-by-societe-ice-and-annee' , this.selectes);
   }
-
-
 
   public findIndexById(id: number): number {
     let index = -1;
@@ -267,5 +264,21 @@ export class DeclarationISService {
 
   set selectedVo(value: DeclarationIsVo) {
     this._selectedVo = value;
+  }
+
+  get disabledSave(): boolean {
+    return this._disabledSave;
+  }
+
+  set disabledSave(value: boolean) {
+    this._disabledSave = value;
+  }
+
+  get montant(): number {
+    return this._montant;
+  }
+
+  set montant(value: number) {
+    this._montant = value;
   }
 }
