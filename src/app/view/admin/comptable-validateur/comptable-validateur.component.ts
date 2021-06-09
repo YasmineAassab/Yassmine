@@ -1,21 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import {DemandeService} from "../../../controller/service/demande.service";
-import {Router} from "@angular/router";
-import {Demande} from "../../../controller/model/demande.model";
-import {DeclarationISService} from "../../../controller/service/declaration-is.service";
-import {DeclarationIsObject} from "../../../controller/model/declaration-is-object.model";
+import {DemandeService} from '../../../controller/service/demande.service';
+import {Router} from '@angular/router';
+import {DeclarationISService} from '../../../controller/service/declaration-is.service';
 import {DeclarationIrService} from '../../../controller/service/declaration-ir.service';
-import {DemandeVo} from "../../../controller/model/demande-vo.model";
+import {Demande} from '../../../controller/model/demande.model';
+import {DeclarationIsObject} from '../../../controller/model/declaration-is-object.model';
+import {DemandeVo} from '../../../controller/model/demande-vo.model';
 import {Comptable} from '../../../controller/model/comptable.model';
 
-
 @Component({
-  selector: 'app-demande-list',
-  templateUrl: './demande-list.component.html',
-  styleUrls: ['./demande-list.component.scss','./demande-list.component.css']
+  selector: 'app-comptable-validateur',
+  templateUrl: './comptable-validateur.component.html',
+  styleUrls: ['./comptable-validateur.component.scss','./comptable-validateur.component.css']
 })
-export class DemandeListComponent implements OnInit {
-
+export class ComptableValidateurComponent implements OnInit {
 
   constructor(private service: DemandeService, private router: Router, private service2: DeclarationISService,
               private declarationIRService: DeclarationIrService,private demandeService:DemandeService) { }
@@ -66,11 +64,11 @@ export class DemandeListComponent implements OnInit {
           this.currentDemande=data;
           console.log(this.demande);
           console.log(this.currentDemande);
-         // this.declarationIR.societe=this.demande.societe;
+          // this.declarationIR.societe=this.demande.societe;
           console.log("*haaa societe am3elem li tsetaat**");
-         // console.log(this.declarationIR.societe);
+          // console.log(this.declarationIR.societe);
 
-         // console.log(this.demande.societe.employes);
+          // console.log(this.demande.societe.employes);
         },error => {
           console.log(error);
         }
@@ -93,16 +91,16 @@ export class DemandeListComponent implements OnInit {
   }
 
 
- /* public displayDemandeComptable(){
-    this.service.displayDemandeComptable().subscribe(
-        data=>{
-         this.items=data;
-        },error => {
-          console.log(error);
-        }
-    );
+  /* public displayDemandeComptable(){
+     this.service.displayDemandeComptable().subscribe(
+         data=>{
+          this.items=data;
+         },error => {
+           console.log(error);
+         }
+     );
 
-  }*/
+   }*/
 
   ngOnInit(): void {
     this.service.connectedComptable();

@@ -9,6 +9,9 @@ import {DeclarationIR} from '../../../controller/model/declaration-ir.model';
 import {UserService} from '../../../Security/_services/user.service';
 import {Demande} from "../../../controller/model/demande.model";
 import {User} from '../../../Security/model/user.model';
+import {Societe} from '../../../controller/model/societe.model';
+import {DemandeVo} from '../../../controller/model/demande-vo.model';
+import {Comptable} from '../../../controller/model/comptable.model';
 
 
 @Component({
@@ -20,19 +23,50 @@ export class DeclarationsComponent implements OnInit {
   cols: any[];
   isCreated:boolean=false;
   isSaved:boolean=true;
+  isNull:boolean;
   Useritems=new Array<User>();
   Useritemsfiltered=new Array<User>();
+
+
+  //isSet:boolean;
+  //comptables= new Array<Comptable>();
   constructor(private messageService: MessageService, private confirmationService: ConfirmationService,private service: DemandeService,private userService:UserService) {
   }
 
   ngOnInit(): void {
   //this.service.jibemp();
+   // this.service.demande.comptableValidateur=new Comptable();
+   // this.service.demande.comptableTraiteur=new Comptable();
     this.initCol();
     this.service.findAllDemande();
     this.getUsersComptable();
 
+
   }
 
+
+  searchDeclaration(){
+    this.service.searchDeclaration().subscribe(
+        data=>{
+          console.log(data);
+          this.items=data;
+        },error => {
+          console.log(error);
+        }
+    );
+
+
+  }
+
+
+  get demandeVo(): DemandeVo {
+
+    return this.service.demandeVo;
+  }
+
+  set demandeVo(value: DemandeVo) {
+    this.service.demandeVo = value;
+  }
 
   get UserItemsFiltered(): Array<User> {
     return this.service.UserItemsFiltered;
@@ -142,7 +176,57 @@ export class DeclarationsComponent implements OnInit {
   }
 
 
+
+  get comptablesTraiteur(): Array<Comptable> {
+
+    return this.service.comptablesTraiteur;
+  }
+
+  set comptablesTraiteur(value: Array<Comptable>) {
+    this.service.comptablesTraiteur = value;
+  }
+
+  get comptablesValidateur(): Array<Comptable> {
+
+    return this.service.comptablesValidateur;
+  }
+
+  set comptablesValidateur(value: Array<Comptable>) {
+    this.service.comptablesValidateur = value;
+  }
+
+
+  getComptables(){
+    console.log("haa chhal nm user length");
+    console.log(this.UserItemsFiltered.length);
+    for (let i=0;i< this.UserItemsFiltered.length;i++){
+      console.log(i);
+      if (this.UserItemsFiltered[i].comptable.type=='traiteur'){
+        this.comptablesTraiteur.push(this.UserItemsFiltered[i].comptable);
+      }else if (this.UserItemsFiltered[i].comptable.type=='validateur'){
+        this.comptablesValidateur.push(this.UserItemsFiltered[i].comptable);
+      }
+
+    }
+    console.log("haaaa le comptable traiterur");
+    console.log(this.comptablesTraiteur);
+
+
+    console.log("haaaa le comptable validateur");
+    console.log(this.comptablesValidateur);
+  }
+  get comptables(): Array<Comptable> {
+
+    return this.service.comptables;
+  }
+
+  set comptables(value: Array<Comptable>) {
+    this.service.comptables = value;
+  }
+
+
   public accept(selected: Demande) {
+  this.getComptables();
     this.editDialog=true;
     this.selected = selected;
 

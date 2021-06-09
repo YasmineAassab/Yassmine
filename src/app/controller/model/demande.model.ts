@@ -12,6 +12,6 @@ export class Demande {
     public dateDemande: string;
     public societe = new Societe();
     public user = new User();
-    public comptableTraiteur = new Comptable();
-    public comptableValidateur = new Comptable();
+    public comptableTraiteur:Comptable ;
+    public comptableValidateur:Comptable;
 }

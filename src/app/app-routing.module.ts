@@ -56,6 +56,8 @@ import {ComptableBoardComponent} from "./view/admin/comptable-board/comptable-bo
 import {DeclarationsComponent} from "./view/admin/declarations/declarations.component";
 import {DeclarationTvaCreateComponent} from "./view/admin/declarationTva/declaration-tva-create/declaration-tva-create.component";
 import {DemandeListComponent} from "./view/admin/demande-list/demande-list.component";
+import {StatistiqueComponent} from './view/admin/statistique/statistique.component';
+import {ComptableValidateurComponent} from './view/admin/comptable-validateur/comptable-validateur.component';
 
 @NgModule({
     imports: [
@@ -68,8 +70,10 @@ import {DemandeListComponent} from "./view/admin/demande-list/demande-list.compo
                     {path: 'home-page', component: HomePageComponent},
                     {path: 'declaration-ir', component: DeclarationIrComponent},
                     {path: 'profile', component: ProfileComponent},
-                    {path: 'comptable', component: ComptableBoardComponent},
-                    {path: 'declarations', component: DeclarationsComponent},
+                    {path: 'traitement', component: ComptableBoardComponent},
+                    {path: 'demandes', component: DeclarationsComponent},
+                    {path: 'statistique', component: StatistiqueComponent},
+                    {path: 'validation', component: ComptableValidateurComponent},
 
                    /* {path: '', component: DashboardDemoComponent},*/
                     {path: 'demande', component: DemandeDeclarationComponent},

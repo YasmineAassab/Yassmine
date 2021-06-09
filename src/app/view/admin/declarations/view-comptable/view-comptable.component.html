@@ -1,5 +1,15 @@
 <p-dialog [(visible)]="editDialog" [style]="{width: '450px'}" header="Commande Details" [modal]="true" styleClass="p-fluid">
     <ng-template pTemplate="content">
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="firstname1">Comptable traiteur :</label>
+                <p-dropdown [options]="comptablesTraiteur" [(ngModel)]="selected.comptableTraiteur" optionLabel="nom"></p-dropdown>
+            </div>
+            <div class="p-field p-col">
+                <label for="lastname1">Comptable Validateur :</label>
+                <p-dropdown [options]="comptablesValidateur" [(ngModel)]="selected.comptableValidateur" optionLabel="nom"></p-dropdown>
+            </div>
+        </div>
         <div class="p-field">
             <label for="total">Reference :</label>
             <input type="text" pInputText id="total" [(ngModel)]="selected.ref"  />
@@ -17,21 +27,12 @@
             <input type="text" pInputText id="total" [(ngModel)]="selected.operation"  />
         </div>
         <div class="p-field">
-            <label for="total">Reference :</label>
-            <input type="text" pInputText id="total" [(ngModel)]="selected.mois"  />
+            <label for="total">Ice Societe :</label>
+            <input type="text" pInputText id="total" [(ngModel)]="selected.societe.ice"  />
         </div>
 
 
-        <div class="p-fluid p-formgrid p-grid">
-            <div class="p-field p-col">
-                <label for="firstname1">Comptable traiteur :</label>
-                <p-dropdown [options]="cities" [(ngModel)]="selectedCity" optionLabel="name"></p-dropdown>
-            </div>
-            <div class="p-field p-col">
-                <label for="lastname1">Comptable Validateur :</label>
-                <p-dropdown [options]="cities" [(ngModel)]="selectedCity" optionLabel="name"></p-dropdown>
-            </div>
-        </div>
+
     </ng-template>
 
     <ng-template pTemplate="footer">

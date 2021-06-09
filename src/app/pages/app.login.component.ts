@@ -40,8 +40,16 @@ export class AppLoginComponent implements OnInit{
           this.isLoggedIn = true;
           this.roles = this.tokenStorage.getUser().roles;
 
-          this.router.navigate(['home-page']);
+          //this.router.navigate(['home-page']);
           // this.reloadPage();
+            console.log("***********");
+            console.log(this.tokenStorage.getUser().roles[0]);
+            if(this.tokenStorage.getUser().roles[0]=="ROLE_SOCIETE"){
+                this.router.navigate(['demande']);
+
+            }else if (this.tokenStorage.getUser().roles[0]=="ROLE_ADMIN"){
+                this.router.navigate(['demandes']);
+            }
 
 
         },

@@ -20,3 +20,17 @@ div.card-header{
     display: flex;
     justify-content: center;
 }
+button.my{
+    width: 80px;
+    height: 10px;
+}
+div.footer{
+    margin-right: 250px;
+}
+div.p-inputgroup{
+    margin-right: 100px;
+    margin-top: -18px;
+}
+p-button.myb{
+    margin-right: 100px;
+}

@@ -10,6 +10,9 @@ import {CategorieService} from '../model/categorie-service.model';
 import {User} from '../../Security/model/user.model';
 import {Demande} from "../model/demande.model";
 import {DemandeVo} from "../model/demande-vo.model";
+import {Commande} from '../model/commande.model';
+import {Comptable} from '../model/comptable.model';
+import {TokenStorageService} from '../../Security/_services/token-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -30,15 +33,160 @@ export class DemandeService {
   private _user: User;
   private _UserItemsFiltered: Array<User>;
   private _selectedDemande:Demande;
-
   private _demandeVo: DemandeVo;
+  private _comptables:Array<Comptable>;
+  private API_URL:string = 'http://localhost:8036/api/test/';
+  private _userlist:Array<User>;
+  private _currentComptable:Comptable;
+  private _comptablesTraiteur:Array<Comptable>;
+  private _comptablesValidateur:Array<Comptable>;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private token:TokenStorageService) { }
+
+
+  get comptablesTraiteur(): Array<Comptable> {
+    if (this._comptablesTraiteur==null){
+      this._comptablesTraiteur=new Array<Comptable>();
+    }
+    return this._comptablesTraiteur;
+  }
+
+  set comptablesTraiteur(value: Array<Comptable>) {
+    this._comptablesTraiteur = value;
+  }
+
+  get comptablesValidateur(): Array<Comptable> {
+    if (this._comptablesValidateur==null){
+      this._comptablesValidateur=new Array<Comptable>();
+    }
+    return this._comptablesValidateur;
+  }
+
+  set comptablesValidateur(value: Array<Comptable>) {
+    this._comptablesValidateur = value;
+  }
+
+  public getComptableDemande():Observable<any> {
+
+    return this.http.get<Array<Demande>>(this.url)
+  }
+
+
+  get userlist(): Array<User> {
+    if (this._userlist==null){
+      this._userlist=new Array<User>();
+    }
+    return this._userlist;
+  }
+
+  set userlist(value: Array<User>) {
+    this._userlist = value;
+  }
+
+  get currentComptable(): Comptable {
+    if (this._currentComptable==null){
+      this._currentComptable=new Comptable();
+    }
+    return this._currentComptable;
+  }
+
+  set currentComptable(value: Comptable) {
+    this._currentComptable = value;
+  }
+
+
+
+  public connectedComptable() {
+    this.http.get<Array<User>>(this.API_URL).subscribe(
+        data=>{
+          console.log(data);
+          this._userlist=data;
+          for (let i=0; i<this._userlist.length; i++){
+            if (this._userlist[i].username==this.token.getUser().username){
+              this._currentComptable=this._userlist[i].comptable;
+            }
+          }
+          console.log("****");
+          console.log(this._currentComptable);
+
+          this.displayDemandeComptable().subscribe(
+              data=>{
+                this.items=data;
+              },error => {
+                console.log(error);
+              }
+          );
+
+        }
+
+    );
+  }
+
+
+
+  public displayDemandeComptable():Observable<any> {
+    console.log("****ha l user***");
+    console.log(this.currentComptable.code);
+    console.log(this.token.getUser());
+    return this.http.get(this.url+'comptableTraiteur/code/'+this.currentComptable.code);
+
+  }
+
+
+
+
+
+
+
+  get comptables(): Array<Comptable> {
+    if (this._comptables==null){
+      this._comptables=new Array<Comptable>();
+    }
+    return this._comptables;
+  }
+
+  set comptables(value: Array<Comptable>) {
+    this._comptables = value;
+  }
+
+  public searchDeclaration() :Observable<any>{
+    console.log(this.demandeVo);
+   return  this.http.post<any>(this.url+'searchDemandeCriteria',this.demandeVo);
+
+  }
+
+  public edit(): Observable<Demande> {
+    console.log(this.selected);
+    return this.http.put<Demande>(this.url, this.selected);
+  }
+
+  public findIndexById(id: number): number {
+    let index = -1;
+    for (let i = 0; i < this.items.length; i++) {
+      if (this.items[i].id === id) {
+        index = i;
+        break;
+      }
+    }
+    return index;
+  }
+
 
 
   public searchCriteria(): Observable<Array<Demande>>{
+    this.demandeVo.comptableTraiteurCode=this.currentComptable.code;
+  console.log("*********haaaaaaaa demande vo li tatsif");
+  console.log(this.demandeVo);
     return this.http.post<Array<Demande>>(this.url + 'recherche-multi-critere/', this.demandeVo);
   }
+
+
+/*
+  public searchCriteria(): Observable<Array<Demande>>{
+    this.demandeVo.comptableTraiteurCode=this.currentComptable.code;
+    return this.http.get<Array<Demande>>(this.url + 'comptableTraiteur/code/'+this.currentComptable.code+'/annee/'+this.demandeVo.annee+'/mois/'+this.demandeVo.mois);
+  }
+*/
 
   public updateDemande(){
 
@@ -86,6 +234,14 @@ export class DemandeService {
     this.http.get<Array<Demande>>(this.url).subscribe(
         data =>{
           this.items =data;
+          for (let i=0;i<this.items.length;i++){
+            if (this.items[i].comptableValidateur==null || this.items[i].comptableTraiteur==null){
+              this.items[i].comptableTraiteur=new Comptable();
+              this.items[i].comptableValidateur=new Comptable();
+              this.items[i].comptableTraiteur.nom="--";
+              this.items[i].comptableValidateur.nom="--";
+            }
+          }
           console.log(this.items);
         }, error => {
           console.log(error);
@@ -177,8 +333,10 @@ export class DemandeService {
 
   get items(): Array<Demande> {
     if (this._items==null){
+
       this._items=new Array<Demande>();
     }
+
     return this._items;
   }
 
@@ -193,6 +351,7 @@ export class DemandeService {
     if(this._demande.societe==null){
       this._demande.societe=new Societe();
     }
+
     return this._demande;
   }
 
