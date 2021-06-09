@@ -1,0 +1,80 @@
+<div class="p-grid">
+    <div class="p-col-12">
+
+        <p-toast></p-toast>
+
+        <div class="card">
+            <h4 style="margin: 10px">Visualisation des demandes</h4>
+            <div class="p-grid p-fluid">
+                <div class="p-col-12  p-md-2 p-offset-2"><div style="margin-bottom: 5px"><label>Référence </label></div>
+                    <input type="text" pInputText placeholder="reference" [(ngModel)]="demandeVo.ref">
+                </div>
+                <div class="p-col-12  p-md-2"><div style="margin-bottom: 5px"><label>Opération </label></div>
+                    <input type="text" pInputText placeholder="operation" [(ngModel)]="demandeVo.operation">
+                </div>
+                <div class="p-col-12  p-md-2"><div style="margin-bottom: 5px"><label>Société </label></div>
+                    <input type="text" pInputText placeholder="ice socété" [(ngModel)]="demandeVo.societe">
+                </div>
+                <div class="p-col-12  p-md-2"><div style="margin-bottom: 5px"><label>Comptable traiteur</label></div>
+                    <input type="text" pInputText placeholder="nom du comptable" [(ngModel)]="demandeVo.comptableTraiteur">
+                </div>
+                <div class="p-col-12  p-md-2 p-offset-4"><div style="margin-bottom: 5px"><label>Comptable validateur </label></div>
+                    <input type="text" pInputText placeholder="nom du comptable" [(ngModel)]="demandeVo.comptableValidateur">
+                </div>
+                <div class="p-col-12  p-md-2"><div style="margin-bottom: 5px"><label>État </label></div>
+                    <input type="text" pInputText placeholder="état de demande" [(ngModel)]="demandeVo.etatDemande">
+                </div>
+
+            </div>
+            <div style="margin: 15px"><button pButton pRipple type="button" label="Search" icon="pi pi-search" iconPos="right" style="width:20rem; height: 10px" class="p-col-6 p-mb-2 p-offset-5" (click)="searchCriteria()"></button></div>
+
+            <div class="card">
+                <h3>Liste des demandes</h3>
+                <p-table #dt [value]="items" [rows]="10" [paginator]="true" [rowHover]="true"
+                         styleClass="p-datatable-customers"
+                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true" dataKey="id">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th pSortableColumn="reference">Reference <p-sortIcon field="reference"></p-sortIcon></th>
+                            <th pSortableColumn="annee">Date de demande <p-sortIcon field="annee"></p-sortIcon></th>
+                            <th pSortableColumn="societe" style="width: 10rem">Société <p-sortIcon field="societe"></p-sortIcon></th>
+                            <th pSortableColumn="totalHTDiff">Opération <p-sortIcon field="totalHTDiff"></p-sortIcon></th>
+                            <th pSortableColumn="totalHTDiff" style="width: 10rem">Année <p-sortIcon field="totalHTDiff"></p-sortIcon></th>
+                            <th pSortableColumn="totalHTDiff" style="width: 8rem">Mois <p-sortIcon field="totalHTDiff"></p-sortIcon></th>
+                            <th pSortableColumn="totalHTDiff" style="width: 9rem">Trim <p-sortIcon field="totalHTDiff"></p-sortIcon></th>
+                            <th pSortableColumn="montantISCalcule">Comptable traiteur<p-sortIcon field="montantISCalcule"></p-sortIcon></th>
+                            <th pSortableColumn="montantISCalcule" style="width: 15rem">Comptable validateur<p-sortIcon field="montantISCalcule"></p-sortIcon></th>
+                            <th pSortableColumn="etatDemande">État<p-sortIcon field="etatDemande"></p-sortIcon></th>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template pTemplate="body" let-demande let-expanded="expanded">
+                        <tr>
+                            <td>{{demande.ref}}</td>
+                            <td>{{demande.dateDemande}}</td>
+                            <td>{{demande.societe.ice}}</td>
+                            <td>{{demande.operation}}</td>
+                            <td>{{demande.annee}}</td>
+                            <td *ngIf="demande.operation=='Declaration IS'">-</td>
+                            <td *ngIf="demande.operation=='Declaration IR'">{{demande.mois}}</td>
+                            <td *ngIf="demande.operation=='Declaration TVA'">{{demande.mois}}</td>
+                            <td *ngIf="demande.operation=='Declaration IS' || demande.operation=='Declaration IR'">-</td>
+                            <td *ngIf="demande.operation=='Declaration TVA'">{{demande.trimestre}}</td>
+                            <td>{{demande.comptableTraiteur}}</td>
+                            <td>{{demande.comptableValidateur}}</td>
+                            <td>{{demande.etatDemande.libelle}}</td>
+                        </tr>
+                    </ng-template>
+
+                </p-table>
+                <ng-template pTemplate="summary">
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        In total there are {{items ? items.length : 0 }} demandes.
+                    </div>
+                </ng-template>
+            </div>
+
+        </div>
+    </div>
+</div>
+

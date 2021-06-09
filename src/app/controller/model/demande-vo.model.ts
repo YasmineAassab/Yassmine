@@ -4,6 +4,7 @@ export class DemandeVo {
     public dateDemande: string;
     public dateDemandeMax: string;
     public dateDemandeMin: string;
+    public etatDemande: string;
     public societe: string;
     public comptableTraiteur: string;
     public comptableValidateur: string;

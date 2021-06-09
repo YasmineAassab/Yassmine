@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {MessageService} from 'primeng/api';
+import {ConfirmationService, MessageService} from 'primeng/api';
 import {DeclarationISService} from "../../../../controller/service/declaration-is.service";
 import {DeclarationIsObject} from "../../../../controller/model/declaration-is-object.model";
 import {DeclarationIS} from "../../../../controller/model/declaration-is.model";
 import {Facture} from "../../../../controller/model/facture.model";
-import {Observable} from "rxjs";
 import {Router} from "@angular/router";
+import {AcomptesService} from "../../../../controller/service/acomptes.service";
+import {Acomptes} from "../../../../controller/model/acomptes.model";
 
 @Component({
   selector: 'app-declaration-is-create',
@@ -21,7 +22,80 @@ export class DeclarationIsCreateComponent implements OnInit {
     public val: boolean;
     public bro: boolean;
 
-  constructor(private messageService: MessageService, private service: DeclarationISService, private router: Router) {
+
+  constructor(private messageService: MessageService, private confirmationService: ConfirmationService, private service: DeclarationISService,
+              private router: Router, private service2: AcomptesService) {
+
+    this.disabledSave = false;
+  }
+
+
+  public calculMontantIS(resultatFiscal: number){
+     this.service.calculMontantIS(resultatFiscal).subscribe(data => {
+      this.selected.montantISCalcule = data;
+      console.log('selected' + this.selected.montantISCalcule);
+    });
+  }
+
+  public deleteFact(selectedFact: Facture){
+    console.log('dekhlna');
+    this.selectedFact = selectedFact;
+    console.log('fact    ' + selectedFact.montantHorsTaxe);
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete facture ' + selectedFact.ref + '?',
+      header: 'Confirm',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.service.deleteFactByRef(selectedFact).subscribe(data => {
+          if (data >= 0){
+            if (selectedFact.typeOperation == "credit"){
+              this.selected.factureC = this.selected.factureC.filter(val => val.id !== this.selectedFact.id);
+              this.selected.totalHTGain -= this.selectedFact.montantHorsTaxe;
+            }
+            if (selectedFact.typeOperation == "debit"){
+              this.selected.factureD = this.selected.factureD.filter(val => val.id !== this.selectedFact.id);
+              this.selected.totalHTCharge -= this.selectedFact.montantHorsTaxe;
+            }
+            this.selected.totalHTDiff = this.selected.totalHTGain - this.selected.totalHTCharge;
+            this.calculMontantIS(this.selected.totalHTDiff);
+            this.findTauxIS(this.selected.totalHTDiff);
+            console.log('age ' + this.object.societe.age);
+            console.log('cm ' + this.object.tauxIsConfig.cotisationMinimale);
+            console.log('mc ' + this.object.montantISCalcule);
+            this.montantPaye(this.selected.societe.age, this.selected.tauxIsConfig.cotisationMinimale, this.selected.montantISCalcule);
+            console.log('accept');
+            this.selectedFact = new Facture();
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Successful',
+              detail: 'Facture deleted',
+              life: 3000
+            });
+          }
+        });
+      }
+    });
+  }
+
+  public findTauxIS(totalDiff: number) {
+    return this.service.findTauxIS(totalDiff).subscribe(data => this.selected.tauxIS = data);
+  }
+
+  public montantPaye(age: number, cm:number, m: number) {
+    console.log('montant qbel '+this.object.montantISPaye);
+    this.service.montantPaye(age, cm, m).subscribe(data => {
+      this.selected.montantISPaye = data;
+      console.log('montant be3eed '+data);
+    });
+  }
+
+  public viewFact(facture: Facture) {
+    this.selectedFact = {...facture};
+    this.viewDialog2 = true;
+  }
+
+  public validateSave(): boolean{
+    return this.service.validateSave();
   }
 
   ngOnInit(): void {
@@ -30,36 +104,29 @@ export class DeclarationIsCreateComponent implements OnInit {
   public return(){
     this.router.navigateByUrl('demande/list');
   }
-  public findByAnnee(annee: number){
-    return this.service.findByAnnee(annee).subscribe(data => this.selected = data);
-  }
 
-  public afficheObject11() {
-    return this.service.afficheObject11().subscribe(data => this.object = data);
-  }
-
-  public afficheObject(ice: string, annee: number){
-    return this.service.afficheObject(ice, annee).subscribe(data => {
+  public afficheObject() {
+    return this.service.afficheObject().subscribe(data => {
       this.selected = data;
-      /*if (this.selected.declarationIS.etatDeclaration == null){
+      this.disabledSave = false;
+      if (this.selected.etatDeclaration == null){
         this.val = false;
         this.bro = false;
       }
-      else if (this.selected.declarationIS.etatDeclaration.libelle == 'valider'){
+      else if (this.selected.etatDeclaration.libelle == 'valider'){
         this.val = true;
         this.bro = false;
       }
-      else if (this.selected.declarationIS.etatDeclaration.libelle == 'brouillon'){
+      else if (this.selected.etatDeclaration.libelle == 'brouillon'){
         this.bro = true;
         this.val = false;
-      }*/
-
+      }
     });
   }
 
   public save(etat: string){
-    this.ice = this.object.societe.ice;
-    this.annee = this.object.annee;
+    this.ice = this.selected.societe.ice;
+    this.annee = this.selected.annee;
     return this.service.save(this.ice, this.annee, etat).subscribe(data => {
       console.log(data);
       if (data > 0){
@@ -79,35 +146,32 @@ export class DeclarationIsCreateComponent implements OnInit {
 
   public openCreate() {
     this.selectedFact.typeOperation = "credit";
-    this.selectedFact.societeSource.ice = this.ice;
+    this.selectedFact.societeSource.ice = this.selected.societe.ice;
     this.submitted = false;
     this.createDialog = true;
   }
 
   public openCreate1() {
     this.selectedFact.typeOperation = "debit";
-    this.selectedFact.societeSource.ice = this.ice;
+    this.selectedFact.societeSource.ice = this.selected.societe.ice;
     this.submitted = false;
     this.createDialog = true;
   }
 
-  public edit(DeclarationIS: DeclarationIS) {
-    this.selected = {...DeclarationIS};
-    this.editDialog = true;
-  }
-  public view(DeclarationIS: DeclarationIS) {
-    this.selected = {...DeclarationIS};
-    this.viewDialog = true;
-  }
-/*
-  get object(): DeclarationIsObject {
-    return this.service.object;
+  public openCreate2() {
+    this.acomptes.societe.ice = this.selected.societe.ice;
+    this.acomptes.numero = 1;
+    this.acomptes.anneePaye = this.selected.annee + 1;
+    this.acomptes.montant = this.selected.montantISPaye/4;
+    this.submitted = false;
+    this.createDialog2 = true;
   }
 
-  set object(value: DeclarationIsObject) {
-    this.service.object = value;
+  public editFact(facture: Facture) {
+    this.selectedFact = {...facture};
+    this.editDialog = true;
   }
-*/
+
   get selected(): DeclarationIS {
     return this.service.selected;
   }
@@ -122,6 +186,14 @@ export class DeclarationIsCreateComponent implements OnInit {
 
   set submitted(value: boolean) {
     this.service.submitted = value;
+  }
+
+  get createDialog2(): boolean {
+    return this.service2.createDialog;
+  }
+
+  set createDialog2(value: boolean) {
+    this.service2.createDialog = value;
   }
 
   get createDialog(): boolean {
@@ -140,12 +212,12 @@ export class DeclarationIsCreateComponent implements OnInit {
     this.service.editDialog = value;
   }
 
-  get viewDialog(): boolean {
-    return this.service.viewDialog;
+  get viewDialog2(): boolean {
+    return this.service.viewDialog2;
   }
 
-  set viewDialog(value: boolean) {
-    this.service.viewDialog = value;
+  set viewDialog2(value: boolean) {
+    this.service.viewDialog2 = value;
   }
 
   get selectedFact(): Facture {
@@ -162,6 +234,22 @@ export class DeclarationIsCreateComponent implements OnInit {
 
   set object(value: DeclarationIsObject) {
     this.service.object = value;
+  }
+
+  get acomptes(): Acomptes {
+    return this.service2.acomptes;
+  }
+
+  set acomptes(value: Acomptes) {
+    this.service2.acomptes = value;
+  }
+
+  get disabledSave(): boolean {
+    return this.service.disabledSave;
+  }
+
+  set disabledSave(value: boolean) {
+    this.service.disabledSave = value;
   }
 
   fileChanged(e) {

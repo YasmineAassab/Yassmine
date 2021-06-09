@@ -27,7 +27,7 @@ export class DeclarationIsEditComponent implements OnInit {
   }
 
   public return(){
-    this.router.navigateByUrl('view/declarations-is/list');
+    this.router.navigateByUrl('/declarations-is/list');
   }
 
   public editFact(facture: Facture) {

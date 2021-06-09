@@ -31,10 +31,16 @@ export class DeclarationISService {
   private _viewDialog2: boolean;
   private _selectedVo: DeclarationIsVo;
 
+  private _disabledSave: boolean;
+
   constructor(private http: HttpClient) { }
 
+  public validateSave(): boolean{
+    return this.selected.montantISPaye > this.selected.tauxIsConfig.cotisationMinimale && this.disabledSave == false;
+  }
+
   public findAll(): Observable<Array<DeclarationIS>> {
-    return this.http.get<Array<DeclarationIS>>(this._url);
+    return this.http.get<Array<DeclarationIS>>(this.url);
   }
   
   public save(ice: string, annee: number, etat: string): Observable<number> {
@@ -43,10 +49,6 @@ export class DeclarationISService {
 
   public edit(): Observable<number> {
     return this.http.put<number>(this.url, this.selected);
-  }
-
-  public findByAnnee(annee: number): Observable<DeclarationIS>{
-    return this.http.get<DeclarationIS>(this.url + 'annee/' + annee);
   }
 
   public deleteBySocieteIceAndAnnee(): Observable<number> {
@@ -61,12 +63,8 @@ export class DeclarationISService {
     return this.http.get<DeclarationIS>(this.url + 'xmlToDec/fileName/' + fileName);
   }
 
-  public afficheObject(ice: string, annee: number): Observable<DeclarationIS>{
-    return this.http.get<DeclarationIS>(this.url + 'afficheDecIS/ice/'+ ice +'/annee/'+ annee);
-  }
-
-  public afficheObject11(): Observable<DeclarationIsObject>{
-    return this.http.post<DeclarationIsObject>(this.url + 'find-declarationIS-object/', this.object);
+  public afficheObject(): Observable<DeclarationIS>{
+    return this.http.post<DeclarationIS>(this.url + 'find-declarationIS-object/', this.selected);
   }
 
   public calculTotalHT(factures: Array<Facture>): Observable<number>{
@@ -85,7 +83,7 @@ export class DeclarationISService {
     return this.http.get<number>(this.url + 'montantPaye/age/'+age+'/cm/'+cm+'/montantCalcule/'+ montant);
   }
 
-  public downloadXmlFile(declarationIS: DeclarationIS): Observable<number>{
+  public downloadXmlFile(declarationIS: DeclarationIS): Observable<any>{
     return this.http.post<number>(this.url + 'toXML/', declarationIS);
   }
 
@@ -96,8 +94,6 @@ export class DeclarationISService {
   public deleteMultipleBySocieteIceAndAnnee(): Observable<number> {
     return this.http.post<number>(this.url + 'delete-multiple-by-societe-ice-and-annee' , this.selectes);
   }
-
-
 
   public findIndexById(id: number): number {
     let index = -1;
@@ -113,7 +109,6 @@ export class DeclarationISService {
   public deleteIndexById(id: number) {
     this.items.splice(this.findIndexById(id), 1);
   }
-
 
   public deleteMultipleIndexById() {
     for (const item of this.selectes){
@@ -140,8 +135,9 @@ export class DeclarationISService {
         +'/annee/'+ this.selected.annee+'/typeoperation/' + typeOperation);
   }
 
-  public findFacturesIndexById(id: number, items: Array<any>): number {
+  public findFacturesIndexById(id: number, items: Array<Facture>): number {
     let index = -1;
+    items = new Array<Facture>();
     for (let i = 0; i < items.length; i++) {
       if (items[i].id === id) {
         index = i;
@@ -268,4 +264,13 @@ export class DeclarationISService {
   set selectedVo(value: DeclarationIsVo) {
     this._selectedVo = value;
   }
+
+  get disabledSave(): boolean {
+    return this._disabledSave;
+  }
+
+  set disabledSave(value: boolean) {
+    this._disabledSave = value;
+  }
+
 }
