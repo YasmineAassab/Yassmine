@@ -18,6 +18,8 @@ export class DeclarationIsListComponent implements OnInit {
   public factureCr = new Array<Facture>();
   public factureDe = new Array<Facture>();
 
+  file: Blob;
+
   constructor(private messageService: MessageService, private confirmationService: ConfirmationService,
               private service: DeclarationISService, private router: Router) {}
 
@@ -25,8 +27,41 @@ export class DeclarationIsListComponent implements OnInit {
   navigateToEdit(selected: DeclarationIS) {
     this.selected = selected;
     this.findFactures(selected);
-    this.router.navigateByUrl('/view/declarations-is/edit');
+    this.router.navigateByUrl('/declarations-is/edit');
   }
+
+  public downloadXmlFile(selected: DeclarationIS){
+    return this.service.downloadXmlFile(selected).subscribe( data => {
+      if (data == 1) {
+
+        this.file=data;
+        const fileName = "fileXml1";
+        const fileType = '.xml';
+
+        const blob = new Blob([this.file], { type: fileType });
+
+        const a = document.createElement('a');
+        a.download = fileName;
+        a.href = URL.createObjectURL(blob);
+        a.dataset.downloadurl = [fileType, a.download, a.href].join(':');
+        a.style.display = "none";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(function() { URL.revokeObjectURL(a.href); }, 1500);
+
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Successful',
+          detail: 'File xml generated',
+          life: 3000
+        });
+      }
+      });
+  }
+
+
+
 
   public return(){
     this.router.navigateByUrl('demande/list');
@@ -123,18 +158,6 @@ export class DeclarationIsListComponent implements OnInit {
     this.viewDialog2 = true;
   }
 
-  public downloadXmlFile(selected: DeclarationIS){
-    return this.service.downloadXmlFile(selected).subscribe( data => {
-      if (data == 1){
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Successful',
-          detail: 'File xml generated',
-          life: 3000
-        });
-      }
-    });
-  }
   private initCol() {
     this.cols = [
       {field: 'id', header: 'Id'},

@@ -26,13 +26,13 @@
             <div class="p-d-flex">
                 <div class="p-mr-2 p-offset-4">
                     <span class="p-float-label col-md-5">
-                        <input id="float-input" type="text" pInputText [(ngModel)]="object.societe.ice">
+                        <input id="float-input" type="text" pInputText [(ngModel)]="selected.societe.ice">
                         <label for="float-input">Societe ice</label>
                     </span>
                 </div>
                 <div class="p-mr-2">
                     <span class="p-float-label col-md-5">
-                        <input id="float-input1" type="text" pInputText [(ngModel)]="object.annee">
+                        <input id="float-input1" type="text" pInputText [(ngModel)]="selected.annee">
                         <label for="float-input1">Année</label>
                     </span>
                 </div>
@@ -52,12 +52,12 @@
                             <div class="p-col-4 p-offset-1">
                                 <div style="padding: 5px"><label>Total gain</label></div>
                                 <div class="p-inputgroup">
-                                    <input type="number" pInputText disabled [value]="object.totalHTGain">
+                                    <input type="number" pInputText disabled [value]="selected.totalHTGain">
                                     <span class="p-inputgroup-addon">MAD</span>
                                 </div>
                             </div>
                         </div>
-                        <p-table [value]="object.factureC" [rows]="9" [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+                        <p-table [value]="selected.factureC" [rows]="9" [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
                             <ng-template pTemplate="header">
                                 <tr>
                                     <th pSortableColumn="ref" style="width: 7rem">Ref<p-sortIcon field="ref"></p-sortIcon></th>
@@ -90,13 +90,13 @@
                             <div class="p-col-4 p-offset-1">
                                     <div style="padding: 5px"><label>Total charge</label></div>
                                     <div class="p-inputgroup">
-                                        <input type="number" pInputText disabled [value]="object.totalHTCharge">
+                                        <input type="number" pInputText disabled [value]="selected.totalHTCharge">
                                         <span class="p-inputgroup-addon">MAD</span>
                                     </div>
                             </div>
                         </div>
 
-                        <p-table [value]="object.factureD" [rows]="9" [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+                        <p-table [value]="selected.factureD" [rows]="9" [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
                             <ng-template pTemplate="header">
                                 <tr>
                                     <th pSortableColumn="ref" style="width: 7rem">Ref <p-sortIcon field="ref"></p-sortIcon></th>
@@ -113,7 +113,7 @@
                                     <td>{{facture.societeSource.ice}}</td>
                                     <td>{{facture.societeDistination.ice}}</td>
                                     <td>
-                                        <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"></button>
+                                        <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-warning p-mr-2" (click)="editFact(facture)"></button>
                                         <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info p-mr-2" (click)="viewFact(facture)"></button>
                                         <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteFact(facture)"></button>
                                     </td>
@@ -136,46 +136,46 @@
                     <div class="p-col">
                         <div style="padding: 5px"><label>Résultat fiscal</label></div>
                         <div class="p-inputgroup">
-                            <input type="number" pInputText disabled mode="decimal" [value]="object.totalHTDiff">
+                            <input type="number" pInputText disabled mode="decimal" [value]="selected.totalHTDiff">
                             <span class="p-inputgroup-addon">MAD</span>
                         </div>
                     </div>
                      <div class="p-col">
                         <div style="padding: 5px"><label>Montant calculé</label></div>
                         <div class="p-inputgroup">
-                            <input type="number" pInputText disabled [value]="object.montantISCalcule">
+                            <input type="number" pInputText disabled [value]="selected.montantISCalcule">
                             <span class="p-inputgroup-addon">MAD</span>
                         </div>
                     </div>
                     <div class="p-col-2">
                         <div style="padding: 5px"><label>Taux appliqué</label></div>
                         <div class="p-inputgroup">
-                            <input type="number" pInputText disabled [value]="object.tauxIS.pourcentage">
+                            <input type="number" pInputText disabled [value]="selected.tauxIS.pourcentage">
                             <span class="p-inputgroup-addon">%</span>
                         </div>
                     </div>
                      <div class="p-col">
                         <div style="padding: 5px"><label>Cotisation minimale {{selected.annee}}</label></div>
                         <div class="p-inputgroup">
-                            <input type="number" pInputText disabled [value]="object.tauxIsConfig.cotisationMinimale">
+                            <input type="number" pInputText disabled [value]="selected.tauxIsConfig.cotisationMinimale">
                             <span class="p-inputgroup-addon">MAD</span>
                         </div>
                     </div>
                      <div class="p-col">
                         <div style="padding: 5px"><label>Montant payé</label></div>
                         <div class="p-inputgroup">
-                            <input type="number" pInputText disabled [value]="object.montantISPaye">
+                            <input type="number" pInputText disabled [value]="selected.montantISPaye">
                             <span class="p-inputgroup-addon">MAD</span>
                         </div>
                     </div>
 
                 </div>
-                <div *ngIf="object.montantISPaye > object.tauxIsConfig.cotisationMinimale">
+                <div *ngIf="selected.montantISPaye > selected.tauxIsConfig.cotisationMinimale">
                     <p-messages severity="error">
                         <ng-template pTemplate="caption" class="p-grid">
                             <i class="pi pi-exclamation-triangle" style="font-size: 40px"></i>
                             <div class="p-col-7 p-ml-2">
-                                <h6>Votre société a réalisé des bénéfices, vous devez payer l'acompte pour l'année {{object.annee + 1}}.</h6>
+                                <h6>Votre société a réalisé des bénéfices, vous devez payer l'acompte pour l'année {{selected.annee + 1}}.</h6>
                                 <h6>L'acompte est égale à 25% du montant de l'impôt de la déclaration IS</h6>
                                     <button pButton pRipple type="button" label="Payer l'acompte" class="p-button-raised p-button-danger p-button-text p-mt-3" (click)="openCreate2()"></button>
                             </div>

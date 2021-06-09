@@ -32,12 +32,11 @@ export class DeclarationISService {
   private _selectedVo: DeclarationIsVo;
 
   private _disabledSave: boolean;
-  private _montant: number;
 
   constructor(private http: HttpClient) { }
 
   public validateSave(): boolean{
-    return this.object.montantISPaye > this.object.tauxIsConfig.cotisationMinimale && this.disabledSave == false;
+    return this.selected.montantISPaye > this.selected.tauxIsConfig.cotisationMinimale && this.disabledSave == false;
   }
 
   public findAll(): Observable<Array<DeclarationIS>> {
@@ -64,8 +63,8 @@ export class DeclarationISService {
     return this.http.get<DeclarationIS>(this.url + 'xmlToDec/fileName/' + fileName);
   }
 
-  public afficheObject(): Observable<DeclarationIsObject>{
-    return this.http.post<DeclarationIsObject>(this.url + 'find-declarationIS-object/', this.object);
+  public afficheObject(): Observable<DeclarationIS>{
+    return this.http.post<DeclarationIS>(this.url + 'find-declarationIS-object/', this.selected);
   }
 
   public calculTotalHT(factures: Array<Facture>): Observable<number>{
@@ -84,7 +83,7 @@ export class DeclarationISService {
     return this.http.get<number>(this.url + 'montantPaye/age/'+age+'/cm/'+cm+'/montantCalcule/'+ montant);
   }
 
-  public downloadXmlFile(declarationIS: DeclarationIS): Observable<number>{
+  public downloadXmlFile(declarationIS: DeclarationIS): Observable<any>{
     return this.http.post<number>(this.url + 'toXML/', declarationIS);
   }
 
@@ -111,7 +110,6 @@ export class DeclarationISService {
     this.items.splice(this.findIndexById(id), 1);
   }
 
-
   public deleteMultipleIndexById() {
     for (const item of this.selectes){
       this.deleteIndexById(item.id);
@@ -137,8 +135,9 @@ export class DeclarationISService {
         +'/annee/'+ this.selected.annee+'/typeoperation/' + typeOperation);
   }
 
-  public findFacturesIndexById(id: number, items: Array<any>): number {
+  public findFacturesIndexById(id: number, items: Array<Facture>): number {
     let index = -1;
+    items = new Array<Facture>();
     for (let i = 0; i < items.length; i++) {
       if (items[i].id === id) {
         index = i;
@@ -274,11 +273,4 @@ export class DeclarationISService {
     this._disabledSave = value;
   }
 
-  get montant(): number {
-    return this._montant;
-  }
-
-  set montant(value: number) {
-    this._montant = value;
-  }
 }

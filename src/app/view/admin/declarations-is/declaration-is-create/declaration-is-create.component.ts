@@ -23,25 +23,17 @@ export class DeclarationIsCreateComponent implements OnInit {
     public bro: boolean;
 
 
-
   constructor(private messageService: MessageService, private confirmationService: ConfirmationService, private service: DeclarationISService,
               private router: Router, private service2: AcomptesService) {
 
     this.disabledSave = false;
-    this.service.calculMontantIS(this.object.totalHTDiff).subscribe(data => {
-      this.object.montantISCalcule = null;
-      this.object.montantISCalcule = data;
-      this.service.montant = data;
-      console.log('data' + data);
-      console.log('cal cal cal' + this.object.montantISCalcule);
-      console.log('montant' + this.service.montant);
-    });
   }
+
 
   public calculMontantIS(resultatFiscal: number){
      this.service.calculMontantIS(resultatFiscal).subscribe(data => {
-      this.object.montantISCalcule = data;
-
+      this.selected.montantISCalcule = data;
+      console.log('selected' + this.selected.montantISCalcule);
     });
   }
 
@@ -55,46 +47,44 @@ export class DeclarationIsCreateComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.service.deleteFactByRef(selectedFact).subscribe(data => {
-          if (selectedFact.typeOperation == "credit"){
-            this.object.factureC = this.object.factureC.filter(val => val.id !== this.selectedFact.id);
-            this.object.totalHTGain -= this.selectedFact.montantHorsTaxe;
+          if (data >= 0){
+            if (selectedFact.typeOperation == "credit"){
+              this.selected.factureC = this.selected.factureC.filter(val => val.id !== this.selectedFact.id);
+              this.selected.totalHTGain -= this.selectedFact.montantHorsTaxe;
+            }
+            if (selectedFact.typeOperation == "debit"){
+              this.selected.factureD = this.selected.factureD.filter(val => val.id !== this.selectedFact.id);
+              this.selected.totalHTCharge -= this.selectedFact.montantHorsTaxe;
+            }
+            this.selected.totalHTDiff = this.selected.totalHTGain - this.selected.totalHTCharge;
+            this.calculMontantIS(this.selected.totalHTDiff);
+            this.findTauxIS(this.selected.totalHTDiff);
+            console.log('age ' + this.object.societe.age);
+            console.log('cm ' + this.object.tauxIsConfig.cotisationMinimale);
+            console.log('mc ' + this.object.montantISCalcule);
+            this.montantPaye(this.selected.societe.age, this.selected.tauxIsConfig.cotisationMinimale, this.selected.montantISCalcule);
+            console.log('accept');
+            this.selectedFact = new Facture();
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Successful',
+              detail: 'Facture deleted',
+              life: 3000
+            });
           }
-          if (selectedFact.typeOperation == "debit"){
-            this.object.factureD = this.object.factureD.filter(val => val.id !== this.selectedFact.id);
-            this.object.totalHTCharge -= this.selectedFact.montantHorsTaxe;
-          }
-
-          this.object.totalHTDiff = this.object.totalHTGain - this.object.totalHTCharge;
-          this.calculMontantIS(this.object.totalHTDiff);
-          this.findTauxIS(this.object.totalHTDiff);
-          console.log('age ' + this.object.societe.age);
-          console.log('cm ' + this.object.tauxIsConfig.cotisationMinimale);
-          console.log('mc ' + this.object.montantISCalcule);
-          this.montantPaye(this.object.societe.age, this.object.tauxIsConfig.cotisationMinimale, this.object.montantISCalcule);
-
-          console.log('accept');
-          this.selectedFact = new Facture();
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Successful',
-            detail: 'Facture deleted',
-            life: 3000
-          });
         });
       }
     });
   }
 
-
-
   public findTauxIS(totalDiff: number) {
-    return this.service.findTauxIS(totalDiff).subscribe(data => this.object.tauxIS = data);
+    return this.service.findTauxIS(totalDiff).subscribe(data => this.selected.tauxIS = data);
   }
 
   public montantPaye(age: number, cm:number, m: number) {
     console.log('montant qbel '+this.object.montantISPaye);
     this.service.montantPaye(age, cm, m).subscribe(data => {
-      this.object.montantISPaye = data;
+      this.selected.montantISPaye = data;
       console.log('montant be3eed '+data);
     });
   }
@@ -117,17 +107,17 @@ export class DeclarationIsCreateComponent implements OnInit {
 
   public afficheObject() {
     return this.service.afficheObject().subscribe(data => {
-      this.object = data;
+      this.selected = data;
       this.disabledSave = false;
-      if (this.object.declarationIS.etatDeclaration == null){
+      if (this.selected.etatDeclaration == null){
         this.val = false;
         this.bro = false;
       }
-      else if (this.object.declarationIS.etatDeclaration.libelle == 'valider'){
+      else if (this.selected.etatDeclaration.libelle == 'valider'){
         this.val = true;
         this.bro = false;
       }
-      else if (this.object.declarationIS.etatDeclaration.libelle == 'brouillon'){
+      else if (this.selected.etatDeclaration.libelle == 'brouillon'){
         this.bro = true;
         this.val = false;
       }
@@ -135,8 +125,8 @@ export class DeclarationIsCreateComponent implements OnInit {
   }
 
   public save(etat: string){
-    this.ice = this.object.societe.ice;
-    this.annee = this.object.annee;
+    this.ice = this.selected.societe.ice;
+    this.annee = this.selected.annee;
     return this.service.save(this.ice, this.annee, etat).subscribe(data => {
       console.log(data);
       if (data > 0){
@@ -156,29 +146,29 @@ export class DeclarationIsCreateComponent implements OnInit {
 
   public openCreate() {
     this.selectedFact.typeOperation = "credit";
-    this.selectedFact.societeSource.ice = this.object.societe.ice;
+    this.selectedFact.societeSource.ice = this.selected.societe.ice;
     this.submitted = false;
     this.createDialog = true;
   }
 
   public openCreate1() {
     this.selectedFact.typeOperation = "debit";
-    this.selectedFact.societeSource.ice = this.object.societe.ice;
+    this.selectedFact.societeSource.ice = this.selected.societe.ice;
     this.submitted = false;
     this.createDialog = true;
   }
 
   public openCreate2() {
-    this.acomptes.societe.ice = this.object.societe.ice;
+    this.acomptes.societe.ice = this.selected.societe.ice;
     this.acomptes.numero = 1;
-    this.acomptes.anneePaye = this.object.annee + 1;
-    this.acomptes.montant = this.object.montantISPaye/4;
+    this.acomptes.anneePaye = this.selected.annee + 1;
+    this.acomptes.montant = this.selected.montantISPaye/4;
     this.submitted = false;
     this.createDialog2 = true;
   }
 
-  public edit(DeclarationIS: DeclarationIS) {
-    this.selected = {...DeclarationIS};
+  public editFact(facture: Facture) {
+    this.selectedFact = {...facture};
     this.editDialog = true;
   }
 

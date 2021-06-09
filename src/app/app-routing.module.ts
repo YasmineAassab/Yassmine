@@ -56,6 +56,7 @@ import {ComptableBoardComponent} from "./view/admin/comptable-board/comptable-bo
 import {DeclarationsComponent} from "./view/admin/declarations/declarations.component";
 import {DeclarationTvaCreateComponent} from "./view/admin/declarationTva/declaration-tva-create/declaration-tva-create.component";
 import {DemandeListComponent} from "./view/admin/demande-list/demande-list.component";
+import {VisualiserDemandeComponent} from "./view/admin/visualiser-demande/visualiser-demande.component";
 
 @NgModule({
     imports: [
@@ -74,6 +75,7 @@ import {DemandeListComponent} from "./view/admin/demande-list/demande-list.compo
                    /* {path: '', component: DashboardDemoComponent},*/
                     {path: 'demande', component: DemandeDeclarationComponent},
                     {path: 'demande/list', component: DemandeListComponent},
+                    {path: 'vis', component: VisualiserDemandeComponent},
                     {path: 'declaration-is', component: DeclarationsISComponent},
                     {path: 'declarations-is/create', component: DeclarationIsCreateComponent},
                     {path: 'declarations-is/edit', component: DeclarationIsEditComponent},

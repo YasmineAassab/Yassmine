@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MessageService} from "primeng/api";
 import {DeclarationISService} from "../../../../controller/service/declaration-is.service";
-import {Commande} from "../../../../controller/model/commande.model";
 import {Facture} from "../../../../controller/model/facture.model";
 import {DeclarationIS} from "../../../../controller/model/declaration-is.model";
 
@@ -17,10 +16,15 @@ export class EditFactureComponent implements OnInit {
   public editFact() {
     if (this.selectedFact.ref.trim()) {
       if (this.selectedFact.id) {
-        this.selected.factures[this.service.findFacturesIndexById(this.selectedFact.id, this.selected.factures)] = this.selectedFact;
         this.service.editFact().subscribe(data => {
           if (data > 0){
-            //this.selectedFact = data;
+            this.selected.factures[this.service.findFacturesIndexById(this.selectedFact.id, this.selected.factures)] = this.selectedFact;
+            if (this.selectedFact.typeOperation == "credit"){
+              this.selected.factureC[this.service.findFacturesIndexById(this.selectedFact.id, this.selected.factureC)] = this.selectedFact;
+            }
+            if (this.selectedFact.typeOperation == "debit"){
+              this.selected.factureD[this.service.findFacturesIndexById(this.selectedFact.id, this.selected.factureD)] = this.selectedFact;
+            }
             this.messageService.add({
               severity: 'success',
               summary: 'Successful',
