@@ -40,7 +40,7 @@ export class AppLoginComponent implements OnInit{
           this.isLoggedIn = true;
           this.roles = this.tokenStorage.getUser().roles;
 
-          this.router.navigate(['home-page']);
+          this.router.navigate(['']);
           // this.reloadPage();
 
 

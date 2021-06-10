@@ -194,6 +194,7 @@ import {DeclarationTvaCreateComponent} from "./view/admin/declarationTva/declara
 import { AcomptesCreateComponent } from './view/admin/declarations-is/acomptes-create/acomptes-create.component';
 import {EditFactureComponent} from "./view/admin/declarations-is/edit-facture/edit-facture.component";
 import { VisualiserDemandeComponent } from './view/admin/visualiser-demande/visualiser-demande.component';
+import { ContactComponent } from './demo/view/contact/contact.component';
 
 @NgModule({
     imports: [
@@ -374,7 +375,8 @@ import { VisualiserDemandeComponent } from './view/admin/visualiser-demande/visu
         DeclarationsComponent,
         ViewComptableComponent,
         AcomptesCreateComponent,
-        VisualiserDemandeComponent
+        VisualiserDemandeComponent,
+        ContactComponent,
 
     ],
     providers: [

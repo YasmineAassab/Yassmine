@@ -14,6 +14,9 @@ export class DashboardDemoComponent implements OnInit {
 
     products: any[];
 
+    tauxis: any[];
+    tauxir: any[];
+
     items: MenuItem[];
 
     chartData: any;
@@ -28,6 +31,18 @@ export class DashboardDemoComponent implements OnInit {
 
     ngOnInit() {
         this.productService.getProducts().then(data => this.products = data);
+
+        this.tauxis = [
+            {beneficeMin: '0.00', beneficeMax: '300 000.00', taux: '10%'},
+            {beneficeMin: '300 001.00', beneficeMax: '1 000 000.00', taux: '20%'},
+            {beneficeMin: '1 000 001.00', beneficeMax: '+', taux: '30%'},
+        ];
+        this.tauxir = [
+            {salMin: '0.00', salMax: '2 500.00', taux: '0%'},
+            {salMin: '2 501.00', salMax: '4 166.00', taux: '10%'},
+            {salMin: '4 167.00', salMax: '5 000.00', taux: '20%'},
+            {salMin: '5 001.00', salMax: '6 666.00', taux: '30%'},
+        ];
 
         this.items = [
             { label: 'Save', icon: 'pi pi-check' },

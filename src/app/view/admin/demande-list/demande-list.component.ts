@@ -43,8 +43,11 @@ export class DemandeListComponent implements OnInit {
   }
 
   public navigateToCreate(selected: Demande){
-    this.object.societe = selected.societe;
-    this.object.annee = selected.annee;
+    console.log('lay' +selected.societe.ice);
+    this.selected.societe = selected.societe;
+    console.log('law' +this.selected.societe.ice);
+    this.selected.annee = selected.annee;
+    console.log('annee' +this.selected.annee);
     this.demandeService.getDemande(selected).subscribe(
         data=>{
           console.log("d5ul lmera 2");

@@ -1,4 +1,51 @@
 <div class="p-grid layout-dashboard">
+
+    <div class="p-col-12 p-md-6 p-lg-6">
+        <div class="card">
+            <h5>Barème de l’impôt sur les sociétés selon la loi de finances 2020</h5>
+            <!--<span style="margin-bottom: 12px">Année 2021</span>-->
+            <p-table [value]="tauxis" [resizableColumns]="true" styleClass="p-datatable-gridlines">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pResizableColumn colspan="2" style="text-align: center">Bénéfice net fiscal en MAD</th>
+                        <th pResizableColumn style="text-align: center">Taux IS à appliquer</th>
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-tauxis>
+                    <tr>
+                        <td>{{tauxis.beneficeMin}}</td>
+                        <td>{{tauxis.beneficeMax}}</td>
+                        <td>{{tauxis.taux}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+    <div class="p-col-12 p-md-6 p-lg-6">
+        <div class="card">
+            <h5>Barème de l’impôt sur le revenu selon la loi de finances 2021</h5>
+            <!--<span style="margin-bottom: 12px">Année 2021</span>-->
+            <p-table [value]="tauxir" [resizableColumns]="true" styleClass="p-datatable-gridlines">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pResizableColumn colspan="2" style="text-align: center">Salaire en MAD</th>
+                        <th pResizableColumn style="text-align: center">Taux IR à appliquer</th>
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-tauxir>
+                    <tr>
+                        <td>{{tauxir.salMin}}</td>
+                        <td>{{tauxir.salMax}}</td>
+                        <td>{{tauxir.taux}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+
+    <!--
     <div class="p-col-12 p-md-6 p-lg-3">
         <div class="overview-box card">
             <div class="overview-box-value">90</div>
@@ -9,6 +56,8 @@
             </div>
         </div>
     </div>
+    -->
+    <!--
     <div class="p-col-12 p-md-6 p-lg-3">
         <div class="overview-box card">
             <div class="overview-box-value">1259</div>
@@ -18,7 +67,8 @@
                 +67.2% <i class="pi pi-arrow-circle-up"></i>
             </div>
         </div>
-    </div>
+    </div>-->
+    <!--
     <div class="p-col-12 p-md-6 p-lg-3">
         <div class="overview-box card">
             <div class="overview-box-value">21</div>
@@ -29,6 +79,8 @@
             </div>
         </div>
     </div>
+    -->
+    <!--
     <div class="p-col-12 p-md-6 p-lg-3">
         <div class="overview-box card">
             <div class="overview-box-value">42</div>
@@ -39,12 +91,14 @@
             </div>
         </div>
     </div>
+    -->
     <div class="p-col-12 p-md-8 p-lg-8">
         <div class="card card-w-title">
             <h5>Statistics</h5>
             <p-chart type="line" [data]="chartData" [options]="chartOptions"></p-chart>
         </div>
     </div>
+<!--
     <div class="p-col-12 p-md-4 p-lg-4">
         <div class="timeline card card-w-title">
             <h5>Timeline</h5>
@@ -84,6 +138,24 @@
             </ul>
         </div>
     </div>
+    -->
+
+    <div class="p-col-12 p-md-4 p-lg-4">
+        <div class="card weather">
+            <div class="weather-header">
+                <img src="assets/layout/images/dashboard/weather.png" library="roma-layout"  />
+            </div>
+            <div class="weather-content">
+                <div class="weather-city">Antalya</div>
+                <div class="weather-status">24&#176; C <i class="pi pi-map-marker"></i></div>
+                <div class="weather-detail">Feels like 26&#176; Low 14 &#176; High 28 &#176;</div>
+                <a>Change Location</a>
+            </div>
+        </div>
+    </div>
+
+
+
     <div class="p-col-12 p-xl-6">
         <div class="expenses card card-w-title">
             <h5>Expenses</h5>
@@ -264,6 +336,7 @@
                 </ul>
             </div>
         </div>
+    <!--
         <div class="p-col-12 p-xl-8">
             <div class="card card-w-title live-support">
                 <h5>Live Support</h5>
@@ -315,6 +388,7 @@
                 </div>
             </div>
         </div>
+    -->
         <div class="p-col-12 p-xl-4">
             <div class="card user-card">
                 <div class="user-card-header">
@@ -385,6 +459,7 @@
                 </div>
             </div>
         </div>
+    <!--
         <div class="p-col-12 p-xl-8">
             <div class="card card-w-title global-sales p-fluid">
                 <h5>Global Sales</h5>
@@ -436,6 +511,7 @@
 				</p-table>
             </div>
         </div>
+    -->
         <div class="p-col-12 p-xl-4">
             <div class="card weather">
                 <div class="weather-header">

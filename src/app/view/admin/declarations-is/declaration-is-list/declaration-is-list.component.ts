@@ -62,11 +62,6 @@ export class DeclarationIsListComponent implements OnInit {
 
 
 
-
-  public return(){
-    this.router.navigateByUrl('demande/list');
-  }
-
   navigateToCreate(){
     this.selected = null;
     this.router.navigateByUrl('view/declarations-is/create');

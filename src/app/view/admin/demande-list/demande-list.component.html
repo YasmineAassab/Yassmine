@@ -4,7 +4,7 @@
         <p-toast></p-toast>
 
         <div class="card">
-            <h4 style="margin: 10px">Recherche multi-critère</h4>
+            <h4 style="margin-bottom: 40px;">Recherche multi-critère</h4>
             <div class="p-grid p-fluid">
                 <div class="p-col-12  p-md-2 p-offset-1"><div style="margin-bottom: 5px"><label>Référence </label></div>
                     <input type="text" pInputText placeholder="reference" [(ngModel)]="demandeVo.ref">
@@ -26,7 +26,7 @@
             <div style="margin: 15px"><button pButton pRipple type="button" label="Search" icon="pi pi-search" iconPos="right" style="width:20rem; height: 10px" class="p-col-6 p-mb-2 p-offset-5" (click)="searchCriteria()"></button></div>
 
             <div class="card">
-                <h3>Liste des demandes</h3>
+                <h3 style="margin-bottom: 33px">Liste des demandes</h3>
                 <p-table #dt [value]="items" [rows]="10" [paginator]="true" [rowHover]="true"
                          styleClass="p-datatable-customers"
                          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true" dataKey="id">

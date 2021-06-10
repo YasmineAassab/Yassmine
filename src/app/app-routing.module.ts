@@ -57,22 +57,25 @@ import {DeclarationsComponent} from "./view/admin/declarations/declarations.comp
 import {DeclarationTvaCreateComponent} from "./view/admin/declarationTva/declaration-tva-create/declaration-tva-create.component";
 import {DemandeListComponent} from "./view/admin/demande-list/demande-list.component";
 import {VisualiserDemandeComponent} from "./view/admin/visualiser-demande/visualiser-demande.component";
+import {ContactComponent} from "./demo/view/contact/contact.component";
+import {ChercherDeclarationIRComponent} from "./view/admin/chercher-declaration-ir/chercher-declaration-ir.component";
 
 @NgModule({
     imports: [
         RouterModule.forRoot([
-            {path: '', component: AppLoginComponent},
-            {path: 'sign-up', component: SignUpComponent},
-            {
-                path: '', component: AppMainComponent,
+           // {path: '', component: AppLoginComponent},
+            //{path: 'sign-up', component: SignUpComponent},
+            {path: '', component: AppMainComponent,
                 children: [
-                    {path: 'home-page', component: HomePageComponent},
+                    {path: '', component: DashboardDemoComponent},
+                    {path: 'sign-up', component: SignUpComponent},
+                    //{path: 'home-page', component: HomePageComponent},
                     {path: 'declaration-ir', component: DeclarationIrComponent},
+                    {path: 'declaration-ir/list', component: ChercherDeclarationIRComponent},
                     {path: 'profile', component: ProfileComponent},
                     {path: 'comptable', component: ComptableBoardComponent},
                     {path: 'declarations', component: DeclarationsComponent},
-
-                   /* {path: '', component: DashboardDemoComponent},*/
+                    {path: 'contact', component: ContactComponent},
                     {path: 'demande', component: DemandeDeclarationComponent},
                     {path: 'demande/list', component: DemandeListComponent},
                     {path: 'vis', component: VisualiserDemandeComponent},

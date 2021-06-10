@@ -1,37 +1,14 @@
-li a{
-    color: white;
-    font-size: 20px;
-
-}
-div.layout-topbar{
-    z-index: 2;
-}
-a.navbar-brand{
+h6{
+    font-weight: bolder;
     font-size: 25px;
-}
-nav.navbar{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: 100%;
+    color: white;
 
 }
-div.layout-topbar{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-
+.layout-topbar-logo{
+    text-underline: none;
+    text-decoration-line: none;
 }
-a.nav-link{
-    margin-right: 15px;
-    margin-left: 15px;
+#sign-out, #sign-in, #sign-up{
+    color: white;
+    font-size: 16px;
 }
-div.layout-topbar{
-    position: relative;
-    width: 100%;
-}
-ul.fin{
-    margin-left: 725px;
-}
-

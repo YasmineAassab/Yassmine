@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { AppComponent } from './app.component';
 import { AppMainComponent } from './app.main.component';
+import {TokenStorageService} from "./Security/_services/token-storage.service";
 
 @Component({
     selector: 'app-menu',
@@ -30,17 +31,97 @@ import { AppMainComponent } from './app.main.component';
 export class AppMenuComponent implements OnInit {
 
     model: any[];
+    isLoggedIn = false;
 
-    constructor(public app: AppComponent, public appMain: AppMainComponent) { }
+    constructor(public app: AppComponent, public appMain: AppMainComponent, private tokenStorageService: TokenStorageService) { }
 
     ngOnInit() {
+
+        this.isLoggedIn = !!this.tokenStorageService.getToken();
+
         this.model = [
             {
-                label: 'Favorites', icon: 'pi pi-fw pi-home',
+                label: 'Home', icon: 'pi pi-fw pi-home',
                 items: [
                     {label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/']}
                 ]
             },
+            {
+                label: 'Demandes', icon: 'pi pi-fw pi-inbox',
+                items: [
+                    {label: 'Liste des demandes', icon: 'pi pi-fw pi-list', routerLink: ['demande/list']},
+                ]
+            },
+            {
+                label: 'Factures', icon: 'pi pi-fw pi-file',
+                items: [
+                    {label: 'Créer', icon: 'pi pi-fw pi-plus', routerLink: ['facture']},
+                    {label: 'Rechercher', icon: 'pi pi-fw pi-search', routerLink: ['/']},
+                    {label: 'Journal', icon: 'pi pi-fw pi-list', routerLink: ['/']},
+                ]
+            },
+            {
+                label: 'Déclarations', icon: 'pi pi-fw pi-book',
+                items: [
+                    {
+                        label: 'Déclarations IS', icon: 'pi pi-fw pi-check',
+                        items: [
+                            {
+                                label: 'Créer', icon: 'pi pi-fw pi-plus', routerLink: ['/declarations-is/create'],
+                            },
+                            {
+                                label: 'Rechercher', icon: 'pi pi-fw pi-search', routerLink: ['declarations-is/list'],
+                            },
+                            {
+                                label: 'Statistiques', icon: 'pi pi-fw pi-chart-bar', routerLink: ['declarations-is/chart'],
+                            },
+                        ]
+                    },
+                    {
+                        label: 'Déclarations IR', icon: 'pi pi-fw pi-check',
+                        items: [
+                            {
+                                label: 'Créer', icon: 'pi pi-fw pi-plus', routerLink: ['declaration-ir']
+                            },
+                            {
+                                label: 'Rechercher', icon: 'pi pi-fw pi-search', routerLink: ['declaration-ir/list']
+                            },
+                            {
+                                label: 'Statistiques', icon: 'pi pi-fw pi-chart-bar', routerLink: [''],
+                            },
+                        ]
+                    },
+                    {
+                        label: 'Déclarations TVA', icon: 'pi pi-fw pi-check',
+                        items: [
+                            {
+                                label: 'Créer', icon: 'pi pi-fw pi-plus', routerLink: ['declaration-tva/create']
+                            },
+                            {
+                                label: 'Recherche', icon: 'pi pi-fw pi-search', routerLink: ['declaration-tva']
+                            },
+                        ]
+                    },
+                ]
+            },
+
+            {
+                label: 'Plan comptable', icon: 'pi pi-fw pi-slack',
+                items: [
+                    {label: 'Plan comptable', icon: 'pi pi-fw pi-check', routerLink: ['/']},
+                ]
+            },
+            {
+                label: 'CPC', icon: 'pi pi-fw pi-dollar',
+                items: [
+                    {label: 'Créer', icon: 'pi pi-fw pi-plus', routerLink: ['/']},
+                    {label: 'Rechercher', icon: 'pi pi-fw pi-search', routerLink: ['/']},
+                    {label: 'Statistiques', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/']},
+                ]
+            },
+
+/*
+
             {
                 label: 'UI Kit', icon: 'pi pi-fw pi-star', routerLink: ['/uikit'],
                 items: [
@@ -62,6 +143,10 @@ export class AppMenuComponent implements OnInit {
                     {label: 'Misc', icon: 'pi pi-fw pi-circle-off', routerLink: ['/uikit/misc']}
                 ]
             },
+
+
+ */
+            /*
             {
                 label: 'Utilities', icon: 'pi pi-fw pi-compass', routerLink: ['utilities'],
                 items: [
@@ -76,6 +161,9 @@ export class AppMenuComponent implements OnInit {
                     {label: 'Typography', icon: 'pi pi-fw pi-align-center', routerLink: ['utilities/typography']}
                 ]
             },
+
+             */
+            /*
             {
                 label: 'Pages', icon: 'pi pi-fw pi-copy', routerLink: ['/pages'],
                 items: [
@@ -93,6 +181,9 @@ export class AppMenuComponent implements OnInit {
                     {label: 'Empty', icon: 'pi pi-fw pi-clone', routerLink: ['/pages/empty']},
                 ]
             },
+
+             */
+            /*
             {
                 label: 'Hierarchy', icon: 'pi pi-fw pi-sitemap',
                 items: [
@@ -135,6 +226,9 @@ export class AppMenuComponent implements OnInit {
                     }
                 ]
             },
+
+             */
+            /*
             {
                 label: 'Start', icon: 'pi pi-fw pi-download',
                 items: [
@@ -146,6 +240,8 @@ export class AppMenuComponent implements OnInit {
                     }
                 ]
             }
+
+             */
         ];
     }
 

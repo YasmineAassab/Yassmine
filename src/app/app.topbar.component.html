@@ -1,87 +1,127 @@
 <div class="layout-topbar">
-    <nav class="navbar navbar-expand" style="color: white;">
-        <a class="navbar-brand" style="color: white;">Comptabilite</a>
-        <ul class="navbar-nav mr-auto" routerLinkActive="active">
-            <li class="nav-item">
-                <a href="/home-page" class="nav-link" routerLink="home-page" style="color: white;">Home </a>
-            </li>
-           <!-- <li class="nav-item" *ngIf="showAdminBoard">
-                <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
-            </li>
-            <li class="nav-item" *ngIf="showModeratorBoard">
-                <a href="/mod" class="nav-link" routerLink="mod">Moderator Board</a>
-            </li>-->
-         <!--   <li class="nav-item">
-                <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">User</a>
-            </li>-->
-        </ul>
 
-        <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
-            <li class="nav-item">
-                <a href="/sign-up" class="nav-link" routerLink="sign-up" style="color: white;">Sign Up</a>
-            </li>
-            <li class="nav-item">
-                <a href="/login" class="nav-link" routerLink="login" style="color: white;">Login</a>
-            </li>
-        </ul>
-
-        <ul class="navbar-nav ml-auto" >
-            <li class="nav-item">
-                <a  class="nav-link" routerLink="sign-up" style="color: white;">About Us</a>
-            </li>
-            <li class="nav-item">
-                <a  class="nav-link" routerLink="login" style="color: white;">Contact Us</a>
-            </li>
-        </ul>
-
-
-
-
-        <ul class="navbar-nav ml-auto fin" *ngIf="isLoggedIn">
-            <li class="nav-item">
-                <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
-            </li>
-            <li class="nav-item ">
-                <a href class="nav-link" (click)="logout()">LogOut</a>
-            </li>
-        </ul>
-
-    </nav>
-</div>
-<!--
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-    </div>
-</nav>
+    <!--
+    <a class="layout-right-panel-button layout-topbar-icon" (click)="appMain.onRightMenuClick($event)" href="#">
+        <i class="pi pi-ellipsis-v"></i>
+    </a>
 -->
+    <a href="#" class="layout-right-panel-button" style="width: 120px; text-decoration-line: none" *ngIf="isLoggedIn" (click)="logout()">
+        <div><span><i class="pi pi-power-off" style="margin-right: 8px; color: white"></i><span id="sign-out">SignOut</span></span></div>
+    </a>
+
+    <a href="/login" routerLink="login" class="layout-right-panel-button" style="width: 120px; text-decoration-line: none" *ngIf="!isLoggedIn">
+        <div><span><i class="pi pi-sign-in" style="margin-right: 8px; color: white"></i><span id="sign-in">LogIn</span></span></div>
+    </a>
+
+    <a href="/sign-up" routerLink="sign-up" class="layout-right-panel-button" style="width: 120px; text-decoration-line: none" *ngIf="!isLoggedIn">
+        <div><span><i class="pi pi-user-plus" style="margin-right: 8px; color: white"></i><span id="sign-up">SignUp</span></span></div>
+    </a>
+
+    <a href="#" class="layout-menu-button layout-topbar-icon" (click)="appMain.onMenuButtonClick($event)">
+
+    </a>
+
+    <a class="layout-topbar-logo">
+        <h6>E-COMPTA</h6>
+    </a>
+
+
+
+
+    <ul  class="topbar-menu">
+        <li class="user-profile" [ngClass]="{'active-topmenuitem fadeInDown': appMain.topbarUserMenuActive}" *ngIf="isLoggedIn">
+            <a href="#" (click)="appMain.onTopbarUserMenuButtonClick($event)" *ngIf="!app.inlineUser">
+                <img src="assets/layout/images/avatar.png" alt="roma-layout" />
+                <div class="layout-profile-userinfo">
+                    <span href="/profile" routerLink="profile" class="layout-profile-name">{{ username }}</span>
+                    <span class="layout-profile-role">{{roleUser}}</span>
+                </div>
+            </a>
+            <!--
+            <ul class="fadeInDown">
+                <li>
+                    <a href="#">
+                        <i class="pi pi-fw pi-user"></i>
+                        <span>Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="pi pi-fw pi-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="pi pi-fw pi-envelope"></i>
+                        <span>Messages</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="pi pi-fw pi-bell"></i>
+                        <span>Notifications</span>
+                    </a>
+                </li>
+            </ul>
+            -->
+        </li>
+        <li [ngClass]="{'active-topmenuitem fadeInDown': appMain.topbarNotificationMenuActive}" *ngIf="isLoggedIn">
+            <a href="#" class="layout-topbar-icon" (click)="appMain.onTopbarNotificationMenuButtonClick($event)">
+                <i class="topbar-icon pi pi-fw pi-bell"></i>
+            </a>
+            <ul class="fadeInDown">
+                <li role="menuitem">
+                    <a href="#"><img src="assets/layout/images/avatar-1.png" alt="">
+                        <div class="topbar-menu-info">
+                            <span class="topbar-menu-name">Bithika Abhedananda</span>
+                            <span class="topbar-menu-role">User interface review is done.</span>
+                        </div>
+                    </a>
+                </li>
+                <li role="menuitem">
+                    <a href="#"><img src="assets/layout/images/avatar-2.png" alt="">
+                        <div class="topbar-menu-info">
+                            <span class="topbar-menu-name">Dai Jiang</span>
+                            <span class="topbar-menu-role">Uh, we have sort of a problem here.</span>
+                        </div>
+                    </a>
+                </li>
+                <li role="menuitem">
+                    <a href="#"><img src="assets/layout/images/avatar-3.png" alt="">
+                        <div class="topbar-menu-info">
+                            <span class="topbar-menu-name">Karlien Nijhuis</span>
+                            <span class="topbar-menu-role">You apparently didn’t put the thing</span>
+                        </div>
+                    </a>
+                </li>
+                <li role="menuitem">
+                    <a href="#"><img src="assets/layout/images/avatar-4.png" alt="">
+                        <div class="topbar-menu-info">
+                            <span class="topbar-menu-name">Tom Chun</span>
+                            <span class="topbar-menu-role">Please check the files</span>
+                        </div>
+                    </a>
+                </li>
+                <li role="menuitem">
+                    <a href="#"><img src="assets/layout/images/avatar-5.png" alt="">
+                        <div class="topbar-menu-info">
+                            <span class="topbar-menu-name">Maria Trofimova</span>
+                            <span class="topbar-menu-role">Meeting reports attached.</span>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a role="menuitem" href="/home-page" class="nav-link" routerLink="" style="color: white;font-size: 20px; right: 1200px">Home </a>
+        </li>
+        <li>
+            <a role="menuitem" href="/home-page" class="nav-link" style="color: white;font-size: 20px; right: 1005px">About Us</a>
+        </li>
+        <li>
+            <a role="menuitem" href="/contact" class="nav-link" routerLink="contact" style="color: white;font-size: 20px; right: 780px">Contact Us</a>
+        </li>
+
+    </ul>
+</div>

@@ -16,6 +16,7 @@ export class AppTopBarComponent implements OnInit{
     showAdminBoard = false;
     showModeratorBoard = false;
     username: string;
+    roleUser: string;
 
     constructor(private tokenStorageService: TokenStorageService, public app: AppComponent, public appMain: AppMainComponent) { }
 
@@ -30,6 +31,15 @@ export class AppTopBarComponent implements OnInit{
             this.showModeratorBoard = this.roles.includes('ROLE_COMPTABLE');
 
             this.username = user.username;
+            if (user.roles[0] == 'ROLE_ADMIN'){
+                this.roleUser = 'ADMIN';
+            }
+            if (user.roles[0] == 'ROLE_COMPTABLE'){
+                this.roleUser = 'COMPTABLE';
+            }
+            if (user.roles[0] == 'ROLE_SOCIETE'){
+                this.roleUser = 'SOCIÉTÉ';
+            }
         }
     }
 
