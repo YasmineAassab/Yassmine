@@ -11,9 +11,9 @@
                 <label for="ref">Reference :</label>
                 <input [(ngModel)]="demande.ref" id="ref" type="text" pInputText>
             </div>
-            <div class="p-field p-col">
+            <div class="p-field p-col ">
                 <label for="operation">Operation :</label>
-                <p-dropdown id="operation" [options]="cities" [(ngModel)]="selectedCity" optionLabel="name"></p-dropdown>
+                <p-dropdown id="operation" [options]="operations" [(ngModel)]="operationSelected" optionLabel="operation"></p-dropdown>
             </div>
         </div>
         <div class="p-grid">
@@ -21,7 +21,7 @@
                 <label for="annee">Annee :</label>
                 <input [(ngModel)]="demande.annee" id="annee" type="text" pInputText>
             </div>
-            <div class="p-field p-col">
+            <div class="p-field p-col" >
                 <label for="mois">Mois :</label>
                 <input [(ngModel)]="demande.mois" id="mois" type="text" pInputText>
             </div>
@@ -51,6 +51,7 @@
 
 
 
+<!--
 <p-table [value]="categorieServices">
     <ng-template pTemplate="caption">
        <h3 class="p-text-center">Nos Services</h3>
@@ -72,3 +73,4 @@
         </tr>
     </ng-template>
 </p-table>
+-->

@@ -8,10 +8,7 @@
                 <label for="firstname1">Reference :</label>
                 <input id="firstname1" type="text" pInputText [(ngModel)]="declarationIR.ref">
             </div>
-            <div class="p-field p-col">
-                <label>IS de Societe :</label>
-                <input type="text" pInputText>
-            </div>
+
             <div class="p-field p-col">
                 <label>Mois :</label>
                 <input type="number" pInputText [(ngModel)]="declarationIR.mois">
@@ -23,7 +20,8 @@
         </div>
     </div>
     <div class="card-footer text-center">
-        <p-button [disabled]="isCreated" label="cree" icon="pi pi-check" iconPos="left"
+        <label style="float: left" >Traitement de demande {{currentDemande.ref}}</label>
+        <p-button class="myb" [disabled]="isCreated" label="cree" icon="pi pi-check" iconPos="left"
                   (click)="creeDeclarationIR()"></p-button>
       <!--  <p-button  label="get" icon="pi pi-check" iconPos="left"
                   (click)="getDemande()"></p-button>-->
@@ -95,7 +93,7 @@
                      [showCurrentPageReport]="true">
                 <ng-template pTemplate="caption">
                     <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
-                        <h5 class="p-m-0">Manage Commandes</h5>
+                        <h5 class="p-m-0">Manage Declarations</h5>
                         <span class="p-input-icon-left">
                         <i class="pi pi-search"></i>
                         <input pInputText type="text" placeholder="Search..."/>
@@ -141,11 +139,17 @@
                     <div class="p-d-flex p-ai-center p-jc-between">
                         In total there are {{items ? items.length : 0 }} items.
                     </div>
-                    <div class="footer ">
+                    <div class="footer p-grid p-justify-around  ">
+
+                        <div class="p-inputgroup p-col-2">
+                            <span class="p-inputgroup-addon">DH</span>
+                            <input type="text" pInputText placeholder="{{declarationIR.total}}">
+
+                        </div>
 
                         <!-- <div class="footer-two">-->
                         <!-- <p-button  [disabled]="isSaved" class=" p-button-danger" label="save" icon="pi pi-save" iconPos="left" (click)="save()"></p-button>-->
-                        <button pButton [disabled]="isSaved" type="button" class="p-button-danger" label="save"
+                        <button pButton [disabled]="isSaved" type="button" class="p-button-danger my p-col-2" label="save"
                                 icon="pi pi-save" iconPos="left" (click)="save()"></button>
                         <!-- </div>-->
 

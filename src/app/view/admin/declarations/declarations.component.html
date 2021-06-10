@@ -1,4 +1,32 @@
 
+<div class="card">
+    <div class="card-header p-d-flex p-jc-center"> <h2 style="margin-left: 20em"  class="text-center"> Demandes De Declaration</h2></div>
+
+    <div class="card-body">
+        <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="firstname1">Operation :</label>
+                <input id="firstname1" type="text" [(ngModel)]="demandeVo.operation" pInputText>
+            </div>
+            <div class="p-field p-col">
+                <label for="firstname1">Annee :</label>
+                <input id="firstname1" type="number" [(ngModel)]="demandeVo.annee" pInputText>
+            </div>
+            <div class="p-field p-col">
+                <label for="lastname1">premiere mois :</label>
+                <input id="lastname1" [(ngModel)]="demandeVo.moisMin" type="number" pInputText>
+            </div>
+            <div class="p-field p-col">
+                <label for="lastname1">deuxieme mois :</label>
+                <input id="lastname1" [(ngModel)]="demandeVo.moisMax" type="number" pInputText>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer p-d-flex p-jc-center"><p-button label="Search" icon="pi pi-search" (onClick)="searchDeclaration()" ></p-button></div>
+</div>
+
+
+
     <div class="p-grid p-mt-3">
         <div class="p-col-12">
 
@@ -49,6 +77,11 @@
                                 <!--<p-sortIcon field="totalPaye"></p-sortIcon>--></th>
                             <th pSortableColumn="totalPaye">Ice du Societe
                                 <!--<p-sortIcon field="totalPaye"></p-sortIcon>--></th>
+                            <th pSortableColumn="totalPaye">Comptable Traiteur
+                                <!--<p-sortIcon field="totalPaye"></p-sortIcon>--></th>
+                            <th pSortableColumn="totalPaye">Comptable Validateur
+                                <!--<p-sortIcon field="totalPaye"></p-sortIcon>--></th>
+
                             <!--<th pSortableColumn="totalPaye">Comptable
                                 &lt;!&ndash;<p-sortIcon field="totalPaye"></p-sortIcon>&ndash;&gt;</th>-->
                             <th></th>
@@ -64,6 +97,10 @@
                             <td>{{demande.mois}}</td>
                             <td>{{demande.annee}}</td>
                             <td>{{demande.societe.ice}}</td>
+
+                            <td >{{demande.comptableTraiteur.nom}}</td>
+                            <td >{{demande.comptableValidateur.nom}}</td>
+
                           <!--  <td>{{demande.user.username}}</td>-->
 
 
@@ -76,20 +113,7 @@
                             </td>
                         </tr>
                     </ng-template>
-                    <ng-template pTemplate="summary">
-                        <div class="p-d-flex p-ai-center p-jc-between">
-                            In total there are {{items ? items.length : 0 }} items.
-                        </div>
-                        <div class="footer ">
 
-                            <!-- <div class="footer-two">-->
-                            <!-- <p-button  [disabled]="isSaved" class=" p-button-danger" label="save" icon="pi pi-save" iconPos="left" (click)="save()"></p-button>-->
-                            <button pButton [disabled]="isSaved" type="button" class="p-button-danger" label="save"
-                                    icon="pi pi-save" iconPos="left" (click)="save()"></button>
-                            <!-- </div>-->
-
-                        </div>
-                    </ng-template>
 
                 </p-table>
             </div>

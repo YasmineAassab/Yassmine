@@ -5,11 +5,10 @@ import {Societe} from '../../../controller/model/societe.model';
 import {DemandeService} from '../../../controller/service/demande.service';
 import {Demande} from "../../../controller/model/demande.model";
 import {TokenStorageService} from '../../../Security/_services/token-storage.service';
-
-interface City {
-  name: string,
-  code: string
+interface com{
+  operation:string;
 }
+
 
 @Component({
   selector: 'app-demande-declaration',
@@ -18,10 +17,10 @@ interface City {
 })
 
 export class DemandeDeclarationComponent implements OnInit {
-  cities: City[];
-
-  selectedCity: City;
-
+  operations=new Array<com>();
+  operationSelected:com;
+  notSelected:boolean=true;
+  declarationIS:string="Declaration IS";
 
 
 
@@ -30,12 +29,14 @@ export class DemandeDeclarationComponent implements OnInit {
 
   constructor(private service: DeclarationIrService, private demandeService: DemandeService,private tokenStorageService:TokenStorageService) {
 
-    this.cities = [
-      {name: 'Declaration IR', code: 'NY'},
-      {name: 'Declaration IS', code: 'RM'},
-      {name: 'Declaration TVA', code: 'LDN'},
+    this.operations = [
+      {operation: 'Declaration IR'},
+      {operation: 'Declaration IS'},
+      {operation: 'Declaration TVA'},
 
     ];
+
+
   }
   set societe(value: Societe) {
     this.demandeService.societe = value;
@@ -48,8 +49,8 @@ export class DemandeDeclarationComponent implements OnInit {
     console.log("*****this is tockenv****");
     console.log(this.tokenStorageService.getUser().societe);
     console.log(this.tokenStorageService.getUser());
+  this.demande.operation=this.operationSelected.operation;
 
-    this.demandeService.demande.operation=this.selectedCity.name;
     console.log(this.demandeService.demande.operation);
 
 
@@ -71,6 +72,7 @@ export class DemandeDeclarationComponent implements OnInit {
     );
   }
   get demande(): Demande {
+
 
     return this.demandeService.demande;
   }

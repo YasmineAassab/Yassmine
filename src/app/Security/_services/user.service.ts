@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {User} from '../model/user.model';
+import {Demande} from '../../controller/model/demande.model';
 
 const API_URL = 'http://localhost:8036/api/test/';
 
@@ -23,7 +24,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
   getUsersComptable(): Observable<any> {
-   return  this.http.get<any>(API_URL );
+   return  this.http.get<Array<any>>(API_URL );
   }
 
   getPublicContent(): Observable<any> {

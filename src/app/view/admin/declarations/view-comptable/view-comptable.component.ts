@@ -5,6 +5,13 @@ import {Commande} from '../../../../controller/model/commande.model';
 import {DemandeService} from '../../../../controller/service/demande.service';
 import {User} from '../../../../Security/model/user.model';
 import {Demande} from "../../../../controller/model/demande.model";
+import {Comptable} from '../../../../controller/model/comptable.model';
+interface ComptableInter {
+  name: string
+
+}
+
+
 
 @Component({
   selector: 'app-view-comptable',
@@ -13,13 +20,40 @@ import {Demande} from "../../../../controller/model/demande.model";
 })
 export class ViewComptableComponent implements OnInit {
   //cols:any;
+ // comptable:ComptableInter[];
+
+
+  //selectedComptable: Comptable;
 
   constructor(private messageService: MessageService, private service: DemandeService) {
-
+ // this.comptables=this.UserItemsFiltered[].comptable;
+  //this.comptables=this.comptables[].nom;
+    //this.comptable=this.comptables.;
 
   }
 
+  get comptables(): Array<Comptable> {
+
+    return this.service.comptables;
+  }
+
+  set comptables(value: Array<Comptable>) {
+    this.service.comptables = value;
+  }
+
+
+/*  getComptables(){
+    console.log("haa chhal nm user length");
+    console.log(this.UserItemsFiltered.length);
+    for (let i=0;i< this.UserItemsFiltered.length;i++){
+      this.comptables.push(this.UserItemsFiltered[i].comptable);
+    }
+    console.log("haaaa le comptable");
+    console.log(this.comptables);
+  }*/
+
   ngOnInit(): void {
+
 
   }
   affectDemande(selectedComptable: User){
@@ -27,7 +61,7 @@ export class ViewComptableComponent implements OnInit {
     this.selected.user = selectedComptable;
     //this.selected.mois=1;
     this.service.updateDemande();
-    this.viewDialog=false;
+   // this.viewDialog=false;
     this.selected=new Demande();
   }
   get UserItemsFiltered(): Array<User> {
@@ -38,47 +72,51 @@ export class ViewComptableComponent implements OnInit {
     this.service.UserItemsFiltered = value;
   }
 
-  get submitted(): boolean {
-    return this.service.submitted;
+
+  get comptablesTraiteur(): Array<Comptable> {
+
+    return this.service.comptablesTraiteur;
   }
 
-  set submitted(value: boolean) {
-    this.service.submitted = value;
-  }
-  get user(): User {
-
-    return this.service.user;
+  set comptablesTraiteur(value: Array<Comptable>) {
+    this.service.comptablesTraiteur = value;
   }
 
-  set user(value: User) {
-    this.service.user = value;
+  get comptablesValidateur(): Array<Comptable> {
+
+    return this.service.comptablesValidateur;
   }
 
-/*  public affect() {
+  set comptablesValidateur(value: Array<Comptable>) {
+    this.service.comptablesValidateur = value;
+  }
+
+
+  public edit() {
+    console.log(this.selected);
     this.submitted = true;
-    if (this.selected.reference.trim()) {
+    if (this.selected.ref.trim()) {
       if (this.selected.id) {
         this.items[this.service.findIndexById(this.selected.id)] = this.selected;
         this.service.edit().subscribe(data => {
-          this.selected = data;
+
           this.messageService.add({
             severity: 'success',
             summary: 'Successful',
             detail: 'Commande Updated',
             life: 3000
           });
+          this.selected = new Demande();
         });
       }
       this.editDialog = false;
-      this.selected = new Commande();
+      this.selected = new Demande();
     }
-  }*/
-
-
-  public hideViewDialog() {
-    this.viewDialog = false;
   }
 
+  public hideEditDialog() {
+    this.editDialog = false;
+  }
   get selected(): Demande {
     return this.service.selected;
   }
@@ -87,13 +125,29 @@ export class ViewComptableComponent implements OnInit {
     this.service.selected = value;
   }
 
-  get viewDialog(): boolean {
-    return this.service.viewDialog;
+  get editDialog(): boolean {
+    return this.service.editDialog;
   }
 
-  set viewDialog(value: boolean) {
-
-    this.service.viewDialog = value;
+  set editDialog(value: boolean) {
+    this.service.editDialog = value;
   }
+
+  get submitted(): boolean {
+    return this.service.submitted;
+  }
+
+  set submitted(value: boolean) {
+    this.service.submitted = value;
+  }
+
+  get items(): Array<Demande> {
+    return this.service.items;
+  }
+
+  set items(value: Array<Demande>) {
+    this.service.items = value;
+  }
+
 
 }
