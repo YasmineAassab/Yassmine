@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {MessageService} from "primeng/api";
+import {ConfirmationService, MessageService} from "primeng/api";
 import {DeclarationTvaService} from "../../../../controller/service/declaration-tva.service";
 import {DeclarationTvaVo2} from "../../../../controller/model/declaration-tva-vo2.model";
 import {DeclarationTva} from "../../../../controller/model/declaration-tva.model";
 import {Facture} from "../../../../controller/model/facture.model";
 import {DeclarationISService} from "../../../../controller/service/declaration-is.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-declaration-tva-create',
@@ -16,7 +17,7 @@ export class DeclarationTvaCreateComponent implements OnInit {
     public a2: boolean;
     public val: boolean;
     public bro: boolean;
-  constructor(private messageService: MessageService, private service: DeclarationTvaService, private service2: DeclarationISService) { }
+  constructor(private messageService: MessageService,private confirmationService: ConfirmationService, private service: DeclarationTvaService) { }
 
   ngOnInit(): void {
   }
@@ -97,6 +98,46 @@ export class DeclarationTvaCreateComponent implements OnInit {
         this.submitted = false;
         this.createDialog = true;
     }
+    public deleteFacture(selectedFact: Facture){
+     this.selectedFact = selectedFact;
+        this.confirmationService.confirm({
+            message: 'Are you sure you want to delete facture ' + selectedFact.ref + '?',
+            header: 'Confirm',
+            icon: 'pi pi-exclamation-triangle',
+            accept: () => {
+                this.service.deleteFacture(selectedFact).subscribe(
+                    data => {
+                        console.log('bravo delete facture');
+                        this.afficheObject();
+                        this.messageService.add({
+                            severity: 'success',
+                            summary: 'Successful',
+                            detail: 'Facture deleted',
+                            life: 3000
+                        });
+                        this.selectedFact = null;
+                    }, error => {
+                        console.log('erreur delete facture');
+                    }
+                );
+            }
+        });
+    }
+    public viewFact(facture: Facture) {
+        this.selectedFact = {...facture};
+        this.viewDialog = true;
+    }
+    public editFact(facture: Facture){
+      this.selectedFact = {...facture};
+      this.editDialog = true;
+    }
+    get viewDialog(): boolean {
+        return this.service.viewDialog;
+    }
+
+    set viewDialog(value: boolean) {
+        this.service.viewDialog = value;
+    }
   get selected(): DeclarationTva {
     return this.service.selected;
   }
@@ -119,19 +160,19 @@ export class DeclarationTvaCreateComponent implements OnInit {
     return this.service.c;
   }
     get submitted(): boolean {
-        return this.service2.submitted;
+        return this.service.submitted;
     }
 
     set submitted(value: boolean) {
-        this.service2.submitted = value;
+        this.service.submitted = value;
     }
 
     get createDialog(): boolean {
-        return this.service2.createDialog;
+        return this.service.createDialog;
     }
 
     set createDialog(value: boolean) {
-        this.service2.createDialog = value;
+        this.service.createDialog = value;
     }
 
     get editDialog(): boolean {
@@ -142,7 +183,10 @@ export class DeclarationTvaCreateComponent implements OnInit {
         this.service.editDialog = value;
     }
     get selectedFact(): Facture {
-        return this.service2.selectedFact;
+        return this.service.selectedFact;
+    }
+    set selectedFact(value: Facture) {
+        this.service.selectedFact = value;
     }
 
 }

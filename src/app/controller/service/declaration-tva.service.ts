@@ -19,6 +19,7 @@ export class DeclarationTvaService {
   private _createDialog: boolean;
   private _editDialog: boolean;
   private _viewDialog: boolean;
+  private _viewDialog2: boolean;
   private _submitted: boolean;
 
   private _object1: DeclarationTvaVo1;
@@ -31,6 +32,7 @@ export class DeclarationTvaService {
   private _items: Array<DeclarationTva>;
   private _details: DeclarationTvaVo2;
   private _selectes: Array<DeclarationTva>;
+  private _selectedFact: Facture;
   constructor(private http: HttpClient) { }
   public findAll(): Observable<Array<DeclarationIS>> {
     return this.http.get<Array<DeclarationIS>>(this._url);
@@ -96,6 +98,9 @@ export class DeclarationTvaService {
       this.deleteIndexById(item.id);
     }
   }
+  public deleteDeclaration(selected: DeclarationTva): Observable<number>{
+    return this.http.delete<number>(this.url + 'ref/' + selected.ref);
+  }
 
   get url(): string {
     return this._url;
@@ -138,6 +143,14 @@ export class DeclarationTvaService {
 
   set viewDialog(value: boolean) {
     this._viewDialog = value;
+  }
+
+  get viewDialog2(): boolean {
+    return this._viewDialog2;
+  }
+
+  set viewDialog2(value: boolean) {
+    this._viewDialog2 = value;
   }
 
   get submitted(): boolean {
@@ -197,7 +210,7 @@ export class DeclarationTvaService {
   // service of declaration tva criteria
 
   public finddeclarationTva(): Observable<Array<DeclarationTva>>{
-    return this.http.post<Array<DeclarationTva>>(this.url + 'declarationtva/criteria', this.selectedVo);
+    return this.http.post<Array<DeclarationTva>>(this.url + 'criteria', this.selectedVo);
   }
   public finddetails(declarationtva: DeclarationTva): Observable<DeclarationTvaVo2>{
     let declarationtvavo1 = new DeclarationTvaVo1();
@@ -206,10 +219,10 @@ export class DeclarationTvaService {
     declarationtvavo1.trim = declarationtva.trim;
     declarationtvavo1.annee = declarationtva.annee;
     declarationtvavo1.mois = declarationtva.mois;
-    return this.http.post<DeclarationTvaVo2>(this.url + 'declarationtva/findfacturesandcalcultva',declarationtvavo1);
+    return this.http.post<DeclarationTvaVo2>(this.url + 'findfacturesandcalcultva',declarationtvavo1);
   }
   public convertToXmlFile(declarationTva: DeclarationTva): Observable<any> {
-    return  this.http.post(this.url + 'declarationtva/convertToXmlFile', declarationTva);
+    return  this.http.post(this.url + 'convertToXmlFile', declarationTva);
   }
 
   get selectedVo(): DeclarationTvaCriteria {
@@ -254,5 +267,32 @@ export class DeclarationTvaService {
 
   set selectes(value: Array<DeclarationTva>) {
     this._selectes = value;
+  }
+
+  //service facture create popup
+
+  get selectedFact(): Facture {
+    if (this._selectedFact == null){
+      this._selectedFact = new Facture();
+    }
+    return this._selectedFact;
+  }
+
+  set selectedFact(value: Facture) {
+    this._selectedFact = value;
+  }
+  public savefacture(): Observable<number>{
+    return this.http.post<number>(environment.baseUrl + 'facture/', this.selectedFact);
+  }
+
+  //service facture edit popup
+
+  public editfacture(): Observable<number>{
+    return this.http.put<number>(environment.baseUrl + 'facture/', this.selectedFact);
+  }
+
+  //delete facture
+  public deleteFacture(selectedFact: Facture): Observable<number> {
+    return this.http.delete<number>(environment.baseUrl + 'facture/ref/' + selectedFact.ref);
   }
 }

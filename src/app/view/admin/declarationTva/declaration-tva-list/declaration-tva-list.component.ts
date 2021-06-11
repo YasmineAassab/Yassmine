@@ -6,6 +6,7 @@ import {DeclarationTva} from "../../../../controller/model/declaration-tva.model
 import {DeclarationTvaCriteria} from "../../../../controller/model/declaration-tva-criteria.model";
 import {DeclarationTvaVo2} from "../../../../controller/model/declaration-tva-vo2.model";
 import {Facture} from "../../../../controller/model/facture.model";
+import {DeclarationIS} from "../../../../controller/model/declaration-is.model";
 
 @Component({
   selector: 'app-declaration-tva-list',
@@ -64,6 +65,61 @@ export class DeclarationTvaListComponent implements OnInit {
 
         ];
         this.exportColumns = this.cols.map(col => ({title: col.header, dataKey: col.field}));
+    }
+    public viewDeclaration(selected: DeclarationTva){
+      this.selected = {...selected};
+      this.viewDialog2 = true;
+    }
+    public viewFact(facture: Facture) {
+        this.selectedFact = {...facture};
+        this.viewDialog = true;
+    }
+    public deleteDeclaration(selected: DeclarationTva){
+      this.selected = selected;
+        this.confirmationService.confirm({
+            message: 'Are you sure you want to delete declaration TVA - ' + selected.ref + '?',
+            header: 'Confirm',
+            icon: 'pi pi-exclamation-triangle',
+            accept: () => {
+                this.service.deleteDeclaration(selected).subscribe(data => {
+                    this.items = this.items.filter(val => val.id !== this.selected.id);
+                    this.selected = null;
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Successful',
+                        detail: 'DeclarationTVA Deleted',
+                        life: 3000
+                    });
+                });
+            }
+        });
+    }
+    get viewDialog(): boolean {
+        return this.service.viewDialog;
+    }
+
+    set viewDialog(value: boolean) {
+        this.service.viewDialog = value;
+    }
+    get selectedFact(): Facture {
+        return this.service.selectedFact;
+    }
+    set selectedFact(value: Facture) {
+        this.service.selectedFact = value;
+    }
+    get viewDialog2(): boolean {
+        return this.service.viewDialog2;
+    }
+
+    set viewDialog2(value: boolean) {
+        this.service.viewDialog2 = value;
+    }
+    get selected(): DeclarationTva {
+        return this.service.selected;
+    }
+
+    set selected(value: DeclarationTva) {
+        this.service.selected = value;
     }
   get selectedVo(): DeclarationTvaCriteria {
     return this.service.selectedVo;
