@@ -172,6 +172,12 @@ import {HttpClient} from "@angular/common/http";
 import { AcomptesComponent } from './view/admin/acomptes/acomptes.component';
 import { AcomptesListComponent } from './view/admin/acomptes/acomptes-list/acomptes-list.component';
 
+import { FactureCreateDeclComponent } from './view/admin/declarationTva/facture-create-decl/facture-create-decl.component';
+import { FactureEditDeclComponent } from './view/admin/declarationTva/facture-edit-decl/facture-edit-decl.component';
+import { FactureViewDeclComponent } from './view/admin/declarationTva/facture-view-decl/facture-view-decl.component';
+import { DeclarationTvaViewComponent } from './view/admin/declarationTva/declaration-tva-view/declaration-tva-view.component';
+import {ComptableValidateurComponent} from "./view/admin/comptable-validateur/comptable-validateur.component";
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -334,7 +340,11 @@ import { AcomptesListComponent } from './view/admin/acomptes/acomptes-list/acomp
         FirsthomepageComponent,
         AcomptesComponent,
         AcomptesListComponent,
-
+        ComptableValidateurComponent,
+        FactureCreateDeclComponent,
+        FactureEditDeclComponent,
+        FactureViewDeclComponent,
+        DeclarationTvaViewComponent
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
