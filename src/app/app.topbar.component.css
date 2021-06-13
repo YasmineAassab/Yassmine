@@ -59,7 +59,7 @@ h6{
     border-radius: 5px;
 }
 */
-#box1 > ul1 > .item > a{ padding: 10px 20px; }
+#box1 > #ul1 > .item > a{ padding: 10px 20px; }
 
 .item li:hover > ul{ display: block;}
 
