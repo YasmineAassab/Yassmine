@@ -84,9 +84,8 @@
                                             <button type="button" pButton pRipple [pRowToggler]="declarationTva" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-times' : 'pi pi-search'" (click)="finddetails(declarationTva)" (click)="activeIndex = 1"></button>
                                         </td>
                                         <td>
-                                            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-warning p-mr-2"></button>
-                                            <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info p-mr-2" ></button>
-                                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger p-mr-2" ></button>
+                                            <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info p-mr-2" (click)="viewDeclaration(declarationTva)"></button>
+                                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger p-mr-2" (click)="deleteDeclaration(declarationTva)" ></button>
                                             <button pButton pRipple icon="pi pi-download" class="p-button-rounded p-button-help p-button-info" (click)="convertToXmlFile(declarationTva)"></button>
                                         </td>
                                     </tr>
@@ -124,7 +123,7 @@
                                     <td>{{facture.societeDistination.ice}}</td>
 
                                     <td><span id="typeOperation">{{facture.typeOperation}}</span></td>
-                                    <td><button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info" ></button></td>
+                                    <td><button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info" (click)="viewFact(facture)"></button></td>
                                 </tr>
                             </ng-template>
 
@@ -248,8 +247,8 @@
 
             <!-- <app-declarations-is-create></app-declarations-is-create>-->
             <!--<app-declarations-is-edit></app-declarations-is-edit>-->
-            <app-declaration-is-view></app-declaration-is-view>
-            <app-view-facture></app-view-facture>
+            <app-declaration-tva-view></app-declaration-tva-view>
+            <app-facture-view-decl></app-facture-view-decl>
             <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
         </div>
     </div>
