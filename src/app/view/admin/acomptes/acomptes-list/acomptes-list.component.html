@@ -1,0 +1,80 @@
+<div class="p-grid">
+    <div class="p-col-12">
+
+            <p-toast></p-toast>
+
+            <div class="card">
+                <h4 style="margin-bottom: 40px;">Recherche multi-critère</h4>
+                <div class="p-grid p-fluid">
+                    <div class="p-col-12  p-md-2 p-offset-3"><div style="margin-bottom: 5px"><label>Société </label></div>
+                        <input type="text" pInputText placeholder="société" [(ngModel)]="acomptesVo.societe">
+                    </div>
+                    <div class="p-col-12  p-md-2"><div style="margin-bottom: 5px"><label>Année </label></div>
+                        <input type="text" pInputText placeholder="année" [(ngModel)]="acomptesVo.annee">
+                    </div>
+                    <div class="p-col-12  p-md-2"><div style="margin-bottom: 5px"><label>Numéro acompte </label></div>
+                        <input type="text" pInputText placeholder="numéro" [(ngModel)]="acomptesVo.numero">
+                    </div>
+                </div>
+                <div style="margin: 15px"><button pButton pRipple type="button" label="Search" icon="pi pi-search" iconPos="right" style="width:20rem; height: 10px" class="p-col-6 p-mb-2 p-offset-5" (click)="searchCriteria()"></button></div>
+                <div class="card">
+                    <h3>Liste des acomptes</h3>
+                    <p-toolbar styleClass="p-mb-4">
+                        <ng-template pTemplate="left">
+                            <!--<button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2 p-mb-2" (click)="navigateToCreate()"></button>-->
+                            <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger p-mb-2" (click)="deleteMultiple()" [disabled]="!selectes || !selectes.length"></button>
+                        </ng-template>
+
+                    </p-toolbar>
+                    <p-table #dt [value]="items" [rows]="10" [paginator]="true" [rowHover]="true"
+                             styleClass="p-datatable-customers" [style]="{'margin': '0 40px'}"
+                             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                             [showCurrentPageReport]="true" dataKey="id">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th style="width: 3rem">
+                                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                                </th>
+                                <th pSortableColumn="societe">Société
+                                    <p-sortIcon field="société"></p-sortIcon>
+                                </th>
+                                <th pSortableColumn="annee">Année
+                                    <p-sortIcon field="annee"></p-sortIcon>
+                                </th>
+                                <th pSortableColumn="numero">Numéro
+                                    <p-sortIcon field="numero"></p-sortIcon>
+                                </th>
+                                <th pSortableColumn="montant">Montant
+                                    <p-sortIcon field="montant"></p-sortIcon>
+                                </th>
+                                <th></th>
+                            </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="body" let-acomptes let-expanded="expanded">
+                            <tr>
+                                <td>
+                                    <p-tableCheckbox [value]="acomptes"></p-tableCheckbox>
+                                </td>
+                                <td>{{acomptes.societe.ice}}</td>
+                                <td>{{acomptes.annee}}</td>
+                                <td>{{acomptes.numero}}</td>
+                                <td>{{acomptes.montant | currency: 'MAD&nbsp;'}}</td>
+                                <td>
+                                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger p-mr-2" (click)="delete(acomptes)"></button>
+                                </td>
+                            </tr>
+                        </ng-template>
+
+                    </p-table>
+                    <ng-template pTemplate="summary">
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            In total there are {{items ? items.length : 0 }} acomptes.
+                        </div>
+                    </ng-template>
+                </div>
+
+                <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+            </div>
+    </div>
+</div>

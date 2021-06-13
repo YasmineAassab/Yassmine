@@ -1,7 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import { AppComponent } from './app.component';
 import { AppMainComponent } from './app.main.component';
 import {TokenStorageService} from './Security/_services/token-storage.service';
+import {Route, Router} from "@angular/router";
+import {FirsthomepageComponent} from "./demo/view/firsthomepage/firsthomepage.component";
+import {DashboardDemoComponent} from "./demo/view/dashboarddemo.component";
 
 @Component({
   selector: 'app-topbar',
@@ -18,7 +21,8 @@ export class AppTopBarComponent implements OnInit{
     username: string;
     roleUser: string;
 
-    constructor(private tokenStorageService: TokenStorageService, public app: AppComponent, public appMain: AppMainComponent) { }
+    constructor(private tokenStorageService: TokenStorageService, public app: AppComponent,
+                public appMain: AppMainComponent, private router: Router) { }
 
     ngOnInit() {
         this.isLoggedIn = !!this.tokenStorageService.getToken();
@@ -46,6 +50,7 @@ export class AppTopBarComponent implements OnInit{
     logout() {
         this.tokenStorageService.signOut();
         window.location.reload();
+        this.router.navigateByUrl('/');
     }
     reloadPage() {
         window.location.reload();

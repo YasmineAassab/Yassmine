@@ -90,37 +90,15 @@ import {AppComponent} from './app.component';
 import {AppCodeModule} from './app.code.component'
 import {AppMainComponent} from './app.main.component';
 import {AppConfigComponent} from './app.config.component';
-import {AppCrudComponent} from './pages/app.crud.component';
-import {AppCalendarComponent} from './pages/app.calendar.component';
-import {AppTimelineDemoComponent} from './pages/app.timelinedemo.component';
 import {AppNotfoundComponent} from './pages/app.notfound.component';
 import {AppErrorComponent} from './pages/app.error.component';
-import {AppAccessdeniedComponent} from './pages/app.accessdenied.component';
 import {AppLoginComponent} from './pages/app.login.component';
 import {AppMenuComponent} from './app.menu.component';
 import {AppMenuitemComponent} from './app.menuitem.component';
 import {AppRightMenuComponent} from './app.right-menu.component';
 import {AppTopBarComponent} from './app.topbar.component';
 import {AppFooterComponent} from './app.footer.component';
-import {FormLayoutDemoComponent} from './demo/view/formlayoutdemo.component';
-import {FloatLabelDemoComponent} from './demo/view/floatlabeldemo.component';
-import {InvalidStateDemoComponent} from './demo/view/invalidstatedemo.component';
-import {InputDemoComponent} from './demo/view/inputdemo.component';
-import {ButtonDemoComponent} from './demo/view/buttondemo.component';
-import {TableDemoComponent} from './demo/view/tabledemo.component';
-import {ListDemoComponent} from './demo/view/listdemo.component';
-import {TreeDemoComponent} from './demo/view/treedemo.component';
-import {PanelsDemoComponent} from './demo/view/panelsdemo.component';
-import {OverlaysDemoComponent} from './demo/view/overlaysdemo.component';
-import {MediaDemoComponent} from './demo/view/mediademo.component';
-import {MenusDemoComponent} from './demo/view/menusdemo.component';
-import {MessagesDemoComponent} from './demo/view/messagesdemo.component';
-import {MiscDemoComponent} from './demo/view/miscdemo.component';
-import {EmptyDemoComponent} from './demo/view/emptydemo.component';
-import {ChartsDemoComponent} from './demo/view/chartsdemo.component';
-import {FileDemoComponent} from './demo/view/filedemo.component';
 import {DashboardDemoComponent} from './demo/view/dashboarddemo.component';
-import {DocumentationComponent} from './demo/view/documentation.component';
 import {DisplayComponent} from './utilities/display.component';
 import {ElevationComponent} from './utilities/elevation.component';
 import {FlexboxComponent} from './utilities/flexbox.component';
@@ -139,13 +117,6 @@ import {CustomerService} from './demo/service/customerservice';
 import {PhotoService} from './demo/service/photoservice';
 import {ProductService} from './demo/service/productservice';
 import {IconService} from './demo/service/iconservice';
-/*
-import { CommandeCreateComponent } from './view/admin/commandes/commande-create/commande-create.component';
-import { CommandesComponent } from './view/admin/commandes/commandes.component';
-import { CommandeListComponent } from './view/admin/commandes/commande-list/commande-list.component';
-import { CommandeEditComponent } from './view/admin/commandes/commande-edit/commande-edit.component';
-import { CommandeViewComponent } from './view/admin/commandes/commande-view/commande-view.component';
-*/
 import { DeclarationIsListComponent } from './view/admin/declarations-is/declaration-is-list/declaration-is-list.component';
 
 import { DeclarationIsCreateComponent } from './view/admin/declarations-is/declaration-is-create/declaration-is-create.component';
@@ -191,10 +162,15 @@ import {ComptableBoardComponent} from "./view/admin/comptable-board/comptable-bo
 import {DeclarationsComponent} from "./view/admin/declarations/declarations.component";
 import {ViewComptableComponent} from "./view/admin/declarations/view-comptable/view-comptable.component";
 import {DeclarationTvaCreateComponent} from "./view/admin/declarationTva/declaration-tva-create/declaration-tva-create.component";
-import { AcomptesCreateComponent } from './view/admin/declarations-is/acomptes-create/acomptes-create.component';
+import { AcomptesCreateComponent } from './view/admin/acomptes/acomptes-create/acomptes-create.component';
 import {EditFactureComponent} from "./view/admin/declarations-is/edit-facture/edit-facture.component";
 import { VisualiserDemandeComponent } from './view/admin/visualiser-demande/visualiser-demande.component';
 import { ContactComponent } from './demo/view/contact/contact.component';
+import { FirsthomepageComponent } from './demo/view/firsthomepage/firsthomepage.component';
+import {GMapModule} from "primeng/gmap";
+import {HttpClient} from "@angular/common/http";
+import { AcomptesComponent } from './view/admin/acomptes/acomptes.component';
+import { AcomptesListComponent } from './view/admin/acomptes/acomptes-list/acomptes-list.component';
 
 @NgModule({
     imports: [
@@ -283,6 +259,7 @@ import { ContactComponent } from './demo/view/contact/contact.component';
         TreeModule,
         TreeTableModule,
         VirtualScrollerModule,
+        GMapModule,
     ],
     declarations: [
         AppComponent,
@@ -294,25 +271,6 @@ import { ContactComponent } from './demo/view/contact/contact.component';
         AppTopBarComponent,
         AppFooterComponent,
         DashboardDemoComponent,
-        FormLayoutDemoComponent,
-        FloatLabelDemoComponent,
-        InvalidStateDemoComponent,
-        InputDemoComponent,
-        ButtonDemoComponent,
-        TableDemoComponent,
-        ListDemoComponent,
-        TreeDemoComponent,
-        PanelsDemoComponent,
-        OverlaysDemoComponent,
-        MediaDemoComponent,
-        MenusDemoComponent,
-        MessagesDemoComponent,
-        MessagesDemoComponent,
-        MiscDemoComponent,
-        ChartsDemoComponent,
-        EmptyDemoComponent,
-        FileDemoComponent,
-        DocumentationComponent,
         DisplayComponent,
         ElevationComponent,
         FlexboxComponent,
@@ -321,13 +279,9 @@ import { ContactComponent } from './demo/view/contact/contact.component';
         SpacingComponent,
         TypographyComponent,
         TextComponent,
-        AppCrudComponent,
-        AppCalendarComponent,
-        AppTimelineDemoComponent,
         WidgetsComponent,
         AppNotfoundComponent,
         AppErrorComponent,
-        AppAccessdeniedComponent,
         AppLoginComponent,
 
         DemandeListComponent,
@@ -377,6 +331,9 @@ import { ContactComponent } from './demo/view/contact/contact.component';
         AcomptesCreateComponent,
         VisualiserDemandeComponent,
         ContactComponent,
+        FirsthomepageComponent,
+        AcomptesComponent,
+        AcomptesListComponent,
 
     ],
     providers: [

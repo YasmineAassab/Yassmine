@@ -6,7 +6,7 @@
         <div class="card">
 
             <div class="card-header mb-5"><h1>Traitement</h1></div>
-            <div class="card-body">
+      <!--      <div class="card-body">
             <div class="p-grid p-fluid">
 
                 <div class="p-fluid p-formgrid p-grid">
@@ -33,37 +33,41 @@
                     </div>
                 </div>
             </div>
-            </div>
-
+            </div> -->
+<!--
             <div class="card-footer p-d-flex p-jc-center">
                 <p-button label="Search" icon="pi pi-search" ></p-button>
             </div>
+-->
+            <p-toast></p-toast>
 
-            <!--<div class="p-col-12  p-md-2 p-offset-1"><div style="margin-bottom: 5px"><label>Référence </label></div>
-                <input type="text" pInputText placeholder="reference" [(ngModel)]="demandeVo.ref">
-            </div>
-            <div class="p-col-12  p-md-2"><div style="margin-bottom: 5px"><label>Opération </label></div>
-                <input type="text" pInputText placeholder="opération" [(ngModel)]="demandeVo.operation">
-            </div>
-            <div class="p-col-12  p-md-2"><div style="margin-bottom: 5px"><label>Société </label></div>
-                <input type="text" pInputText placeholder="ice socété" [(ngModel)]="demandeVo.societe">
-            </div>
-            <div class="p-col-12  p-md-2"><div style="margin-bottom: 5px"><label>Comptable traiteur</label></div>
-                <input type="text" pInputText placeholder="nom du comptable" [(ngModel)]="demandeVo.comptableTraiteur">
-            </div>
-            <div class="p-col-12  p-md-2"><div style="margin-bottom: 5px"><label>Comptable validateur </label></div>
-                <input type="text" pInputText placeholder="nom du comptable" [(ngModel)]="demandeVo.comptableValidateur">
-            </div>-->
+            <div class="card">
+                <h4 style="margin-bottom: 40px;">Recherche multi-critère</h4>
+                <div class="p-grid p-fluid">
+                    <div class="p-col-12  p-md-2 p-offset-2"><div style="margin-bottom: 5px"><label>Référence </label></div>
+                        <input type="text" pInputText placeholder="reference" [(ngModel)]="demandeVo.ref">
+                    </div>
+                    <div class="p-col-12  p-md-2"><div style="margin-bottom: 5px"><label>Opération </label></div>
+                        <input type="text" pInputText placeholder="opération" [(ngModel)]="demandeVo.operation">
+                    </div>
+                    <div class="p-col-12  p-md-2"><div style="margin-bottom: 5px"><label>Société </label></div>
+                        <input type="text" pInputText placeholder="ice socété" [(ngModel)]="demandeVo.societe">
+                    </div>
+                    <div class="p-col-12  p-md-2"><div style="margin-bottom: 5px"><label>Année</label></div>
+                        <input type="text" pInputText placeholder="nom du comptable" [(ngModel)]="demandeVo.annee">
+                    </div>
+                    <div class="p-col-12  p-md-2 p-offset-3"><div style="margin-bottom: 5px"><label>Mois minimum</label></div>
+                        <input type="text" pInputText placeholder="nom du comptable" [(ngModel)]="demandeVo.moisMin">
+                    </div>
+                    <div class="p-col-12  p-md-2"><div style="margin-bottom: 5px"><label>Mois maximum</label></div>
+                        <input type="text" pInputText placeholder="nom du comptable" [(ngModel)]="demandeVo.moisMax">
+                    </div>
+                    <div class="p-col-12  p-md-2"><div style="margin-bottom: 5px"><label>Comptable validateur </label></div>
+                        <input type="text" pInputText placeholder="nom du comptable" [(ngModel)]="demandeVo.comptableValidateur">
+                    </div>
 
-        </div>
-      <!--  <div style="margin: 15px">
-            <button pButton pRipple type="button" label="Search" icon="pi pi-search" iconPos="right"
-                    style="width:20rem; height: 10px" class="p-col-6 p-mb-2 p-offset-5"
-                    (click)="searchCriteria()"></button> <button pButton pRipple type="button" label="Search" icon="pi pi-search" iconPos="right"
-                                                                 style="width:20rem; height: 10px" class="p-col-6 p-mb-2 p-offset-5"
-                                                                 (click)="searchCriteria()"></button>
-        </div>-->
-
+                </div>
+                <div style="margin: 15px"><button pButton pRipple type="button" label="Search" icon="pi pi-search" iconPos="right" style="width:20rem; height: 10px" class="p-col-6 p-mb-2 p-offset-5" (click)="searchCriteria()"></button></div>
         <div class="card">
             <h3>Liste des demandes</h3>
             <p-table #dt [value]="items" [rows]="10" [paginator]="true" [rowHover]="true"
@@ -93,9 +97,6 @@
                         <th pSortableColumn="totalHTDiff" style="width: 9rem">Trim
                             <p-sortIcon field="totalHTDiff"></p-sortIcon>
                         </th>
-                        <th pSortableColumn="montantISCalcule">Comptable traiteur
-                            <p-sortIcon field="montantISCalcule"></p-sortIcon>
-                        </th>
                         <th pSortableColumn="montantISCalcule" style="width: 15rem">Comptable validateur
                             <p-sortIcon field="montantISCalcule"></p-sortIcon>
                         </th>
@@ -110,10 +111,16 @@
                         <td>{{demande.societe.ice}}</td>
                         <td>{{demande.operation}}</td>
                         <td>{{demande.annee}}</td>
-                        <td>{{demande.mois}}</td>
-                        <td>{{demande.trimestre}}</td>
-                        <td>{{demande.comptableTraiteur.nom}}</td>
-                        <td>{{demande.comptableValidateur.nom}}</td>
+                        <td *ngIf="demande.operation=='Declaration IS'">-</td>
+                        <td *ngIf="demande.operation=='Declaration IR'">{{demande.mois}}</td>
+                        <td *ngIf="demande.operation=='Declaration TVA'">{{demande.mois}}</td>
+                        <td *ngIf="demande.operation=='Declaration IS' || demande.operation=='Declaration IR'">-</td>
+                        <td *ngIf="demande.operation=='Declaration TVA'">{{demande.trimestre}}</td>
+                        <!--
+                        <td>{{demande.comptableTraiteur.code}}</td>
+                        <td>{{demande.comptableValidateur.code}}</td>
+                        -->
+                        <td></td>
                         <td>
                             <button pButton pRipple label="Traiter" icon="pi pi-pencil" class="p-button-success p-mr-2"
                                     (click)="navigateToCreate(demande)"></button>

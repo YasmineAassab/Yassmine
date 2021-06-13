@@ -31,13 +31,7 @@ export class DeclarationISService {
   private _viewDialog2: boolean;
   private _selectedVo: DeclarationIsVo;
 
-  private _disabledSave: boolean;
-
   constructor(private http: HttpClient) { }
-
-  public validateSave(): boolean{
-    return this.selected.montantISPaye > this.selected.tauxIsConfig.cotisationMinimale && this.disabledSave == false;
-  }
 
   public findAll(): Observable<Array<DeclarationIS>> {
     return this.http.get<Array<DeclarationIS>>(this.url);
@@ -264,13 +258,4 @@ export class DeclarationISService {
   set selectedVo(value: DeclarationIsVo) {
     this._selectedVo = value;
   }
-
-  get disabledSave(): boolean {
-    return this._disabledSave;
-  }
-
-  set disabledSave(value: boolean) {
-    this._disabledSave = value;
-  }
-
 }

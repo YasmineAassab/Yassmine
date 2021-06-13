@@ -44,21 +44,16 @@
                 <div>
                     <form>
                         <label for="name">Nom</label>
-                        <input type="text" id="name" name="name" placeholder="Your name..">
-                        <label for="lname">Société ICE</label>
-                        <input type="text" id="lname" name="lastname" placeholder="Your ice société">
+                        <input type="text" id="name" name="name" placeholder="Votre nom..">
                         <label for="mail">Email</label>
-                        <input type="text" id="mail" name="name" placeholder="Your email..">
-                        <label for="subject">Subject</label>
-                        <textarea id="subject" name="subject" placeholder="Write something.." style="height:170px"></textarea>
+                        <input type="text" id="mail" name="name" placeholder="Votre email..">
+                        <label for="subject">Message</label>
+                        <textarea id="subject" name="subject" placeholder="laissez un message..." style="height:160px"></textarea>
                         <button pButton pRipple label="Envoyer" icon="pi pi-send"></button>
                     </form>
                 </div>
 
             </div>
         </div>
-    </div>
-    <div class="alert alert-success" *ngIf="isLoggedIn">
-        Logged in as {{ roles }}.
     </div>
 </div>

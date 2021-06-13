@@ -18,6 +18,7 @@ export class DeclarationIsViewComponent implements OnInit {
 
   public hideViewDialog() {
     this.viewDialog = false;
+    this.selected = new DeclarationIS();
   }
 
   get selected(): DeclarationIS {

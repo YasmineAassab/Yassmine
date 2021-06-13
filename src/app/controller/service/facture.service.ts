@@ -1,6 +1,4 @@
 import {Injectable} from '@angular/core';
-import {environment} from '../../../environments/environment';
-import {Commande} from '../model/commande.model';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Facture} from '../model/facture.model';

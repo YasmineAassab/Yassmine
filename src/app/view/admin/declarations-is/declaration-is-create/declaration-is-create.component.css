@@ -34,3 +34,6 @@
      align-items: center;
      font-family: sans-serif;
  }
+div > p{
+    font-size: 17px;
+}

@@ -12,6 +12,8 @@ import { ProductService } from '../service/productservice';
 })
 export class DashboardDemoComponent implements OnInit {
 
+    data: any;
+
     products: any[];
 
     tauxis: any[];
@@ -27,7 +29,40 @@ export class DashboardDemoComponent implements OnInit {
 
     fullcalendarOptions: any;
 
-    constructor(private eventService: EventService, private productService: ProductService) {}
+    constructor(private eventService: EventService, private productService: ProductService) {
+        this.data = {
+            labels: ['Industrie', 'Services aux entreprises', 'Commerce, réparations automobile et d\'articles domestiques', 'Bâtiment et travaux publics', 'Transports et communications',
+                'Activités financières', 'Services collectifs, sociaux et personnels', 'Hôtels et restaurants'],
+            datasets: [
+                {
+                    data: [52, 18, 12, 9, 6, 1, 1, 1],
+                    backgroundColor: [
+                        "#55A7E5",
+                        "#09BAAC",
+                        "yellow",
+                        "red",
+                        "#174794",
+                        "orange",
+                        "#054e0d",
+                        "#FF6384",
+                    ],
+                    hoverBackgroundColor: [
+                        "#FF6384",
+                        "#36a2eb",
+                        "#FFCE56",
+                        "#fe4533",
+                        "#fe4533",
+                        "#fe4533",
+                        "#fe4533",
+                        "#fe4533",
+                    ]
+                }]
+        };
+    }
+
+    goToHome(){
+        document.getElementById("imgaccueil").scrollIntoView({behavior: "smooth"});
+    }
 
     ngOnInit() {
         this.productService.getProducts().then(data => this.products = data);

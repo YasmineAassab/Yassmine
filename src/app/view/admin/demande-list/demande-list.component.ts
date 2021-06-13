@@ -32,24 +32,23 @@ export class DemandeListComponent implements OnInit {
 
 
   public searchCriteria(){
-    this.service.searchCriteria().subscribe(data => this.items = data);
+    this.service.searchCriteriaXX().subscribe(data => this.items = data);
   }
 
   public navigateToSearch(){
     this.router.navigateByUrl('view/declarations-is/list');
   }
-  get currentDemande(): Demande {
 
+  get currentDemande(): Demande {
     return this.declarationIRService.currentDemande;
   }
   set currentDemande(value: Demande) {
     this.declarationIRService.currentDemande = value;
   }
-  get demande(): Demande {
 
+  get demande(): Demande {
     return this.declarationIRService.currentDemande;
   }
-
   set demande(value: Demande) {
     this.demandeService.demande = value;
   }
@@ -108,7 +107,7 @@ export class DemandeListComponent implements OnInit {
   }*/
 
   ngOnInit(): void {
-    this.service.connectedComptable();
+   this.service.connectedComptable();
     //this.service.findAll().subscribe(data => this.items = data);
     this.service.getComptableDemande();
 

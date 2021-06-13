@@ -21,6 +21,7 @@ export class AppLoginComponent implements OnInit{
   roles: string[] = [];
   constructor(private router: Router, private userService: UserService, private authService: AuthService, private tokenStorage: TokenStorageService) {}
 
+
   get user(): User {
 
     return this.userService.user;
@@ -40,9 +41,10 @@ export class AppLoginComponent implements OnInit{
           this.isLoggedIn = true;
           this.roles = this.tokenStorage.getUser().roles;
 
-          //this.router.navigate(['home-page']);
+          this.router.navigate(['/']);
           // this.reloadPage();
             console.log("***********");
+            /*
             console.log(this.tokenStorage.getUser().roles[0]);
             if(this.tokenStorage.getUser().roles[0]=="ROLE_SOCIETE"){
                 this.router.navigate(['demande']);
@@ -50,7 +52,11 @@ export class AppLoginComponent implements OnInit{
             }else if (this.tokenStorage.getUser().roles[0]=="ROLE_ADMIN"){
                 this.router.navigate(['demandes']);
             }
+            else if (this.tokenStorage.getUser().roles[0]=="ROLE_COMPTABLE"){
+                this.router.navigate(['demande/list']);
+            }
 
+             */
 
         },
         err => {

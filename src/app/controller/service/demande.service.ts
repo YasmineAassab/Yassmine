@@ -3,14 +3,9 @@ import {Societe} from '../model/societe.model';
 import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {DeclarationIREmploye} from '../model/declaration-iremploye.model';
-import {DeclarationIR} from '../model/declaration-ir.model';
-import {Employe} from '../model/employe.model';
-import {CategorieService} from '../model/categorie-service.model';
 import {User} from '../../Security/model/user.model';
 import {Demande} from "../model/demande.model";
 import {DemandeVo} from "../model/demande-vo.model";
-import {Commande} from '../model/commande.model';
 import {Comptable} from '../model/comptable.model';
 import {TokenStorageService} from '../../Security/_services/token-storage.service';
 
@@ -43,6 +38,10 @@ export class DemandeService {
 
   constructor(private http: HttpClient,private token:TokenStorageService) { }
 
+
+  public searchCriteriaXX(): Observable<Array<Demande>>{
+    return this.http.post<Array<Demande>>(this.url + 'recherche-multi-critere/', this.demandeVo);
+  }
 
   get comptablesTraiteur(): Array<Comptable> {
     if (this._comptablesTraiteur==null){
@@ -118,7 +117,6 @@ export class DemandeService {
           );
 
         }
-
     );
   }
 
