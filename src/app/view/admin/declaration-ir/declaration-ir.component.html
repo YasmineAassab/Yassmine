@@ -20,7 +20,8 @@
         </div>
     </div>
     <div class="card-footer text-center">
-        <label style="float: left" >Traitement de demande {{currentDemande.ref}}</label>
+        <label *ngIf="!validation" style="float: left" >Traitement de demande {{currentDemande.ref}}</label>
+        <label *ngIf="validation" style="float: left" >Validation de demande {{currentDemande.ref}}</label>
         <p-button class="myb" [disabled]="isCreated" label="cree" icon="pi pi-check" iconPos="left"
                   (click)="creeDeclarationIR()"></p-button>
       <!--  <p-button  label="get" icon="pi pi-check" iconPos="left"

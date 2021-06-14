@@ -82,6 +82,9 @@
                         <th pSortableColumn="montantISCalcule" style="width: 15rem">Comptable validateur
                             <p-sortIcon field="montantISCalcule"></p-sortIcon>
                         </th>
+                        <th pSortableColumn="montantISCalcule" style="width: 15rem">Etat de demande
+                            <p-sortIcon field="montantISCalcule"></p-sortIcon>
+                        </th>
                         <th></th>
                     </tr>
                 </ng-template>
@@ -97,6 +100,7 @@
                         <td>{{demande.trimestre}}</td>
                         <td>{{demande.comptableTraiteur.nom}}</td>
                         <td>{{demande.comptableValidateur.nom}}</td>
+                        <td>{{demande.etatDemande.libelle}}</td>
                         <td>
                             <button pButton pRipple label="Traiter" icon="pi pi-pencil" class="p-button-success p-mr-2"
                                     (click)="navigateToCreate(demande)"></button>

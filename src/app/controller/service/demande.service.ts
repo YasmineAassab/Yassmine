@@ -10,7 +10,7 @@ import {CategorieService} from '../model/categorie-service.model';
 import {User} from '../../Security/model/user.model';
 import {Demande} from "../model/demande.model";
 import {DemandeVo} from "../model/demande-vo.model";
-import {Commande} from '../model/commande.model';
+
 import {Comptable} from '../model/comptable.model';
 import {TokenStorageService} from '../../Security/_services/token-storage.service';
 import {EtatDemande} from '../model/etat-demande.model';
@@ -274,6 +274,7 @@ export class DemandeService {
 
   public searchCriteria(): Observable<Array<Demande>>{
     this.demandeVo.comptableTraiteurCode=this.currentComptable.code;
+
   console.log("*********haaaaaaaa demande vo li tatsif");
   console.log(this.demandeVo);
     return this.http.post<Array<Demande>>(this.url + 'recherche-multi-critere/', this.demandeVo);

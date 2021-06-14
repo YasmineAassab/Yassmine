@@ -177,6 +177,8 @@ import { FactureEditDeclComponent } from './view/admin/declarationTva/facture-ed
 import { FactureViewDeclComponent } from './view/admin/declarationTva/facture-view-decl/facture-view-decl.component';
 import { DeclarationTvaViewComponent } from './view/admin/declarationTva/declaration-tva-view/declaration-tva-view.component';
 import {ComptableValidateurComponent} from "./view/admin/comptable-validateur/comptable-validateur.component";
+import {StatistiqueComponent} from './view/admin/statistique/statistique.component';
+import {ChercherDeclarationIRComponent} from './view/admin/chercher-declaration-ir/chercher-declaration-ir.component';
 
 @NgModule({
     imports: [
@@ -344,7 +346,10 @@ import {ComptableValidateurComponent} from "./view/admin/comptable-validateur/co
         FactureCreateDeclComponent,
         FactureEditDeclComponent,
         FactureViewDeclComponent,
-        DeclarationTvaViewComponent
+        DeclarationTvaViewComponent,
+        StatistiqueComponent,
+        ChercherDeclarationIRComponent
+
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

@@ -14,6 +14,7 @@ import {Societe} from '../model/societe.model';
 import {Demande} from '../model/demande.model';
 import {EtatDemande} from '../model/etat-demande.model';
 import {DemandeService} from './demande.service';
+import {TokenStorageService} from '../../Security/_services/token-storage.service';
 
 
 
@@ -43,6 +44,10 @@ export class DeclarationIrService {
 
 
 
+  public findDeclarationByMoisAndAnnee(mois:number,annee:number):Observable<any> {
+   return  this.http.get(this.url+'mois/'+mois+'/annee/'+annee)
+
+  }
 
 
   get currentDemande(): Demande {
@@ -120,6 +125,7 @@ public details(declaration:DeclarationIR) :Observable<any>{
   }
 
   public declarationSociete(): Observable<any> {
+    this.searchIce=this.token.getUser().societe.ice;
     return  this.http.get<Array<any>>(this.url + 'ice/' + this.searchIce + '/annee/' + this.searchAnnee);
   }
 
@@ -171,7 +177,8 @@ public details(declaration:DeclarationIR) :Observable<any>{
   // constructor(private messageService: MessageService,
   //             private confirmationService: ConfirmationService, private http: HttpClient) {
   // }
-  constructor(private http: HttpClient,private demandeService:DemandeService) {
+  constructor(private http: HttpClient,private demandeService:DemandeService,
+              private token:TokenStorageService) {
   }
 
 

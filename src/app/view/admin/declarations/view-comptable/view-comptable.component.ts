@@ -101,12 +101,16 @@ export class ViewComptableComponent implements OnInit {
   }
 
 
+
+
+
   public edit() {
     console.log(this.selected);
     this.submitted = true;
     if (this.selected.ref.trim()) {
       if (this.selected.id) {
         this.items[this.service.findIndexById(this.selected.id)] = this.selected;
+        this.UserItemsFiltered=new Array<User>();
         this.service.edit().subscribe(data => {
 
           this.messageService.add({
@@ -116,6 +120,7 @@ export class ViewComptableComponent implements OnInit {
             life: 3000
           });
           this.selected = new Demande();
+
         });
       }
       this.editDialog = false;
@@ -124,6 +129,7 @@ export class ViewComptableComponent implements OnInit {
   }
 
   public hideEditDialog() {
+    this.UserItemsFiltered=new Array<User>();
     this.editDialog = false;
   }
   get selected(): Demande {

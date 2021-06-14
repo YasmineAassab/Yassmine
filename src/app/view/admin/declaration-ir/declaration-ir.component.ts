@@ -8,6 +8,7 @@ import {DemandeService} from '../../../controller/service/demande.service';
 import {Demande} from '../../../controller/model/demande.model';
 import {Societe} from '../../../controller/model/societe.model';
 import {EtatDemande} from '../../../controller/model/etat-demande.model';
+import {Comptable} from '../../../controller/model/comptable.model';
 
 
 @Component({
@@ -22,10 +23,22 @@ export class DeclarationIrComponent implements OnInit {
     file: Blob;
     isCreated:boolean=false;
     isSaved:boolean=true;
+    validation:boolean=false;
     demande: Demande;
     // total:number;
     constructor(private messageService: MessageService, private confirmationService: ConfirmationService,
                 private service: DeclarationIrService,private demandeService :DemandeService) {
+    }
+
+
+
+    get currentComptable(): Comptable {
+
+        return this.demandeService.currentComptable;
+    }
+
+    set currentComptable(value: Comptable) {
+        this.demandeService.currentComptable = value;
     }
 
 
@@ -41,6 +54,10 @@ export class DeclarationIrComponent implements OnInit {
 
     ngOnInit(): void {
         this.initCol();
+        if (this.currentComptable.type=="validateur"){
+            this.validation=true;
+        }
+        console.log(this.currentDemande);
         //  this.service.findAll().subscribe(data => this.items = data);
     }
 

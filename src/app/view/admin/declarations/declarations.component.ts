@@ -145,13 +145,15 @@ export class DeclarationsComponent implements OnInit {
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.service.deleteDemande(selected).subscribe(
+        this.selected.etatDemande.libelle="rejetée";
+        this.service.updateDemande();
+   /*     this.service.deleteDemande(selected).subscribe(
             data=>{
               console.log("safi mchat");
             },error => {
               console.log(error);
             }
-        );
+        );*/
 
         /*this.generateID();*/
       //  console.log("*****dkuuul");

@@ -73,6 +73,7 @@ import {AcomptesListComponent} from "./view/admin/acomptes/acomptes-list/acompte
                     {path: 'declarations', component: DeclarationsComponent},
                     {path: 'contact', component: ContactComponent},
                     {path: 'demande/list', component: DemandeListComponent},
+                    {path: 'demande/validation', component: ComptableValidateurComponent},
                     {path: 'vis', component: VisualiserDemandeComponent},
                     {path: 'declaration-is', component: DeclarationsISComponent},
                     {path: 'declarations-is/create', component: DeclarationIsCreateComponent},

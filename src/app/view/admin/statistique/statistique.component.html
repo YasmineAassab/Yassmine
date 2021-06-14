@@ -1,16 +1,51 @@
-<div class="p-fluid p-formgrid p-grid">
-    <div class="p-field p-col">
-        <label for="firstname1">Annee :</label>
-        <input [(ngModel)]="searchAnnee" id="firstname1" type="text" pInputText>
-    </div>
-    <div class="p-field p-col">
-        <label for="lastname1">Ice :</label>
-        <input [(ngModel)]="searchIce" id="lastname1" type="text" pInputText>
-    </div>
-    <div><button pButton (click)="declarationSociete()" type="button" icon="pi pi-check" iconPos="left"></button></div>
+<!--<div class="p-fluid p-formgrid p-grid">-->
+    <!-- <div class="p-field p-col">
+         <label for="firstname1">Annee :</label>
+         <input [(ngModel)]="searchAnnee" id="firstname1" type="text" pInputText>
+     </div>
+     <div class="p-field p-col">
+         <label for="lastname1">Ice :</label>
+         <input [(ngModel)]="searchIce" id="lastname1" type="text" pInputText>
+     </div>-->
+    <!-- <div>
+         <button pButton (click)="declarationSociete()" type="button" icon="pi pi-check" iconPos="left"></button>
+     </div>-->
 
-</div>
+
+<!--    <div class="card">
+
+        <div class="card-header mb-5"><h1>Statistique</h1></div>
+        <div class="card-body">
+            <div class="p-grid p-fluid">
+
+                <div class="p-fluid p-formgrid p-grid">
+
+                    <div class="p-field p-col">
+                        <label for="firstname1">Annee :</label>
+                        <input id="firstname1" type="number" [(ngModel)]="searchAnnee" pInputText>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer p-d-flex p-jc-center">
+            <button pButton (click)="declarationSociete()" type="button" icon="pi pi-check" iconPos="left"></button>
+        </div>
+    </div>-->
+
+<!--</div>-->
 <div class="card">
-    <h5>Vertical</h5>
+    <div class="card-header"><h2>Statistique</h2> </div>
+    <div class="p-field p-grid mt-5">
+        <label for="firstname3" class="p-col-fixed" style="width:100px">Annee:</label>
+        <div class="p-col">
+            <input id="firstname3" type="number" [(ngModel)]="searchAnnee" pInputText>
+            <p-button (onClick)="declarationSociete()" label="Search" icon="pi pi-search" ></p-button>
+        </div>
+
+    </div>
+
+    <div class="card-body"></div>
     <p-chart type="bar" [data]="basicData" [options]="basicOptions"></p-chart>
 </div>

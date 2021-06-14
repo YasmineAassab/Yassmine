@@ -53,7 +53,10 @@ export class AppMenuComponent implements OnInit {
                         label: 'Liste des demandes - a', icon: 'pi pi-fw pi-list', routerLink: ['demandes']
                     },
                     {
-                        label: 'Liste des demandes - c', icon: 'pi pi-fw pi-list', routerLink: ['demande/list']
+                        label: 'Liste des demandes - cT', icon: 'pi pi-fw pi-list', routerLink: ['demande/list']
+                    },
+                    {
+                        label: 'Validation - cV', icon: 'pi pi-fw pi-list', routerLink: ['demande/validation']
                     },
                     {
                         label: 'demandes - s', icon: 'pi pi-fw pi-list',

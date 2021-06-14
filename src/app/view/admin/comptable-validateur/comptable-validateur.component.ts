@@ -8,7 +8,7 @@ import {DeclarationIsObject} from '../../../controller/model/declaration-is-obje
 import {DemandeVo} from '../../../controller/model/demande-vo.model';
 import {Comptable} from '../../../controller/model/comptable.model';
 import {MessageService} from 'primeng/api';
-import {Commande} from '../../../controller/model/commande.model';
+
 
 @Component({
   selector: 'app-comptable-validateur',
@@ -59,7 +59,23 @@ export class ComptableValidateurComponent implements OnInit {
   public valide(selected:Demande){
    // this.submitted = true;
     this.selected=selected;
-    this.selected.etatDemande.libelle="traitée";
+  this.currentDemande=selected;
+    this.declarationIRService.findDeclarationByMoisAndAnnee(selected.mois,selected.annee).subscribe(
+        data=>{
+          console.log(data);
+        },error => {
+          console.log(error);
+        }
+    );
+    this.router.navigate(['declaration-ir']);
+
+
+
+
+
+
+
+  /*  this.selected.etatDemande.libelle="traitée";
     if (this.selected.etatDemande.libelle.trim()) {
       if (this.selected.id) {
         this.items[this.service.findIndexById(this.selected.id)] = this.selected;
@@ -76,7 +92,7 @@ export class ComptableValidateurComponent implements OnInit {
       }
 
       this.selected = new Demande();
-    }
+    }*/
 
   }
 

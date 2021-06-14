@@ -32,6 +32,7 @@ export class DemandeListComponent implements OnInit {
 
 
   public searchCriteria(){
+
     this.service.searchCriteria().subscribe(data => this.items = data);
   }
 

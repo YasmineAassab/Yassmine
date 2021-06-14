@@ -2,12 +2,12 @@
     <ng-template pTemplate="content">
         <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col">
-                <label for="firstname1">Comptable traiteur :</label>
-                <p-dropdown [options]="comptablesTraiteur" [(ngModel)]="selected.comptableTraiteur" optionLabel="nom"></p-dropdown>
+                <label>Comptable traiteur :</label>
+                <p-dropdown [options]="comptablesTraiteur" [(ngModel)]="selected.comptableTraiteur" optionLabel="nom" placeholder="Select Comptable"></p-dropdown>
             </div>
             <div class="p-field p-col">
-                <label for="lastname1">Comptable Validateur :</label>
-                <p-dropdown [options]="comptablesValidateur" [(ngModel)]="selected.comptableValidateur" optionLabel="nom"></p-dropdown>
+                <label>Comptable Validateur :</label>
+                <p-dropdown [options]="comptablesValidateur" [(ngModel)]="selected.comptableValidateur" optionLabel="nom" placeholder="Select Comptable"></p-dropdown>
             </div>
         </div>
         <div class="p-field ">
