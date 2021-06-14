@@ -13,6 +13,7 @@ import {DemandeVo} from "../model/demande-vo.model";
 import {Commande} from '../model/commande.model';
 import {Comptable} from '../model/comptable.model';
 import {TokenStorageService} from '../../Security/_services/token-storage.service';
+import {EtatDemande} from '../model/etat-demande.model';
 
 @Injectable({
   providedIn: 'root'
@@ -40,9 +41,48 @@ export class DemandeService {
   private _currentComptable:Comptable;
   private _comptablesTraiteur:Array<Comptable>;
   private _comptablesValidateur:Array<Comptable>;
+  private _etats:Array<EtatDemande>;
+  private _logedSociete:Societe;
 
   constructor(private http: HttpClient,private token:TokenStorageService) { }
 
+
+
+  public getSocieteDemandes():Observable<any>{
+    return this.http.get<Array<Demande>>(this.url+'societe/ice/'+this.logedSociete.ice);
+  }
+
+  get logedSociete(): Societe {
+    if (this._logedSociete==null){
+      this._logedSociete=new Societe();
+    }
+    return this._logedSociete;
+  }
+
+  set logedSociete(value: Societe) {
+    this._logedSociete = value;
+  }
+
+  public getEtatsDemande(){
+    this.http.get<Array<EtatDemande>>(environment.baseUrl+'etatDemande/').subscribe(
+        data=>{
+          console.log(data);
+          this.etats=data;
+
+        }
+    );
+  }
+
+  get etats(): Array<EtatDemande> {
+    if (this._etats==null){
+      this._etats=new Array<EtatDemande>();
+    }
+    return this._etats;
+  }
+
+  set etats(value: Array<EtatDemande>) {
+    this._etats = value;
+  }
 
   get comptablesTraiteur(): Array<Comptable> {
     if (this._comptablesTraiteur==null){
@@ -99,6 +139,7 @@ export class DemandeService {
   public connectedComptable() {
     this.http.get<Array<User>>(this.API_URL).subscribe(
         data=>{
+
           console.log(data);
           this._userlist=data;
           for (let i=0; i<this._userlist.length; i++){
@@ -107,7 +148,17 @@ export class DemandeService {
             }
           }
           console.log("****");
+          console.log("this isss the connected comptable");
           console.log(this._currentComptable);
+          this.demandeVo.comptableValidateurCode=this.currentComptable.code;
+
+       /*   this.http.post(this.url+'recherche-multi-critere/',this.demandeVo).subscribe(
+              data=>{
+                console.log(data);
+              },error => {
+                console.log(error);
+              }
+          );*/
 
           this.displayDemandeComptable().subscribe(
               data=>{
@@ -122,6 +173,47 @@ export class DemandeService {
     );
   }
 
+  public connectedComptableValidateur() {
+    this.http.get<Array<User>>(this.API_URL).subscribe(
+        data=>{
+
+          console.log(data);
+          this._userlist=data;
+          for (let i=0; i<this._userlist.length; i++){
+            if (this._userlist[i].username==this.token.getUser().username){
+              this._currentComptable=this._userlist[i].comptable;
+            }
+          }
+          console.log("****");
+          console.log("this isss the connected comptable");
+          console.log(this._currentComptable);
+          this.demandeVo.comptableValidateurCode=this.currentComptable.code;
+
+          /*   this.http.post(this.url+'recherche-multi-critere/',this.demandeVo).subscribe(
+                 data=>{
+                   console.log(data);
+                 },error => {
+                   console.log(error);
+                 }
+             );*/
+
+          this.displayDemandeComptableValidateur().subscribe(
+              data=>{
+                this.items=data;
+              },error => {
+                console.log(error);
+              }
+          );
+
+        }
+
+    );
+  }
+
+
+
+
+
 
 
   public displayDemandeComptable():Observable<any> {
@@ -131,7 +223,13 @@ export class DemandeService {
     return this.http.get(this.url+'comptableTraiteur/code/'+this.currentComptable.code);
 
   }
+  public displayDemandeComptableValidateur():Observable<any> {
+    console.log("****ha l user***");
+    console.log(this.currentComptable.code);
+    console.log(this.token.getUser());
+    return this.http.get(this.url+'comptableValidateur/code/'+this.currentComptable.code);
 
+  }
 
 
 
@@ -156,6 +254,7 @@ export class DemandeService {
   }
 
   public edit(): Observable<Demande> {
+    console.log("haa edit dial l validateur");
     console.log(this.selected);
     return this.http.put<Demande>(this.url, this.selected);
   }
@@ -226,6 +325,11 @@ export class DemandeService {
     return this.http.put(this.url+'demande/',selected);
   }*/
   save(): Observable<number> {
+   /* this.demande.societe=new Societe();
+    this.demande.societe.ice="2";*/
+ /*   console.log(this.token.getUser());
+    console.log(this.demande);*/
+    console.log("hhhhhhhhhaaaaaaaaaaaaaaaaaaaaa");
     console.log(this.demande);
     return this.http.post<number>(this.url,this.demande);
   }

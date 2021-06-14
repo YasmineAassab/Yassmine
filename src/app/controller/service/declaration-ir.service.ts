@@ -12,6 +12,8 @@ import {environment} from '../../../environments/environment';
 import {DeclarationIrVo} from '../model/declaration-ir-vo.model';
 import {Societe} from '../model/societe.model';
 import {Demande} from '../model/demande.model';
+import {EtatDemande} from '../model/etat-demande.model';
+import {DemandeService} from './demande.service';
 
 
 
@@ -38,6 +40,11 @@ export class DeclarationIrService {
   private _declarationIrVo:DeclarationIrVo;
   private _currentDemande:Demande;
 
+
+
+
+
+
   get currentDemande(): Demande {
     if (this._currentDemande==null){
       this._currentDemande=new Demande();
@@ -50,6 +57,11 @@ export class DeclarationIrService {
 
   set currentDemande(value: Demande) {
     this._currentDemande = value;
+  }
+  public updateEtatDemande():Observable<any> {
+    console.log("**this is the current demande");
+    console.log(this.currentDemande);
+    return this.http.put(environment.baseUrl+'demande/',this.currentDemande);
   }
 
 
@@ -159,7 +171,7 @@ public details(declaration:DeclarationIR) :Observable<any>{
   // constructor(private messageService: MessageService,
   //             private confirmationService: ConfirmationService, private http: HttpClient) {
   // }
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private demandeService:DemandeService) {
   }
 
 
@@ -228,6 +240,7 @@ public details(declaration:DeclarationIR) :Observable<any>{
   set items(value: Array<DeclarationIREmploye>) {
     this._items = value;
   }
+
 
   get selected(): DeclarationIREmploye {
 

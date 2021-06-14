@@ -193,6 +193,7 @@ import {ViewComptableComponent} from "./view/admin/declarations/view-comptable/v
 import {DeclarationTvaCreateComponent} from "./view/admin/declarationTva/declaration-tva-create/declaration-tva-create.component";
 import {StatistiqueComponent} from './view/admin/statistique/statistique.component';
 import { ComptableValidateurComponent } from './view/admin/comptable-validateur/comptable-validateur.component';
+import {VisualiserDemandeComponent} from './view/admin/visualiser-demande/visualiser-demande.component';
 
 @NgModule({
     imports: [
@@ -372,7 +373,8 @@ import { ComptableValidateurComponent } from './view/admin/comptable-validateur/
         DeclarationsComponent,
         ViewComptableComponent,
         StatistiqueComponent,
-        ComptableValidateurComponent
+        ComptableValidateurComponent,
+        VisualiserDemandeComponent
 
     ],
     providers: [

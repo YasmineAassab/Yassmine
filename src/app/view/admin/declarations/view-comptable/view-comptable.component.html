@@ -10,6 +10,10 @@
                 <p-dropdown [options]="comptablesValidateur" [(ngModel)]="selected.comptableValidateur" optionLabel="nom"></p-dropdown>
             </div>
         </div>
+        <div class="p-field ">
+            <label for="lastname1">Etat de demande :</label>
+            <p-dropdown [options]="etats" [(ngModel)]="selected.etatDemande" optionLabel="libelle"></p-dropdown>
+        </div>
         <div class="p-field">
             <label for="total">Reference :</label>
             <input type="text" pInputText id="total" [(ngModel)]="selected.ref"  />

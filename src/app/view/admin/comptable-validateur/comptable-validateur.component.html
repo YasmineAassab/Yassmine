@@ -36,7 +36,7 @@
             </div>
 
             <div class="card-footer p-d-flex p-jc-center">
-                <p-button label="Search" icon="pi pi-search" ></p-button>
+                <p-button (onClick)="searchCriteria()" label="Search" icon="pi pi-search" ></p-button>
             </div>
 
             <!--<div class="p-col-12  p-md-2 p-offset-1"><div style="margin-bottom: 5px"><label>Référence </label></div>
@@ -99,6 +99,9 @@
                         <th pSortableColumn="montantISCalcule" style="width: 15rem">Comptable validateur
                             <p-sortIcon field="montantISCalcule"></p-sortIcon>
                         </th>
+                        <th pSortableColumn="montantISCalcule" style="width: 15rem">Eatat de demande
+                            <p-sortIcon field="montantISCalcule"></p-sortIcon>
+                        </th>
                         <th></th>
                     </tr>
                 </ng-template>
@@ -114,9 +117,12 @@
                         <td>{{demande.trimestre}}</td>
                         <td>{{demande.comptableTraiteur.nom}}</td>
                         <td>{{demande.comptableValidateur.nom}}</td>
+                        <td>{{demande.etatDemande.libelle}}</td>
                         <td>
-                            <button pButton pRipple label="Traiter" icon="pi pi-pencil" class="p-button-success p-mr-2"
-                                    (click)="navigateToCreate(demande)"></button>
+                            <!--<button pButton pRipple label="Traiter" icon="pi pi-pencil" class="p-button-success p-mr-2"
+                                    (click)="navigateToCreate(demande)"></button>-->
+                            <button pButton pRipple label="valider" icon="pi pi-pencil" class="p-button-success p-mr-2"
+                                    (click)="valide(demande)"></button>
                         </td>
                     </tr>
                 </ng-template>

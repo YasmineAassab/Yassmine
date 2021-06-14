@@ -7,6 +7,8 @@ import {Demande} from '../../../controller/model/demande.model';
 import {DeclarationIsObject} from '../../../controller/model/declaration-is-object.model';
 import {DemandeVo} from '../../../controller/model/demande-vo.model';
 import {Comptable} from '../../../controller/model/comptable.model';
+import {MessageService} from 'primeng/api';
+import {Commande} from '../../../controller/model/commande.model';
 
 @Component({
   selector: 'app-comptable-validateur',
@@ -16,7 +18,8 @@ import {Comptable} from '../../../controller/model/comptable.model';
 export class ComptableValidateurComponent implements OnInit {
 
   constructor(private service: DemandeService, private router: Router, private service2: DeclarationISService,
-              private declarationIRService: DeclarationIrService,private demandeService:DemandeService) { }
+              private declarationIRService: DeclarationIrService,private demandeService:DemandeService,
+              private messageService: MessageService) { }
 
 
   get currentComptable(): Comptable {
@@ -50,6 +53,31 @@ export class ComptableValidateurComponent implements OnInit {
 
   set demande(value: Demande) {
     this.demandeService.demande = value;
+  }
+
+
+  public valide(selected:Demande){
+   // this.submitted = true;
+    this.selected=selected;
+    this.selected.etatDemande.libelle="traitée";
+    if (this.selected.etatDemande.libelle.trim()) {
+      if (this.selected.id) {
+        this.items[this.service.findIndexById(this.selected.id)] = this.selected;
+        this.service.edit().subscribe(data => {
+          //this.selected = data;
+          console.log("daaz mn hna");
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Successful',
+            detail: 'Demande Updated',
+            life: 3000
+          });
+        });
+      }
+
+      this.selected = new Demande();
+    }
+
   }
 
   public navigateToCreate(selected: Demande){
@@ -103,7 +131,7 @@ export class ComptableValidateurComponent implements OnInit {
    }*/
 
   ngOnInit(): void {
-    this.service.connectedComptable();
+    this.service.connectedComptableValidateur();
     //this.service.findAll().subscribe(data => this.items = data);
     this.service.getComptableDemande();
 

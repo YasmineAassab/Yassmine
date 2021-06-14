@@ -58,6 +58,7 @@ import {DeclarationTvaCreateComponent} from "./view/admin/declarationTva/declara
 import {DemandeListComponent} from "./view/admin/demande-list/demande-list.component";
 import {StatistiqueComponent} from './view/admin/statistique/statistique.component';
 import {ComptableValidateurComponent} from './view/admin/comptable-validateur/comptable-validateur.component';
+import {VisualiserDemandeComponent} from './view/admin/visualiser-demande/visualiser-demande.component';
 
 @NgModule({
     imports: [
@@ -74,6 +75,7 @@ import {ComptableValidateurComponent} from './view/admin/comptable-validateur/co
                     {path: 'demandes', component: DeclarationsComponent},
                     {path: 'statistique', component: StatistiqueComponent},
                     {path: 'validation', component: ComptableValidateurComponent},
+                    {path: 'vis', component: VisualiserDemandeComponent},
 
                    /* {path: '', component: DashboardDemoComponent},*/
                     {path: 'demande', component: DemandeDeclarationComponent},

@@ -55,6 +55,7 @@ export class DemandeListComponent implements OnInit {
   }
 
   public navigateToCreate(selected: Demande){
+
     this.object.societe = selected.societe;
     this.object.annee = selected.annee;
     this.demandeService.getDemande(selected).subscribe(

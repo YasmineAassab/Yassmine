@@ -1,6 +1,7 @@
 import {Societe} from "./societe.model";
 import {User} from "../../Security/model/user.model";
 import {Comptable} from "./comptable.model";
+import {EtatDemande} from './etat-demande.model';
 
 export class Demande {
     public id: number;
@@ -14,4 +15,5 @@ export class Demande {
     public user = new User();
     public comptableTraiteur:Comptable ;
     public comptableValidateur:Comptable;
+    public etatDemande:EtatDemande;
 }

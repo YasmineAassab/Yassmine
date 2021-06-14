@@ -12,12 +12,14 @@ import {User} from '../../../Security/model/user.model';
 import {Societe} from '../../../controller/model/societe.model';
 import {DemandeVo} from '../../../controller/model/demande-vo.model';
 import {Comptable} from '../../../controller/model/comptable.model';
+import {TokenStorageService} from '../../../Security/_services/token-storage.service';
+import {EtatDemande} from '../../../controller/model/etat-demande.model';
 
 
 @Component({
   selector: 'app-declarations',
   templateUrl: './declarations.component.html',
-  styleUrls: ['./declarations.component.scss']
+  styleUrls: ['./declarations.component.scss','./declarations.component.css']
 })
 export class DeclarationsComponent implements OnInit {
   cols: any[];
@@ -30,7 +32,7 @@ export class DeclarationsComponent implements OnInit {
 
   //isSet:boolean;
   //comptables= new Array<Comptable>();
-  constructor(private messageService: MessageService, private confirmationService: ConfirmationService,private service: DemandeService,private userService:UserService) {
+  constructor(private token:TokenStorageService,private messageService: MessageService, private confirmationService: ConfirmationService,private service: DemandeService,private userService:UserService) {
   }
 
   ngOnInit(): void {
@@ -40,7 +42,7 @@ export class DeclarationsComponent implements OnInit {
     this.initCol();
     this.service.findAllDemande();
     this.getUsersComptable();
-
+    this.service.getEtatsDemande();
 
   }
 
@@ -76,6 +78,7 @@ export class DeclarationsComponent implements OnInit {
     this.service.UserItemsFiltered = value;
   }
   getUsersComptable(){
+
     this.userService.getUsersComptable().subscribe(
         data => {
           console.log(data);
@@ -95,6 +98,15 @@ export class DeclarationsComponent implements OnInit {
         }
     );
   }
+  get etats(): Array<EtatDemande> {
+
+    return this.service.etats;
+  }
+
+  set etats(value: Array<EtatDemande>) {
+    this.service.etats = value;
+  }
+
 
 
   public save() {

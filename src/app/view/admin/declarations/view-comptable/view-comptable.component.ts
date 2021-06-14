@@ -6,6 +6,7 @@ import {DemandeService} from '../../../../controller/service/demande.service';
 import {User} from '../../../../Security/model/user.model';
 import {Demande} from "../../../../controller/model/demande.model";
 import {Comptable} from '../../../../controller/model/comptable.model';
+import {EtatDemande} from '../../../../controller/model/etat-demande.model';
 interface ComptableInter {
   name: string
 
@@ -89,6 +90,16 @@ export class ViewComptableComponent implements OnInit {
 
   set comptablesValidateur(value: Array<Comptable>) {
     this.service.comptablesValidateur = value;
+  }
+
+
+  get etats(): Array<EtatDemande> {
+
+    return this.service.etats;
+  }
+
+  set etats(value: Array<EtatDemande>) {
+    this.service.etats = value;
   }
 
 

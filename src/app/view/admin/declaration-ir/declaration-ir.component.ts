@@ -7,6 +7,7 @@ import {DeclarationIR} from '../../../controller/model/declaration-ir.model';
 import {DemandeService} from '../../../controller/service/demande.service';
 import {Demande} from '../../../controller/model/demande.model';
 import {Societe} from '../../../controller/model/societe.model';
+import {EtatDemande} from '../../../controller/model/etat-demande.model';
 
 
 @Component({
@@ -117,6 +118,28 @@ export class DeclarationIrComponent implements OnInit {
         );*/
     }
 
+    updateEtatDemande(){
+
+
+
+        this.service.updateEtatDemande().subscribe(
+            data=>{
+                console.log("succes");
+            },error => {
+                console.log(error);
+            }
+        );
+
+    }
+
+    get etats(): Array<EtatDemande> {
+
+        return this.demandeService.etats;
+    }
+
+    set etats(value: Array<EtatDemande>) {
+        this.demandeService.etats = value;
+    }
 
     public save() {
 
@@ -128,6 +151,10 @@ export class DeclarationIrComponent implements OnInit {
                 this.isSaved=true;
                 this.isCreated=false;
                 this.declarationIR.total=0;
+                this.currentDemande.etatDemande.libelle="traitée";
+
+                this.updateEtatDemande();
+
                // this.declarationIR=null;
                // this.declarationIR=new DeclarationIR();
                 this.messageService.add({

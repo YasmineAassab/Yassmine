@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {DemandeService} from "../../../controller/service/demande.service";
 import {Demande} from "../../../controller/model/demande.model";
 import {DemandeVo} from "../../../controller/model/demande-vo.model";
+import {UserService} from '../../../Security/_services/user.service';
+import {Societe} from '../../../controller/model/societe.model';
+import {User} from '../../../Security/model/user.model';
+import {TokenStorageService} from '../../../Security/_services/token-storage.service';
 
 @Component({
   selector: 'app-visualiser-demande',
@@ -9,15 +13,52 @@ import {DemandeVo} from "../../../controller/model/demande-vo.model";
   styleUrls: ['./visualiser-demande.component.scss', './visualiser-demande.component.css']
 })
 export class VisualiserDemandeComponent implements OnInit {
+  societeUsers:Array<User>;
 
-  constructor(private service: DemandeService) {}
+  constructor(private userService:UserService,private service: DemandeService,private tokenStorageService:TokenStorageService) {}
 
   public searchCriteria(){
     this.service.searchCriteria().subscribe(data => this.items = data);
   }
 
+  get logedSociete(): Societe {
+    return this.service.logedSociete;
+  }
+
+  set logedSociete(value: Societe) {
+    this.service.logedSociete = value;
+  }
+
   ngOnInit(): void {
-    this.service.findAll().subscribe(data => this.items = data);
+   // this.service.findAll().subscribe(data => this.items = data);
+    this.userService.getUsersSociete().subscribe(
+        data =>{
+          console.log(data);
+
+          this.societeUsers=data;
+
+          for (let i=0;i<this.societeUsers.length;i++){
+            if (this.societeUsers[i].username==this.tokenStorageService.getUser().username){
+              this.logedSociete=this.societeUsers[i].societe;
+
+            }
+          }
+
+          console.log(this.logedSociete);
+          this.service.getSocieteDemandes().subscribe(
+              data=>{
+                console.log(data);
+                this.items=data;
+              },error => {
+                console.log(error);
+              }
+          );
+        },error => {
+          console.log(error);
+        }
+    );
+
+
   }
 
   get items(): Array<Demande> {
