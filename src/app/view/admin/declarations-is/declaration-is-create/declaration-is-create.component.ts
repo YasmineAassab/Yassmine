@@ -25,8 +25,6 @@ export class DeclarationIsCreateComponent implements OnInit {
 
   constructor(private messageService: MessageService, private confirmationService: ConfirmationService, private service: DeclarationISService,
               private router: Router, private service2: AcomptesService) {
-
-    this.disabledSave = false;
   }
 
 
@@ -94,10 +92,6 @@ export class DeclarationIsCreateComponent implements OnInit {
     this.viewDialog2 = true;
   }
 
-  public validateSave(): boolean{
-    return this.service.validateSave();
-  }
-
   ngOnInit(): void {
   }
 
@@ -108,7 +102,6 @@ export class DeclarationIsCreateComponent implements OnInit {
   public afficheObject() {
     return this.service.afficheObject().subscribe(data => {
       this.selected = data;
-      this.disabledSave = false;
       if (this.selected.etatDeclaration == null){
         this.val = false;
         this.bro = false;
@@ -161,7 +154,7 @@ export class DeclarationIsCreateComponent implements OnInit {
   public openCreate2() {
     this.acomptes.societe.ice = this.selected.societe.ice;
     this.acomptes.numero = 1;
-    this.acomptes.anneePaye = this.selected.annee + 1;
+    this.acomptes.annee = this.selected.annee + 1;
     this.acomptes.montant = this.selected.montantISPaye/4;
     this.submitted = false;
     this.createDialog2 = true;
@@ -237,19 +230,11 @@ export class DeclarationIsCreateComponent implements OnInit {
   }
 
   get acomptes(): Acomptes {
-    return this.service2.acomptes;
+    return this.service2.selected;
   }
 
   set acomptes(value: Acomptes) {
-    this.service2.acomptes = value;
-  }
-
-  get disabledSave(): boolean {
-    return this.service.disabledSave;
-  }
-
-  set disabledSave(value: boolean) {
-    this.service.disabledSave = value;
+    this.service2.selected = value;
   }
 
   fileChanged(e) {

@@ -5,9 +5,9 @@
         <input type="text" pInputText placeholder="annee" [(ngModel)]="annee">
         <button pButton pRipple label="Ok" icon="pi pi-check" class="p-button-danger" style="margin-left: 2px" (click)="findAll()"></button>
     </div>
-    <div class="card">
+    <div class="card" style="height: 800px">
         <h5>Déclarations IS</h5>
-        <p-chart type="bar" [data]="basicData" [options]="basicOptions"></p-chart>
+        <p-chart type="bar" [data]="basicData" [options]="basicOptions" width="1000px" height="700px"></p-chart>
     </div>
 
 </div>

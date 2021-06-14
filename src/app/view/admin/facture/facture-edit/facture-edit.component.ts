@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {MessageService} from 'primeng/api';
-import {CommandeService} from '../../../../controller/service/commande.service';
-import {Commande} from '../../../../controller/model/commande.model';
 import {FactureService} from '../../../../controller/service/facture.service';
 import {Facture} from '../../../../controller/model/facture.model';
 

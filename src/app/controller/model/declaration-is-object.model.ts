@@ -11,6 +11,7 @@ export class DeclarationIsObject {
   public totalHTDiff : number;
   public montantISCalcule : number;
   public montantISPaye : number;
+  public totalPaye : number;
   public societe = new Societe();
   public factureD  = new Array<Facture>();
   public factureC  = new Array<Facture>();

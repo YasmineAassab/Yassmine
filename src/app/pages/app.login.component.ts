@@ -25,6 +25,7 @@ export class AppLoginComponent implements OnInit{
 
   constructor(private router: Router, private userService: UserService, private authService: AuthService, private tokenStorage: TokenStorageService) {}
 
+
   get user(): User {
 
     return this.userService.user;
@@ -47,9 +48,10 @@ export class AppLoginComponent implements OnInit{
           this.isLoggedIn = true;
           this.roles = this.tokenStorage.getUser().roles;
 
-          //this.router.navigate(['home-page']);
+          this.router.navigate(['/']);
           // this.reloadPage();
             console.log("***********");
+            /*
             console.log(this.tokenStorage.getUser().roles[0]);
 
             if(this.tokenStorage.getUser().roles[0]=="ROLE_SOCIETE"){
@@ -83,7 +85,11 @@ export class AppLoginComponent implements OnInit{
             if (this.comptableTraiteur!=null && this.tokenStorage.getUser().roles[0]=="ROLE_COMPTABLE" ){
                 this.router.navigate(['traitement']);
             }
+            else if (this.tokenStorage.getUser().roles[0]=="ROLE_COMPTABLE"){
+                this.router.navigate(['demande/list']);
+            }
 
+             */
 
         },
         err => {

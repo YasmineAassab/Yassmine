@@ -1,0 +1,41 @@
+<p-dialog [(visible)]="createDialog" [style]="{width: '490px'}" header="Acompte create" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="p-grid">
+            <div class="p-col-6">
+                <div class="p-field">
+                    <label for="annee">Année</label>
+                    <input type="text" pInputText id="annee" [(ngModel)]="selected.annee" disabled required autofocus />
+                    <small class="p-invalid" *ngIf="submitted && !selected.annee">anneePaye is required.</small>
+                </div>
+            </div>
+            <div class="p-col-6">
+                <div class="p-field">
+                    <label for="societe">Société</label>
+                    <input type="text" pInputText id="societe" [(ngModel)]="selected.societe.ice" disabled required autofocus />
+                    <small class="p-invalid" *ngIf="submitted && !selected.societe.ice">société is required.</small>
+                </div>
+            </div>
+            <div class="p-col-6">
+                <div class="p-field">
+                    <label for="numero">Numéro</label>
+                    <p-inputNumber [(ngModel)]="selected.numero" id="numero" mode="decimal" [showButtons]="true" inputId="minmax-buttons" [min]="1" [max]="4">
+                    </p-inputNumber>
+                    <small class="p-invalid" *ngIf="submitted && !selected.numero">numero is required.</small>
+                </div>
+            </div>
+            <div class="p-col-6">
+                <div class="p-field">
+                    <label for="montant">Montant</label>
+                    <p-inputNumber id="montant" [(ngModel)]="selected.montant"  mode="currency" currency="MAD"></p-inputNumber>
+                    <small class="p-invalid" *ngIf="submitted && !selected.montant">libelle is required.</small>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideCreateDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="save()"></button>
+    </ng-template>
+</p-dialog>
+
