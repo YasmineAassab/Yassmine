@@ -1,4 +1,4 @@
-<p-dialog [(visible)]="viewDialog" [style]="{width: '450px'}" header="Commande Details" [modal]="true" styleClass="p-fluid">
+<p-dialog [(visible)]="viewDialog" [style]="{width: '450px'}" header="Details de Declarations" [modal]="true" styleClass="p-fluid">
     <ng-template pTemplate="content">
         <div class="p-field">
             <label for="ref">CIN :</label>
@@ -9,7 +9,7 @@
             <input type="text" pInputText id="total" [(ngModel)]="selected.employe.nom" disabled />
         </div>
         <div class="p-field">
-            <label for="total">Prenom :</label>
+            <label for="total">Prénom :</label>
             <input type="text" pInputText id="total" [(ngModel)]="selected.employe.prenom" disabled />
         </div>
         <div class="p-field">

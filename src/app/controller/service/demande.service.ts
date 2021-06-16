@@ -43,10 +43,29 @@ export class DemandeService {
   private _comptablesValidateur:Array<Comptable>;
   private _etats:Array<EtatDemande>;
   private _logedSociete:Societe;
-
+  private _societes:Array<Societe>;
+ // private _ices:Array<string>;
   constructor(private http: HttpClient,private token:TokenStorageService) { }
 
 
+  get societes(): Array<Societe> {
+    if (this._societes==null){
+      this._societes=new Array<Societe>();
+    }
+    return this._societes;
+  }
+
+  set societes(value: Array<Societe>) {
+    this._societes = value;
+  }
+
+  /*  get ices(): Array<string> {
+    return this._ices;
+  }
+
+  set ices(value: Array<string>) {
+    this._ices = value;
+  }*/
 
   public getSocieteDemandes():Observable<any>{
     return this.http.get<Array<Demande>>(this.url+'societe/ice/'+this.logedSociete.ice);
@@ -150,7 +169,7 @@ export class DemandeService {
           console.log("****");
           console.log("this isss the connected comptable");
           console.log(this._currentComptable);
-          this.demandeVo.comptableValidateurCode=this.currentComptable.code;
+         // this.demandeVo.comptableValidateurCode=this.currentComptable.code;
 
        /*   this.http.post(this.url+'recherche-multi-critere/',this.demandeVo).subscribe(
               data=>{
@@ -249,12 +268,13 @@ export class DemandeService {
 
   public searchDeclaration() :Observable<any>{
     console.log(this.demandeVo);
-   return  this.http.post<any>(this.url+'searchDemandeCriteria',this.demandeVo);
+   return  this.http.post<any>(this.url+'recherche-multi-critere/',this.demandeVo);
 
   }
 
   public edit(): Observable<Demande> {
     console.log("haa edit dial l validateur");
+    this.selected.etatDemande.libelle="acceptée";
     console.log(this.selected);
     return this.http.put<Demande>(this.url, this.selected);
   }
@@ -270,10 +290,12 @@ export class DemandeService {
     return index;
   }
 
-
+  public findAllSociete(): Observable<any>{
+    return this.http.get<Array<Societe>>(environment.baseUrl+'societe/');
+  }
 
   public searchCriteria(): Observable<Array<Demande>>{
-    this.demandeVo.comptableTraiteurCode=this.currentComptable.code;
+    //this.demandeVo.comptableTraiteurCode=this.currentComptable.code;
 
   console.log("*********haaaaaaaa demande vo li tatsif");
   console.log(this.demandeVo);

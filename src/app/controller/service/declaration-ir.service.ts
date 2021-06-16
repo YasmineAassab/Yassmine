@@ -40,12 +40,30 @@ export class DeclarationIrService {
   private _declarationIRSearch:DeclarationIR;
   private _declarationIrVo:DeclarationIrVo;
   private _currentDemande:Demande;
+  private _currentDeclarationIR;
 
 
+  get currentDeclarationIR() {
+    if (this._currentDeclarationIR==null){
+      this._currentDeclarationIR=new DeclarationIR()
+    }
+    return this._currentDeclarationIR;
+  }
+
+  set currentDeclarationIR(value) {
+    this._currentDeclarationIR = value;
+  }
+
+  public findDeclarationIREmploye() :Observable<any>{
+    console.log("haaa data li batsifet");
+    console.log(this.declarationIR);
+    console.log(this.declarationIR[0].ref);
+    return this.http.get<Array<DeclarationIREmploye>>(environment.baseUrl+'declarationiremploye/declarationir/ref/'+this.declarationIR[0].ref);
+  }
 
 
   public findDeclarationByMoisAndAnnee(mois:number,annee:number):Observable<any> {
-   return  this.http.get(this.url+'mois/'+mois+'/annee/'+annee)
+   return  this.http.get<DeclarationIR>(this.url+'mois/'+mois+'/annee/'+annee)
 
   }
 
@@ -238,6 +256,14 @@ public details(declaration:DeclarationIR) :Observable<any>{
     for (const item of this.selectes){
       this.deleteIndexById(item.id);
     }
+  }
+
+
+  public deleteDeclarationIRandIREmploye():Observable<any> {
+    console.log("yyy native li at delete");
+    console.log(this.currentDeclarationIR);
+    console.log(this.currentDeclarationIR[0].ref);
+    return this.http.delete(this.url+'ref/'+this.currentDeclarationIR[0].ref);
   }
 
   get items(): Array<DeclarationIREmploye> {

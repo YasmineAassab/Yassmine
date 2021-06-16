@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ClasseComptableService} from '../../../../../Controller/Service/classeComptable.service';
-import {ClasseComptable} from '../../../../../Controller/Model/classeComptable.model';
-import {SousClasseComptableService} from '../../../../../Controller/Service/sousClasseComptable.service';
-import {CompteComptableService} from '../../../../../Controller/Service/compteComptable.service';
+import {ClasseComptable} from '../../../../../controller/model/classeComptable.model';
+import {CompteComptableService} from '../../../../../controller/service/compteComptable.service';
+import {ClasseComptableService} from '../../../../../controller/service/classeComptable.service';
 
 @Component({
   selector: 'app-classe-liste',
@@ -22,22 +21,36 @@ export class ClasseListeComponent implements OnInit {
       {field: 'action', header: 'Action'}
     ];
   }
- public getAll(){
+  public getAll(){
     return this.service.getAll().subscribe(
         data => {console.log(data);
-                 this.service.items = data;
+          this.service.items = data;
         }, error  => {
           console.log(error);
         }
     );
   }
-    get num(): number {
-        return this.service.num1;
-    }
+  get num(): number {
+    return this.service.num1;
+  }
 
-    set num(value: number) {
-        this.service.num1 = value;
-    }
+  set num(value: number) {
+    this.service.num1 = value;
+  }
+  get create(): number {
+    return this.service.create;
+  }
+
+  set create(value: number) {
+    this.service.create = value;
+  }
+  get create2(): number {
+    return this.service.create2;
+  }
+
+  set create2(value: number) {
+    this.service.create2 = value;
+  }
   get items(): Array<ClasseComptable> {
     return this.service.items;
   }
@@ -49,23 +62,27 @@ export class ClasseListeComponent implements OnInit {
   findByNumero(numero: number) {
     this.service.findByNumeo(numero).subscribe(
         data => {console.log(data);
-                 this.service.items2 = data;
-                 this.service2.items = null;
+          this.service.items2 = data;
+          this.service2.items = null;
+          this.create = this.num;
+          this.create2 = null;
         }, error  => {
-            console.log(error);
+          console.log(error);
         }
     );
   }
 
-    delete(numero: number) {
-return this.service.delete(numero).subscribe(
-    data => {
-        console.log(data);
-        this.getAll();
-    }
-);
-    }
-    public openCreate() {
-        this.service.createDialog = true;
-    }
+  delete(numero: number) {
+    return this.service.delete(numero).subscribe(
+        data => {
+          console.log(data);
+          this.getAll();
+          this.service.items2 = null;
+        }
+    );
+  }
+  public openCreate() {
+    this.service.createDialog = true;
+  }
+
 }

@@ -1,25 +1,27 @@
-<div class="card"><h2 align="center" style="color: #0772b3"><i>RECHERCHE CPC</i></h2></div>
+
+<div class="card"><p-toast></p-toast><h2 align="center" style="color: #0772b3"><i>RECHERCHE CPC</i></h2></div>
 <div class="card"><div class="p-formgroup-inline p-fluid" style="margin-left: 30%">
     <div class="p-col-12 p-md-3">
-        <label>date min</label>
+        <label>date minimale</label>
         <p-calendar [(ngModel)]="cpcVo.dateMinVo" dateFormat="yy-mm-dd" inputId="dateformat" placeholder="yyyy-mm-dd"></p-calendar>
     </div>
     <div class="p-col-12 p-md-3">
-        <label>date max</label>
+        <label>date maximale</label>
         <p-calendar [(ngModel)]="cpcVo.dateMaxVo" dateFormat="yy-mm-dd" inputId="dateformat" placeholder="yyyy-mm-dd"></p-calendar>
     </div>
+
     <div class="p-col-12 p-md-2" style="margin-top: 1px">
-        <button pButton type="button" class="p-button-outlined" style="margin-top: 23px" label="Search" [disabled]="cpcVo.totalProdExVo==null && cpcVo.dateMaxVo==null && cpcVo.dateMinVo==null"  (click)="findCpc()"></button>
+        <button pButton type="button" class="p-button-outlined" style="margin-top: 23px" label="Chercher" [disabled]="cpcVo.totalProdExVo==null && cpcVo.dateMaxVo==null && cpcVo.dateMinVo==null"  (click)="findCpc()"></button>
     </div>
 </div></div>
 <div id="tab" class="card" style="background-color: transparent">
 
     <p-toolbar styleClass="p-mb-4">
         <ng-template pTemplate="left">
-            <button pButton pRipple label="Add new Bills" icon="pi pi-plus" class="p-button-success p-mr-2 p-mb-2" (click)="openCreate()"></button>
-             </ng-template>
+            <button pButton pRipple label="Ajouter une nouvelle Facture" icon="pi pi-plus" class="p-button-success p-mr-2 p-mb-2" (click)="openCreate()"></button>
+        </ng-template>
     </p-toolbar>
-    <p-tabView styleClass="tabview-custom">
+    <p-tabView styleClass="tabview-custom" [(activeIndex)]="activateIndex">
         <p-tabPanel>
             <ng-template pTemplate="header">
                 <i class="pi pi-calendar"></i>
@@ -32,13 +34,13 @@
                      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
                 <ng-template pTemplate="caption">
                     <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
-                        <h5 class="p-m-0">Sous Classe Comptable</h5>
+                        <h5 class="p-m-0">Cpc</h5>
                     </div>
                 </ng-template>
                 <ng-template pTemplate="header">
                     <th><i>ID</i></th>
-                    <th><i>Produits d'exploitation</i></th>
-                    <th><i>Charge D'exploitation</i></th>
+                    <th><i>Produits d'éxploitation</i></th>
+                    <th><i>Charge D'éxploitation</i></th>
                     <th><i>Produits Financiers</i></th>
                     <th><i>Charge Financiers</i></th>
                     <th><i>Produits Non Courants</i></th>
@@ -55,30 +57,30 @@
                         <td>{{cpc.totalChargFin}}</td>
                         <td>{{cpc.totalProdNCour}}</td>
                         <td>{{cpc.totalChargNCour}}</td>
-                        <td>{{cpc.dateMinCpc}}</td>
+                        <td>{{cpc.dateMinCpc}}</td><!--detaille();-->
                         <td>{{cpc.dateMaxCpc}}</td>
                         <td>
-                            <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info p-mr-2" style="margin-right: 2px" (click)="detaille();find();openTab()"></button>
-                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px"></button>
+                            <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info p-mr-2" style="margin-right: 2px" (click)="find(cpc);openTab();put(cpc);activateIndex=1"></button>
+                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="deleteCpc(cpc.id)"></button>
                         </td>
                     </tr>
                 </ng-template>
             </p-table>
-            </p-tabPanel>
+        </p-tabPanel>
         <p-tabPanel id="tablinks" style="display:block">
             <ng-template pTemplate="header">
                 <i class="pi pi-calendar"></i>
-                <span>DETAILLE</span>
+                <span>DÉTAILLE</span><div *ngIf="detaille" style="color: green">(CPC)</div>
 
             </ng-template>
 
             <p-table [value]="cpcTable" >  <!-- [scrollable]="true" scrollHeight="200px"-->
                 <ng-template pTemplate="caption">
-                    Compte Des Produits Et Des Charges
+                    Compte des Produits et Charges
                 </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
-                        <th>Numero</th>
+                        <th>Numéro</th>
                         <th>Libelle</th>
                         <th>Montant(DH)</th>
 
@@ -87,17 +89,17 @@
                 <ng-template pTemplate="body">
                     <tr>
                         <td>I</td>
-                        <td>Produits d'exploitation</td>
+                        <td>Produits d'éxploitation</td>
                         <td>{{produitExp}}</td>
                     </tr>
                     <tr>
                         <td>II</td>
-                        <td>Charges d'exploitation</td>
+                        <td>Charges d'éxploitation</td>
                         <td>{{chargEx}}</td>
                     </tr>
                     <tr>
                         <td>III</td>
-                        <td>Resultat d'exploitation(I - II)</td>
+                        <td>Résultat d'éxploitation(I - II)</td>
                         <td>{{resultatExploi}}</td>
 
                     </tr>
@@ -115,13 +117,13 @@
                     </tr>
                     <tr>
                         <td>VI</td>
-                        <td>Resultat financiers(IV - V)</td>
+                        <td>Résultat financiers(IV - V)</td>
                         <td>{{resultatFinance}}</td>
 
                     </tr>
                     <tr>
                         <td>VII</td>
-                        <td>Resultat courant(III - VI)</td>
+                        <td>Résultat courant(III - VI)</td>
                         <td>{{resultatCourant}}</td>
 
                     </tr>
@@ -137,38 +139,38 @@
                     </tr>
                     <tr>
                         <td>X</td>
-                        <td>Resultat non courant(VII - IX)</td>
+                        <td>Résultat non courant(VII - IX)</td>
                         <td>{{resultatNonCourant}}</td>
 
                     </tr>
                     <tr>
                         <td>XI</td>
-                        <td>Resultat avant impots(VII + X)</td>
+                        <td>Résultat avant impots(VII + X)</td>
                         <td>{{resultatAvantImpots}}</td>
 
                     </tr>
                     <tr>
                         <td>XII</td>
-                        <td>Impots sur les Resultats</td>
+                        <td>Impots sur les Résultats</td>
                         <td>{{surImpots}}</td>
 
                     </tr>
                     <tr>
                         <td>XIII</td>
-                        <td>Resultat net(XI - XII)</td>
+                        <td>Résultat net(XI - XII)</td>
                         <td>{{resultatNet}}</td>
 
                     </tr>
                 </ng-template>
             </p-table>
             <div class="card" style="background-color: transparent; border-color: transparent">
-                <button type="button" class="btn btn-outline-dark" [disabled]="resultatNet==0" (click)="update()">Update</button>
+                <button type="button" class="btn btn-outline-dark" [disabled]="resultatNet==0" (click)="update()">Édit</button>
             </div>
         </p-tabPanel>
         <p-tabPanel>
             <ng-template pTemplate="header">
                 <i class="pi pi-calendar"></i>
-                <span>Produits D'Exploitations</span>
+                <span>P.d'Éxploitations</span>
             </ng-template>
             <p-table #dt [value]="items" [columns]="cols2" [rows]="1" [paginator]="true" [globalFilterFields]="['reference','total','totalPaye']"
                      [rowHover]="true" dataKey="id"
@@ -178,18 +180,16 @@
                 </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
-                        <th>Ref</th>
-                        <th>Societe Source</th>
-                        <th>Societe Distination</th>
+                        <th>Référence</th>
+                        <th>Sociéte Source</th>
+                        <th>Sociéte Distination</th>
                         <th>libelle</th>
                         <th>MHT</th>
                         <th>tva</th>
                         <th>MTVA</th>
                         <th>MTTC</th>
-                        <th>Annee</th>
-                        <th>mois</th>
-                        <th>trim</th>
-                        <th>Operation</th>
+                        <th>Année/mois(trim)</th>
+                        <th>Opération</th>
                         <th>comptable</th>
                         <th>action</th>
                     </tr>
@@ -197,16 +197,14 @@
                 <ng-template pTemplate="body" let-c>
                     <tr>
                         <td>{{c.ref}}</td>
-                        <td><!--{{c.societeSource.ice}}--></td>
-                        <td><!--{{c.societeDistination.ice}}--></td>
+                        <td>{{c.societeSource.ice}}</td>
+                        <td>{{c.societeDistination.ice}}</td>
                         <td>{{c.libelle}} </td>
-                        <td>{{c.montantHorsTaxe}}<i>$</i></td>
-                        <td><!--{{c.tva.valeur}}--><i>%</i></td>
-                        <td>{{c.montantTVA}}<i>$</i></td>
-                        <td>{{c.montantTTC}}<i>$</i></td>
-                        <td>{{c.annee}}</td>
-                        <td>{{c.mois}}</td>
-                        <td>{{c.trim}}</td>
+                        <td>{{c.montantHorsTaxe}}</td>
+                        <td>{{c.tva.valeur}}</td>
+                        <td>{{c.montantTVA}}</td>
+                        <td>{{c.montantTTC}}</td>
+                        <td>{{c.annee}}/{{c.mois}}({{c.trim}})</td>
                         <td>{{c.typeOperation}}</td>
                         <td>{{c.compteComptable.code}}</td>
                         <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(c,items)"></button></td>
@@ -217,8 +215,8 @@
         </p-tabPanel>
         <p-tabPanel header="Header II">
             <ng-template pTemplate = "header">
-                <i class="pi pi-user"></i>
-                <span>Charges D'Exploitation</span>
+                <i class="pi pi-calendar"></i>
+                <span>C.d'Éxploitation</span>
             </ng-template>
             <p-table #dt [value]="items1" [columns]="cols2" [rows]="4" [paginator]="true" [globalFilterFields]="['reference','total','totalPaye']"
                      [rowHover]="true" dataKey="id"
@@ -228,18 +226,16 @@
                 </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
-                        <th>Ref</th>
-                        <th>Societe Source</th>
-                        <th>Societe Distination</th>
+                        <th>Référence</th>
+                        <th>Sociéte Source</th>
+                        <th>Sociéte Distination</th>
                         <th>libelle</th>
                         <th>MHT</th>
                         <th>tva</th>
                         <th>MTVA</th>
                         <th>MTTC</th>
-                        <th>Annee</th>
-                        <th>mois</th>
-                        <th>trim</th>
-                        <th>Operation</th>
+                        <th>Année/mois(trim)</th>
+                        <th>Opération</th>
                         <th>comptable</th>
                         <th>action</th>
                     </tr>
@@ -247,16 +243,14 @@
                 <ng-template pTemplate="body" let-facture>
                     <tr *ngFor="let c of items1; index as i ">
                         <td>{{c.ref}}</td>
-                        <td><!--{{c.societeSource.ice}}--></td>
-                        <td><!--{{c.societeDistination.ice}}--></td>
+                        <td>{{c.societeSource.ice}}</td>
+                        <td>{{c.societeDistination.ice}}</td>
                         <td>{{c.libelle}} </td>
-                        <td>{{c.montantHorsTaxe}}<i>$</i></td>
-                        <td><!--{{c.tva.valeur}}--><i>%</i></td>
-                        <td>{{c.montantTVA}}<i>$</i></td>
-                        <td>{{c.montantTTC}}<i>$</i></td>
-                        <td>{{c.annee}}</td>
-                        <td>{{c.mois}}</td>
-                        <td>{{c.trim}}</td>
+                        <td>{{c.montantHorsTaxe}}</td>
+                        <td>{{c.tva.valeur}}</td>
+                        <td>{{c.montantTVA}}</td>
+                        <td>{{c.montantTTC}}</td>
+                        <td>{{c.annee}}/{{c.mois}}({{c.trim}})</td>
                         <td>{{c.typeOperation}}</td>
                         <td>{{c.compteComptable.code}}</td>
                         <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(c,items1)"></button></td>
@@ -267,8 +261,8 @@
         </p-tabPanel>
         <p-tabPanel header="Header III">
             <ng-template pTemplate = "header">
-                <i class="pi pi-user"></i>
-                <span>Produits Financiers</span>
+                <i class="pi pi-calendar"></i>
+                <span>P.Financiers</span>
             </ng-template>
             <p-table #dt [value]="items2" [columns]="cols2" [rows]="4" [paginator]="true" [globalFilterFields]="['reference','total','totalPaye']"
                      [rowHover]="true" dataKey="id"
@@ -278,18 +272,16 @@
                 </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
-                        <th>Ref</th>
-                        <th>Societe Source</th>
-                        <th>Societe Distination</th>
+                        <th>Référence</th>
+                        <th>Sociéte Source</th>
+                        <th>Sociéte Distination</th>
                         <th>libelle</th>
                         <th>MHT</th>
                         <th>tva</th>
                         <th>MTVA</th>
                         <th>MTTC</th>
-                        <th>Annee</th>
-                        <th>mois</th>
-                        <th>trim</th>
-                        <th>Operation</th>
+                        <th>Année/mois(trim)</th>
+                        <th>Opération</th>
                         <th>comptable</th>
                         <th>action</th>
                     </tr>
@@ -297,16 +289,14 @@
                 <ng-template pTemplate="body" let-facture>
                     <tr *ngFor="let c of items2; index as i ">
                         <td>{{c.ref}}</td>
-                        <td><!--{{c.societeSource.ice}}--></td>
-                        <td><!--{{c.societeDistination.ice}}--></td>
+                        <td>{{c.societeSource.ice}}</td>
+                        <td>{{c.societeDistination.ice}}</td>
                         <td>{{c.libelle}} </td>
-                        <td>{{c.montantHorsTaxe}}<i>$</i></td>
-                        <td><!--{{c.tva.valeur}}--><i>%</i></td>
-                        <td>{{c.montantTVA}}<i>$</i></td>
-                        <td>{{c.montantTTC}}<i>$</i></td>
-                        <td>{{c.annee}}</td>
-                        <td>{{c.mois}}</td>
-                        <td>{{c.trim}}</td>
+                        <td>{{c.montantHorsTaxe}}</td>
+                        <td>{{c.tva.valeur}}</td>
+                        <td>{{c.montantTVA}}</td>
+                        <td>{{c.montantTTC}}</td>
+                        <td>{{c.annee}}/{{c.mois}}({{c.trim}})</td>
                         <td>{{c.typeOperation}}</td>
                         <td>{{c.compteComptable.code}}</td>
                         <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(c,items2)"></button></td>
@@ -317,8 +307,8 @@
         </p-tabPanel>
         <p-tabPanel header="Header IV">
             <ng-template pTemplate = "header">
-                <i class="pi pi-user"></i>
-                <span>Charges Financiers</span>
+                <i class="pi pi-calendar"></i>
+                <span>C.Financiers</span>
             </ng-template>
             <p-table #dt [value]="items3" [columns]="cols2" [rows]="4" [paginator]="true" [globalFilterFields]="['reference','total','totalPaye']"
                      [rowHover]="true" dataKey="id"
@@ -328,18 +318,16 @@
                 </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
-                        <th>Ref</th>
-                        <th>Societe Source</th>
-                        <th>Societe Distination</th>
+                        <th>Référence</th>
+                        <th>Sociéte Source</th>
+                        <th>Sociéte Distination</th>
                         <th>libelle</th>
                         <th>MHT</th>
                         <th>tva</th>
                         <th>MTVA</th>
                         <th>MTTC</th>
-                        <th>Annee</th>
-                        <th>mois</th>
-                        <th>trim</th>
-                        <th>Operation</th>
+                        <th>Année/mois(trim)</th>
+                        <th>Opération</th>
                         <th>comptable</th>
                         <th>action</th>
                     </tr>
@@ -347,16 +335,14 @@
                 <ng-template pTemplate="body" let-facture>
                     <tr *ngFor="let c of items3; index as i ">
                         <td>{{c.ref}}</td>
-                        <td><!--{{c.societeSource.ice}}--></td>
-                        <td><!--{{c.societeDistination.ice}}--></td>
+                        <td>{{c.societeSource.ice}}</td>
+                        <td>{{c.societeDistination.ice}}</td>
                         <td>{{c.libelle}} </td>
-                        <td>{{c.montantHorsTaxe}}<i>$</i></td>
-                        <td><!--{{c.tva.valeur}}--><i>%</i></td>
-                        <td>{{c.montantTVA}}<i>$</i></td>
-                        <td>{{c.montantTTC}}<i>$</i></td>
-                        <td>{{c.annee}}</td>
-                        <td>{{c.mois}}</td>
-                        <td>{{c.trim}}</td>
+                        <td>{{c.montantHorsTaxe}}</td>
+                        <td>{{c.tva.valeur}}</td>
+                        <td>{{c.montantTVA}}</td>
+                        <td>{{c.montantTTC}}</td>
+                        <td>{{c.annee}}/{{c.mois}}({{c.trim}})</td>
                         <td>{{c.typeOperation}}</td>
                         <td>{{c.compteComptable.code}}</td>
                         <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(c,items3)"></button></td>
@@ -367,8 +353,8 @@
         </p-tabPanel>
         <p-tabPanel header="Header V">
             <ng-template pTemplate = "header">
-                <i class="pi pi-user"></i>
-                <span>Produits N Courants</span>
+                <i class="pi pi-calendar"></i>
+                <span>P.N.Courants</span>
             </ng-template>
             <p-table #dt [value]="items4" [columns]="cols2" [rows]="4" [paginator]="true" [globalFilterFields]="['reference','total','totalPaye']"
                      [rowHover]="true" dataKey="id"
@@ -378,18 +364,16 @@
                 </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
-                        <th>Ref</th>
-                        <th>Societe Source</th>
-                        <th>Societe Distination</th>
+                        <th>Référence</th>
+                        <th>Sociéte Source</th>
+                        <th>Sociéte Distination</th>
                         <th>libelle</th>
                         <th>MHT</th>
                         <th>tva</th>
                         <th>MTVA</th>
                         <th>MTTC</th>
-                        <th>Annee</th>
-                        <th>mois</th>
-                        <th>trim</th>
-                        <th>Operation</th>
+                        <th>Année/mois(trim)</th>
+                        <th>Opération</th>
                         <th>comptable</th>
                         <th>action</th>
                     </tr>
@@ -397,16 +381,14 @@
                 <ng-template pTemplate="body" let-facture>
                     <tr *ngFor="let c of items4; index as i ">
                         <td>{{c.ref}}</td>
-                        <td><!--{{c.societeSource.ice}}--></td>
-                        <td><!--{{c.societeDistination.ice}}--></td>
+                        <td>{{c.societeSource.ice}}</td>
+                        <td>{{c.societeDistination.ice}}</td>
                         <td>{{c.libelle}} </td>
-                        <td>{{c.montantHorsTaxe}}<i>$</i></td>
-                        <td><!--{{c.tva.valeur}}--><i>%</i></td>
-                        <td>{{c.montantTVA}}<i>$</i></td>
-                        <td>{{c.montantTTC}}<i>$</i></td>
-                        <td>{{c.annee}}</td>
-                        <td>{{c.mois}}</td>
-                        <td>{{c.trim}}</td>
+                        <td>{{c.montantHorsTaxe}}</td>
+                        <td>{{c.tva.valeur}}</td>
+                        <td>{{c.montantTVA}}</td>
+                        <td>{{c.montantTTC}}</td>
+                        <td>{{c.annee}}/{{c.mois}}({{c.trim}})</td>
                         <td>{{c.typeOperation}}</td>
                         <td>{{c.compteComptable.code}}</td>
                         <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(c,items4)"></button></td>
@@ -417,8 +399,8 @@
         </p-tabPanel>
         <p-tabPanel header="Header VI">
             <ng-template pTemplate = "header">
-                <i class="pi pi-user"></i>
-                <span>Charges N Courants</span>
+                <i class="pi pi-calendar"></i>
+                <span>C.N.Courants</span>
             </ng-template>
             <p-table #dt [value]="items5" [columns]="cols2" [rows]="4" [paginator]="true" [globalFilterFields]="['reference','total','totalPaye']"
                      [rowHover]="true" dataKey="id"
@@ -428,18 +410,16 @@
                 </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
-                        <th>Ref</th>
-                        <th>Societe Source</th>
-                        <th>Societe Distination</th>
+                        <th>Référence</th>
+                        <th>Sociéte Source</th>
+                        <th>Sociéte Distination</th>
                         <th>libelle</th>
                         <th>MHT</th>
                         <th>tva</th>
                         <th>MTVA</th>
                         <th>MTTC</th>
-                        <th>Annee</th>
-                        <th>mois</th>
-                        <th>trim</th>
-                        <th>Operation</th>
+                        <th>Année/mois(trim)</th>
+                        <th>Opération</th>
                         <th>comptable</th>
                         <th>action</th>
                     </tr>
@@ -447,16 +427,14 @@
                 <ng-template pTemplate="body" let-facture>
                     <tr *ngFor="let c of items5; index as i ">
                         <td>{{c.ref}}</td>
-                        <td><!--{{c.societeSource.ice}}--></td>
-                        <td><!--{{c.societeDistination.ice}}--></td>
+                        <td>{{c.societeSource.ice}}</td>
+                        <td>{{c.societeDistination.ice}}</td>
                         <td>{{c.libelle}} </td>
-                        <td>{{c.montantHorsTaxe}}<i>$</i></td>
-                        <td><!--{{c.tva.valeur}}--><i>%</i></td>
-                        <td>{{c.montantTVA}}<i>$</i></td>
-                        <td>{{c.montantTTC}}<i>$</i></td>
-                        <td>{{c.annee}}</td>
-                        <td>{{c.mois}}</td>
-                        <td>{{c.trim}}</td>
+                        <td>{{c.montantHorsTaxe}}</td>
+                        <td>{{c.tva.valeur}}</td>
+                        <td>{{c.montantTVA}}</td>
+                        <td>{{c.montantTTC}}</td>
+                        <td>{{c.annee}}/{{c.mois}}({{c.trim}})</td>
                         <td>{{c.typeOperation}}</td>
                         <td>{{c.compteComptable.code}}</td>
                         <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(c,items5)"></button></td>
@@ -465,6 +443,54 @@
 
             </p-table>
         </p-tabPanel>
+        <p-tabPanel header="Header VII">
+            <ng-template pTemplate = "header">
+                <i class="pi pi-calendar"></i>
+                <span>Deleted Factures</span>
+            </ng-template>
+            <p-table #dt [value]="disactivatedFactures" [columns]="cols2" [rows]="4" [paginator]="true" [globalFilterFields]="['reference','total','totalPaye']"
+                     [rowHover]="true" dataKey="id"
+                     styleClass="p-datatable-customers"
+                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+                <ng-template pTemplate="caption">Factures
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Référence</th>
+                        <th>Sociéte Source</th>
+                        <th>Sociéte Distination</th>
+                        <th>libelle</th>
+                        <th>MHT</th>
+                        <th>tva</th>
+                        <th>MTVA</th>
+                        <th>MTTC</th>
+                        <th>Année/mois(trim)</th>
+                        <th>Opération</th>
+                        <th>comptable</th>
+                        <th>action</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-facture>
+                    <tr *ngFor="let c of disactivatedFactures; index as i ">
+                        <td>{{c.ref}}</td>
+                        <td>{{c.societeSource.ice}}</td>
+                        <td>{{c.societeDistination.ice}}</td>
+                        <td>{{c.libelle}} </td>
+                        <td>{{c.montantHorsTaxe}}</td>
+                        <td>{{c.tva.valeur}}</td>
+                        <td>{{c.montantTVA}}</td>
+                        <td>{{c.montantTTC}}</td>
+                        <td>{{c.annee}}/{{c.mois}}({{c.trim}})</td>
+                        <td>{{c.typeOperation}}</td>
+                        <td>{{c.compteComptable.code}}</td>
+                        <td><button pButton pRipple type="button" icon="pi pi-check" class="p-button-rounded" style="margin-right: 2px" (click)="restore(c,disactivatedFactures)" title="restore facture"></button></td>
+                    </tr>
+                </ng-template>
+
+            </p-table>
+        </p-tabPanel>
     </p-tabView>
+    <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
 </div>
 <app-cpc-list></app-cpc-list>
+

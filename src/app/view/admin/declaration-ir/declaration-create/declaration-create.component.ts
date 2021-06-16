@@ -37,8 +37,8 @@ export class DeclarationCreateComponent implements OnInit {
     this.items.push({...this.selected});
         this.messageService.add({
           severity: 'success',
-          summary: 'Successful',
-          detail: 'Declaration Created',
+          summary: 'Succès',
+          detail: 'Déclaration créée',
           life: 3000
         });
     //  });

@@ -1,8 +1,8 @@
-<p-dialog [(visible)]="editDialog" [style]="{width: '450px'}" header="Commande Details" [modal]="true" styleClass="p-fluid">
+<p-dialog [(visible)]="editDialog" [style]="{width: '450px'}" header="Détails de la demande" [modal]="true" styleClass="p-fluid">
     <ng-template pTemplate="content">
         <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col">
-                <label>Comptable traiteur :</label>
+                <label>Comptable traitant :</label>
                 <p-dropdown [options]="comptablesTraiteur" [(ngModel)]="selected.comptableTraiteur" optionLabel="nom" placeholder="Select Comptable"></p-dropdown>
             </div>
             <div class="p-field p-col">
@@ -11,11 +11,11 @@
             </div>
         </div>
         <div class="p-field ">
-            <label for="lastname1">Etat de demande :</label>
+            <label for="lastname1">État de demande :</label>
             <p-dropdown [options]="etats" [(ngModel)]="selected.etatDemande" optionLabel="libelle"></p-dropdown>
         </div>
         <div class="p-field">
-            <label for="total">Reference :</label>
+            <label for="total">Référence :</label>
             <input type="text" pInputText id="total" [(ngModel)]="selected.ref"  />
         </div>
         <div class="p-field">
@@ -23,15 +23,15 @@
             <input type="text" pInputText id="total" [(ngModel)]="selected.mois"  />
         </div>
         <div class="p-field">
-            <label for="total">Annee :</label>
+            <label for="total">Année :</label>
             <input type="text" pInputText id="total" [(ngModel)]="selected.annee"  />
         </div>
         <div class="p-field">
-            <label for="total">Operation :</label>
+            <label for="total">Opération :</label>
             <input type="text" pInputText id="total" [(ngModel)]="selected.operation"  />
         </div>
         <div class="p-field">
-            <label for="total">Ice Societe :</label>
+            <label for="total">Ice de Société :</label>
             <input type="text" pInputText id="total" [(ngModel)]="selected.societe.ice"  />
         </div>
 
@@ -40,8 +40,8 @@
     </ng-template>
 
     <ng-template pTemplate="footer">
-        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideEditDialog()"></button>
-        <button pButton pRipple label="Edit" icon="pi pi-check" class="p-button-text" (click)="edit()"></button>
+        <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-text" (click)="hideEditDialog()"></button>
+        <button pButton pRipple label="Éditer" icon="pi pi-check" class="p-button-text" (click)="edit()"></button>
     </ng-template>
 </p-dialog>
 

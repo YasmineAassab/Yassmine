@@ -135,20 +135,6 @@ import {DeclarationViewComponent} from './view/admin/declaration-ir/declaration-
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {AuthInterceptor} from './Security/auth-interceptor.service';
 import {ProfileComponent} from './Security/profile/profile.component';
-import {ClassComponent} from './view/admin/classe/class.component';
-import {ClasseCreateComponent} from './view/admin/classe/classe-comptable/classe-create/classe-create.component';
-import {ClasseListeComponent} from './view/admin/classe/classe-comptable/classe-liste/classe-liste.component';
-import {ClasseComptableComponent} from './view/admin/classe/classe-comptable/classe-comptable.component';
-import {CompteCreateComponent} from './view/admin/classe/compte-comptable/compte-create/compte-create.component';
-import {CompteListeComponent} from './view/admin/classe/compte-comptable/compte-liste/compte-liste.component';
-import {CompteComptableComponent} from './view/admin/classe/compte-comptable/compte-comptable.component';
-import {SousCreateComponent} from './view/admin/classe/sous-classe-comptable/sous-create/sous-create.component';
-import {SousListeComponent} from './view/admin/classe/sous-classe-comptable/sous-liste/sous-liste.component';
-import {SousClasseComptableComponent} from './view/admin/classe/sous-classe-comptable/sous-classe-comptable.component';
-import {CpcListComponent} from './view/admin/cpc/cpc-list/cpc-list.component';
-import {CpcRecherchComponent} from './view/admin/cpc/cpc-recherch/cpc-recherch.component';
-import {CpcViewComponent} from './view/admin/cpc/cpc-view/cpc-view.component';
-import {CpcComponent} from './view/admin/cpc/cpc.component';
 import { FactureComponent } from './view/admin/facture/facture.component';
 import { FactureCreateComponent } from './view/admin/facture/facture-create/facture-create.component';
 import { FactureListComponent } from './view/admin/facture/facture-list/facture-list.component';
@@ -179,7 +165,24 @@ import { DeclarationTvaViewComponent } from './view/admin/declarationTva/declara
 import {ComptableValidateurComponent} from "./view/admin/comptable-validateur/comptable-validateur.component";
 import {StatistiqueComponent} from './view/admin/statistique/statistique.component';
 import {ChercherDeclarationIRComponent} from './view/admin/chercher-declaration-ir/chercher-declaration-ir.component';
-
+import {SousCreateComponent} from './view/admin/classe/sous-classe-comptable/sous-create/sous-create.component';
+import {SousListeComponent} from './view/admin/classe/sous-classe-comptable/sous-liste/sous-liste.component';
+import {CompteListeComponent} from './view/admin/classe/compte-comptable/compte-liste/compte-liste.component';
+import {CompteCreateComponent} from './view/admin/classe/compte-comptable/compte-create/compte-create.component';
+import {ClasseListeComponent} from './view/admin/classe/classe-comptable/classe-liste/classe-liste.component';
+import {ClasseCreateComponent} from './view/admin/classe/classe-comptable/classe-create/classe-create.component';
+import {SousClasseComptableComponent} from './view/admin/classe/sous-classe-comptable/sous-classe-comptable.component';
+import {CompteComptableComponent} from './view/admin/classe/compte-comptable/compte-comptable.component';
+import {ClasseComptableComponent} from './view/admin/classe/classe-comptable/classe-comptable.component';
+import {ClasseComponent} from './view/admin/classe/classe.component';
+import { CpcComponent } from './view/admin/cpc/cpc.component';
+import { CpcListComponent } from './view/admin/cpc/cpc-list/cpc-list.component';
+import { CpcRechercheComponent } from './view/admin/cpc/cpc-recherche/cpc-recherche.component';
+import { CpcViewComponent } from './view/admin/cpc/cpc-view/cpc-view.component';
+import { CpcChartComponent } from './view/admin/cpc/cpc-chart/cpc-chart.component';
+import { ClasseEditComponent } from './view/admin/classe/classe-comptable/classe-edit/classe-edit.component';
+import { CompteEditComponent } from './view/admin/classe/compte-comptable/compte-edit/compte-edit.component';
+import { SousEditComponent } from './view/admin/classe/sous-classe-comptable/sous-edit/sous-edit.component';
 @NgModule({
     imports: [
         BrowserModule,
@@ -316,20 +319,24 @@ import {ChercherDeclarationIRComponent} from './view/admin/chercher-declaration-
         FactureListComponent,
         FactureEditComponent,
         FactureViewComponent,
-        /*ClassComponent,
+        ClasseComponent,
+        ClasseComptableComponent,
+        CompteComptableComponent,
+        SousClasseComptableComponent,
         ClasseCreateComponent,
         ClasseListeComponent,
-        ClasseComptableComponent,
         CompteCreateComponent,
         CompteListeComponent,
-        CompteComptableComponent,
         SousCreateComponent,
         SousListeComponent,
-        SousClasseComptableComponent,
+        CpcComponent,
         CpcListComponent,
-        CpcRecherchComponent,
-        CpcViewComponent,
-        CpcComponent*/
+        CpcRechercheComponent,
+        CpcViewComponent,CpcChartComponent,
+        ClasseEditComponent,
+        CompteEditComponent,
+        SousEditComponent,
+
         DeclarationCreateComponent,
         DeclarationTvaListComponent,
         DeclarationTvaCreateComponent,

@@ -13,23 +13,23 @@
                     <div class="p-fluid p-formgrid p-grid">
 
                         <div class="p-field p-col">
-                            <label for="firstname1">Ice de societe :</label>
+                            <label for="firstname1">Ice de société :</label>
                             <input id="firstname1" type="text" [(ngModel)]="demandeVo.societe" pInputText>
                         </div>
                         <div class="p-field p-col">
-                            <label for="firstname1">Operation</label>
+                            <label for="firstname1">Opération</label>
                             <input id="firstname1" type="text" [(ngModel)]="demandeVo.operation" pInputText>
                         </div>
                         <div class="p-field p-col">
-                            <label for="firstname1">Annee</label>
+                            <label for="firstname1">Année</label>
                             <input id="firstname1" type="text" [(ngModel)]="demandeVo.annee" pInputText>
                         </div>
                         <div class="p-field p-col">
-                            <label for="lastname1">premiere mois :</label>
+                            <label for="lastname1">première mois :</label>
                             <input id="lastname1" type="text" [(ngModel)]="demandeVo.moisMin" pInputText>
                         </div>
                         <div class="p-field p-col">
-                            <label for="lastname1">deuxieme mois :</label>
+                            <label for="lastname1">deuxième mois :</label>
                             <input id="lastname1" type="text" [(ngModel)]="demandeVo.moisMax" pInputText>
                         </div>
                     </div>
@@ -37,7 +37,7 @@
             </div>
 
             <div class="card-footer p-d-flex p-jc-center">
-                <p-button label="Search" icon="pi pi-search" (onClick)="searchCriteria()"></p-button>
+                <p-button label="chercher" icon="pi pi-search" (onClick)="searchCriteria()"></p-button>
             </div>
         </div>
 
@@ -70,11 +70,11 @@
             <h3>Liste des demandes</h3>
             <p-table #dt [value]="items" [rows]="10" [paginator]="true" [rowHover]="true"
                      styleClass="p-datatable-customers"
-                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                     currentPageReportTemplate="Montrant {first} à {last} des {totalRecords} entrées"
                      [showCurrentPageReport]="true" dataKey="id">
                 <ng-template pTemplate="header">
                     <tr>
-                        <th pSortableColumn="reference">Reference
+                        <th pSortableColumn="reference">Référence
                             <p-sortIcon field="reference"></p-sortIcon>
                         </th>
                         <th pSortableColumn="annee">Date de demande
@@ -95,7 +95,7 @@
                         <th pSortableColumn="totalHTDiff" style="width: 9rem">Trim
                             <p-sortIcon field="totalHTDiff"></p-sortIcon>
                         </th>
-                        <th pSortableColumn="montantISCalcule">Comptable traiteur
+                        <th pSortableColumn="montantISCalcule">Comptable traitant
                             <p-sortIcon field="montantISCalcule"></p-sortIcon>
                         </th>
                         <th pSortableColumn="montantISCalcule" style="width: 15rem">Comptable validateur
@@ -128,7 +128,7 @@
             </p-table>
             <ng-template pTemplate="summary">
                 <div class="p-d-flex p-ai-center p-jc-between">
-                    In total there are {{items ? items.length : 0 }} demandes.
+                    Au total il y a {{items ? items.length : 0 }} demandes.
                 </div>
             </ng-template>
         </div>
