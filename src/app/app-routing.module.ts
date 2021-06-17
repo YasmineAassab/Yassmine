@@ -44,6 +44,7 @@ import {DashboardDemoComponent} from "./demo/view/dashboarddemo.component";
 
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import {AcomptesListComponent} from "./view/admin/acomptes/acomptes-list/acomptes-list.component";
+import {FactureJournalComponent} from './view/admin/facture/facture-journal/facture-journal.component';
 
 
 @NgModule({
@@ -83,6 +84,7 @@ import {AcomptesListComponent} from "./view/admin/acomptes/acomptes-list/acompte
                     {path: 'declarations-is/chart', component: ChartsComponent},
                     {path: 'facture', component: FactureComponent},
                     {path: 'view/facture/create', component: FactureCreateComponent},
+                    {path: 'view/facture/journal', component: FactureJournalComponent},
                     {path: 'declaration-tva', component: DeclarationTvaListComponent},
                     {path: 'declaration-tva/create', component: DeclarationTvaCreateComponent},
                     {path: 'utilities/display', component: DisplayComponent},

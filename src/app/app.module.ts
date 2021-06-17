@@ -183,6 +183,7 @@ import { CpcChartComponent } from './view/admin/cpc/cpc-chart/cpc-chart.componen
 import { ClasseEditComponent } from './view/admin/classe/classe-comptable/classe-edit/classe-edit.component';
 import { CompteEditComponent } from './view/admin/classe/compte-comptable/compte-edit/compte-edit.component';
 import { SousEditComponent } from './view/admin/classe/sous-classe-comptable/sous-edit/sous-edit.component';
+import { FactureJournalComponent } from './view/admin/facture/facture-journal/facture-journal.component';
 @NgModule({
     imports: [
         BrowserModule,
@@ -355,7 +356,8 @@ import { SousEditComponent } from './view/admin/classe/sous-classe-comptable/sou
         FactureViewDeclComponent,
         DeclarationTvaViewComponent,
         StatistiqueComponent,
-        ChercherDeclarationIRComponent
+        ChercherDeclarationIRComponent,
+        FactureJournalComponent
 
     ],
     providers: [
