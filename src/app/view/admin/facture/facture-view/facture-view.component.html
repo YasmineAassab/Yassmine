@@ -1,4 +1,4 @@
-<p-dialog [(visible)]="viewDialog" [style]="{width: '450px'}" header="Commande Details" [modal]="true" styleClass="p-fluid">
+<p-dialog [(visible)]="viewDialog" [style]="{width: '450px'}" header="Facture Details" [modal]="true" styleClass="p-fluid">
     <ng-template pTemplate="content">
         <div class="p-field">
             <label for="ref">Ref</label>
@@ -13,8 +13,26 @@
             <input type="date" pInputText id="total" [(ngModel)]="selected.dateOperation" disabled />
         </div>
         <div class="p-field">
+            <label for="total">Trim</label>
+            <input type="date" pInputText id="total" [(ngModel)]="selected.trim" disabled />
+        </div>
+        <div class="p-field">
+            <label for="total">Type Operation</label>
+            <input type="date" pInputText id="total" [(ngModel)]="selected.typeOperation" disabled />
+        </div>
+
+
+        <div class="p-field">
             <label for="total">Montan hors taxe</label>
             <input type="number" pInputText id="total" [(ngModel)]="selected.montantHorsTaxe" disabled />
+        </div>
+        <div class="p-field">
+            <label for="total">Montant TTC</label>
+            <input type="number" pInputText id="total" [(ngModel)]="selected.montantTTC" disabled />
+        </div>
+        <div class="p-field">
+            <label for="total">Montant TVA</label>
+            <input type="number" pInputText id="total" [(ngModel)]="selected.montantTVA" disabled />
         </div>
         <div class="p-field">
             <label for="total">tva</label>

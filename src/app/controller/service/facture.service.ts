@@ -1,14 +1,19 @@
 import {Injectable} from '@angular/core';
+import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Facture} from '../model/facture.model';
+import {FactureVo} from '../model/facture-vo.model';
 
 @Injectable({
     providedIn: 'root'
 })
 export class FactureService {
-    private url =  'http://localhost:8036/gestion-comptabilite/facture/';
+    private url = 'http://localhost:8036/gestion-comptabilite/facture/';
     private _items: Array<Facture>;
+    private _facturesJournal: Array<Facture>;
+    private _facturevo: FactureVo;
+    private _Sommes: FactureVo;
     private _selected: Facture;
     private _selectes: Array<Facture>;
 
@@ -26,6 +31,12 @@ export class FactureService {
 
     public findAll(): Observable<Array<Facture>> {
         return this.http.get<Array<Facture>>(this.url);
+    }
+    public Journal(): Observable<Array<Facture>> {
+        return this.http.post<Array<Facture>>('http://localhost:8036/gestion-comptabilite/facture/MultiTache', this.facturevo);
+    }
+    public CalculSomme(): Observable<FactureVo> {
+        return this.http.post<FactureVo>(this.url + '/CalculSomme', this.facturevo);
     }
 
     public save(): Observable<Facture> {
@@ -74,10 +85,46 @@ export class FactureService {
     }
 
     get selected(): Facture {
-        if (this._selected == null){
-            this._selected = new  Facture();
+        if (this._selected == null) {
+            this._selected = new Facture();
         }
         return this._selected;
+    }
+
+
+    get facturesJournal(): Array<Facture> {
+        if (this._facturesJournal == null) {
+            this._facturesJournal = new Array<Facture>();
+        }
+        return this._facturesJournal;
+    }
+
+    set facturesJournal(value: Array<Facture>) {
+        this._facturesJournal = value;
+    }
+
+
+    get facturevo(): FactureVo {
+        if (this._facturevo == null) {
+            this._facturevo = new FactureVo();
+        }
+        return this._facturevo;
+    }
+
+    set facturevo(value: FactureVo) {
+        this._facturevo = value;
+    }
+
+
+    get Sommes(): FactureVo {
+        if (this._Sommes == null) {
+            this._Sommes = new FactureVo();
+        }
+        return this._Sommes;
+    }
+
+    set Sommes(value: FactureVo) {
+        this._Sommes = value;
     }
 
     set selected(value: Facture) {
