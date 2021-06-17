@@ -9,32 +9,33 @@
                 </div>
                 <div class="p-col-12 username-container">
                     <!-- <h:panelGroup> -->
-                    <label>Username</label>
+                    <label>Nom d'utilisateur</label>
                     <div class="login-input">
-                        <input id="input" type="text" pInputText [(ngModel)]="user.username">
+                        <input id="input" type="text" pInputText [(ngModel)]="user.username" placeholder="Entrer Votre Nom d'utilisateur">
                     </div>
                     <!-- </h:panelGroup> -->
                 </div>
                 <div class="p-col-12 password-container">
                     <!-- <h:panelGroup> -->
-                    <label>Password</label>
+                    <label>Mot de passe</label>
                     <div class="login-input">
-                        <input pPassword type="password" [(ngModel)]="user.password" />
+                        <input pPassword type="password" [(ngModel)]="user.password" placeholder="Entrer Votre mot de passe" />
                     </div>
                     <!-- </h:panelGroup> -->
                 </div>
                 <div class="p-col-12 p-sm-6 p-md-6 rememberme-container">
-                    <p-checkbox></p-checkbox>
-                    <label> Remember me</label>
+                    <!--<p-checkbox></p-checkbox>
+                    <label> Remember me</label>-->
+                    <a routerLink="/sign-up"  class="forget-password">Vous n'avez pas de compte ?</a>
                 </div>
 
                 <div class="p-col-12 p-sm-6 p-md-6 forgetpassword-container">
-                    <a href="#" class="forget-password">Forget Password</a> <br> <br>
-                    <a routerLink="/sign-up"  class="forget-password">Don't have an account ?</a>
+                    <a href="#" class="forget-password">Mot de passe oublié</a> <br> <br>
+
                 </div>
 
                 <div class="p-col-12 p-sm-6 p-md-6">
-                    <button pButton type="button" icon="pi pi-check" label="Sign In" (click)="onSubmit()"></button>
+                    <button pButton type="button" icon="pi pi-check" label="s'identifier" (click)="onSubmit()"></button>
                 </div>
                 <div
                         class="alert alert-danger"

@@ -1,3 +1,6 @@
+import {Facture} from './facture.model';
+import {CpcFacture} from './cpc-facture.model';
+
 export class Cpc {
     public id: number;
     public totalProdEx: number;
@@ -8,4 +11,6 @@ export class Cpc {
     public totalChargNCour: number;
     public dateMinCpc: Date;
     public dateMaxCpc: Date;
+    //public factureList = new Array<Facture>();
+    public cpcFactures = new Array<CpcFacture>();
 }

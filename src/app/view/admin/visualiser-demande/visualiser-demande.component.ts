@@ -6,6 +6,7 @@ import {UserService} from '../../../Security/_services/user.service';
 import {Societe} from '../../../controller/model/societe.model';
 import {User} from '../../../Security/model/user.model';
 import {TokenStorageService} from '../../../Security/_services/token-storage.service';
+import {Comptable} from '../../../controller/model/comptable.model';
 
 @Component({
   selector: 'app-visualiser-demande',
@@ -49,6 +50,14 @@ export class VisualiserDemandeComponent implements OnInit {
               data=>{
                 console.log(data);
                 this.items=data;
+                  for (let i=0;i<this.items.length;i++){
+                      if (this.items[i].comptableValidateur==null || this.items[i].comptableTraiteur==null){
+                          this.items[i].comptableTraiteur=new Comptable();
+                          this.items[i].comptableValidateur=new Comptable();
+                          this.items[i].comptableTraiteur.nom="--";
+                          this.items[i].comptableValidateur.nom="--";
+                      }
+                  }
               },error => {
                 console.log(error);
               }

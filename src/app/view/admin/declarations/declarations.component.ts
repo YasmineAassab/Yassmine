@@ -16,12 +16,18 @@ import {TokenStorageService} from '../../../Security/_services/token-storage.ser
 import {EtatDemande} from '../../../controller/model/etat-demande.model';
 
 
+interface com {
+  operation:string;
+}
+
 @Component({
   selector: 'app-declarations',
   templateUrl: './declarations.component.html',
   styleUrls: ['./declarations.component.scss','./declarations.component.css']
 })
 export class DeclarationsComponent implements OnInit {
+  operations=new Array<com>();
+  operationSelected:com;
   cols: any[];
   isCreated:boolean=false;
   isSaved:boolean=true;
@@ -33,6 +39,13 @@ export class DeclarationsComponent implements OnInit {
   //isSet:boolean;
   //comptables= new Array<Comptable>();
   constructor(private token:TokenStorageService,private messageService: MessageService, private confirmationService: ConfirmationService,private service: DemandeService,private userService:UserService) {
+    this.operations = [
+      {operation: 'Declaration IR'},
+      {operation: 'Declaration IS'},
+      {operation: 'Declaration TVA'},
+
+    ];
+
   }
 
   ngOnInit(): void {
@@ -48,6 +61,7 @@ export class DeclarationsComponent implements OnInit {
 
 
   searchDeclaration(){
+    this.demandeVo.operation=this.operationSelected.operation;
     this.service.searchDeclaration().subscribe(
         data=>{
           console.log(data);
@@ -141,8 +155,8 @@ export class DeclarationsComponent implements OnInit {
   public delete(selected: Demande) {
     this.selected = selected;
     this.confirmationService.confirm({
-      message: 'Are you sure you want to refuse this Request ?',
-      header: 'Confirm',
+      message: 'Êtes-vous sûr de vouloir refuser cette demande ?',
+      header: 'Confirmer',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.selected.etatDemande.libelle="rejetée";
@@ -164,8 +178,8 @@ export class DeclarationsComponent implements OnInit {
         this.selected = new Demande();
         this.messageService.add({
           severity: 'success',
-          summary: 'Successful',
-          detail: 'Declaration IR Employe Deleted',
+          summary: 'à succès',
+          detail: 'Déclaration IR Employé refusée',
           life: 3000
         });
 

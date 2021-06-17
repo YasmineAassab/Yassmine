@@ -2,54 +2,136 @@
     <h2 style="text-align: center">Facture </h2>
     <ng-template pTemplate="content">
         <div class="p-fluid p-formgrid p-grid">
-        <div class="p-field p-col-12 p-md-4">
-            <label for="ref">Ref</label>
-            <input type="text" pInputText id="ref" [(ngModel)]="selected.ref" required autofocus />
-        </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label for="ref">Référence</label>
+                <input type="text" pInputText id="ref" [(ngModel)]="selected.ref" required autofocus placeholder="Référence" />
+            </div>
             <div class="p-field p-col-12 p-md-4">
                 <label for="libelle">Libelle</label>
-                <input type="text" pInputText id="libelle" [(ngModel)]="selected.libelle" required autofocus />
+                <input type="text" pInputText id="libelle" [(ngModel)]="selected.libelle" required autofocus placeholder="libelle"/>
             </div>
-        <div class="p-field p-col-12 p-md-4">
-            <label for="annee">Annee</label>
-            <input type="number" pInputText id="annee"   [(ngModel)]="selected.annee" required autofocus />
-        </div>
-
-        <div class="p-field p-col-12 p-md-4">
-            <label for="mois">Mois</label>
-            <input type="number" pInputText id="mois"  [(ngModel)]="selected.mois" required autofocus />
-        </div>
-        <div class="p-field p-col-12 p-md-4">
-            <label for="date">Date</label>
-            <input type="date" pInputText id="date" [(ngModel)]="selected.dateOperation" required autofocus />
-        </div>
-        <div class="p-field p-col-12 p-md-4">
-            <label for="trim">Trim</label>
-            <input type="number" pInputText id="trim" [(ngModel)]="selected.trim" required autofocus />
-        </div>
-        <div class="p-field p-col-12 p-md-4">
-            <label for="mntHt">Montant Hors Taxe</label>
-            <input type="number" pInputText id="mntHt" [(ngModel)]="selected.montantHorsTaxe" required autofocus />
-        </div>
-        <div class="p-field p-col-12 p-md-4">
-            <label for="mnTva">Montant TVA</label>
-            <input type="number" pInputText id="mnTva" [(ngModel)]="selected.montantTVA" required autofocus />
-        </div>
-        <div class="p-field p-col-12 p-md-4">
-            <label for="mnTtc">Montant TTC</label>
-            <input type="number" pInputText id="mnTtc" [(ngModel)]="selected.montantTTC" required autofocus />
-        </div>
-        <div class="p-field p-col-12 p-md-4">
-            <label for="compteComptable">Compte Comptable</label>
-            <input type="text" pInputText id="compteComptable" [(ngModel)]="selected.compteComptable.code" required autofocus />
-        </div>
-
-     <!--   <div class="p-formgrid p-grid">
-            <div class="p-field p-col">
-                <label for="totalPaye">Total Paye</label>
-                <p-inputNumber id="totalPaye" [(ngModel)]=""></p-inputNumber>
+           <!-- <div class="p-field p-col-12 p-md-4">
+                <label for="annee">Annee</label>
+                <input type="number" pInputText id="annee"   [(ngModel)]="selected.annee" required autofocus />
+            </div>-->
+            <div class="p-field p-col-12 p-md-4">
+                <label>Sociéte Source</label>
+                <p-dropdown [options]="items001" [(ngModel)]="selected.societeSource" optionLabel="ice" [filter]="true" filterBy="nom" [showClear]="true" placeholder="societe source" required autofocus>
+                    <ng-template pTemplate="selectedItem">
+                        <div class="country-item country-item-value" *ngIf="selected.societeSource.ice">
+                            <div>{{selected.societeSource.ice}}</div>
+                        </div>
+                    </ng-template>
+                    <ng-template let-items1 pTemplate="item">
+                        <div class="country-item">  <div>{{items1.ice}}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
             </div>
-        </div>-->
+            <div class="p-field p-col-12 p-md-4">
+                <label>Sociéte Distination</label>
+                <p-dropdown [options]="items002" [(ngModel)]="selected.societeDistination" optionLabel="ice" [filter]="true" filterBy="nom" [showClear]="true" placeholder="societe distination" required autofocus>
+                    <ng-template pTemplate="selectedItem">
+                        <div class="country-item country-item-value" *ngIf="selected.societeDistination.ice">
+                            <div>{{selected.societeDistination.ice}}</div>
+                        </div>
+                    </ng-template>
+                    <ng-template let-items1 pTemplate="item">
+                        <div class="country-item">  <div>{{items1.ice}}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label>Tva</label>
+                <p-dropdown [options]="items0001" [(ngModel)]="selected.tva" optionLabel="valeur" [filter]="true" filterBy="valeur" [showClear]="true" placeholder="Select a TVA" required autofocus>
+                    <ng-template pTemplate="selectedItem">
+                        <div class="country-item country-item-value" *ngIf="selected.tva.valeur">
+                            <div>{{selected.tva.valeur}}</div>
+                        </div>
+                    </ng-template>
+                    <ng-template let-items1 pTemplate="item">
+                        <div class="country-item">  <div>{{items1.valeur}}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label>État de Facture</label>
+                <p-dropdown [options]="etatsFacture" [(ngModel)]="selected.etatFacture" optionLabel="code" [filter]="true" filterBy="libelle" [showClear]="true" placeholder="Select etat" required autofocus>
+                    <ng-template pTemplate="selectedItem">
+                        <div class="country-item country-item-value" *ngIf="selected.etatFacture.libelle">
+                            <div>{{selected.etatFacture.libelle}}</div>
+                        </div>
+                    </ng-template>
+                    <ng-template let-items1 pTemplate="item">
+                        <div class="country-item">  <div>{{items1.libelle}}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label>État de Paiment</label>
+                <p-dropdown [options]="etatsPaiment" [(ngModel)]="selected.etatPaiement" optionLabel="code" [filter]="true" filterBy="libelle" [showClear]="true" placeholder="Select etat" required autofocus>
+                    <ng-template pTemplate="selectedItem">
+                        <div class="country-item country-item-value" *ngIf="selected.etatPaiement.libelle">
+                            <div>{{selected.etatPaiement.libelle}}</div>
+                        </div>
+                    </ng-template>
+                    <ng-template let-items1 pTemplate="item">
+                        <div class="country-item">  <div>{{items1.libelle}}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+            <label>Type d'operation</label><br>
+            <p-dropdown [options]="type" [(ngModel)]="selected.typeOperation" [placeholder]="selected.typeOperation" optionLabel="type" required autofocus>
+                <ng-template pTemplate="selectedItem">
+                    <div class="country-item country-item-value" *ngIf="selected.typeOperation">
+                        <div>{{selected.typeOperation}}</div>
+                    </div>
+                </ng-template>
+                <ng-template let-items1 pTemplate="item">
+                    <div class="country-item">  <div>{{items1}}</div>
+                    </div>
+                </ng-template>
+            </p-dropdown>
+           </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label for="date">Date</label>
+                <input type="date" pInputText id="date" [(ngModel)]="selected.dateOperation" required autofocus />
+            </div>
+         <!--   <div class="p-field p-col-12 p-md-4">
+                <label for="trim">Trim</label>
+                <input type="number" pInputText id="trim" [(ngModel)]="selected.trim" required autofocus />
+            </div>-->
+            <div class="p-field p-col-12 p-md-4">
+                <label for="mntHt">Montant Hors Taxe</label>
+                <input type="number" pInputText id="mntHt" [(ngModel)]="selected.montantHorsTaxe" required autofocus />
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label for="mnTva">Montant TVA</label>
+                <input type="number" pInputText id="mnTva" [(ngModel)]="selected.montantTVA" required autofocus />
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label for="mnTtc">Montant TTC</label>
+                <input type="number" pInputText id="mnTtc" [(ngModel)]="selected.montantTTC" required autofocus />
+            </div>
+            <div class="p-field p-col-12 p-md-4">
+                <label>Compte Comptable</label>
+            <p-dropdown [options]="items1" [(ngModel)]="selected.compteComptable" optionLabel="code" [filter]="true" filterBy="libelle" [showClear]="true" placeholder="Select a Compte" required autofocus>
+                <ng-template pTemplate="selectedItem">
+                    <div class="country-item country-item-value" *ngIf="selected.compteComptable.code">
+                        <div>{{selected.compteComptable.code}}</div>
+                    </div>
+                </ng-template>
+                <ng-template let-items1 pTemplate="item">
+                    <div class="country-item">  <div>{{items1.libelle}}</div>
+                    </div>
+                </ng-template>
+            </p-dropdown>
+            </div>
         </div>
     </ng-template>
     <ng-template pTemplate="footer">
@@ -57,3 +139,4 @@
         <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="save()"></button>
     </ng-template>
 </p-dialog>
+

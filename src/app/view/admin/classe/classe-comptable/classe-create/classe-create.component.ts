@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ClasseComptableService} from '../../../../../Controller/Service/classeComptable.service';
-import {ClasseComptable} from '../../../../../Controller/Model/classeComptable.model';
+import {ClasseComptable} from '../../../../../controller/model/classeComptable.model';
+import {ClasseComptableService} from '../../../../../controller/service/classeComptable.service';
 
 @Component({
   selector: 'app-classe-create',
@@ -31,17 +31,17 @@ export class ClasseCreateComponent implements OnInit {
   }
 
   save() {
-return this.service.save(this.selected).subscribe(
-    data => {console.log(data);
-             this.getAll();
-             this.selected = null;
-    }
-);
+    return this.service.save(this.selected).subscribe(
+        data => {console.log(data);
+          this.getAll();
+          this.selected = null;
+        }
+    );
   }
   public getAll(){
     return this.service.getAll().subscribe(
         data => {console.log(data);
-                 this.service.items = data;
+          this.service.items = data;
         }, error  => {
           console.log(error);
         }
