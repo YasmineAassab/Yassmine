@@ -1,5 +1,6 @@
 import {Component, Injectable, OnInit} from '@angular/core';
 import {DashboardDemoComponent} from "../dashboarddemo.component";
+import {TokenStorageService} from "../../../Security/_services/token-storage.service";
 
 
 @Component({
@@ -9,9 +10,12 @@ import {DashboardDemoComponent} from "../dashboarddemo.component";
 })
 export class FirsthomepageComponent implements OnInit {
 
-  constructor(public dash: DashboardDemoComponent) {}
+  isLoggedIn = false;
+
+  constructor(public dash: DashboardDemoComponent, private tokenStorageService: TokenStorageService) {}
 
   ngOnInit() {
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
   }
   goToContact(){
     document.getElementById("contactus").scrollIntoView({behavior: "smooth"});

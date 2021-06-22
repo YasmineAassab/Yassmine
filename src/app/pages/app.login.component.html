@@ -5,37 +5,32 @@
                 <div class="p-col-12 p-sm-6 p-md-6 logo-container" style="width: 440px;">
                     <!--<img src="assets/layout/images/logo-roma.svg" />-->
                     <h1 style="font-weight: bolder; font-size: 25px">E-COMPTA</h1><br>
-                    <span class="guest-sign-in" style="width: 800px; font-size: 17px">Bienvenue, merci d'utiliser le formulaire pour se connecter à E-COMPTA</span>
+                    <span class="guest-sign-in" style="font-size: 17px">Bienvenue, merci d'utiliser le formulaire pour se connecter à E-COMPTA</span>
                 </div>
                 <div class="p-col-12 username-container">
                     <!-- <h:panelGroup> -->
-                    <label>Nom d'utilisateur</label>
+                    <label style="font-size: 20px;">Nom d'utilisateur</label>
                     <div class="login-input">
-                        <input id="input" type="text" pInputText [(ngModel)]="user.username" placeholder="Entrer Votre Nom d'utilisateur">
+                        <input id="input" type="text" placeholder="votre nom" pInputText [(ngModel)]="user.username" style="height: 45px; border-radius: 8px; font-size: 15px">
                     </div>
                     <!-- </h:panelGroup> -->
                 </div>
                 <div class="p-col-12 password-container">
                     <!-- <h:panelGroup> -->
-                    <label>Mot de passe</label>
+                    <label style="font-size: 20px;">Mot de passe</label>
                     <div class="login-input">
-                        <input pPassword type="password" [(ngModel)]="user.password" placeholder="Entrer Votre mot de passe" />
+                        <input pPassword type="password" placeholder="votre mot de passe" [(ngModel)]="user.password"  style="height: 45px; border-radius: 8px; font-size: 15px">
                     </div>
                     <!-- </h:panelGroup> -->
                 </div>
+                <!--
                 <div class="p-col-12 p-sm-6 p-md-6 rememberme-container">
-                    <!--<p-checkbox></p-checkbox>
-                    <label> Remember me</label>-->
-                    <a routerLink="/sign-up"  class="forget-password">Vous n'avez pas de compte ?</a>
+                    <p-checkbox></p-checkbox>
+                    <label> Remember me</label>
                 </div>
-
-                <div class="p-col-12 p-sm-6 p-md-6 forgetpassword-container">
-                    <a href="#" class="forget-password">Mot de passe oublié</a> <br> <br>
-
-                </div>
-
+-->
                 <div class="p-col-12 p-sm-6 p-md-6">
-                    <button pButton type="button" icon="pi pi-check" label="s'identifier" (click)="onSubmit()"></button>
+                    <button pButton type="button" icon="pi pi-check" label="Se connecter" (click)="onSubmit()"></button>
                 </div>
                 <div
                         class="alert alert-danger"
@@ -44,6 +39,11 @@
                 >
                     Login failed: {{ errorMessage }}
                 </div>
+                <div class="p-col-12 p-sm-6 p-md-6 forgetpassword-container">
+                    <!--<a href="#" class="forget-password">Mot de passe oublié</a> <br> <br>-->
+                    <a routerLink="/sign-up"  class="forget-password" style="font-size: 16px">Vous n'avez pas de compte ?</a>
+                </div>
+
             </div>
         </div>
     </div>

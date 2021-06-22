@@ -7,7 +7,7 @@ import {PrimeNGConfig} from 'primeng/api';
 })
 export class AppComponent implements OnInit{
 
-    layoutMode = 'slim';
+    layoutMode = 'static';
 
     lightMenu = true;
 

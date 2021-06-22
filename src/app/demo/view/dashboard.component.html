@@ -1,9 +1,5 @@
-<!--<div class="p-grid layout-dashboard">
-    <app-firsthomepage></app-firsthomepage>
-</div>
--->
 <div class="container-fluid">
-    <div class="header">
+    <div class="header" id="header">
         <!--  <div id="box1" style="z-index: 4"> navbar (MENU)
             <ul>
                 <h4 id="badge">E-COMPTA</h4>
@@ -19,34 +15,214 @@
                 </a>
             </ul>
         </div> --><!--fin_navbar-->
-        <img style="z-index: 0" src="assets/images/imgaccueil.jpg" alt="image d'accueil" id="imgaccueil">
+        <div *ngIf="isLoggedIn && ste==true">
+            <img style="z-index: 0" src="assets/images/imgaccueil.jpeg" alt="image d'accueil" id="imgaccueil">
 
-        <div id="tit">
-            <h2>E-COMPTA</h2>
-            <!--<p>WE ARE HERE TO HELP YOU</p>-->
         </div>
+
+
+        <div class="p-grid" style="padding: 10px"  *ngIf="isLoggedIn && admin==true || isLoggedIn && cpt==true">
+
+            <div class="p-col-12 p-md-6 p-lg-3">
+                <div class="overview-box card" style="height: 170px">
+                    <div class="overview-box-value">{{nbrDemande}}</div>
+                    <div class="overview-box-title">Demandes</div>
+                    <img src="assets/layout/images/dashboard/graph-tasks.svg" alt="">
+                    <div class="overview-box-status">
+                        +8.9% <i class="pi pi-arrow-circle-up"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="p-col-12 p-md-6 p-lg-3">
+                <div class="overview-box card" style="height: 170px">
+                    <div class="overview-box-value">{{nbrste}}</div>
+                    <div class="overview-box-title">Société</div>
+                    <img src="assets/layout/images/dashboard/graph-tasks.svg" alt="">
+                    <div class="overview-box-status">
+                        +30.9% <i class="pi pi-arrow-circle-up"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="p-col-12 p-md-6 p-lg-3">
+                <div class="overview-box card" style="height: 170px">
+                    <div class="overview-box-value">{{nbrcpt}}</div>
+                    <div class="overview-box-title">Comptables</div>
+                    <img src="assets/layout/images/dashboard/graph-purchases.svg" alt="">
+                    <div class="overview-box-status">
+                        +67.2% <i class="pi pi-arrow-circle-up"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-col-12 p-md-6 p-lg-3">
+                <div class="overview-box card" style="height: 170px">
+                    <div class="overview-box-value">{{nbrFact}}</div>
+                    <div class="overview-box-title">Factures</div>
+                    <img src="assets/layout/images/dashboard/graph-issues.svg" alt="">
+                    <div class="overview-box-status">
+                        +3.0% <i class="pi pi-arrow-circle-up"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-col-12 p-md-6 p-lg-3">
+                <div class="overview-box card" style="height: 170px">
+                    <div class="overview-box-value">{{nbrIs}}</div>
+                    <div class="overview-box-title">Déclarations IS</div>
+                    <img src="assets/layout/images/dashboard/graph-messages.svg" alt="">
+                    <div class="overview-box-status">
+                        +12.5% <i class="pi pi-arrow-circle-up"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="p-col-12 p-md-6 p-lg-3">
+                <div class="overview-box card" style="height: 170px">
+                    <div class="overview-box-value">{{nbracomptes}}</div>
+                    <div class="overview-box-title">Acomptes</div>
+                    <img src="assets/layout/images/dashboard/graph-messages.svg" alt="">
+                    <div class="overview-box-status">
+                        +12.5% <i class="pi pi-arrow-circle-up"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="p-col-12 p-md-6 p-lg-3">
+                <div class="overview-box card" style="height: 170px">
+                    <div class="overview-box-value">{{nbrTva}}</div>
+                    <div class="overview-box-title">Déclarations TVA</div>
+                    <img src="assets/layout/images/dashboard/graph-messages.svg" alt="">
+                    <div class="overview-box-status">
+                        +12.5% <i class="pi pi-arrow-circle-up"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="p-col-12 p-md-6 p-lg-3">
+                <div class="overview-box card" style="height: 170px">
+                    <div class="overview-box-value">{{nbrIr}}</div>
+                    <div class="overview-box-title">Déclarations IR</div>
+                    <img src="assets/layout/images/dashboard/graph-tasks.svg" alt="">
+                    <div class="overview-box-status">
+                        +12.5% <i class="pi pi-arrow-circle-up"></i>
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- fin p-grid-->
+
     </div>
-    <div class="serv1">
-        <div>
-            <i class="bi bi-calculator"></i>
-            <h1 style="font-size: 32px">Services de comptabilité</h1>
-            <p style="font-size: 20px">L'application offre une gamme complète de services comptables complets aux entreprises : déclarations IR, déclarations IS, déclarations TVA</p>
+    <div class="serv">
+        <div class="srvste" *ngIf="isLoggedIn && ste == true">
+            <div class="serv1">
+                <div>
+                    <i class="bi bi-calculator"></i>
+                    <h1 style="font-size: 32px">Services de comptabilité</h1>
+                    <p style="font-size: 20px">L'application offre une gamme complète de services comptables complets aux entreprises : déclarations IR, déclarations IS, déclarations TVA</p>
+                </div>
+            </div>
+            <div class="serv2">
+                <div>
+                    <i class="bi bi-clipboard-check"></i>
+                    <h1>Impôt de taxes</h1>
+                    <p style="font-size: 20px">ce service permet de soumettre et de consulter vos déclarations</p>
+                </div>
+            </div>
+            <div class="serv3">
+                <div>
+                    <i class="bi bi-hourglass-split"></i>
+                    <h1>Services de facturation</h1>
+                    <p style="font-size: 20px">Ce service s’intéresse principalement à la gestion des factures,
+                        leurs paiements, les comptes bancaires, la caisse...</p>
+                </div>
+            </div>
+
         </div>
-    </div>
-    <div class="serv2">
-        <div>
-            <i class="bi bi-clipboard-check"></i>
-            <h1>Impôt de taxes</h1>
-            <p style="font-size: 20px">ce service permet de soumettre et de consulter vos déclarations</p>
+
+        <div class="crd" *ngIf="isLoggedIn && admin==true || isLoggedIn && cpt==true">
+
+            <div class="crd1">
+                <div class="card">
+
+                    <p-table #dt [value]="itemsSte" [rows]="7" [paginator]="true" [globalFilterFields]="['ice','raisonsocial','adresse','dateCreation']"
+                             [rowHover]="true" dataKey="id"
+                             currentPageReportTemplate="Affichage de {first} à {last} des {totalRecords} entrées" [showCurrentPageReport]="true">
+                        <ng-template pTemplate="caption">
+                            <div class="p-d-flex p-ai-center p-jc-between">
+                                <h5 class="p-m-0">Sociétés adhérées</h5>
+                                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
+                </span>
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th pSortableColumn="ice" style="width: 7rem">ICE <p-sortIcon field="ice"></p-sortIcon></th>
+                                <th pSortableColumn="price" style="width: 14rem">Raison sociale <p-sortIcon field="price"></p-sortIcon></th>
+                                <th pSortableColumn="category" style="width: 10rem">Adresse <p-sortIcon field="category"></p-sortIcon></th>
+                                <th pSortableColumn="rating" style="width: 12rem">Date de création <p-sortIcon field="rating"></p-sortIcon></th>
+                                <th style="width: 10rem"></th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-societe>
+                            <tr>
+                                <td>{{societe.ice}}</td>
+                                <td><mark>{{societe.raisonSociale}}</mark></td>
+                                <td>{{societe.adresse}}</td>
+                                <td>{{societe.dateCreation}}</td>
+                                <td>
+                                    <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info p-mr-2" (click)="viewSociete(societe)"></button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="summary">
+                            <div class="p-d-flex p-ai-center p-jc-between">
+                                En total il y a {{itemsSte ? itemsSte.length : 0 }} sociétés.
+                            </div>
+                        </ng-template>
+                    </p-table>
+                </div>
+
+                <p-dialog [(visible)]="societeDialog" [style]="{width: '450px'}" header="Détails de la société" [modal]="true" styleClass="p-fluid">
+                    <ng-template pTemplate="content">
+                        <div class="p-field">
+                            <label for="ice">ICE</label>
+                            <input type="text" pInputText id="ice" [(ngModel)]="societe.ice" required autofocus disabled />
+                        </div>
+                        <div class="p-field">
+                            <label for="raisonsociale">ICE</label>
+                            <input type="text" pInputText id="raisonsociale" [(ngModel)]="societe.raisonSociale" required autofocus disabled />
+                        </div>
+                        <div class="p-field">
+                            <label for="adresse">Adresse</label>
+                            <input type="text" pInputText id="adresse" [(ngModel)]="societe.adresse" required autofocus disabled />
+                        </div>
+                        <div class="p-field">
+                            <label for="datecreation">Date de création</label>
+                            <input type="text" pInputText id="datecreation" [(ngModel)]="societe.dateCreation" required autofocus disabled />
+                        </div>
+                        <div class="p-field">
+                            <label for="age">Age</label>
+                            <input type="text" pInputText id="age" [(ngModel)]="societe.age" required autofocus disabled />
+                        </div>
+
+                    </ng-template>
+
+                    <ng-template pTemplate="footer">
+                        <button pButton pRipple label="Fermer" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+                    </ng-template>
+                </p-dialog>
+
+            </div>
+            <div class="crd2" style="border: 2px solid lightgray; border-radius: 4px; margin-left: 4px; height: 634px">
+                <div style="margin: 10px 20px; text-align: center">
+                    <h3>Répartition sectorielles des PME bénéficiares aux Maroc</h3>
+                </div>
+                <p-chart type="doughnut" [data]="data" [width]="300" [height]="552"></p-chart>
+            </div>
+
         </div>
+
     </div>
-    <div class="serv3">
-        <div>
-            <i class="bi bi-hourglass-split"></i>
-            <h1>services financiers</h1>
-            <p style="font-size: 20px">L'application fournit divers services financiers, notamment xxxxxxxxxXxxxxxxxxxxx...</p>
-        </div>
-    </div>
+
     <div class="textis">
         <div class="tauxIsDiv">
             <h3>Taux de l'impôt sur les sociétés</h3>
@@ -117,15 +293,18 @@
             </table>
         </div>
     </div>
-    <div class="mm">
-        <div id="pie" style="margin: 120px 80px">
-            <h3>Répartition sectorielles des PME bénéficiares aux Maroc</h3>
-            <p>Année 2021</p>
+    <div class="chartpie" *ngIf="isLoggedIn && ste==true">
+        <div class="mm">
+            <div id="pie" style="margin: 120px 80px">
+                <h3>Répartition sectorielles des PME bénéficiares aux Maroc</h3>
+                <p>Année 2021</p>
+            </div>
+        </div>
+        <div class="chart" style="padding: 7px">
+            <p-chart type="pie" [data]="data" [height]="500" [width]="500"></p-chart>
         </div>
     </div>
-    <div class="chart" style="padding: 7px">
-        <p-chart type="pie" [data]="data" [height]="500" [width]="500"></p-chart>
-    </div>
+
     <div id="contactus" class="contactus" >
         <img style="z-index: 0" src="assets/images/imgforcontact.jpg" alt="image contact" id="imgctc">
         <div id="email">
@@ -138,9 +317,9 @@
         </div>
         <div id="local" style="left: 66.66%">
             <div class="dot"><i class="bi bi-geo-alt-fill"></i></div>
-            <p style="color: white; font-size: 27px;">00 Rue XXXXX Guéliz<br> 40000 Marrakech</p>
+            <p style="color: white; font-size: 27px;">57 Rue Mauritania Gueliz<br> 40000 Marrakech</p>
         </div>
-        <div id="goup" routerLinkActive="active" routerLink="/">
+        <div id="goup" routerLinkActive="active" (click)="goToHome()">
             <i class="bi bi-arrow-up"></i>
         </div>
     </div>

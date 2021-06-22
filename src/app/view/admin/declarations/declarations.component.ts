@@ -66,6 +66,14 @@ export class DeclarationsComponent implements OnInit {
         data=>{
           console.log(data);
           this.items=data;
+          for (let i=0;i<this.items.length;i++){
+            if (this.items[i].comptableValidateur==null || this.items[i].comptableTraiteur==null){
+              this.items[i].comptableTraiteur=new Comptable();
+              this.items[i].comptableValidateur=new Comptable();
+              this.items[i].comptableTraiteur.nom="--";
+              this.items[i].comptableValidateur.nom="--";
+            }
+          }
         },error => {
           console.log(error);
         }
@@ -98,14 +106,27 @@ export class DeclarationsComponent implements OnInit {
           console.log(data);
         this.Useritems=data;
         for (let i=0;i<this.Useritems.length; i++){
-          if (this.Useritems[i].roles[0].name== "ROLE_COMPTABLE"){
-            console.log("*****");
-            this.Useritemsfiltered.push(this.Useritems[i]);
+       //  console.log("haaa li bghina");
+        //  console.log(this.Useritems[i]);
+
+            //this.Useritemsfiltered=new Array<User>();
+            if (this.Useritems[i].roles[0].name== "ROLE_COMPTABLE"){
+
+              console.log("*****");
+              console.log(i);
+              console.log(this.Useritems[i]);
+              console.log(this.UserItemsFiltered);
+             // if (this.Useritemsfiltered[i].)
+              this.Useritemsfiltered.push(this.Useritems[i]);
+
+
           }
+
 
 
         }
           this.service.UserItemsFiltered=this.Useritemsfiltered;
+       // console.log(this.service.UserItemsFiltered);
           console.log(this.Useritemsfiltered);
         }, error => {
           console.log(error);

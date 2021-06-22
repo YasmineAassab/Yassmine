@@ -7,8 +7,8 @@ import {FirsthomepageComponent} from "./demo/view/firsthomepage/firsthomepage.co
 import {DashboardDemoComponent} from "./demo/view/dashboarddemo.component";
 
 @Component({
-  selector: 'app-topbar',
-  templateUrl: './app.topbar.component.html',
+    selector: 'app-topbar',
+    templateUrl: './app.topbar.component.html',
     styleUrls: ['./app.topbar.component.css']
 })
 export class AppTopBarComponent implements OnInit{
@@ -49,7 +49,7 @@ export class AppTopBarComponent implements OnInit{
 
     logout() {
         this.tokenStorageService.signOut();
-        window.location.reload();
+        //window.location.reload();
         this.router.navigateByUrl('/');
     }
     reloadPage() {

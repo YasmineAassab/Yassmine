@@ -1,4 +1,4 @@
-<div class="c">
+<!--
 <p-card >
 
     <ng-template pTemplate="header"  class="p-text-center">
@@ -25,10 +25,6 @@
                 <label for="mois">Mois :</label>
                 <input [(ngModel)]="demande.mois" id="mois" type="text" pInputText>
             </div>
-            <!--<div class="p-field p-col">
-                <label for="societe">ice Societe :</label>
-                <input [(ngModel)]="demande.societe.ice" id="societe" type="text" pInputText>
-            </div>-->
         </div>
     </div>
     <ng-template pTemplate="footer" >
@@ -37,10 +33,79 @@
         </div>
     </ng-template>
 </p-card>
+-->
+<div class="card" style="background-color: #d3e7ee">
+
+    <p-toast></p-toast>
+
+    <div><h2 style="margin: 23px;">Demande d'opération</h2></div>
+    <div class="p-grid p-fluid">
+
+        <div class="p-field p-col-12 p-md-3 p-offset-3">
+            <label for="ref">Référence</label>
+            <input id="ref" pInputText  [(ngModel)]="demande.ref">
+        </div>
+
+        <div class="p-field p-col-12 p-md-3">
+            <label for="operation">Opération :</label>
+            <p-dropdown id="operation" [options]="operations" [(ngModel)]="operationSelected" optionLabel="operation" placeholder="sélectionner le type"></p-dropdown>
+        </div>
+
+        <div class="p-field p-col-12 p-md-3 p-offset-3">
+            <label for="annee">Année</label>
+            <input pInputText id="annee" [(ngModel)]="demande.annee">
+        </div>
+        <div class="p-field p-col-12 p-md-3">
+            <label for="mois">Mois</label>
+            <input pInputText  id="mois" inputId="integeronly" [(ngModel)]="demande.mois">
+        </div>
+        <!--
+        <div class="p-fieldset p-col-12 p-md-6 p-offset-3">
+            <button pButton (click)="save()" type="button" class="p-button-raised p-button-rounded" label="sauvegarder" style="padding: 6px"></button>
+        </div>
+        -->
+    </div>
+    <button pButton type="button" (click)="openCreate()" class="p-button-info" icon="pi pi-fw pi-plus" label="Ajouter les factures" style="width: 200px; height: 50px; left: 45%"></button>
+
+    <div class="card" style="min-height: 300px; margin-top: 10px">
+        <p-table [value]="itemsFact" [rows]="9" [paginator]="true" currentPageReportTemplate="Affichage de {first} à {last} des {totalRecords} entrées" [showCurrentPageReport]="true">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="ref" style="width: 7rem">Ref<p-sortIcon field="ref"></p-sortIcon></th>
+                    <th pSortableColumn="MontantHorsTaxe" style="width: 13rem">Montant hors taxe <p-sortIcon field="MontantHorsTaxe"></p-sortIcon></th>
+                    <th pSortableColumn="societeSource" style="width: 10rem">Sté source <p-sortIcon field="societeSource"></p-sortIcon></th>
+                    <th pSortableColumn="societeDistination" style="width: 12rem">Sté destination <p-sortIcon field="societeDistination"></p-sortIcon></th>
+                    <th>Action</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-facture>
+                <tr>
+                    <td>{{facture.ref}}</td>
+                    <td>{{facture.montantHorsTaxe | currency: 'MAD&nbsp;'}}</td>
+                    <td>{{facture.societeSource.ice}}</td>
+                    <td>{{facture.societeDistination.ice}}</td>
+                    <td>
+                        <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-warning p-mr-2" (click)="editFact(facture)"></button>
+                        <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info p-mr-2" (click)="viewFact(facture)"></button>
+                        <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteFact(facture)"></button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+
+
+    </div>
+
+    <div style="margin: 10px">
+        <button pButton (click)="save()" type="button" class="p-button-info" label="sauvegarder" style="padding: 6px; width: 100px; left: 45%; height: 45px"></button>
+    </div>
+
+    <app-facture-create></app-facture-create>
+    <app-facture-edit></app-facture-edit>
+    <app-facture-view></app-facture-view>
+    <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
 </div>
-
-
-
 
 
 
