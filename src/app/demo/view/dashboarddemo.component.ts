@@ -1,16 +1,44 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { EventService } from '../service/eventservice';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { ProductService } from '../service/productservice';
+import {DeclarationISService} from "../../controller/service/declaration-is.service";
+import {DeclarationIrService} from "../../controller/service/declaration-ir.service";
+import {DeclarationTvaService} from "../../controller/service/declaration-tva.service";
+import {FactureService} from "../../controller/service/facture.service";
+import {DemandeService} from "../../controller/service/demande.service";
+import {TokenStorageService} from "../../Security/_services/token-storage.service";
+import {SocieteService} from "../../controller/service/societe.service";
+import {ComptableService} from "../../controller/service/comptable.service";
+import {AcomptesService} from "../../controller/service/acomptes.service";
+import {Societe} from "../../controller/model/societe.model";
+import {Acomptes} from "../../controller/model/acomptes.model";
+
+@Injectable({
+    providedIn: 'root',
+})
 
 @Component({
     templateUrl: './dashboard.component.html',
     styleUrls: ['./tabledemo.scss']
 })
 export class DashboardDemoComponent implements OnInit {
+
+    nbrFact: number;
+    nbrIs: number;
+    nbrIr: number;
+    nbrTva: number;
+    nbrDemande: number;
+    nbrcpt: number;
+    nbrste: number;
+    nbracomptes: number;
+
+    societeDialog: boolean;
+    submitted: boolean;
+    societe: Societe;
 
     data: any;
 
@@ -29,7 +57,22 @@ export class DashboardDemoComponent implements OnInit {
 
     fullcalendarOptions: any;
 
-    constructor(private eventService: EventService, private productService: ProductService) {
+    private roles: string[];
+    isLoggedIn = false;
+    showAdminBoard = false;
+    showModeratorBoard = false;
+    username: string;
+    roleUser: string;
+    admin = false;
+    cpt = false;
+    ste = false;
+
+    constructor(private eventService: EventService, private productService: ProductService,
+                private serviceIS: DeclarationISService, private serviceIR: DeclarationIrService, private serviceTVA: DeclarationTvaService,
+                private serviceFact: FactureService, private serviceDem: DemandeService,
+                private servSte: SocieteService, private servCpt: ComptableService, private servacompt: AcomptesService,
+                private tokenStorageService: TokenStorageService) {
+
         this.data = {
             labels: ['Industrie', 'Services aux entreprises', 'Commerce, réparations automobile et d\'articles domestiques', 'Bâtiment et travaux publics', 'Transports et communications',
                 'Activités financières', 'Services collectifs, sociaux et personnels', 'Hôtels et restaurants'],
@@ -37,34 +80,91 @@ export class DashboardDemoComponent implements OnInit {
                 {
                     data: [52, 18, 12, 9, 6, 1, 1, 1],
                     backgroundColor: [
-                        "#55A7E5",
-                        "#09BAAC",
-                        "yellow",
-                        "red",
-                        "#174794",
+                        "#FF6384",
+                        "#36A2EB",
+                        "#FFCE56",
+                        "#1f8d66",
+                        "#a45dd6",
                         "orange",
                         "#054e0d",
-                        "#FF6384",
+                        "#ff6384",
                     ],
                     hoverBackgroundColor: [
                         "#FF6384",
-                        "#36a2eb",
+                        "#36A2EB",
                         "#FFCE56",
-                        "#fe4533",
-                        "#fe4533",
-                        "#fe4533",
-                        "#fe4533",
-                        "#fe4533",
+                        "#1f8d66",
+                        "#a45dd6",
+                        "orange",
+                        "#054e0d",
+                        "#ff6384",
                     ]
                 }]
         };
     }
 
-    goToHome(){
-        document.getElementById("imgaccueil").scrollIntoView({behavior: "smooth"});
-    }
-
     ngOnInit() {
+
+        this.isLoggedIn = !!this.tokenStorageService.getToken();
+
+        if (this.isLoggedIn) {
+            const user = this.tokenStorageService.getUser();
+            this.roles = user.roles;
+
+            this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+            this.showModeratorBoard = this.roles.includes('ROLE_COMPTABLE');
+
+            this.username = user.username;
+            if (user.roles[0] == 'ROLE_ADMIN'){
+                this.roleUser = 'ADMIN';
+                this.admin = true;
+            }
+            if (user.roles[0] == 'ROLE_COMPTABLE'){
+                this.roleUser = 'COMPTABLE';
+                this.cpt = true;
+            }
+            if (user.roles[0] == 'ROLE_SOCIETE'){
+                this.roleUser = 'SOCIÉTÉ';
+                this.ste = true;
+            }
+        }
+
+        this.serviceDem.findAll().subscribe( data =>{
+            this.nbrDemande = data.length;
+            console.log('nbr demandes' + this.nbrDemande);
+        })
+        this.serviceIS.findAll().subscribe( data =>{
+            this.nbrIs = data.length;
+            console.log('nbr IS' + this.nbrIs);
+        })
+
+        this.serviceIR.findAll().subscribe( data =>{
+            this.nbrIr = data.length;
+            console.log('nbr Ir' + this.nbrIr);
+        })
+
+        this.serviceTVA.findAll().subscribe( data =>{
+            this.nbrTva = data.length;
+            console.log('nbr TVA' + this.nbrTva);
+        })
+
+        this.serviceIS.findAll().subscribe( data =>{
+            this.nbrFact = data.length;
+            console.log('nbr facture' + this.nbrFact);
+        })
+        this.servSte.findAll().subscribe( data =>{
+            this.nbrste = data.length;
+            console.log('nbr ste' + this.nbrste);
+        })
+        this.servCpt.findAll().subscribe( data =>{
+            this.nbrcpt = data.length;
+            console.log('nbr facture' + this.nbrcpt);
+        })
+        this.servacompt.findAll().subscribe( data =>{
+            this.nbracomptes = data.length;
+            console.log('nbr facture' + this.nbrcpt);
+        })
+
         this.productService.getProducts().then(data => this.products = data);
 
         this.tauxis = [
@@ -109,25 +209,25 @@ export class DashboardDemoComponent implements OnInit {
                 borderWidth: 3,
                 fill: true
             },
-            {
-                label: 'Expenses',
-                data: [7, 12, 15, 5, 3, 13, 21],
-                borderColor: [
-                    '#1BA7AF',
-                ],
-                borderWidth: 3,
-                fill: false,
-                pointRadius: [4, 6, 4, 12, 8, 0, 4]
-            },
-            {
-                label: 'New Users',
-                data: [3, 7, 2, 17, 15, 13, 19],
-                borderColor: [
-                    '#E2841A',
-                ],
-                borderWidth: 3,
-                fill: false
-            }]
+                {
+                    label: 'Expenses',
+                    data: [7, 12, 15, 5, 3, 13, 21],
+                    borderColor: [
+                        '#1BA7AF',
+                    ],
+                    borderWidth: 3,
+                    fill: false,
+                    pointRadius: [4, 6, 4, 12, 8, 0, 4]
+                },
+                {
+                    label: 'New Users',
+                    data: [3, 7, 2, 17, 15, 13, 19],
+                    borderColor: [
+                        '#E2841A',
+                    ],
+                    borderWidth: 3,
+                    fill: false
+                }]
         };
 
         this.chartOptions = {
@@ -165,5 +265,28 @@ export class DashboardDemoComponent implements OnInit {
             },
             editable: true
         };
+
+        this.servSte.findAll().subscribe( data => this.itemsSte = data);
+    }
+
+    goToHome(){
+        document.getElementById("header").scrollIntoView({behavior: "smooth"});
+    }
+
+    viewSociete(selected: Societe) {
+        this.societe = {...selected};
+        this.societeDialog = true;
+    }
+
+    hideDialog() {
+        this.societeDialog = false;
+        this.submitted = false;
+    }
+
+    get itemsSte(): Array<Societe> {
+        return this.servSte.items;
+    }
+    set itemsSte(value: Array<Societe>) {
+        this.servSte.items = value;
     }
 }

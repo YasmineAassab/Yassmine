@@ -246,10 +246,11 @@ img#imgctc{
   font-size: 50px;
   color: #1b3b73;
 }
-.bi-calculator, .bi-clipboard-check{
-  color: white;
+.bi-calculator, .bi-clipboard-check, .bi-currency-dollar{
+  color: black;
   font-weight: bolder;
   font-size: 70px;
+  margin-bottom: 20px;
 }
 #goup{
   position: absolute;
@@ -262,10 +263,59 @@ img#imgctc{
   border-radius: 3px;
 }
 #goup :hover{
-   cursor: pointer;
- }
+  cursor: pointer;
+}
 
 .bi-arrow-up{
   color: white;
   font-size: 45px;
+}
+/*------------------------------*/
+
+.p-fluid{
+  padding: 0;
+  overflow: hidden;
+  margin: 0 auto;
+  position: relative;
+  height: 100vh;
+  background: url("~src/assets/layout/images/pages/bg.jpg") no-repeat;
+  /*background: url("~src/assets/images/imgaccueil.jpg") no-repeat;*/
+  background-size: cover;
+}
+.p-grid{
+  margin: 8% 10%;
+}
+.p-col-4{
+  border-radius: 10px;
+  border: 3px solid #526ca9;
+  width: 500px;
+  height: 600px;
+  margin: 10px;
+  background-color: rgba(255,255,255, 0.7);
+}
+.btnlog{
+  position: absolute;
+  right: 5%;
+  width: 200px;
+  margin: 20px;
+}
+.about{
+  position: absolute;
+  right: 5%;
+  width: 200px;
+  margin: 100px 20px 20px 20px;
+}
+.content{
+  padding: 20px 20px;
+}
+.btnlog > button, .about > button{
+  background-color: #526ca9;
+  border-radius: 14px;
+  border: solid #526ca9;
+  color: white;
+  text-align: center;
+  font-size: 17px;
+  font-weight: bold;
+  height: 70px;
+  width: 170px;
 }

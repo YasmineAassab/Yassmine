@@ -191,25 +191,18 @@
 
 }
 
+/* ,,,,,,,,,,,,,,,,,,,,,,, */
 
 .header {
 	grid-area: hd;
 	position: relative;
 }
-.serv1, .serv2, .serv3{
-	position: relative;
-	background-color: #526ca9;
-	height: 480px;
-	color: white;
+
+.crd1{
+	grid-area: crd1;
 }
-.serv1{
-	grid-area: srv1;
-}
-.serv2{
-	grid-area: srv2;
-}
-.serv3{
-	grid-area: srv3;
+.crd2{
+	grid-area: crd2;
 }
 
 .contentis, .textis {
@@ -240,22 +233,79 @@
 .mm{
 	grid-area: mm;
 }
+.widget{
+	grid-area: wd;
+}
+.serv{
+	grid-area: srv;
+}
+.chartpie{
+	grid-area: cp;
+}
 .container-fluid {
 	display: grid;
 	grid-template-columns: repeat(9, 1fr);
 	grid-auto-rows: minmax(100px, auto);
 	grid-template-areas:
       "hd hd hd hd   hd   hd   hd   hd   hd"
-      "srv1 srv1 srv1 srv2 srv2 srv2 srv3 srv3 srv3"
+      "srv srv srv srv srv srv srv srv srv"
       "tis tis tis tis cis cis cis cis cis"
       "tir tir tir tir cir cir cir cir cir"
-	  "mm mm mm mm ch ch ch ch ch"
-	  //"ch ch ch ch ch ch ch ch ch"
+	  "cp cp cp cp cp cp cp cp cp"
       "ctc ctc ctc ctc ctc ctc ctc ctc ctc";
 	margin: 0;
 	padding: 0;
 	width: 100%;
 }
+.chartpie{
+	display: grid;
+	grid-template-columns: repeat(9, 1fr);
+	grid-auto-rows: minmax(100px, auto);
+	grid-template-areas:
+      "mm mm mm mm ch ch ch ch ch";
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+.srvste{
+	display: grid;
+	grid-template-columns: repeat(9, 1fr);
+	grid-auto-rows: minmax(100px, auto);
+	grid-template-areas:
+      "srv1 srv1 srv1 srv2 srv2 srv2 srv3 srv3 srv3";
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+.crd{
+	display: grid;
+	grid-template-columns: repeat(9, 1fr);
+	grid-auto-rows: minmax(100px, auto);
+	grid-template-areas:
+      "crd1 crd1 crd1 crd1 crd1 crd1 crd2 crd2 crd2";
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+.serv1, .serv2, .serv3{
+	position: relative;
+	background-color: #526ca9;
+	height: 480px;
+	color: white;
+}
+.serv1{
+	grid-area: srv1;
+}
+.serv2{
+	grid-area: srv2;
+}
+.serv3{
+	grid-area: srv3;
+}
+.serv1>div, .serv2>div, .serv3>div{
+	margin: 100px;
+}
+
 img{
 	width: 100%;
 	height: 685px;
@@ -419,9 +469,7 @@ td.pourc{
 	font-size: 17px;
 }
 
-.serv1>div, .serv2>div, .serv3>div{
-	margin: 100px;
-}
+
 img#imgctc{
 	height: 460px;
 }
@@ -476,4 +524,10 @@ img#imgctc{
 #pie > p {
 	font-family: "Goudy Old Style", serif;
 	font-size: 22px;
+}
+mark {
+	color: #7c5d3b;
+	background-color: #ffd8b1;
+	font-family: system-ui;
+	font-weight: bold;
 }

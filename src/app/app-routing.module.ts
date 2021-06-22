@@ -44,16 +44,16 @@ import {DashboardDemoComponent} from "./demo/view/dashboarddemo.component";
 
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import {AcomptesListComponent} from "./view/admin/acomptes/acomptes-list/acomptes-list.component";
-import {FactureJournalComponent} from './view/admin/facture/facture-journal/facture-journal.component';
 
 
 @NgModule({
     imports: [
         RouterModule.forRoot([
-           // {path: '', component: AppLoginComponent},
+            // {path: '', component: AppLoginComponent},
             //{path: 'sign-up', component: SignUpComponent},
             //{path: '', component: FirsthomepageComponent},
-            {path: '', component: AppMainComponent,
+            {path: '', component: FirsthomepageComponent},
+            {path: 'home', component: AppMainComponent,
                 children: [
 
                     {path: '', component: DashboardDemoComponent},
@@ -62,6 +62,7 @@ import {FactureJournalComponent} from './view/admin/facture/facture-journal/fact
                     {path: 'declaration-ir', component: DeclarationIrComponent},
                     {path: 'declaration-ir/list', component: ChercherDeclarationIRComponent},
                     {path: 'comptable', component: ComptableBoardComponent},
+                   // {path: 'paiement/is', component: PaiementComponent},
                     {path: 'declarations', component: DeclarationsComponent},
                     {path: 'traitement', component: ComptableBoardComponent},
                     {path: 'demandes', component: DeclarationsComponent},
@@ -74,7 +75,6 @@ import {FactureJournalComponent} from './view/admin/facture/facture-journal/fact
                     {path: 'declarations', component: DeclarationsComponent},
                     {path: 'contact', component: ContactComponent},
                     {path: 'demande/list', component: DemandeListComponent},
-                    {path: 'demande/validation', component: ComptableValidateurComponent},
                     {path: 'vis', component: VisualiserDemandeComponent},
                     {path: 'declaration-is', component: DeclarationsISComponent},
                     {path: 'declarations-is/create', component: DeclarationIsCreateComponent},
@@ -84,7 +84,6 @@ import {FactureJournalComponent} from './view/admin/facture/facture-journal/fact
                     {path: 'declarations-is/chart', component: ChartsComponent},
                     {path: 'facture', component: FactureComponent},
                     {path: 'view/facture/create', component: FactureCreateComponent},
-                    {path: 'view/facture/journal', component: FactureJournalComponent},
                     {path: 'declaration-tva', component: DeclarationTvaListComponent},
                     {path: 'declaration-tva/create', component: DeclarationTvaCreateComponent},
                     {path: 'utilities/display', component: DisplayComponent},
@@ -96,7 +95,7 @@ import {FactureJournalComponent} from './view/admin/facture/facture-journal/fact
                     {path: 'utilities/spacing', component: SpacingComponent},
                     {path: 'utilities/typography', component: TypographyComponent},
                     {path: 'utilities/text', component: TextComponent}
-                    ]
+                ]
             },
             {path: 'sign-up', component: SignUpComponent},
             {path: 'error', component: AppErrorComponent},

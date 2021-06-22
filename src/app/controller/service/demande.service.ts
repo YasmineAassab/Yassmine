@@ -337,6 +337,7 @@ export class DemandeService {
     if (this._UserItemsFiltered==null){
       this._UserItemsFiltered= new Array<User>();
     }
+
     return this._UserItemsFiltered;
   }
 

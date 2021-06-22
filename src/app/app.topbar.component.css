@@ -73,3 +73,12 @@ h6{
 }
 
 
+#signout{
+    text-decoration: none;
+}
+.bi-person-circle{
+    font-weight: bolder;
+    color: #FFFFFF;
+    margin-right: 15px;
+    font-size: 33px;
+}
