@@ -7,18 +7,39 @@ import {DeclarationIsObject} from "../../../controller/model/declaration-is-obje
 import {DeclarationIrService} from '../../../controller/service/declaration-ir.service';
 import {DemandeVo} from "../../../controller/model/demande-vo.model";
 import {Comptable} from '../../../controller/model/comptable.model';
-
-
+import {Societe} from '../../../controller/model/societe.model';
+/*interface socie{
+  ice:string;
+}*/
+interface com {
+  operation:string;
+}
 @Component({
   selector: 'app-demande-list',
   templateUrl: './demande-list.component.html',
   styleUrls: ['./demande-list.component.scss','./demande-list.component.css']
 })
 export class DemandeListComponent implements OnInit {
+  operations=new Array<com>();
+  operationSelected:com;
+  ices=new Array<Societe>();
+  iceSelected:Societe;
+  //iceSelected:string;
+ // ices=new Array<string>();
 
 
   constructor(private service: DemandeService, private router: Router, private service2: DeclarationISService,
-              private declarationIRService: DeclarationIrService,private demandeService:DemandeService) { }
+              private declarationIRService: DeclarationIrService,private demandeService:DemandeService) {
+
+    this.operations = [
+      {operation: 'Declaration IR'},
+      {operation: 'Declaration IS'},
+      {operation: 'Declaration TVA'},
+
+    ];
+
+  }
+
 
 
   get currentComptable(): Comptable {
@@ -32,6 +53,11 @@ export class DemandeListComponent implements OnInit {
 
 
   public searchCriteria(){
+    console.log(this.iceSelected);
+    this.demandeVo.societe=this.iceSelected.ice;
+    this.demandeVo.operation=this.operationSelected.operation;
+    this.demandeVo.comptableTraiteurCode=this.currentComptable.code;
+   // this.demandeVo.comptableValidateurCode=null;
     this.service.searchCriteria().subscribe(data => this.items = data);
   }
 
@@ -55,6 +81,8 @@ export class DemandeListComponent implements OnInit {
   }
 
   public navigateToCreate(selected: Demande){
+    this.currentDemande=selected;
+
     this.object.societe = selected.societe;
     this.object.annee = selected.annee;
     this.demandeService.getDemande(selected).subscribe(
@@ -104,11 +132,37 @@ export class DemandeListComponent implements OnInit {
 
   }*/
 
+
+
+  get societes(): Array<Societe> {
+
+    return this.service.societes;
+  }
+
+  set societes(value: Array<Societe>) {
+    this.service.societes = value;
+  }
+
   ngOnInit(): void {
     this.service.connectedComptable();
     //this.service.findAll().subscribe(data => this.items = data);
     this.service.getComptableDemande();
+  this.service.findAllSociete().subscribe(
+      data=>{
+        this.societes=data;
 
+      //  this.ices=new Array<string>();
+
+         /* for (let i=0;i<this.societes.length;i++){
+            this.ices[i].ice=data[i].ice;
+          }*/
+          console.log("waaaaaaaaaaaaaaaaaaaaa*************************************");
+        console.log(data);
+        console.log(this.societes);
+      },error => {
+        console.log(error);
+      }
+  );
 
 
   }

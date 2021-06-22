@@ -12,14 +12,22 @@ import {User} from '../../../Security/model/user.model';
 import {Societe} from '../../../controller/model/societe.model';
 import {DemandeVo} from '../../../controller/model/demande-vo.model';
 import {Comptable} from '../../../controller/model/comptable.model';
+import {TokenStorageService} from '../../../Security/_services/token-storage.service';
+import {EtatDemande} from '../../../controller/model/etat-demande.model';
 
+
+interface com {
+  operation:string;
+}
 
 @Component({
   selector: 'app-declarations',
   templateUrl: './declarations.component.html',
-  styleUrls: ['./declarations.component.scss']
+  styleUrls: ['./declarations.component.scss','./declarations.component.css']
 })
 export class DeclarationsComponent implements OnInit {
+  operations=new Array<com>();
+  operationSelected:com;
   cols: any[];
   isCreated:boolean=false;
   isSaved:boolean=true;
@@ -30,7 +38,14 @@ export class DeclarationsComponent implements OnInit {
 
   //isSet:boolean;
   //comptables= new Array<Comptable>();
-  constructor(private messageService: MessageService, private confirmationService: ConfirmationService,private service: DemandeService,private userService:UserService) {
+  constructor(private token:TokenStorageService,private messageService: MessageService, private confirmationService: ConfirmationService,private service: DemandeService,private userService:UserService) {
+    this.operations = [
+      {operation: 'Declaration IR'},
+      {operation: 'Declaration IS'},
+      {operation: 'Declaration TVA'},
+
+    ];
+
   }
 
   ngOnInit(): void {
@@ -40,12 +55,13 @@ export class DeclarationsComponent implements OnInit {
     this.initCol();
     this.service.findAllDemande();
     this.getUsersComptable();
-
+    this.service.getEtatsDemande();
 
   }
 
 
   searchDeclaration(){
+    this.demandeVo.operation=this.operationSelected.operation;
     this.service.searchDeclaration().subscribe(
         data=>{
           console.log(data);
@@ -76,6 +92,7 @@ export class DeclarationsComponent implements OnInit {
     this.service.UserItemsFiltered = value;
   }
   getUsersComptable(){
+
     this.userService.getUsersComptable().subscribe(
         data => {
           console.log(data);
@@ -95,6 +112,15 @@ export class DeclarationsComponent implements OnInit {
         }
     );
   }
+  get etats(): Array<EtatDemande> {
+
+    return this.service.etats;
+  }
+
+  set etats(value: Array<EtatDemande>) {
+    this.service.etats = value;
+  }
+
 
 
   public save() {
@@ -129,17 +155,19 @@ export class DeclarationsComponent implements OnInit {
   public delete(selected: Demande) {
     this.selected = selected;
     this.confirmationService.confirm({
-      message: 'Are you sure you want to refuse this Request ?',
-      header: 'Confirm',
+      message: 'Êtes-vous sûr de vouloir refuser cette demande ?',
+      header: 'Confirmer',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.service.deleteDemande(selected).subscribe(
+        this.selected.etatDemande.libelle="rejetée";
+        this.service.updateDemande();
+   /*     this.service.deleteDemande(selected).subscribe(
             data=>{
               console.log("safi mchat");
             },error => {
               console.log(error);
             }
-        );
+        );*/
 
         /*this.generateID();*/
       //  console.log("*****dkuuul");
@@ -150,8 +178,8 @@ export class DeclarationsComponent implements OnInit {
         this.selected = new Demande();
         this.messageService.add({
           severity: 'success',
-          summary: 'Successful',
-          detail: 'Declaration IR Employe Deleted',
+          summary: 'à succès',
+          detail: 'Déclaration IR Employé refusée',
           life: 3000
         });
 

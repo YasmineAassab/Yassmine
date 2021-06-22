@@ -1,56 +1,75 @@
-<p-dialog [(visible)]="createDialog" [style]="{width: '450px'}" header="facture Details" [modal]="true" styleClass="p-fluid">
+<p-dialog [(visible)]="createDialog" [style]="{width: '450px'}" header="facture Create" [modal]="true" styleClass="p-fluid">
     <ng-template pTemplate="content">
         <div>
-        <div class="p-field">
-            <label for="ref">Reference</label>
-            <input type="text" pInputText id="ref" [(ngModel)]="selected.ref" required autofocus />
-            <small class="p-invalid" *ngIf="submitted && !selected.ref">ref is required.</small>
-        </div>
-        <div class="p-field">
-            <label for="total">libelle</label>
-            <input type="text" pInputText id="total" [(ngModel)]="selected.libelle" required autofocus />
-            <small class="p-invalid" *ngIf="submitted && !selected.libelle">total is required.</small>
-        </div>
-        <div class="p-field">
-            <label for="total">Date Operation</label>
-            <input type="date" pInputText id="total" [(ngModel)]="selected.dateOperation" required autofocus />
-            <small class="p-invalid" *ngIf="submitted && !selected.dateOperation">total is required.</small>
-        </div>
-        <div class="p-field">
-            <label for="total">Montan hors taxe</label>
-            <input type="number" pInputText id="total" [(ngModel)]="selected.montantHorsTaxe" required autofocus />
-            <small class="p-invalid" *ngIf="submitted && !selected.montantHorsTaxe">total is required.</small>
-        </div>
-        <div class="p-field">
-            <label for="total">Type Operation</label>
-            <input type="text" pInputText id="total" [(ngModel)]="selected.typeOperation" required autofocus />
-        <small class="p-invalid" *ngIf="submitted && !selected.typeOperation">total is required.</small>
-        </div>
-        <div class="p-field">
-            <label for="total">Societe Source</label>
-            <input type="text" pInputText id="total" [(ngModel)]="selected.societeSource.ice" required autofocus />
-            <small class="p-invalid" *ngIf="submitted && !selected.societeSource.ice">total is required.</small>
-        </div>
-        <div class="p-field">
-            <label for="total">Societe distination</label>
-            <input type="text" pInputText id="total" [(ngModel)]="selected.societeDistination.ice" required autofocus />
-            <small class="p-invalid" *ngIf="submitted && !selected.societeDistination.ice">total is required.</small>
-        </div>
-        <div class="p-field">
-            <label for="total">etat Facture </label>
-            <input type="text" pInputText id="total" [(ngModel)]="selected.etatFacture.code" required autofocus />
-            <small class="p-invalid" *ngIf="submitted && !selected.etatFacture.code">total is required.</small>
-        </div>
-            <div class="p-field">
-                <label for="total">etat Paiement </label>
-                <input type="text" pInputText id="total" [(ngModel)]="selected.etatPaiement.code" required autofocus />
-                <small class="p-invalid" *ngIf="submitted && !selected.etatPaiement.code">total is required.</small>
+            <div class="row">
+                <div class="p-field col-md-6">
+                    <label for="ref">Reference</label>
+                    <input type="text" pInputText id="ref" [(ngModel)]="selected.ref" required autofocus />
+                    <small class="p-invalid" *ngIf="submitted && !selected.ref">ref is required.</small>
+                </div>
+                <div class="p-field col-md-6">
+                    <label for="total">libelle</label>
+                    <input type="text" pInputText id="total" [(ngModel)]="selected.libelle" required autofocus />
+                    <small class="p-invalid" *ngIf="submitted && !selected.libelle">total is required.</small>
+                </div>
+
+                <div class="p-field col-md-6">
+                    <label for="total">Date Operation</label>
+                    <input type="date" pInputText id="total" [(ngModel)]="selected.dateOperation" required autofocus />
+                    <small class="p-invalid" *ngIf="submitted && !selected.dateOperation">total is required.</small>
+                </div>
+                <div class="p-field col-md-6">
+                    <label for="total">Montan hors taxe</label>
+                    <input type="number" pInputText id="total" [(ngModel)]="selected.montantHorsTaxe" required autofocus />
+                    <small class="p-invalid" *ngIf="submitted && !selected.montantHorsTaxe">total is required.</small>
+                </div>
+                <div class="p-field col-md-6">
+                    <label for="total">Societe Source</label>
+                    <input type="text" pInputText id="total" [(ngModel)]="selected.societeSource.ice" required autofocus />
+                    <small class="p-invalid" *ngIf="submitted && !selected.societeSource.ice">total is required.</small>
+                </div>
+                <div class="p-field col-md-6">
+                    <label for="total">Societe distination</label>
+                    <input type="text" pInputText id="total" [(ngModel)]="selected.societeDistination.ice" required autofocus />
+                    <small class="p-invalid" *ngIf="submitted && !selected.societeDistination.ice">total is required.</small>
+                </div>
+
+                <div class=" col-md-6 mb-md-4  ">
+                    <label>Type d'operation</label><br>
+                    <select class="w-100 h-75 mt-md-2 " [(ngModel)]="selected.typeOperation">
+                        <option   >CRÉDIT</option>
+                        <option  >DÉBIT</option>
+                    </select>
+                </div>
+                <div class=" col-md-6 mb-md-4  ">
+                    <label>TVA</label><br>
+                    <select class="w-100 h-75 mt-md-2" [(ngModel)]="selected.tva.ref">
+                        <option value="TVA1"  >3%</option>
+                        <option value="TVA2" >5%</option>
+                        <option value="TVA3" >7%</option>
+                    </select>
+                </div>
+
+
+                <div class=" col-md-6   ">
+                    <label>etat Facture</label><br>
+                    <select class="w-100 h-75 mt-md-2" [(ngModel)]="selected.etatFacture.code">
+                        <option value="1"   > complet</option>
+                        <option  value="2" >partiellement complet</option>
+                        <option  value="3" >non complet</option>
+                    </select>
+                </div>
+                <div class=" col-md-6   ">
+                    <label>etat paiement</label><br>
+                    <select class="w-100 h-75 mt-md-2" [(ngModel)]="selected.etatPaiement.code">
+                        <option value="1"   > payée</option>
+                        <option  value="2" >partiellement payée</option>
+                        <option  value="3" >non payée</option>
+                    </select>
+                </div>
+
+
             </div>
-        <div class="p-field">
-            <label for="total">TVA </label>
-            <input type="text" pInputText id="total" [(ngModel)]="selected.tva.ref" required autofocus />
-            <small class="p-invalid" *ngIf="submitted && !selected.tva.ref">total is required.</small>
-        </div>
         </div>
     </ng-template>
 

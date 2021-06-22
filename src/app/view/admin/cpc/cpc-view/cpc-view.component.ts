@@ -1,61 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import {CpcService} from '../../../../Controller/Service/cpc.service';
-import {CalCpcVo} from '../../../../Controller/Model/cal-cpc-vo.model';
-import {Facture} from "../../../../Controller/Model/facture.model";
-import {CpcSave} from "../../../../Controller/Model/cpc-vo.model";
-import {Cpc} from "../../../../Controller/Model/cpc.model";
-
-import {DialogModule} from 'primeng/dialog';
-
+import {Facture} from '../../../../controller/model/facture.model';
+import {CalCpcVo} from '../../../../controller/model/cal-cpc-vo.model';
+import {CpcSave} from '../../../../controller/model/cpc-vo.model';
+import {Cpc} from '../../../../controller/model/cpc.model';
+import {CpcService} from '../../../../controller/service/cpc.service';
+import {CpcFacture} from '../../../../controller/model/cpc-facture.model';
+import {ConfirmationService, MessageService} from 'primeng/api';
+import {async} from 'rxjs';
 @Component({
   selector: 'app-cpc-view',
   templateUrl: './cpc-view.component.html',
   styleUrls: ['./cpc-view.component.scss']
 })
 export class CpcViewComponent implements OnInit {
-  get cpcSave(): Cpc {
-    if (this._cpcSave == null){
-      this._cpcSave = new Cpc();
-    }
-    return this._cpcSave;
-  }
-
-  set cpcSave(value: Cpc) {
-    this._cpcSave = value;
-  }
-  get displayPosition(): boolean {
-    return this._displayPosition;
-  }
-
-  set displayPosition(value: boolean) {
-    this._displayPosition = value;
-  }
-
-  get cpcVo(): CpcSave {
-    if (this._cpcVo == null){
-      this._cpcVo = new CpcSave();
-    }
-    return this._cpcVo;
-  }
-
-  set cpcVo(value: CpcSave) {
-    this._cpcVo = value;
-  }
-  private _produitExp: number;
-  private _prodFinance: number;
-  private _prodNCourant: number;
-  private _chargEx: number;
-  private _chargFinance: number;
-  private _chargNCourant: number;
-  private _surImpots: number;
-  private _calCpcVo: CalCpcVo;
   private _cpcVo: CpcSave;
   private _displayPosition: boolean;
   private _cpcSave: Cpc;
   cols: any[];
   cols2: any[];
   cpcTable: CpcTable[];
-  constructor(private service: CpcService) { }
+  constructor(private service: CpcService, private messageService: MessageService, private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
     this.init();
@@ -139,75 +103,92 @@ export class CpcViewComponent implements OnInit {
         data => {
           if (type === 'PRODUITS D’EXPLOITATION'){
             this.service.items = data;
-            console.log( this.items);
+            console.log( data);
           }
           else if (type === 'CHARGES D’EXPLOITATION') {
             this.service.items1 = data;
-            console.log('CHARGES D’EXPLOITATION' + '=' + this.service.items1);
+            console.log(data);
           }
           else if (type === 'PRODUITS FINANCIERS') {
             this.service.items2 = data;
-            console.log('PRODUITS FINANCIERS' + '=' + this.service.items2);
+            console.log(data);
           }
           else if (type === 'CHARGES FINANCIERES') {
             this.service.items3 = data;
-            console.log('CHARGES FINANCIERES' + '=' + this.service.items3);
+            console.log(data);
           }
           else if (type === 'PRODUITS NON COURANTS') {
             this.service.items4 = data;
-            console.log('PRODUITS NON COURANTS' + '=' + this.service.items4);
+            console.log(data);
           }
           else if (type === 'CHARGES NON COURANTES') {
             this.service.items5 = data;
-            console.log('CHARGES NON COURANTES' + '=' + this.service.items5);
+            console.log(data);
           }
         }, error => {
           console.log('erreur');
         }
     );
   }
-  public  findCpc(){
+ public  findCpc(){
     return this.service.find(this.cpcVo).subscribe(
         data => {console.log(data);
-                 this.service.items01 = data;
-                 console.log(this.service.items01);
+          this.service.items01 = data;
+          console.log(this.service.items01);
         }, error => {
           console.log('erreur');
         }
     );
   }
- public find() {
+  public find() {
     this.searchProduitExploitation(this.calCpcVo,"PRODUITS D’EXPLOITATION");
     this.searchProduitFinancier(this.calCpcVo, "PRODUITS FINANCIERS");
     this.searchProduitNonCourant(this.calCpcVo, "PRODUITS NON COURANTS");
-    this.searchChargeExploitation(this.calCpcVo, "CHARGES DEXPLOITATION");
+    this.searchChargeExploitation(this.calCpcVo, "CHARGES D’EXPLOITATION");
     this.searchChargeFinancier(this.calCpcVo, "CHARGES FINANCIERES");
     this.searchChargeNonCourant(this.calCpcVo, "CHARGES NON COURANTES");
     this.resultatSurImpots(this.resultatAvantImpots);
   }
   delete(c: Facture, items: Array<Facture>){
-    return new Promise((resolve, reject) => {
-      return this.service.delete(c, this.findIndexById(c.id, items)).subscribe(
-          data => {
-            console.log(data);
-            items.splice(this.findIndexById(c.id, items), 1);
-            this.click();
-          }, error => {
-            console.log('erreur');
-          }
-      );
-      resolve();
+    this.confirmationService.confirm({
+      message: 'Êtes-vous sûr de vouloir supprimer cette Facture?',
+      header: 'Confirm',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        return new Promise((resolve, reject) => {
+          return this.service.delete(c, this.findIndexById(c.id, items)).subscribe(
+              data => {
+                console.log(data);
+                items.splice(this.findIndexById(c.id, items), 1);
+                this.click();
+              }, error => {
+                console.log('erreur');
+              }
+          );
+          resolve();
+        });
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Facture Supprimé',
+          detail: 'Avec succès',
+          life: 3000
+        });
+      }
     });
   }
-    public findIndexById(id: number, items: Array<Facture>): number{
-      return this.service.findIndexById(id, items);
-    }
+  public findIndexById(id: number, items: Array<Facture>): number{
+    return this.service.findIndexById(id, items);
+  }
   save(){
-    this.cpcSave.dateMaxCpc = this.calCpcVo.datemax;
-    this.cpcSave.dateMinCpc = this.calCpcVo.datemin;
     return this.service.save(this.remplir()).subscribe(
         data => {
-            console.log(data);
+          console.log(data);
+          this.messageService.add({
+            severity: 'success',
+            summary: 'CPC Crée',
+            detail: 'Avec succès',
+            life: 3000
+          });
         }
     );
   }
@@ -218,80 +199,105 @@ export class CpcViewComponent implements OnInit {
     this.cpcSave.totalChargFin = this.chargFinance;
     this.cpcSave.totalProdNCour = this.prodNCourant;
     this.cpcSave.totalChargNCour = this.chargNCourant;
-    return this.cpcSave;
+    this.cpcSave.dateMaxCpc = this.calCpcVo.datemax;
+    this.cpcSave.dateMinCpc = this.calCpcVo.datemin;
+    let cpc: Cpc;
+    cpc = this.cpcSave;
+    this.items.forEach(function(item){
+      let cpcFacture: CpcFacture;
+      cpcFacture = new CpcFacture();
+      cpcFacture.facture = item;
+      cpcFacture.included = true;
+      cpc.cpcFactures.push(cpcFacture);
+    });
+    this.items1.forEach(function(item){
+      let cpcFacture: CpcFacture;
+      cpcFacture = new CpcFacture();
+      cpcFacture.facture = item;
+      cpcFacture.included = true;
+      cpc.cpcFactures.push(cpcFacture);
+    });
+    this.items2.forEach(function(item){
+      let cpcFacture: CpcFacture;
+      cpcFacture = new CpcFacture();
+      cpcFacture.facture = item;
+      cpcFacture.included = true;
+      cpc.cpcFactures.push(cpcFacture);
+    });
+    this.items3.forEach(function(item){
+      let cpcFacture: CpcFacture;
+      cpcFacture = new CpcFacture();
+      cpcFacture.facture = item;
+      cpcFacture.included = true;
+      cpc.cpcFactures.push(cpcFacture);
+    });
+    this.items4.forEach(function(item){
+      let cpcFacture: CpcFacture;
+      cpcFacture = new CpcFacture();
+      cpcFacture.facture = item;
+      cpcFacture.included = true;
+      cpc.cpcFactures.push(cpcFacture);
+    });
+    this.items5.forEach(function(item){
+      let cpcFacture: CpcFacture;
+      cpcFacture = new CpcFacture();
+      cpcFacture.facture = item;
+      cpcFacture.included = true;
+      cpc.cpcFactures.push(cpcFacture);
+    });
+    return cpc;
   }
   get calCpcVo(): CalCpcVo {
-    if (this._calCpcVo == null){
-      this._calCpcVo = new CalCpcVo();
-    }
-    return this._calCpcVo;
+    return this.service.calCpcVo;
   }
 
   set calCpcVo(value: CalCpcVo) {
-    this._calCpcVo = value;
+    this.service.calCpcVo = value;
   }
   get produitExp(): number {
-    if (this._produitExp == null){
-      this._produitExp = 0;
-    }
-    return this._produitExp;
+    return this.service.produitExp;
   }
 
   set produitExp(value: number) {
-    this._produitExp = value;
+    this.service.produitExp = value;
   }
   get prodNCourant(): number {
-    if (this._prodNCourant == null){
-      this._prodNCourant = 0;
-    }
-    return this._prodNCourant;
+    return this.service.prodNCourant;
   }
 
   set prodNCourant(value: number) {
-    this._prodNCourant = value;
+    this.service.prodNCourant = value;
   }
 
   get chargEx(): number {
-    if (this._chargEx == null){
-      this._chargEx = 0;
-    }
-    return this._chargEx;
+    return this.service.chargEx;
   }
 
   set chargEx(value: number) {
-    this._chargEx = value;
+    this.service.chargEx = value;
   }
 
   get chargFinance(): number {
-    if (this._chargFinance == null){
-      this._chargFinance = 0;
-    }
-    return this._chargFinance;
+    return this.service.chargFinance;
   }
 
   set chargFinance(value: number) {
-    this._chargFinance = value;
+    this.service.chargFinance = value;
   }
 
   get chargNCourant(): number {
-    if (this._chargNCourant == null){
-      this._chargNCourant = 0;
-    }
-    return this._chargNCourant;
+    return this.service.chargNCourant;
   }
 
   set chargNCourant(value: number) {
-    this._chargNCourant = value;
+    this.service.chargNCourant = value;
   }
   get prodFinance(): number {
-    if (this._prodFinance == null){
-      this._prodFinance = 0;
-    }
-    return this._prodFinance;
+    return this.service.prodFinance;
   }
 
   set prodFinance(value: number) {
-    this._prodFinance = value;
+    this.service.prodFinance = value;
   }
   get resultatExploi(): number {
     return  this.produitExp - this.chargEx;
@@ -309,14 +315,11 @@ export class CpcViewComponent implements OnInit {
     return  this.resultatCourant + this.resultatNonCourant;
   }
   get surImpots(): number {
-    if (this._surImpots == null){
-      this._surImpots = 0;
-    }
-    return this._surImpots;
+    return this.service.surImpots;
   }
 
   set surImpots(value: number) {
-    this._surImpots = value;
+    this.service.surImpots = value;
   }
   get resultatNet(): number {
     return  this.resultatAvantImpots - this.surImpots ;
@@ -330,24 +333,24 @@ export class CpcViewComponent implements OnInit {
   public openCreate() {
     this.service.viewDialog = true;
   }
- public show() {
+  public show() {
     document.getElementById('tab').style.display = 'block';
   }
-    get items1(): Array<Facture> {
-        return this.service.items1;
-    }
-    get items2(): Array<Facture> {
-        return this.service.items2;
-    }
-    get items3(): Array<Facture> {
-        return this.service.items3;
-    }
-    get items4(): Array<Facture> {
-        return this.service.items4;
-    }
-    get items5(): Array<Facture> {
-        return this.service.items5;
-    }
+  get items1(): Array<Facture> {
+    return this.service.items1;
+  }
+  get items2(): Array<Facture> {
+    return this.service.items2;
+  }
+  get items3(): Array<Facture> {
+    return this.service.items3;
+  }
+  get items4(): Array<Facture> {
+    return this.service.items4;
+  }
+  get items5(): Array<Facture> {
+    return this.service.items5;
+  }
   detaille() {
     this.bring('PRODUITS D’EXPLOITATION', this.calCpcVo);
     this.bring('CHARGES D’EXPLOITATION', this.calCpcVo);
@@ -356,20 +359,61 @@ export class CpcViewComponent implements OnInit {
     this.bring('PRODUITS NON COURANTS', this.calCpcVo);
     this.bring('CHARGES NON COURANTES', this.calCpcVo);
   }
-
-  navigateAssociates(url: string) {
-    window.open(url, '_blank');
-  }
-
   click() {
     this.find();
     this.detaille();
     this.init();
   }
+  get updateDialog(): boolean {
+    return this.service.updateDialog;
+  }
+
+  set updateDialog(value: boolean) {
+    this.service.updateDialog = value;
+  }
+
+  showDialog(c: Facture) {
+    this.service.selected1 = c;
+    this.service.updateDialog = true;
+  }
+  get updload(): boolean {
+    return this.service.updload;
+  }
+
+  set updload(value: boolean) {
+    this.service.updload = value;
+  }
+  get cpcSave(): Cpc {
+    if (this._cpcSave == null){
+      this._cpcSave = new Cpc();
+    }
+    return this._cpcSave;
+  }
+
+  set cpcSave(value: Cpc) {
+    this._cpcSave = value;
+  }
+  get displayPosition(): boolean {
+    return this._displayPosition;
+  }
+
+  set displayPosition(value: boolean) {
+    this._displayPosition = value;
+  }
+
+  get cpcVo(): CpcSave {
+    if (this._cpcVo == null){
+      this._cpcVo = new CpcSave();
+    }
+    return this._cpcVo;
+  }
+
+  set cpcVo(value: CpcSave) {
+    this._cpcVo = value;
+  }
 }
 export interface CpcTable {
   numero;
   libelle;
-/*  montant;*/
+  /*  montant;*/
 }
-

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {SousClasseComptable} from "../../../../../Controller/Model/sousClasseComptable.model";
-import {CompteComptableService} from "../../../../../Controller/Service/compteComptable.service";
-import {CompteComptable} from "../../../../../Controller/Model/compteComptable.model";
+import {CompteComptable} from '../../../../../controller/model/compteComptable.model';
+import {CompteComptableService} from '../../../../../controller/service/compteComptable.service';
 
 @Component({
   selector: 'app-compte-create',
@@ -33,6 +32,6 @@ export class CompteCreateComponent implements OnInit {
   }
 
   save() {
-return this.service.save(this.service.num2,this.selected).subscribe();
+    return this.service.save(this.service.num2,this.selected).subscribe();
   }
 }

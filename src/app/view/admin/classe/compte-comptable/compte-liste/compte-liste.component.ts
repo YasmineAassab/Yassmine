@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ClasseComptable} from "../../../../../Controller/Model/classeComptable.model";
-import {CompteComptableService} from "../../../../../Controller/Service/compteComptable.service";
-import {CompteComptable} from "../../../../../Controller/Model/compteComptable.model";
+import {CompteComptable} from '../../../../../controller/model/compteComptable.model';
+import {CompteComptableService} from '../../../../../controller/service/compteComptable.service';
+import {ClasseComptableService} from '../../../../../controller/service/classeComptable.service';
 
 @Component({
   selector: 'app-compte-liste',
@@ -10,7 +10,7 @@ import {CompteComptable} from "../../../../../Controller/Model/compteComptable.m
 })
 export class CompteListeComponent implements OnInit {
   cols: any[];
-  constructor(private service: CompteComptableService) { }
+  constructor(private service: CompteComptableService, private service2: ClasseComptableService) { }
 
   ngOnInit(): void {
   }
@@ -27,6 +27,9 @@ export class CompteListeComponent implements OnInit {
   set items(value: Array<CompteComptable>) {
     this.service.items = value;
   }
+  get create2(): number {
+    return this.service2.create2;
+  }
 
   delete(code: string) {
     return this.service.delete(code).subscribe();
@@ -34,4 +37,5 @@ export class CompteListeComponent implements OnInit {
   openCreate() {
     this.service.createDialog = true;
   }
+
 }

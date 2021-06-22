@@ -1,12 +1,12 @@
-<p-dialog [(visible)]="editDialog" [style]="{width: '450px'}" header="Commande Edit" [modal]="true" styleClass="p-fluid">
+<p-dialog [(visible)]="editDialog" [style]="{width: '450px'}" header="Modification de déclaration" [modal]="true" styleClass="p-fluid">
     <ng-template pTemplate="content">
         <div class="p-field">
-            <label for="ref">Salaire Net</label>
+            <label for="ref">Salaire Net :</label>
             <input type="text" pInputText id="ref" [(ngModel)]="selected.salaireNet" required autofocus />
             <small class="p-invalid" *ngIf="submitted && !selected.salaireNet">ref is required.</small>
         </div>
         <div class="p-field">
-            <label for="total">Salaire brut</label>
+            <label for="total">Salaire brut :</label>
             <input type="text" pInputText id="total" [(ngModel)]="selected.salaireBrut" required autofocus />
             <small class="p-invalid" *ngIf="submitted && !selected.salaireBrut">total is required.</small>
         </div>
@@ -15,15 +15,15 @@
 
         <div class="p-formgrid p-grid">
             <div class="p-field p-col">
-                <label for="totalPaye">Montant IR</label>
+                <label for="totalPaye">Montant IR :</label>
                 <p-inputNumber id="totalPaye" [(ngModel)]="selected.montantIR"></p-inputNumber>
             </div>
         </div>
     </ng-template>
 
     <ng-template pTemplate="footer">
-        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideEditDialog()"></button>
-        <button pButton pRipple label="Edit" icon="pi pi-check" class="p-button-text" (click)="edit()"></button>
+        <button pButton pRipple label="Fermer" icon="pi pi-times" class="p-button-text" (click)="hideEditDialog()"></button>
+        <button pButton pRipple label="Modifier" icon="pi pi-check" class="p-button-text" (click)="edit()"></button>
     </ng-template>
 </p-dialog>
 

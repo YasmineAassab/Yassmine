@@ -5,24 +5,29 @@
     <div class="card-body">
         <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col">
-                <label for="firstname1">Operation :</label>
-                <input id="firstname1" type="text" [(ngModel)]="demandeVo.operation" pInputText>
+                <label for="firstname1">ICE de Société :</label>
+                <input id="firstname1" type="number" [(ngModel)]="demandeVo.societe" pInputText>
             </div>
             <div class="p-field p-col">
-                <label for="firstname1">Annee :</label>
+                <label for="firstname1">Opération :</label>
+                <p-dropdown id="operation" [options]="operations" [(ngModel)]="operationSelected" optionLabel="operation" placeholder="Sélectionner le type"></p-dropdown>
+               <!-- <input id="firstname1" type="text" [(ngModel)]="demandeVo.operation" pInputText>-->
+            </div>
+            <div class="p-field p-col">
+                <label for="firstname1">Année :</label>
                 <input id="firstname1" type="number" [(ngModel)]="demandeVo.annee" pInputText>
             </div>
             <div class="p-field p-col">
-                <label for="lastname1">premiere mois :</label>
+                <label for="lastname1">première mois :</label>
                 <input id="lastname1" [(ngModel)]="demandeVo.moisMin" type="number" pInputText>
             </div>
             <div class="p-field p-col">
-                <label for="lastname1">deuxieme mois :</label>
+                <label for="lastname1">deuxième mois :</label>
                 <input id="lastname1" [(ngModel)]="demandeVo.moisMax" type="number" pInputText>
             </div>
         </div>
     </div>
-    <div class="card-footer p-d-flex p-jc-center"><p-button label="Search" icon="pi pi-search" (onClick)="searchDeclaration()" ></p-button></div>
+    <div class="card-footer p-d-flex p-jc-center"><p-button label="Rechercher" icon="pi pi-search" (onClick)="searchDeclaration()" ></p-button></div>
 </div>
 
 
@@ -33,7 +38,7 @@
             <p-toast></p-toast>
 
             <div class="card">
-                <p-toolbar styleClass="p-mb-4">
+                <!--<p-toolbar styleClass="p-mb-4">
                     <ng-template pTemplate="left">
                         <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2 p-mb-2"
                                 (click)="openCreate()"></button>
@@ -47,20 +52,20 @@
                         <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help p-mb-2"
                                 (click)="convert()"></button>
                     </ng-template>
-                </p-toolbar>
+                </p-toolbar>-->
 
                 <p-table #dt [value]="items" [columns]="cols" [rows]="6" [paginator]="true"
                          [globalFilterFields]="['reference','total','totalPaye']"
                          [(selection)]="selectes" [rowHover]="true" dataKey="id"
                          styleClass="p-datatable-customers"
-                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                         currentPageReportTemplate="Montrant {first} à {last} des {totalRecords} entrées"
                          [showCurrentPageReport]="true">
                     <ng-template pTemplate="caption">
                         <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header ">
-                            <h5 class="p-m-0 ">Manage Demandes</h5>
+                            <h5 class="p-m-0 ">Gérer les demandes</h5>
                             <span class="p-input-icon-left">
                         <i class="pi pi-search"></i>
-                        <input pInputText type="text" placeholder="Search..."/>
+                        <input pInputText type="text" placeholder="rechercher..."/>
                     </span>
                         </div>
                     </ng-template>
@@ -69,17 +74,19 @@
                            <!-- <th style="width: 3rem">
                                 <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                             </th>-->
-                            <th pSortableColumn="reference">reference <!--<p-sortIcon field="reference"></p-sortIcon>--></th>
-                            <th pSortableColumn="total">Operation <!--<p-sortIcon field="total"></p-sortIcon>--></th>
+                            <th pSortableColumn="reference">référence <!--<p-sortIcon field="reference"></p-sortIcon>--></th>
+                            <th pSortableColumn="total">Opération <!--<p-sortIcon field="total"></p-sortIcon>--></th>
                             <th pSortableColumn="totalPaye">Mois
                                 <!--<p-sortIcon field="totalPaye"></p-sortIcon>--></th>
-                            <th pSortableColumn="totalPaye">Annee
+                            <th pSortableColumn="totalPaye">Année
                                 <!--<p-sortIcon field="totalPaye"></p-sortIcon>--></th>
-                            <th pSortableColumn="totalPaye">Ice du Societe
+                            <th pSortableColumn="totalPaye">Ice de Société
                                 <!--<p-sortIcon field="totalPaye"></p-sortIcon>--></th>
-                            <th pSortableColumn="totalPaye">Comptable Traiteur
+                            <th pSortableColumn="totalPaye">Comptable Traitant
                                 <!--<p-sortIcon field="totalPaye"></p-sortIcon>--></th>
                             <th pSortableColumn="totalPaye">Comptable Validateur
+                                <!--<p-sortIcon field="totalPaye"></p-sortIcon>--></th>
+                            <th pSortableColumn="totalPaye">État
                                 <!--<p-sortIcon field="totalPaye"></p-sortIcon>--></th>
 
                             <!--<th pSortableColumn="totalPaye">Comptable
@@ -100,6 +107,7 @@
 
                             <td >{{demande.comptableTraiteur.nom}}</td>
                             <td >{{demande.comptableValidateur.nom}}</td>
+                            <td >{{demande.etatDemande.libelle}}</td>
 
                           <!--  <td>{{demande.user.username}}</td>-->
 

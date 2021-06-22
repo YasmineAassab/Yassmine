@@ -30,8 +30,8 @@ export class DeclarationEditComponent implements OnInit {
 
           this.messageService.add({
             severity: 'success',
-            summary: 'Successful',
-            detail: 'Declaration Updated',
+            summary: 'succès',
+            detail: 'Déclaration mise à jour',
             life: 3000
           });
           this.service.calculTotal();

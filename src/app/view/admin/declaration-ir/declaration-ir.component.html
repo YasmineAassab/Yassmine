@@ -1,11 +1,11 @@
 <div class="card">
     <div class="card-header p-text-center">
-        <h3 class="text-center ">Creation de Declaration IR </h3>
+        <h3 class="text-center ">Création de Déclaration IR </h3>
     </div>
     <div class="card-body">
         <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col">
-                <label for="firstname1">Reference :</label>
+                <label for="firstname1">Référence :</label>
                 <input id="firstname1" type="text" pInputText [(ngModel)]="declarationIR.ref">
             </div>
 
@@ -14,14 +14,15 @@
                 <input type="number" pInputText [(ngModel)]="declarationIR.mois">
             </div>
             <div class="p-field p-col">
-                <label>Annee :</label>
+                <label>Année :</label>
                 <input type="number" pInputText [(ngModel)]="declarationIR.annee">
             </div>
         </div>
     </div>
     <div class="card-footer text-center">
-        <label style="float: left" >Traitement de demande {{currentDemande.ref}}</label>
-        <p-button class="myb" [disabled]="isCreated" label="cree" icon="pi pi-check" iconPos="left"
+        <label *ngIf="!validation" style="float: left" >Traitement de demande {{currentDemande.ref}}</label>
+        <label *ngIf="validation" style="float: left" >Validation de demande {{currentDemande.ref}}</label>
+        <p-button class="myb" [disabled]="isCreated" label="créer" icon="pi pi-check" iconPos="left"
                   (click)="creeDeclarationIR()"></p-button>
       <!--  <p-button  label="get" icon="pi pi-check" iconPos="left"
                   (click)="getDemande()"></p-button>-->
@@ -71,16 +72,16 @@
         <div class="card">
             <p-toolbar styleClass="p-mb-4">
                 <ng-template pTemplate="left">
-                    <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2 p-mb-2"
+                    <button pButton pRipple label="Nouveau" icon="pi pi-plus" class="p-button-success p-mr-2 p-mb-2"
                             (click)="openCreate()"></button>
-                    <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger p-mb-2"
+                    <button pButton pRipple label="effacer" icon="pi pi-trash" class="p-button-danger p-mb-2"
                             (click)="deleteMultiple()" [disabled]="!selectes || !selectes.length"></button>
                 </ng-template>
 
                 <ng-template pTemplate="right">
-                    <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import"
+                    <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="importer"
                                   chooseLabel="Import" class="p-mr-2 p-mb-2 p-d-inline-block"></p-fileUpload>
-                    <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help p-mb-2"
+                    <button pButton pRipple label="Exporter" icon="pi pi-upload" class="p-button-help p-mb-2"
                             (click)="convert()"></button>
                 </ng-template>
             </p-toolbar>
@@ -89,14 +90,14 @@
                      [globalFilterFields]="['reference','total','totalPaye']"
                      [(selection)]="selectes" [rowHover]="true" dataKey="id"
                      styleClass="p-datatable-customers"
-                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                     currentPageReportTemplate="Montrant {first} à {last} des {totalRecords} entrées"
                      [showCurrentPageReport]="true">
                 <ng-template pTemplate="caption">
                     <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
-                        <h5 class="p-m-0">Manage Declarations</h5>
+                        <h5 class="p-m-0">Gérer les déclarations</h5>
                         <span class="p-input-icon-left">
                         <i class="pi pi-search"></i>
-                        <input pInputText type="text" placeholder="Search..."/>
+                        <input pInputText type="text" placeholder="chercher..."/>
                     </span>
                     </div>
                 </ng-template>
@@ -137,7 +138,7 @@
                 </ng-template>
                 <ng-template pTemplate="summary">
                     <div class="p-d-flex p-ai-center p-jc-between">
-                        In total there are {{items ? items.length : 0 }} items.
+                        Au total il y a {{items ? items.length : 0 }} éléments.
                     </div>
                     <div class="footer p-grid p-justify-around  ">
 
@@ -149,8 +150,10 @@
 
                         <!-- <div class="footer-two">-->
                         <!-- <p-button  [disabled]="isSaved" class=" p-button-danger" label="save" icon="pi pi-save" iconPos="left" (click)="save()"></p-button>-->
-                        <button pButton [disabled]="isSaved" type="button" class="p-button-danger my p-col-2" label="save"
+                        <button *ngIf="!validation" pButton [disabled]="isSaved" type="button" class="p-button-danger my p-col-2" label="sauvegarder"
                                 icon="pi pi-save" iconPos="left" (click)="save()"></button>
+                        <button *ngIf="validation" pButton  type="button" class="p-button-danger my p-col-2" label="Valider"
+                                icon="pi pi-save" iconPos="left" (click)="valideDeclaration()"></button>
                         <!-- </div>-->
 
                     </div>

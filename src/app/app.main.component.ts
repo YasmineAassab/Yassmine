@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
 import { MenuService } from './app.menu.service';
 import {AppComponent} from './app.component';
+import {TokenStorageService} from "./Security/_services/token-storage.service";
 
 @Component({
     selector: 'app-main',
@@ -44,7 +45,9 @@ export class AppMainComponent {
 
     inlineUserMenuActive = false;
 
-    constructor(private menuService: MenuService, private primengConfig: PrimeNGConfig, public app: AppComponent) { }
+    constructor(private menuService: MenuService, private primengConfig: PrimeNGConfig,
+                public app: AppComponent) { }
+
 
     onLayoutClick() {
         if (!this.userMenuClick) {

@@ -3,8 +3,6 @@
     <p-toast></p-toast>
     <p-toast position="top-left" key="tl"></p-toast>
 
-    <div><button pButton pRipple label="Retour" icon="pi pi-arrow-left" class="p-button-success p-mr-2 p-mb-5" (click)="return()"></button></div>
-
     <div class="card" id="card1">
         <p-toolbar styleClass="p-mb-4">
 
@@ -74,7 +72,7 @@
                                     <td>{{facture.societeSource.ice}}</td>
                                     <td>{{facture.societeDistination.ice}}</td>
                                     <td>
-                                        <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"></button>
+                                        <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-warning p-mr-2" (click)="editFact(facture)"></button>
                                         <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info p-mr-2" (click)="viewFact(facture)"></button>
                                         <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteFact(facture)"></button>
                                     </td>
@@ -171,13 +169,30 @@
 
                 </div>
                 <div *ngIf="selected.montantISPaye > selected.tauxIsConfig.cotisationMinimale">
+                    <p-messages severity="warn">
+                        <ng-template pTemplate="caption" class="p-grid">
+                            <i class="pi pi-exclamation-triangle" style="font-size: 40px"></i>
+                            <div class="p-col-7 p-ml-2">
+                                <p>Votre société a réalisé des bénéfices, vous devez payer l'acompte pour l'année {{selected.annee + 1}}.</p>
+                                <p>L'acompte est égale à 25% du montant de l'impôt de la déclaration IS</p>
+                                    <button pButton pRipple type="button" label="Payer l'acompte" style="font-weight: bolder" class="p-button-raised p-button-warning p-button-text p-mt-3" (click)="openCreate2()"></button>
+                            </div>
+                            <!--<div class="p-col-2">
+                            </div>-->
+                        </ng-template>
+                    </p-messages>
+                </div>
+                <br>
+                <div *ngIf="selected.montantISPaye > 0">
                     <p-messages severity="error">
                         <ng-template pTemplate="caption" class="p-grid">
                             <i class="pi pi-exclamation-triangle" style="font-size: 40px"></i>
                             <div class="p-col-7 p-ml-2">
-                                <h6>Votre société a réalisé des bénéfices, vous devez payer l'acompte pour l'année {{selected.annee + 1}}.</h6>
-                                <h6>L'acompte est égale à 25% du montant de l'impôt de la déclaration IS</h6>
-                                    <button pButton pRipple type="button" label="Payer l'acompte" class="p-button-raised p-button-danger p-button-text p-mt-3" (click)="openCreate2()"></button>
+                                <p>La date limite de paiement des impôts est fixée du 01/03 au 31/03 !</p>
+                                <p>Une augmentation de <span style="font-weight: bold">500 DH</span> est appliquée sur votre montant IS</p>
+                            </div>
+                            <div class="p-col-12  p-md-2"><div style="margin-bottom: 5px"><label>Total à payer </label></div>
+                                <p-inputNumber  [(ngModel)]="selected.totalPaye" disabled mode="currency" currency="MAD"></p-inputNumber>
                             </div>
                             <!--<div class="p-col-2">
                             </div>-->
@@ -190,8 +205,8 @@
 
         <div class="card-footer">
             <div class="p-grid" style="padding: 20px">
-                <button pButton pRipple type="button" label="Enregistrer BROUILLON" style="width:20rem" class="p-offset-4 p-mr-6 p-mb-2" [disabled]="validateSave()" (click)="save('brouillon')"></button>
-                <button pButton pRipple type="button" label="VALIDER" style="width:20rem" class="p-col-6 p-mb-2" [disabled]="validateSave()" (click)="save('valider')"></button>
+                <button pButton pRipple type="button" label="Enregistrer BROUILLON" style="width:20rem" class="p-offset-4 p-mr-6 p-mb-2" (click)="save('brouillon')"></button>
+                <button pButton pRipple type="button" label="VALIDER" style="width:20rem" class="p-col-6 p-mb-2" (click)="save('valider')"></button>
             </div>
         </div>
     </div>

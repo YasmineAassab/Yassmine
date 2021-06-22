@@ -2,38 +2,38 @@
 <p-card >
 
     <ng-template pTemplate="header"  class="p-text-center">
-        <h2 class="text-center pt-3"> Creation du demande</h2>
+        <h2 class="text-center pt-3"> Création de demande</h2>
     </ng-template>
 
     <div class="p-fluid p-formgrid ">
         <div class="p-grid">
             <div class="p-field p-col">
-                <label for="ref">Reference :</label>
+                <label for="ref">Référence :</label>
                 <input [(ngModel)]="demande.ref" id="ref" type="text" pInputText>
             </div>
             <div class="p-field p-col ">
-                <label for="operation">Operation :</label>
-                <p-dropdown id="operation" [options]="operations" [(ngModel)]="operationSelected" optionLabel="operation"></p-dropdown>
+                <label for="operation">Opération :</label>
+                <p-dropdown id="operation" [options]="operations" [(ngModel)]="operationSelected" optionLabel="operation" placeholder="sélectionner le type"></p-dropdown>
             </div>
         </div>
         <div class="p-grid">
             <div class="p-field p-col">
-                <label for="annee">Annee :</label>
+                <label for="annee">Année :</label>
                 <input [(ngModel)]="demande.annee" id="annee" type="text" pInputText>
             </div>
             <div class="p-field p-col" >
                 <label for="mois">Mois :</label>
                 <input [(ngModel)]="demande.mois" id="mois" type="text" pInputText>
             </div>
-            <div class="p-field p-col">
+            <!--<div class="p-field p-col">
                 <label for="societe">ice Societe :</label>
                 <input [(ngModel)]="demande.societe.ice" id="societe" type="text" pInputText>
-            </div>
+            </div>-->
         </div>
     </div>
     <ng-template pTemplate="footer" >
         <div class="p-d-flex p-jc-center">
-        <button pButton (click)="save()" type="button" class="p-button-raised p-button-rounded" label="save"></button>
+        <button pButton (click)="save()" type="button" class="p-button-raised p-button-rounded" label="sauvegarder"></button>
         </div>
     </ng-template>
 </p-card>

@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {MessageService} from 'primeng/api';
-import {CommandeService} from '../../../../controller/service/commande.service';
-import {Commande} from '../../../../controller/model/commande.model';
 import {DemandeService} from '../../../../controller/service/demande.service';
 import {User} from '../../../../Security/model/user.model';
 import {Demande} from "../../../../controller/model/demande.model";
 import {Comptable} from '../../../../controller/model/comptable.model';
+import {EtatDemande} from '../../../../controller/model/etat-demande.model';
 interface ComptableInter {
   name: string
 
@@ -92,12 +91,26 @@ export class ViewComptableComponent implements OnInit {
   }
 
 
+  get etats(): Array<EtatDemande> {
+
+    return this.service.etats;
+  }
+
+  set etats(value: Array<EtatDemande>) {
+    this.service.etats = value;
+  }
+
+
+
+
+
   public edit() {
     console.log(this.selected);
     this.submitted = true;
     if (this.selected.ref.trim()) {
       if (this.selected.id) {
         this.items[this.service.findIndexById(this.selected.id)] = this.selected;
+        this.UserItemsFiltered=new Array<User>();
         this.service.edit().subscribe(data => {
 
           this.messageService.add({
@@ -107,6 +120,7 @@ export class ViewComptableComponent implements OnInit {
             life: 3000
           });
           this.selected = new Demande();
+
         });
       }
       this.editDialog = false;
@@ -115,6 +129,7 @@ export class ViewComptableComponent implements OnInit {
   }
 
   public hideEditDialog() {
+    this.UserItemsFiltered=new Array<User>();
     this.editDialog = false;
   }
   get selected(): Demande {

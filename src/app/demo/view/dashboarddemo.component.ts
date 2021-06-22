@@ -12,7 +12,12 @@ import { ProductService } from '../service/productservice';
 })
 export class DashboardDemoComponent implements OnInit {
 
+    data: any;
+
     products: any[];
+
+    tauxis: any[];
+    tauxir: any[];
 
     items: MenuItem[];
 
@@ -24,10 +29,55 @@ export class DashboardDemoComponent implements OnInit {
 
     fullcalendarOptions: any;
 
-    constructor(private eventService: EventService, private productService: ProductService) {}
+    constructor(private eventService: EventService, private productService: ProductService) {
+        this.data = {
+            labels: ['Industrie', 'Services aux entreprises', 'Commerce, réparations automobile et d\'articles domestiques', 'Bâtiment et travaux publics', 'Transports et communications',
+                'Activités financières', 'Services collectifs, sociaux et personnels', 'Hôtels et restaurants'],
+            datasets: [
+                {
+                    data: [52, 18, 12, 9, 6, 1, 1, 1],
+                    backgroundColor: [
+                        "#55A7E5",
+                        "#09BAAC",
+                        "yellow",
+                        "red",
+                        "#174794",
+                        "orange",
+                        "#054e0d",
+                        "#FF6384",
+                    ],
+                    hoverBackgroundColor: [
+                        "#FF6384",
+                        "#36a2eb",
+                        "#FFCE56",
+                        "#fe4533",
+                        "#fe4533",
+                        "#fe4533",
+                        "#fe4533",
+                        "#fe4533",
+                    ]
+                }]
+        };
+    }
+
+    goToHome(){
+        document.getElementById("imgaccueil").scrollIntoView({behavior: "smooth"});
+    }
 
     ngOnInit() {
         this.productService.getProducts().then(data => this.products = data);
+
+        this.tauxis = [
+            {beneficeMin: '0.00', beneficeMax: '300 000.00', taux: '10%'},
+            {beneficeMin: '300 001.00', beneficeMax: '1 000 000.00', taux: '20%'},
+            {beneficeMin: '1 000 001.00', beneficeMax: '+', taux: '30%'},
+        ];
+        this.tauxir = [
+            {salMin: '0.00', salMax: '2 500.00', taux: '0%'},
+            {salMin: '2 501.00', salMax: '4 166.00', taux: '10%'},
+            {salMin: '4 167.00', salMax: '5 000.00', taux: '20%'},
+            {salMin: '5 001.00', salMax: '6 666.00', taux: '30%'},
+        ];
 
         this.items = [
             { label: 'Save', icon: 'pi pi-check' },

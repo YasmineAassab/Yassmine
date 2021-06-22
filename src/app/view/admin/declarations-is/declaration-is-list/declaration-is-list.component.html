@@ -3,10 +3,8 @@
 
         <p-toast></p-toast>
 
-        <div><button pButton pRipple label="Retour" icon="pi pi-arrow-left" class="p-button-success p-mr-2 p-mb-5" (click)="return()"></button></div>
-
         <div class="card">
-            <h4 style="margin: 10px">Recherche multi-critère</h4>
+            <h4 style="margin-bottom: 35px">Recherche multi-critère</h4>
                 <div class="p-grid p-fluid">
                     <div class="p-col-12  p-md-2 p-offset-1"><div style="margin-bottom: 5px"><label>Référence </label></div>
                         <input type="text" pInputText placeholder="reference" [(ngModel)]="selectedVo.ref">
@@ -256,16 +254,4 @@
     <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
     </div>
 </div>
-    <button href="no-script.html" id="btn">Download</button>
 </div>
-
-<script>
-    $(document).ready(function (){
-        console.log('zeemeer');
-        $('#btn').click(function (e) {
-            console.log('waaaa khedeem sttp');
-            e.preventDefault();
-            window.location.href = "jas.xml";
-        })
-    });
-</script>

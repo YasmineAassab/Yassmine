@@ -11,11 +11,15 @@ export class CompteComptableService {
   private _selected: CompteComptable;
   private _createDialog: boolean;
   private _items: Array<CompteComptable>;
+  private _items1: Array<CompteComptable>;
   private _num2: number;
   constructor(private http: HttpClient) { }
 
   public find(numero: number): Observable<Array<CompteComptable>> {
   return  this.http.get<Array<CompteComptable>>('http://localhost:8036/gestion-categorie/categorie/SousClasseComptable/num/' + numero);
+  }
+  public findAll(): Observable<Array<CompteComptable>>{
+    return this.http.get<Array<CompteComptable>>('http://localhost:8036/gestion-categorie/categorie/');
   }
 
   delete(code: string): Observable<number> {
@@ -41,6 +45,16 @@ export class CompteComptableService {
 
   set items(value: Array<CompteComptable>) {
     this._items = value;
+  }
+  get items1(): Array<CompteComptable> {
+    if (this._items1 == null){
+      this._items1 = new Array<CompteComptable>();
+    }
+    return this._items1;
+  }
+
+  set items1(value: Array<CompteComptable>) {
+    this._items1 = value;
   }
   get num2(): number {
     return this._num2;

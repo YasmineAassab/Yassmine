@@ -12,23 +12,24 @@
                     <div class="p-fluid p-formgrid p-grid">
 
                         <div class="p-field p-col">
-                            <label for="firstname1">Ice de societe :</label>
-                            <input id="firstname1" type="text" [(ngModel)]="demandeVo.societe" pInputText>
+                            <label for="firstname1">Ice de société :</label>
+                            <p-dropdown id="ice" [options]="societes" optionLabel="ice" placeholder="Sélectionner ICE" [(ngModel)]="iceSelected"></p-dropdown>
                         </div>
                         <div class="p-field p-col">
-                            <label for="firstname1">Operation</label>
-                            <input id="firstname1" type="text" [(ngModel)]="demandeVo.operation" pInputText>
+                            <label for="firstname1">Opération</label>
+                            <p-dropdown id="operation" [options]="operations" [(ngModel)]="operationSelected" optionLabel="operation" placeholder="Sélectionner le type"></p-dropdown>
+                            <!--<input id="firstname1" type="text" [(ngModel)]="demandeVo.operation" pInputText>-->
                         </div>
                         <div class="p-field p-col">
-                            <label for="firstname1">Annee</label>
+                            <label for="firstname1">Année</label>
                             <input id="firstname1" type="text" [(ngModel)]="demandeVo.annee" pInputText>
                         </div>
                         <div class="p-field p-col">
-                            <label for="lastname1">premiere mois :</label>
+                            <label for="lastname1">première mois :</label>
                             <input id="lastname1" type="text" [(ngModel)]="demandeVo.moisMin" pInputText>
                         </div>
                         <div class="p-field p-col">
-                            <label for="lastname1">deuxieme mois :</label>
+                            <label for="lastname1">deuxième mois :</label>
                             <input id="lastname1" type="text" [(ngModel)]="demandeVo.moisMax" pInputText>
                         </div>
                     </div>
@@ -36,7 +37,7 @@
             </div>
 
             <div class="card-footer p-d-flex p-jc-center">
-                <p-button label="Search" icon="pi pi-search" ></p-button>
+                <p-button (onClick)="searchCriteria()" label="chercher" icon="pi pi-search" ></p-button>
             </div>
 
             <!--<div class="p-col-12  p-md-2 p-offset-1"><div style="margin-bottom: 5px"><label>Référence </label></div>
@@ -68,11 +69,11 @@
             <h3>Liste des demandes</h3>
             <p-table #dt [value]="items" [rows]="10" [paginator]="true" [rowHover]="true"
                      styleClass="p-datatable-customers"
-                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                     currentPageReportTemplate="Montrant {first} à {last} des {totalRecords} entrées"
                      [showCurrentPageReport]="true" dataKey="id">
                 <ng-template pTemplate="header">
                     <tr>
-                        <th pSortableColumn="reference">Reference
+                        <th pSortableColumn="reference">Référence
                             <p-sortIcon field="reference"></p-sortIcon>
                         </th>
                         <th pSortableColumn="annee">Date de demande
@@ -93,10 +94,13 @@
                         <th pSortableColumn="totalHTDiff" style="width: 9rem">Trim
                             <p-sortIcon field="totalHTDiff"></p-sortIcon>
                         </th>
-                        <th pSortableColumn="montantISCalcule">Comptable traiteur
+                        <th pSortableColumn="montantISCalcule">Comptable traitant
                             <p-sortIcon field="montantISCalcule"></p-sortIcon>
                         </th>
                         <th pSortableColumn="montantISCalcule" style="width: 15rem">Comptable validateur
+                            <p-sortIcon field="montantISCalcule"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="montantISCalcule" style="width: 15rem">État de demande
                             <p-sortIcon field="montantISCalcule"></p-sortIcon>
                         </th>
                         <th></th>
@@ -114,9 +118,16 @@
                         <td>{{demande.trimestre}}</td>
                         <td>{{demande.comptableTraiteur.nom}}</td>
                         <td>{{demande.comptableValidateur.nom}}</td>
+                        <td>{{demande.etatDemande.libelle}}</td>
                         <td>
-                            <button pButton pRipple label="Traiter" icon="pi pi-pencil" class="p-button-success p-mr-2"
-                                    (click)="navigateToCreate(demande)"></button>
+                            <button pButton pRipple icon="pi pi-check" class="p-button-rounded p-button-info p-mr-2"
+                                    (click)="finalise(demande)"></button>
+                            <button pButton pRipple icon="pi pi-angle-double-right" class="p-button-rounded p-button-danger p-mr-2"
+                                    (click)="valide(demande)"></button>
+                            <!--<button pButton pRipple label="Traiter" icon="pi pi-pencil" class="p-button-success p-mr-2"
+                                    (click)="navigateToCreate(demande)"></button>-->
+                           <!-- <button pButton pRipple label="valider" icon="pi pi-pencil" class="p-button-rounded p-mr-2"
+                                    (click)=""></button>-->
                         </td>
                     </tr>
                 </ng-template>
@@ -124,7 +135,7 @@
             </p-table>
             <ng-template pTemplate="summary">
                 <div class="p-d-flex p-ai-center p-jc-between">
-                    In total there are {{items ? items.length : 0 }} declarations IS.
+                    Au total il y a {{items ? items.length : 0 }} declarations IS.
                 </div>
             </ng-template>
         </div>

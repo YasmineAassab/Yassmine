@@ -90,37 +90,15 @@ import {AppComponent} from './app.component';
 import {AppCodeModule} from './app.code.component'
 import {AppMainComponent} from './app.main.component';
 import {AppConfigComponent} from './app.config.component';
-import {AppCrudComponent} from './pages/app.crud.component';
-import {AppCalendarComponent} from './pages/app.calendar.component';
-import {AppTimelineDemoComponent} from './pages/app.timelinedemo.component';
 import {AppNotfoundComponent} from './pages/app.notfound.component';
 import {AppErrorComponent} from './pages/app.error.component';
-import {AppAccessdeniedComponent} from './pages/app.accessdenied.component';
 import {AppLoginComponent} from './pages/app.login.component';
 import {AppMenuComponent} from './app.menu.component';
 import {AppMenuitemComponent} from './app.menuitem.component';
 import {AppRightMenuComponent} from './app.right-menu.component';
 import {AppTopBarComponent} from './app.topbar.component';
 import {AppFooterComponent} from './app.footer.component';
-import {FormLayoutDemoComponent} from './demo/view/formlayoutdemo.component';
-import {FloatLabelDemoComponent} from './demo/view/floatlabeldemo.component';
-import {InvalidStateDemoComponent} from './demo/view/invalidstatedemo.component';
-import {InputDemoComponent} from './demo/view/inputdemo.component';
-import {ButtonDemoComponent} from './demo/view/buttondemo.component';
-import {TableDemoComponent} from './demo/view/tabledemo.component';
-import {ListDemoComponent} from './demo/view/listdemo.component';
-import {TreeDemoComponent} from './demo/view/treedemo.component';
-import {PanelsDemoComponent} from './demo/view/panelsdemo.component';
-import {OverlaysDemoComponent} from './demo/view/overlaysdemo.component';
-import {MediaDemoComponent} from './demo/view/mediademo.component';
-import {MenusDemoComponent} from './demo/view/menusdemo.component';
-import {MessagesDemoComponent} from './demo/view/messagesdemo.component';
-import {MiscDemoComponent} from './demo/view/miscdemo.component';
-import {EmptyDemoComponent} from './demo/view/emptydemo.component';
-import {ChartsDemoComponent} from './demo/view/chartsdemo.component';
-import {FileDemoComponent} from './demo/view/filedemo.component';
 import {DashboardDemoComponent} from './demo/view/dashboarddemo.component';
-import {DocumentationComponent} from './demo/view/documentation.component';
 import {DisplayComponent} from './utilities/display.component';
 import {ElevationComponent} from './utilities/elevation.component';
 import {FlexboxComponent} from './utilities/flexbox.component';
@@ -139,13 +117,6 @@ import {CustomerService} from './demo/service/customerservice';
 import {PhotoService} from './demo/service/photoservice';
 import {ProductService} from './demo/service/productservice';
 import {IconService} from './demo/service/iconservice';
-/*
-import { CommandeCreateComponent } from './view/admin/commandes/commande-create/commande-create.component';
-import { CommandesComponent } from './view/admin/commandes/commandes.component';
-import { CommandeListComponent } from './view/admin/commandes/commande-list/commande-list.component';
-import { CommandeEditComponent } from './view/admin/commandes/commande-edit/commande-edit.component';
-import { CommandeViewComponent } from './view/admin/commandes/commande-view/commande-view.component';
-*/
 import { DeclarationIsListComponent } from './view/admin/declarations-is/declaration-is-list/declaration-is-list.component';
 
 import { DeclarationIsCreateComponent } from './view/admin/declarations-is/declaration-is-create/declaration-is-create.component';
@@ -164,20 +135,6 @@ import {DeclarationViewComponent} from './view/admin/declaration-ir/declaration-
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {AuthInterceptor} from './Security/auth-interceptor.service';
 import {ProfileComponent} from './Security/profile/profile.component';
-import {ClassComponent} from './view/admin/classe/class.component';
-import {ClasseCreateComponent} from './view/admin/classe/classe-comptable/classe-create/classe-create.component';
-import {ClasseListeComponent} from './view/admin/classe/classe-comptable/classe-liste/classe-liste.component';
-import {ClasseComptableComponent} from './view/admin/classe/classe-comptable/classe-comptable.component';
-import {CompteCreateComponent} from './view/admin/classe/compte-comptable/compte-create/compte-create.component';
-import {CompteListeComponent} from './view/admin/classe/compte-comptable/compte-liste/compte-liste.component';
-import {CompteComptableComponent} from './view/admin/classe/compte-comptable/compte-comptable.component';
-import {SousCreateComponent} from './view/admin/classe/sous-classe-comptable/sous-create/sous-create.component';
-import {SousListeComponent} from './view/admin/classe/sous-classe-comptable/sous-liste/sous-liste.component';
-import {SousClasseComptableComponent} from './view/admin/classe/sous-classe-comptable/sous-classe-comptable.component';
-import {CpcListComponent} from './view/admin/cpc/cpc-list/cpc-list.component';
-import {CpcRecherchComponent} from './view/admin/cpc/cpc-recherch/cpc-recherch.component';
-import {CpcViewComponent} from './view/admin/cpc/cpc-view/cpc-view.component';
-import {CpcComponent} from './view/admin/cpc/cpc.component';
 import { FactureComponent } from './view/admin/facture/facture.component';
 import { FactureCreateComponent } from './view/admin/facture/facture-create/facture-create.component';
 import { FactureListComponent } from './view/admin/facture/facture-list/facture-list.component';
@@ -191,13 +148,42 @@ import {ComptableBoardComponent} from "./view/admin/comptable-board/comptable-bo
 import {DeclarationsComponent} from "./view/admin/declarations/declarations.component";
 import {ViewComptableComponent} from "./view/admin/declarations/view-comptable/view-comptable.component";
 import {DeclarationTvaCreateComponent} from "./view/admin/declarationTva/declaration-tva-create/declaration-tva-create.component";
-import {StatistiqueComponent} from './view/admin/statistique/statistique.component';
-import { ComptableValidateurComponent } from './view/admin/comptable-validateur/comptable-validateur.component';
+import { AcomptesCreateComponent } from './view/admin/acomptes/acomptes-create/acomptes-create.component';
+import {EditFactureComponent} from "./view/admin/declarations-is/edit-facture/edit-facture.component";
+import { VisualiserDemandeComponent } from './view/admin/visualiser-demande/visualiser-demande.component';
+import { ContactComponent } from './demo/view/contact/contact.component';
+import { FirsthomepageComponent } from './demo/view/firsthomepage/firsthomepage.component';
+import {GMapModule} from "primeng/gmap";
+import {HttpClient} from "@angular/common/http";
+import { AcomptesComponent } from './view/admin/acomptes/acomptes.component';
+import { AcomptesListComponent } from './view/admin/acomptes/acomptes-list/acomptes-list.component';
+
 import { FactureCreateDeclComponent } from './view/admin/declarationTva/facture-create-decl/facture-create-decl.component';
 import { FactureEditDeclComponent } from './view/admin/declarationTva/facture-edit-decl/facture-edit-decl.component';
 import { FactureViewDeclComponent } from './view/admin/declarationTva/facture-view-decl/facture-view-decl.component';
 import { DeclarationTvaViewComponent } from './view/admin/declarationTva/declaration-tva-view/declaration-tva-view.component';
-
+import {ComptableValidateurComponent} from "./view/admin/comptable-validateur/comptable-validateur.component";
+import {StatistiqueComponent} from './view/admin/statistique/statistique.component';
+import {ChercherDeclarationIRComponent} from './view/admin/chercher-declaration-ir/chercher-declaration-ir.component';
+import {SousCreateComponent} from './view/admin/classe/sous-classe-comptable/sous-create/sous-create.component';
+import {SousListeComponent} from './view/admin/classe/sous-classe-comptable/sous-liste/sous-liste.component';
+import {CompteListeComponent} from './view/admin/classe/compte-comptable/compte-liste/compte-liste.component';
+import {CompteCreateComponent} from './view/admin/classe/compte-comptable/compte-create/compte-create.component';
+import {ClasseListeComponent} from './view/admin/classe/classe-comptable/classe-liste/classe-liste.component';
+import {ClasseCreateComponent} from './view/admin/classe/classe-comptable/classe-create/classe-create.component';
+import {SousClasseComptableComponent} from './view/admin/classe/sous-classe-comptable/sous-classe-comptable.component';
+import {CompteComptableComponent} from './view/admin/classe/compte-comptable/compte-comptable.component';
+import {ClasseComptableComponent} from './view/admin/classe/classe-comptable/classe-comptable.component';
+import {ClasseComponent} from './view/admin/classe/classe.component';
+import { CpcComponent } from './view/admin/cpc/cpc.component';
+import { CpcListComponent } from './view/admin/cpc/cpc-list/cpc-list.component';
+import { CpcRechercheComponent } from './view/admin/cpc/cpc-recherche/cpc-recherche.component';
+import { CpcViewComponent } from './view/admin/cpc/cpc-view/cpc-view.component';
+import { CpcChartComponent } from './view/admin/cpc/cpc-chart/cpc-chart.component';
+import { ClasseEditComponent } from './view/admin/classe/classe-comptable/classe-edit/classe-edit.component';
+import { CompteEditComponent } from './view/admin/classe/compte-comptable/compte-edit/compte-edit.component';
+import { SousEditComponent } from './view/admin/classe/sous-classe-comptable/sous-edit/sous-edit.component';
+import { FactureJournalComponent } from './view/admin/facture/facture-journal/facture-journal.component';
 @NgModule({
     imports: [
         BrowserModule,
@@ -285,6 +271,7 @@ import { DeclarationTvaViewComponent } from './view/admin/declarationTva/declara
         TreeModule,
         TreeTableModule,
         VirtualScrollerModule,
+        GMapModule,
     ],
     declarations: [
         AppComponent,
@@ -296,25 +283,6 @@ import { DeclarationTvaViewComponent } from './view/admin/declarationTva/declara
         AppTopBarComponent,
         AppFooterComponent,
         DashboardDemoComponent,
-        FormLayoutDemoComponent,
-        FloatLabelDemoComponent,
-        InvalidStateDemoComponent,
-        InputDemoComponent,
-        ButtonDemoComponent,
-        TableDemoComponent,
-        ListDemoComponent,
-        TreeDemoComponent,
-        PanelsDemoComponent,
-        OverlaysDemoComponent,
-        MediaDemoComponent,
-        MenusDemoComponent,
-        MessagesDemoComponent,
-        MessagesDemoComponent,
-        MiscDemoComponent,
-        ChartsDemoComponent,
-        EmptyDemoComponent,
-        FileDemoComponent,
-        DocumentationComponent,
         DisplayComponent,
         ElevationComponent,
         FlexboxComponent,
@@ -323,17 +291,14 @@ import { DeclarationTvaViewComponent } from './view/admin/declarationTva/declara
         SpacingComponent,
         TypographyComponent,
         TextComponent,
-        AppCrudComponent,
-        AppCalendarComponent,
-        AppTimelineDemoComponent,
         WidgetsComponent,
         AppNotfoundComponent,
         AppErrorComponent,
-        AppAccessdeniedComponent,
         AppLoginComponent,
 
         DemandeListComponent,
         ChartsComponent,
+        EditFactureComponent,
         DeclarationIsListComponent,
         DeclarationIsCreateComponent,
         DeclarationIsEditComponent,
@@ -355,32 +320,44 @@ import { DeclarationTvaViewComponent } from './view/admin/declarationTva/declara
         FactureListComponent,
         FactureEditComponent,
         FactureViewComponent,
-        /*ClassComponent,
+        ClasseComponent,
+        ClasseComptableComponent,
+        CompteComptableComponent,
+        SousClasseComptableComponent,
         ClasseCreateComponent,
         ClasseListeComponent,
-        ClasseComptableComponent,
         CompteCreateComponent,
         CompteListeComponent,
-        CompteComptableComponent,
         SousCreateComponent,
         SousListeComponent,
-        SousClasseComptableComponent,
+        CpcComponent,
         CpcListComponent,
-        CpcRecherchComponent,
-        CpcViewComponent,
-        CpcComponent*/
+        CpcRechercheComponent,
+        CpcViewComponent, CpcChartComponent,
+        ClasseEditComponent,
+        CompteEditComponent,
+        SousEditComponent,
+
         DeclarationCreateComponent,
         DeclarationTvaListComponent,
         DeclarationTvaCreateComponent,
         ComptableBoardComponent,
         DeclarationsComponent,
         ViewComptableComponent,
-        StatistiqueComponent,
+        AcomptesCreateComponent,
+        VisualiserDemandeComponent,
+        ContactComponent,
+        FirsthomepageComponent,
+        AcomptesComponent,
+        AcomptesListComponent,
         ComptableValidateurComponent,
         FactureCreateDeclComponent,
         FactureEditDeclComponent,
         FactureViewDeclComponent,
-        DeclarationTvaViewComponent
+        DeclarationTvaViewComponent,
+        StatistiqueComponent,
+        ChercherDeclarationIRComponent,
+        FactureJournalComponent
 
     ],
     providers: [

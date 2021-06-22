@@ -6,7 +6,7 @@ import {DeclarationIR} from '../../../controller/model/declaration-ir.model';
 @Component({
   selector: 'app-statistique',
   templateUrl: './statistique.component.html',
-  styleUrls: ['./statistique.component.scss']
+  styleUrls: ['./statistique.component.scss','./statistique.component.css']
 })
 export class StatistiqueComponent implements OnInit {
   basicData: any;
@@ -71,7 +71,7 @@ export class StatistiqueComponent implements OnInit {
         {
           label: 'My First dataset',
           backgroundColor: '#42A5F5',
-          data: this.data1
+          data: this.data1.reverse()
         }/*,
         {
           label: 'My Second dataset',

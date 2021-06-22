@@ -1,0 +1,58 @@
+<div class="card"><h2 align="center" style="color: #0772b3"><i>CPC Chart</i></h2></div>
+<div class="card" style="height: 160%">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-10">
+                <h5>Vertical</h5>
+                <p-chart type="bar" [data]="basicData"></p-chart>
+
+            </div>
+            <div class="row">
+
+                <div class="col-sm-6">
+                    <div class="flip-card" pTooltip="Create your CPC" routerLink="/cpc-view" routerLinkActive="active">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                               <h1 style="margin-top: 10%"><i><b>Créer CPC</b></i></h1>
+                            </div>
+                            <div class="flip-card-back">
+                                <h1>CPC</h1>
+                                <p style="font-size: 18px">Le compte de produits et charges (CPC) est un état de synthèse qui décrit en terme de
+                                    produits et charges les composantes du résultat final de l'exercice comptable, il est
+                                    déterminé à partir des comptes de produits et charges.</p>
+                            </div>
+                        </div>
+                    </div>
+                  <!--  <div class="card" pTooltip="Create your CPC" id="card1" routerLink="/cpc-view" routerLinkActive="active">
+                      <h3 align="center" style="color: #0a3e41"><i>Créer CPC</i></h3>
+                        <p style="font-size: 18px">Le compte de produits et charges (CPC) est un état de synthèse qui décrit en terme de
+                            produits et charges les composantes du résultat final de l'exercice comptable, il est
+                            déterminé à partir des comptes de produits et charges.</p>
+                    </div>-->
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="flip-card" pTooltip="Find your CPC" routerLink="/cpc-recherche" routerLinkActive="active">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <h1 style="margin-top: 10%"><i><b>Recherch CPC</b></i></h1>
+                            </div>
+                            <div class="flip-card-back">
+                                <h1>CPC</h1>
+                                <p style="font-size: 18px">Ici, vous pouvez rechercher des cpcs existants après avoir inséré la date minimale et la date
+                                    maximale.</p>
+                            </div>
+                        </div>
+                    </div>
+                   <!-- <div class="card" pTooltip="Find your CPC" id="card2" routerLink="/cpc-recherche" routerLinkActive="active">
+                        <h3 align="center" style="color: #0a3e41"><i>Recherch CPC</i></h3>
+                        <p style="font-size: 18px">Ici, vous pouvez rechercher des cpcs existants après avoir inséré la date minimale et la date
+                            maximale.</p>
+                    </div>-->
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

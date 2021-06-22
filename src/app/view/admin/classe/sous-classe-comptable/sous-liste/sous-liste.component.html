@@ -1,10 +1,10 @@
 <div class="container">
     <div  align="center">
-        <button type="button" class="btn btn-outline-primary" style="margin-bottom: 20px" (click)="openCreate()">+</button>
+        <button type="button" class="btn btn-outline-primary" style="margin-bottom: 20px" [disabled]="num2==create" (click)="openCreate()">+</button>
     </div>
     <div class="card">
         <p-table #dt [value]="items" [columns]="cols" [rows]="5" [paginator]="true" [globalFilterFields]="['reference','total','totalPaye']"
-                 [rowHover]="true" dataKey="id"
+                 [rowHover]="true" dataKey="id" style="width: 100%"
                  styleClass="p-datatable-customers"
                  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
             <ng-template pTemplate="caption">
@@ -13,7 +13,7 @@
                 </div>
             </ng-template>
             <ng-template pTemplate="header">
-                <th><i>NUMERO</i></th>
+                <th><i>N°</i></th>
                 <th><i>LIBELLE</i></th>
                 <th><i>Action</i></th>
             </ng-template>
@@ -31,3 +31,4 @@
     </div>
 </div>
 <app-sous-create></app-sous-create>
+

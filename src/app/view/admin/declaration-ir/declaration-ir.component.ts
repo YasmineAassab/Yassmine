@@ -7,6 +7,8 @@ import {DeclarationIR} from '../../../controller/model/declaration-ir.model';
 import {DemandeService} from '../../../controller/service/demande.service';
 import {Demande} from '../../../controller/model/demande.model';
 import {Societe} from '../../../controller/model/societe.model';
+import {EtatDemande} from '../../../controller/model/etat-demande.model';
+import {Comptable} from '../../../controller/model/comptable.model';
 
 
 @Component({
@@ -21,10 +23,23 @@ export class DeclarationIrComponent implements OnInit {
     file: Blob;
     isCreated:boolean=false;
     isSaved:boolean=true;
+    validation:boolean=false;
     demande: Demande;
+    nativeDeclarationIR:any;
     // total:number;
     constructor(private messageService: MessageService, private confirmationService: ConfirmationService,
                 private service: DeclarationIrService,private demandeService :DemandeService) {
+    }
+
+
+
+    get currentComptable(): Comptable {
+
+        return this.demandeService.currentComptable;
+    }
+
+    set currentComptable(value: Comptable) {
+        this.demandeService.currentComptable = value;
     }
 
 
@@ -37,10 +52,30 @@ export class DeclarationIrComponent implements OnInit {
     set currentDemande(value: Demande) {
         this.service.currentDemande = value;
     }
+    get currentDeclarationIR() {
+
+        return this.service.currentDeclarationIR;
+    }
+
+    set currentDeclarationIR(value) {
+        this.service.currentDeclarationIR = value;
+    }
 
     ngOnInit(): void {
         this.initCol();
+        if (this.currentComptable.type=="validateur"){
+            this.validation=true;
+        }
+        console.log(this.currentDemande);
         //  this.service.findAll().subscribe(data => this.items = data);
+        this.declarationIR.annee=this.currentDemande.annee;
+        this.declarationIR.mois=this.currentDemande.mois;
+
+
+
+       // this.nativeDeclarationIR=this.currentDeclarationIR;
+     //   console.log("**this is the native**");
+      //  console.log(this.nativeDeclarationIR);
     }
 
     /*  get total(): number {
@@ -117,6 +152,77 @@ export class DeclarationIrComponent implements OnInit {
         );*/
     }
 
+    updateEtatDemande(){
+
+
+
+        this.service.updateEtatDemande().subscribe(
+            data=>{
+                console.log("succes");
+            },error => {
+                console.log(error);
+            }
+        );
+
+    }
+
+    get etats(): Array<EtatDemande> {
+
+        return this.demandeService.etats;
+    }
+
+    set etats(value: Array<EtatDemande>) {
+        this.demandeService.etats = value;
+    }
+
+    public valideDeclaration(nativedeclarationIR:DeclarationIR){
+        console.log("luwla libit sift");
+        console.log(nativedeclarationIR);
+        for (let i=0;i<this.items.length;i++){
+            this.items[i].id=null;
+        }
+        this.declarationIR.declarationsIREmployes = this.items;
+
+        this.service.deleteDeclarationIRandIREmploye().subscribe(
+
+            data=>{
+                console.log(data);
+                return this.service.save().subscribe(
+                    data => {
+                        this.items = null;
+                        this.isSaved=true;
+                        this.isCreated=false;
+                        this.declarationIR.total=0;
+                        this.currentDemande.etatDemande.libelle="traitée";
+
+                        this.updateEtatDemande();
+
+                        // this.declarationIR=null;
+                        // this.declarationIR=new DeclarationIR();
+                        this.messageService.add({
+                            severity: 'success',
+                            summary: 'Succès',
+                            detail: 'Déclarations enregistrées',
+                            life: 3000
+                        });
+                        console.log('3la slaaamtna');
+                    }, error => {
+                        console.log(error);
+                    }
+                );
+
+
+
+
+
+            },error => {
+                console.log(error);
+            }
+        );
+
+    }
+
+
 
     public save() {
 
@@ -128,12 +234,16 @@ export class DeclarationIrComponent implements OnInit {
                 this.isSaved=true;
                 this.isCreated=false;
                 this.declarationIR.total=0;
+                this.currentDemande.etatDemande.libelle="en cours de traitement";
+
+                this.updateEtatDemande();
+
                // this.declarationIR=null;
                // this.declarationIR=new DeclarationIR();
                 this.messageService.add({
                     severity: 'success',
-                    summary: 'Successful',
-                    detail: 'Declarations saved',
+                    summary: 'Succès',
+                    detail: 'Déclarations enregistrées',
                     life: 3000
                 });
                 console.log('3la slaaamtna');
@@ -195,8 +305,8 @@ export class DeclarationIrComponent implements OnInit {
     public delete(selected: DeclarationIREmploye) {
         this.selected = selected;
         this.confirmationService.confirm({
-            message: 'Are you sure you want to delete ' +/* selected.employe.cin */+'?',
-            header: 'Confirm',
+            message: 'Etes-vous sûr que vous voulez supprimer cette Declaration ?',
+            header: 'Confirmer',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
 
@@ -205,8 +315,8 @@ export class DeclarationIrComponent implements OnInit {
                 this.selected = new DeclarationIREmploye();
                 this.messageService.add({
                     severity: 'success',
-                    summary: 'Successful',
-                    detail: 'Declaration IR Employe Deleted',
+                    summary: 'succès',
+                    detail: 'Déclaration IR Employé Supprimée',
                     life: 3000
                 });
 
@@ -216,8 +326,8 @@ export class DeclarationIrComponent implements OnInit {
 
     public deleteMultiple() {
         this.confirmationService.confirm({
-            message: 'Are you sure you want to delete the selected declaration ?',
-            header: 'Confirm',
+            message: 'Êtes-vous sûr de vouloir supprimer la déclaration sélectionnée ?',
+            header: 'Confirmer',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
 
@@ -226,8 +336,8 @@ export class DeclarationIrComponent implements OnInit {
                 this.selectes = null;
                 this.messageService.add({
                     severity: 'success',
-                    summary: 'Successful',
-                    detail: 'Declarations Deleted',
+                    summary: 'Succès',
+                    detail: 'Déclarations supprimées',
                     life: 3000
                 });
 

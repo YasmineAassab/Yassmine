@@ -31,7 +31,7 @@
                     </li>
                 </ul>
         </div>
-        <ul class="layout-menu">
+        <ul class="layout-menu" *ngIf="isLoggedIn">
             <li app-menuitem *ngFor="let item of model; let i = index;" [item]="item" [index]="i" [root]="true"></li>
         </ul>
     </div>

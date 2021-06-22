@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {SousClasseComptable} from '../../../../../Controller/Model/sousClasseComptable.model';
-import {SousClasseComptableService} from '../../../../../Controller/Service/sousClasseComptable.service';
-import {ClasseComptableService} from "../../../../../Controller/Service/classeComptable.service";
+import {SousClasseComptable} from '../../../../../controller/model/sousClasseComptable.model';
+import {SousClasseComptableService} from '../../../../../controller/service/sousClasseComptable.service';
+import {ClasseComptableService} from '../../../../../controller/service/classeComptable.service';
 
 @Component({
   selector: 'app-sous-create',
@@ -9,6 +9,7 @@ import {ClasseComptableService} from "../../../../../Controller/Service/classeCo
   styleUrls: ['./sous-create.component.scss']
 })
 export class SousCreateComponent implements OnInit {
+
 
   constructor(private service: ClasseComptableService , private service2: SousClasseComptableService) { }
 
@@ -33,11 +34,11 @@ export class SousCreateComponent implements OnInit {
   }
 
   save() {
-return this.service2.save(this.service.num1, this.selected).subscribe(
-    data => {
-      console.log(data);
-      this.selected = null;
-    }
-);
+    return this.service2.save(this.service.num1, this.selected).subscribe(
+        data => {
+          console.log(data);
+          this.selected = null;
+        }
+    );
   }
 }

@@ -5,6 +5,8 @@ import {Societe} from '../../../controller/model/societe.model';
 import {DemandeService} from '../../../controller/service/demande.service';
 import {Demande} from "../../../controller/model/demande.model";
 import {TokenStorageService} from '../../../Security/_services/token-storage.service';
+import {UserService} from '../../../Security/_services/user.service';
+import {User} from '../../../Security/model/user.model';
 interface com{
   operation:string;
 }
@@ -21,13 +23,13 @@ export class DemandeDeclarationComponent implements OnInit {
   operationSelected:com;
   notSelected:boolean=true;
   declarationIS:string="Declaration IS";
+  societeUsers:Array<User>;
+  currentSociete:Societe;
 
 
 
 
-
-
-  constructor(private service: DeclarationIrService, private demandeService: DemandeService,private tokenStorageService:TokenStorageService) {
+  constructor(private userService:UserService,private service: DeclarationIrService, private demandeService: DemandeService,private tokenStorageService:TokenStorageService) {
 
     this.operations = [
       {operation: 'Declaration IR'},
@@ -46,6 +48,7 @@ export class DemandeDeclarationComponent implements OnInit {
     this.demandeService.demande = value;
   }
   save(){
+
     console.log("*****this is tockenv****");
     console.log(this.tokenStorageService.getUser().societe);
     console.log(this.tokenStorageService.getUser());
@@ -53,7 +56,7 @@ export class DemandeDeclarationComponent implements OnInit {
 
     console.log(this.demandeService.demande.operation);
 
-
+    this.demande.societe=this.currentSociete;
     this.demandeService.save().subscribe(
         data=>{
           if (data > 0){
@@ -87,11 +90,33 @@ export class DemandeDeclarationComponent implements OnInit {
   }
 
 
+
+  get logedSociete(): Societe {
+  return this.demandeService.logedSociete;
+  }
+
+  set logedSociete(value: Societe) {
+    this.demandeService.logedSociete = value;
+  }
+
   ngOnInit(): void {
     this.service.findCard();
     this.demandeService.demande.societe=new Societe();
    // this.demandeService.jibemp();
+    this.userService.getUsersComptable().subscribe(
+        data=>{
+          this.societeUsers=data;
 
+          for (let i=0;i<this.societeUsers.length;i++){
+            if (this.societeUsers[i].username==this.tokenStorageService.getUser().username){
+              this.currentSociete=this.societeUsers[i].societe;
+              this.logedSociete=this.currentSociete;
+            }
+          }
+          console.log(this.currentSociete);
+          console.log(this.societeUsers);
+        }
+    );
 
   }
 
