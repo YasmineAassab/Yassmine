@@ -57,7 +57,8 @@ import {CpcChartComponent} from "./view/admin/cpc/cpc-chart/cpc-chart.component"
            // {path: '', component: AppLoginComponent},
             //{path: 'sign-up', component: SignUpComponent},
             //{path: '', component: FirsthomepageComponent},
-            {path: '', component: AppMainComponent,
+            {path: '', component: FirsthomepageComponent},
+            {path: 'home', component: AppMainComponent,
                 children: [
 
                     {path: '', component: DashboardDemoComponent},

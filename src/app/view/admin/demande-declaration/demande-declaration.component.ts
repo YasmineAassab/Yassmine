@@ -7,6 +7,11 @@ import {Demande} from "../../../controller/model/demande.model";
 import {TokenStorageService} from '../../../Security/_services/token-storage.service';
 import {UserService} from '../../../Security/_services/user.service';
 import {User} from '../../../Security/model/user.model';
+import {FactureService} from "../../../controller/service/facture.service";
+import {Facture} from "../../../controller/model/facture.model";
+import {DeclarationIS} from "../../../controller/model/declaration-is.model";
+import {DeclarationISService} from "../../../controller/service/declaration-is.service";
+import {ConfirmationService, MessageService} from "primeng/api";
 interface com{
   operation:string;
 }
@@ -29,7 +34,9 @@ export class DemandeDeclarationComponent implements OnInit {
 
 
 
-  constructor(private userService:UserService,private service: DeclarationIrService, private demandeService: DemandeService,private tokenStorageService:TokenStorageService) {
+  constructor(private userService:UserService,private service: DeclarationIrService, private demandeService: DemandeService,
+              private serviceFct: FactureService, private tokenStorageService:TokenStorageService,
+              private messageService: MessageService, private confirmationService: ConfirmationService) {
 
     this.operations = [
       {operation: 'Declaration IR'},
@@ -37,8 +44,6 @@ export class DemandeDeclarationComponent implements OnInit {
       {operation: 'Declaration TVA'},
 
     ];
-
-
   }
   set societe(value: Societe) {
     this.demandeService.societe = value;
@@ -52,7 +57,7 @@ export class DemandeDeclarationComponent implements OnInit {
     console.log("*****this is tockenv****");
     console.log(this.tokenStorageService.getUser().societe);
     console.log(this.tokenStorageService.getUser());
-  this.demande.operation=this.operationSelected.operation;
+    this.demande.operation=this.operationSelected.operation;
 
     console.log(this.demandeService.demande.operation);
 
@@ -67,7 +72,7 @@ export class DemandeDeclarationComponent implements OnInit {
             console.log(this.demande);
             console.log("mchaat demande");
           }
-         else console.log(data);
+          else console.log(data);
 
         },error => {
           console.log(error);
@@ -92,7 +97,7 @@ export class DemandeDeclarationComponent implements OnInit {
 
 
   get logedSociete(): Societe {
-  return this.demandeService.logedSociete;
+    return this.demandeService.logedSociete;
   }
 
   set logedSociete(value: Societe) {
@@ -100,9 +105,11 @@ export class DemandeDeclarationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //this.serviceFct.findBySocieteSourceIceAndAnnee('2', 2020).subscribe(data => this.itemsFact = data);
+
     this.service.findCard();
     this.demandeService.demande.societe=new Societe();
-   // this.demandeService.jibemp();
+    // this.demandeService.jibemp();
     this.userService.getUsersComptable().subscribe(
         data=>{
           this.societeUsers=data;
@@ -118,6 +125,92 @@ export class DemandeDeclarationComponent implements OnInit {
         }
     );
 
+  }
+
+  public openCreate() {
+    this.submitted = false;
+    this.createDialog = true;
+  }
+
+  public editFact(facture: Facture) {
+    this.selectedFact = {...facture};
+    this.editDialog = true;
+  }
+
+  public viewFact(facture: Facture) {
+    this.selectedFact = {...facture};
+    this.viewDialog = true;
+  }
+
+  public deleteFact(selectedFact: Facture){
+    console.log('dekhlna');
+    this.selectedFact = selectedFact;
+    console.log('fact    ' + selectedFact.montantHorsTaxe);
+    this.confirmationService.confirm({
+      message: 'Êtes-vous sûr de vouloir supprimer la facture ' + selectedFact.ref + '?',
+      header: 'Confirm',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.serviceFct.deleteByReference().subscribe(data => {
+          this.itemsFact = this.itemsFact.filter(val => val.id !== this.selectedFact.id);
+          this.selectedFact = new Facture();
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Succès',
+            detail: 'Facture supprimée',
+            life: 3000
+          });
+        });
+      }
+    });
+  }
+
+
+  get itemsFact(): Array<Facture> {
+    return this.serviceFct.items;
+  }
+
+  set itemsFact(value: Array<Facture>) {
+    this.serviceFct.items = value;
+  }
+
+  get selectedFact(): Facture {
+    return this.serviceFct.selected;
+  }
+
+  set selectedFact(value: Facture) {
+    this.serviceFct.selected = value;
+  }
+  get submitted(): boolean {
+    return this.serviceFct.submitted;
+  }
+
+  set submitted(value: boolean) {
+    this.serviceFct.submitted = value;
+  }
+
+  get createDialog(): boolean {
+    return this.serviceFct.createDialog;
+  }
+
+  set createDialog(value: boolean) {
+    this.serviceFct.createDialog = value;
+  }
+
+  get editDialog(): boolean {
+    return this.serviceFct.editDialog;
+  }
+
+  set editDialog(value: boolean) {
+    this.serviceFct.editDialog = value;
+  }
+
+  get viewDialog(): boolean {
+    return this.serviceFct.viewDialog;
+  }
+
+  set viewDialog(value: boolean) {
+    this.serviceFct.viewDialog = value;
   }
 
 }
