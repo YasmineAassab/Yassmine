@@ -18,12 +18,6 @@
                 <div class="p-col-12  p-md-2"><div style="margin-bottom: 5px"><label>trim</label></div>
                     <input type="text" pInputText placeholder="trim" [(ngModel)]="selectedVo.trim">
                 </div>
-                <div class="p-col-12 p-md-2"><div style="margin-bottom: 5px"><label>Diff Tva min</label></div>
-                    <input type="text" pInputText placeholder="DiffTva min" [(ngModel)]="selectedVo.difftvamin">
-                </div>
-                <div class="p-col-12 p-md-2 p-offset-1"><div style="margin-bottom: 5px"><label>Diff Tva max</label></div>
-                    <input type="text" pInputText placeholder="DiffTva max" [(ngModel)]="selectedVo.difftvamax">
-                </div>
                 <div class="p-col-12 p-md-2"><div style="margin-bottom: 5px"><label>Type decl Tva</label></div>
                     <input type="text" pInputText placeholder="Type decl Tva" [(ngModel)]="selectedVo.typedeclarationtva">
                 </div>
@@ -32,7 +26,7 @@
 
             <div>
                 <p-tabView  [(activeIndex)]="activeIndex">
-                    <p-tabPanel header="Declaration IS">
+                    <p-tabPanel header="Declaration TVA">
                         <div>
                             <p-toolbar styleClass="p-mb-4">
                                 <ng-template pTemplate="left">
