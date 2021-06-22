@@ -45,6 +45,10 @@ import {DashboardDemoComponent} from "./demo/view/dashboarddemo.component";
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import {AcomptesListComponent} from "./view/admin/acomptes/acomptes-list/acomptes-list.component";
 import {FactureJournalComponent} from './view/admin/facture/facture-journal/facture-journal.component';
+import {ClasseComponent} from "./view/admin/classe/classe.component";
+import {CpcViewComponent} from "./view/admin/cpc/cpc-view/cpc-view.component";
+import {CpcRechercheComponent} from "./view/admin/cpc/cpc-recherche/cpc-recherche.component";
+import {CpcChartComponent} from "./view/admin/cpc/cpc-chart/cpc-chart.component";
 
 
 @NgModule({
@@ -57,6 +61,10 @@ import {FactureJournalComponent} from './view/admin/facture/facture-journal/fact
                 children: [
 
                     {path: '', component: DashboardDemoComponent},
+                    {path: 'classe-comptable', component: ClasseComponent},
+                    {path: 'cpc-view', component: CpcViewComponent},
+                    {path: 'cpc-recherche', component: CpcRechercheComponent},
+                    {path: 'Cpc-Chart', component: CpcChartComponent},
                     //{path: 'sign-up', component: SignUpComponent},
                     //{path: 'home-page', component: HomePageComponent},
                     {path: 'declaration-ir', component: DeclarationIrComponent},

@@ -84,5 +84,8 @@ export class ClasseListeComponent implements OnInit {
   public openCreate() {
     this.service.createDialog = true;
   }
+  public openUpdate() {
+    this.service.updateDialog = true;
+  }
 
 }

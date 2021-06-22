@@ -19,13 +19,6 @@ export class CpcRechercheComponent implements OnInit {
   cols: any[];
   private _disactivatedFactures: Array<Facture>;
   private _cpc: Cpc;
-  private _produitExp: number;
-  private _prodFinance: number;
-  private _prodNCourant: number;
-  private _chargEx: number;
-  private _chargFinance: number;
-  private _chargNCourant: number;
-  private _surImpots: number;
   private _detaille: boolean = false;
   activateIndex: number =0;
   constructor(public service: CpcService, private messageService: MessageService, private confirmationService: ConfirmationService) { }
@@ -128,7 +121,8 @@ export class CpcRechercheComponent implements OnInit {
   }
   find(cpc: Cpc) {
     this.detaille = true;
-    console.log(this.cpc);
+    console.log("cpc right");
+    console.log(cpc);
     let fact1: Array<Facture>;
     fact1 = new Array<Facture>();
     let fact2: Array<Facture>;
@@ -149,37 +143,37 @@ export class CpcRechercheComponent implements OnInit {
     console.log(cpc);
     // tslint:disable-next-line:only-arrow-functions
     cpc.cpcFactures.forEach( function(item){
-      if (item.facture.compteComptable.sousClasseComptable.libelle === 'PRODUITS D’EXPLOITATION' && item.included === true){
+      if (item.facture.compteComptable.sousClasseComptable.libelle == 'PRODUITS D’EXPLOITATION' && item.included === true){
         fact1.push(item.facture);
         produi1 += item.facture.montantHorsTaxe;
         console.log('hii');
         console.log(fact1);
       }
-      if (item.facture.compteComptable.sousClasseComptable.libelle === 'PRODUITS FINANCIERS' && item.included === true){
+      if (item.facture.compteComptable.sousClasseComptable.libelle == 'PRODUITS FINANCIERS' && item.included === true){
         fact2.push(item.facture);
         produi2 += item.facture.montantHorsTaxe;
         console.log('hii');
         console.log(fact1);
       }
-      if (item.facture.compteComptable.sousClasseComptable.libelle === 'PRODUITS NON COURANTS' && item.included === true){
+      if (item.facture.compteComptable.sousClasseComptable.libelle == 'PRODUITS NON COURANTS' && item.included === true){
         fact3.push(item.facture);
         produi3 += item.facture.montantHorsTaxe;
         console.log('hii');
         console.log(fact1);
       }
-      if (item.facture.compteComptable.sousClasseComptable.libelle === 'CHARGES D’EXPLOITATION' && item.included === true){
+      if (item.facture.compteComptable.sousClasseComptable.libelle == 'CHARGES D’EXPLOITATION' && item.included === true){
         fact4.push(item.facture);
         charg1 += item.facture.montantHorsTaxe;
-        console.log('hii');
-        console.log(fact1);
+        console.log('hii charges ');
+        console.log(fact4);
       }
-      if (item.facture.compteComptable.sousClasseComptable.libelle === 'CHARGES FINANCIERES' && item.included === true){
+      if (item.facture.compteComptable.sousClasseComptable.libelle == 'CHARGES FINANCIERES' && item.included === true){
         fact5.push(item.facture);
         charg2 += item.facture.montantHorsTaxe;
         console.log('hii');
         console.log(fact1);
       }
-      if (item.facture.compteComptable.sousClasseComptable.libelle === 'CHARGES NON COURANTES' && item.included === true){
+      if (item.facture.compteComptable.sousClasseComptable.libelle == 'CHARGES NON COURANTES' && item.included === true){
         fact6.push(item.facture);
         charg3 += item.facture.montantHorsTaxe;
         console.log('hii');
@@ -197,75 +191,66 @@ export class CpcRechercheComponent implements OnInit {
     this.chargFinance = charg2;
     this.chargNCourant = charg3;
     this.service.items = fact1;
-    this.service.items1 = fact2;
-    this.service.items2 = fact3;
-    this.service.items3 = fact4;
-    this.service.items4 = fact5;
+    console.log("this.item1");
+    this.service.items1 = fact4;// wrong position
+    console.log(this.service.items1);
+    this.service.items2 = fact2;
+    this.service.items3 = fact5;
+    this.service.items4 = fact3;
     this.service.items5 = fact6;
     this.disactivatedFactures = disactivated;
   }
   get produitExp(): number {
-    if (this._produitExp == null){
-      this._produitExp = 0;
-    }
-    return this._produitExp;
+    return this.service.produitExp;
   }
 
   set produitExp(value: number) {
-    this._produitExp = value;
+    this.service.produitExp = value;
   }
   get prodNCourant(): number {
-    if (this._prodNCourant == null){
-      this._prodNCourant = 0;
-    }
-    return this._prodNCourant;
+    return this.service.prodNCourant;
   }
 
   set prodNCourant(value: number) {
-    this._prodNCourant = value;
+    this.service.prodNCourant = value;
   }
 
   get chargEx(): number {
-    if (this._chargEx == null){
-      this._chargEx = 0;
-    }
-    return this._chargEx;
+    return this.service.chargEx;
   }
 
   set chargEx(value: number) {
-    this._chargEx = value;
+    this.service.chargEx = value;
   }
 
   get chargFinance(): number {
-    if (this._chargFinance == null){
-      this._chargFinance = 0;
-    }
-    return this._chargFinance;
+    return this.service.chargFinance;
   }
 
   set chargFinance(value: number) {
-    this._chargFinance = value;
+    this.service.chargFinance = value;
   }
 
   get chargNCourant(): number {
-    if (this._chargNCourant == null){
-      this._chargNCourant = 0;
-    }
-    return this._chargNCourant;
+    return this.service.chargNCourant;
   }
 
   set chargNCourant(value: number) {
-    this._chargNCourant = value;
+    this.service.chargNCourant = value;
   }
   get prodFinance(): number {
-    if (this._prodFinance == null){
-      this._prodFinance = 0;
-    }
-    return this._prodFinance;
+    return this.service.prodFinance;
   }
 
   set prodFinance(value: number) {
-    this._prodFinance = value;
+    this.service.prodFinance = value;
+  }
+  get surImpots(): number {
+    return this.service.surImpots;
+  }
+
+  set surImpots(value: number) {
+    this.service.surImpots = value;
   }
   get resultatExploi(): number {
     return  this.produitExp - this.chargEx;
@@ -282,16 +267,6 @@ export class CpcRechercheComponent implements OnInit {
   get resultatAvantImpots(): number {
     return  this.resultatCourant + this.resultatNonCourant;
   }
-  get surImpots(): number {
-    if (this._surImpots == null){
-      this._surImpots = 0;
-    }
-    return this._surImpots;
-  }
-
-  set surImpots(value: number) {
-    this._surImpots = value;
-  }
   get resultatNet(): number {
     return  this.resultatAvantImpots - this.surImpots ;
   }
@@ -302,24 +277,30 @@ export class CpcRechercheComponent implements OnInit {
   set detaille(value: boolean) {
     this._detaille = value;
   }
+  showDialog(c: Facture) {
+    this.service.calCpcVo.datemax = this.cpcVo.dateMaxVo;
+    this.service.calCpcVo.datemin = this.cpcVo.dateMinVo;
+    this.service.selected1 = c;
+    this.service.updateDialog = true;
+  }
 
   update() {
     // tslint:disable-next-line:prefer-for-of
   for (let i = 0 ; i < this.cpc.cpcFactures.length; i++){
     this.service.updateCpcFacture(this.cpc.cpcFactures[i]).subscribe(
         data => {
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Avec succès',
-            detail: 'CPC a été mis à jour',
-            life: 3000
-          });
           console.log(data);
         }
     );
   }
   this.service.update(this.remplirCpc()).subscribe(
         data => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'CPC a été mis à jour',
+            detail: 'Avec succès',
+            life: 3000
+          });
           console.log(data);
         }
     );
@@ -350,8 +331,8 @@ export class CpcRechercheComponent implements OnInit {
         items.splice(this.findIndexById(c.id, items), 1);
         this.messageService.add({
           severity: 'success',
-          summary: 'Avec succès',
-          detail: 'Facture Supprimé',
+          summary: 'Facture Supprimé',
+          detail: 'Avec succès',
           life: 3000
         });
       }
@@ -381,8 +362,8 @@ export class CpcRechercheComponent implements OnInit {
     );
     this.messageService.add({
           severity: 'success',
-          summary: 'Avec succès',
-          detail: 'cpc Supprimé',
+          summary: 'cpc Supprimé',
+          detail: 'Avec succès',
           life: 3000
         });
       }
@@ -391,6 +372,8 @@ export class CpcRechercheComponent implements OnInit {
   }
   put(cpc: any) {
     this.cpc = cpc;
+    console.log("now");
+    console.log(this.cpc);
   }
   get disactivatedFactures(): Array<Facture> {
     if (this._disactivatedFactures == null){

@@ -6,48 +6,13 @@ import {Cpc} from '../../../../controller/model/cpc.model';
 import {CpcService} from '../../../../controller/service/cpc.service';
 import {CpcFacture} from '../../../../controller/model/cpc-facture.model';
 import {ConfirmationService, MessageService} from 'primeng/api';
+import {async} from 'rxjs';
 @Component({
   selector: 'app-cpc-view',
   templateUrl: './cpc-view.component.html',
   styleUrls: ['./cpc-view.component.scss']
 })
 export class CpcViewComponent implements OnInit {
-  get cpcSave(): Cpc {
-    if (this._cpcSave == null){
-      this._cpcSave = new Cpc();
-    }
-    return this._cpcSave;
-  }
-
-  set cpcSave(value: Cpc) {
-    this._cpcSave = value;
-  }
-  get displayPosition(): boolean {
-    return this._displayPosition;
-  }
-
-  set displayPosition(value: boolean) {
-    this._displayPosition = value;
-  }
-
-  get cpcVo(): CpcSave {
-    if (this._cpcVo == null){
-      this._cpcVo = new CpcSave();
-    }
-    return this._cpcVo;
-  }
-
-  set cpcVo(value: CpcSave) {
-    this._cpcVo = value;
-  }
-  private _produitExp: number;
-  private _prodFinance: number;
-  private _prodNCourant: number;
-  private _chargEx: number;
-  private _chargFinance: number;
-  private _chargNCourant: number;
-  private _surImpots: number;
-  private _calCpcVo: CalCpcVo;
   private _cpcVo: CpcSave;
   private _displayPosition: boolean;
   private _cpcSave: Cpc;
@@ -138,34 +103,34 @@ export class CpcViewComponent implements OnInit {
         data => {
           if (type === 'PRODUITS D’EXPLOITATION'){
             this.service.items = data;
-            console.log( this.items);
+            console.log( data);
           }
           else if (type === 'CHARGES D’EXPLOITATION') {
             this.service.items1 = data;
-            console.log(this.service.items1);
+            console.log(data);
           }
           else if (type === 'PRODUITS FINANCIERS') {
             this.service.items2 = data;
-            console.log('PRODUITS FINANCIERS' + '=' + this.service.items2);
+            console.log(data);
           }
           else if (type === 'CHARGES FINANCIERES') {
             this.service.items3 = data;
-            console.log('CHARGES FINANCIERES' + '=' + this.service.items3);
+            console.log(data);
           }
           else if (type === 'PRODUITS NON COURANTS') {
             this.service.items4 = data;
-            console.log('PRODUITS NON COURANTS' + '=' + this.service.items4);
+            console.log(data);
           }
           else if (type === 'CHARGES NON COURANTES') {
             this.service.items5 = data;
-            console.log('CHARGES NON COURANTES' + '=' + this.service.items5);
+            console.log(data);
           }
         }, error => {
           console.log('erreur');
         }
     );
   }
-  public  findCpc(){
+ public  findCpc(){
     return this.service.find(this.cpcVo).subscribe(
         data => {console.log(data);
           this.service.items01 = data;
@@ -204,8 +169,8 @@ export class CpcViewComponent implements OnInit {
         });
         this.messageService.add({
           severity: 'success',
-          summary: 'Avec succès',
-          detail: 'Facture Supprimé',
+          summary: 'Facture Supprimé',
+          detail: 'Avec succès',
           life: 3000
         });
       }
@@ -220,8 +185,8 @@ export class CpcViewComponent implements OnInit {
           console.log(data);
           this.messageService.add({
             severity: 'success',
-            summary: 'Avec succès',
-            detail: 'CPC Créé',
+            summary: 'CPC Crée',
+            detail: 'Avec succès',
             life: 3000
           });
         }
@@ -280,86 +245,59 @@ export class CpcViewComponent implements OnInit {
       cpcFacture.included = true;
       cpc.cpcFactures.push(cpcFacture);
     });
-/*    this.cpcSave.factureList = this.items;
-    this.cpcSave.factureList.push.apply(this.cpcSave.factureList, this.items1);
-    this.cpcSave.factureList.push.apply(this.cpcSave.factureList, this.items2);
-    this.cpcSave.factureList.push.apply(this.cpcSave.factureList, this.items3);
-    this.cpcSave.factureList.push.apply(this.cpcSave.factureList, this.items4);
-    this.cpcSave.factureList.push.apply(this.cpcSave.factureList, this.items5);*/
     return cpc;
   }
   get calCpcVo(): CalCpcVo {
-    if (this._calCpcVo == null){
-      this._calCpcVo = new CalCpcVo();
-    }
-    return this._calCpcVo;
+    return this.service.calCpcVo;
   }
 
   set calCpcVo(value: CalCpcVo) {
-    this._calCpcVo = value;
+    this.service.calCpcVo = value;
   }
   get produitExp(): number {
-    if (this._produitExp == null){
-      this._produitExp = 0;
-    }
-    return this._produitExp;
+    return this.service.produitExp;
   }
 
   set produitExp(value: number) {
-    this._produitExp = value;
+    this.service.produitExp = value;
   }
   get prodNCourant(): number {
-    if (this._prodNCourant == null){
-      this._prodNCourant = 0;
-    }
-    return this._prodNCourant;
+    return this.service.prodNCourant;
   }
 
   set prodNCourant(value: number) {
-    this._prodNCourant = value;
+    this.service.prodNCourant = value;
   }
 
   get chargEx(): number {
-    if (this._chargEx == null){
-      this._chargEx = 0;
-    }
-    return this._chargEx;
+    return this.service.chargEx;
   }
 
   set chargEx(value: number) {
-    this._chargEx = value;
+    this.service.chargEx = value;
   }
 
   get chargFinance(): number {
-    if (this._chargFinance == null){
-      this._chargFinance = 0;
-    }
-    return this._chargFinance;
+    return this.service.chargFinance;
   }
 
   set chargFinance(value: number) {
-    this._chargFinance = value;
+    this.service.chargFinance = value;
   }
 
   get chargNCourant(): number {
-    if (this._chargNCourant == null){
-      this._chargNCourant = 0;
-    }
-    return this._chargNCourant;
+    return this.service.chargNCourant;
   }
 
   set chargNCourant(value: number) {
-    this._chargNCourant = value;
+    this.service.chargNCourant = value;
   }
   get prodFinance(): number {
-    if (this._prodFinance == null){
-      this._prodFinance = 0;
-    }
-    return this._prodFinance;
+    return this.service.prodFinance;
   }
 
   set prodFinance(value: number) {
-    this._prodFinance = value;
+    this.service.prodFinance = value;
   }
   get resultatExploi(): number {
     return  this.produitExp - this.chargEx;
@@ -377,14 +315,11 @@ export class CpcViewComponent implements OnInit {
     return  this.resultatCourant + this.resultatNonCourant;
   }
   get surImpots(): number {
-    if (this._surImpots == null){
-      this._surImpots = 0;
-    }
-    return this._surImpots;
+    return this.service.surImpots;
   }
 
   set surImpots(value: number) {
-    this._surImpots = value;
+    this.service.surImpots = value;
   }
   get resultatNet(): number {
     return  this.resultatAvantImpots - this.surImpots ;
@@ -424,15 +359,57 @@ export class CpcViewComponent implements OnInit {
     this.bring('PRODUITS NON COURANTS', this.calCpcVo);
     this.bring('CHARGES NON COURANTES', this.calCpcVo);
   }
-
-  navigateAssociates(url: string) {
-    window.open(url, '_blank');
-  }
-
   click() {
     this.find();
     this.detaille();
     this.init();
+  }
+  get updateDialog(): boolean {
+    return this.service.updateDialog;
+  }
+
+  set updateDialog(value: boolean) {
+    this.service.updateDialog = value;
+  }
+
+  showDialog(c: Facture) {
+    this.service.selected1 = c;
+    this.service.updateDialog = true;
+  }
+  get updload(): boolean {
+    return this.service.updload;
+  }
+
+  set updload(value: boolean) {
+    this.service.updload = value;
+  }
+  get cpcSave(): Cpc {
+    if (this._cpcSave == null){
+      this._cpcSave = new Cpc();
+    }
+    return this._cpcSave;
+  }
+
+  set cpcSave(value: Cpc) {
+    this._cpcSave = value;
+  }
+  get displayPosition(): boolean {
+    return this._displayPosition;
+  }
+
+  set displayPosition(value: boolean) {
+    this._displayPosition = value;
+  }
+
+  get cpcVo(): CpcSave {
+    if (this._cpcVo == null){
+      this._cpcVo = new CpcSave();
+    }
+    return this._cpcVo;
+  }
+
+  set cpcVo(value: CpcSave) {
+    this._cpcVo = value;
   }
 }
 export interface CpcTable {

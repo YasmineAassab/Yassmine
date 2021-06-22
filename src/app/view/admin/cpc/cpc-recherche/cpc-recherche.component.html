@@ -11,7 +11,7 @@
     </div>
 
     <div class="p-col-12 p-md-2" style="margin-top: 1px">
-        <button pButton type="button" class="p-button-outlined" style="margin-top: 23px" label="Chercher" [disabled]="cpcVo.totalProdExVo==null && cpcVo.dateMaxVo==null && cpcVo.dateMinVo==null"  (click)="findCpc()"></button>
+        <button pButton type="button" class="p-button-outlined" style="margin-top: 23px" label="Chercher" [disabled]=" cpcVo.dateMaxVo==null && cpcVo.dateMinVo==null"  (click)="findCpc()"></button>
     </div>
 </div></div>
 <div id="tab" class="card" style="background-color: transparent">
@@ -172,7 +172,7 @@
                 <i class="pi pi-calendar"></i>
                 <span>P.d'Éxploitations</span>
             </ng-template>
-            <p-table #dt [value]="items" [columns]="cols2" [rows]="1" [paginator]="true" [globalFilterFields]="['reference','total','totalPaye']"
+            <p-table #dt [value]="items" [columns]="cols2" [rows]="4" [paginator]="true" [globalFilterFields]="['reference','total','totalPaye']"
                      [rowHover]="true" dataKey="id"
                      styleClass="p-datatable-customers"
                      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
@@ -207,7 +207,8 @@
                         <td>{{c.annee}}/{{c.mois}}({{c.trim}})</td>
                         <td>{{c.typeOperation}}</td>
                         <td>{{c.compteComptable.code}}</td>
-                        <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(c,items)"></button></td>
+                        <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(c,items)"></button>
+                            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 2px" (click)="showDialog(c)"></button></td>
                     </tr>
                 </ng-template>
 
@@ -240,8 +241,8 @@
                         <th>action</th>
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-facture>
-                    <tr *ngFor="let c of items1; index as i ">
+                <ng-template pTemplate="body" let-c>
+                    <tr>
                         <td>{{c.ref}}</td>
                         <td>{{c.societeSource.ice}}</td>
                         <td>{{c.societeDistination.ice}}</td>
@@ -253,7 +254,8 @@
                         <td>{{c.annee}}/{{c.mois}}({{c.trim}})</td>
                         <td>{{c.typeOperation}}</td>
                         <td>{{c.compteComptable.code}}</td>
-                        <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(c,items1)"></button></td>
+                        <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(c,items1)"></button>
+                            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 2px" (click)="showDialog(c)"></button></td>
                     </tr>
                 </ng-template>
 
@@ -286,8 +288,8 @@
                         <th>action</th>
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-facture>
-                    <tr *ngFor="let c of items2; index as i ">
+                <ng-template pTemplate="body" let-c>
+                    <tr>
                         <td>{{c.ref}}</td>
                         <td>{{c.societeSource.ice}}</td>
                         <td>{{c.societeDistination.ice}}</td>
@@ -299,7 +301,8 @@
                         <td>{{c.annee}}/{{c.mois}}({{c.trim}})</td>
                         <td>{{c.typeOperation}}</td>
                         <td>{{c.compteComptable.code}}</td>
-                        <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(c,items2)"></button></td>
+                        <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(c,items2)"></button>
+                            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 2px" (click)="showDialog(c)"></button></td>
                     </tr>
                 </ng-template>
 
@@ -332,8 +335,8 @@
                         <th>action</th>
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-facture>
-                    <tr *ngFor="let c of items3; index as i ">
+                <ng-template pTemplate="body" let-c>
+                    <tr>
                         <td>{{c.ref}}</td>
                         <td>{{c.societeSource.ice}}</td>
                         <td>{{c.societeDistination.ice}}</td>
@@ -345,7 +348,8 @@
                         <td>{{c.annee}}/{{c.mois}}({{c.trim}})</td>
                         <td>{{c.typeOperation}}</td>
                         <td>{{c.compteComptable.code}}</td>
-                        <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(c,items3)"></button></td>
+                        <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(c,items3)"></button>
+                            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 2px" (click)="showDialog(c)"></button></td>
                     </tr>
                 </ng-template>
 
@@ -378,8 +382,8 @@
                         <th>action</th>
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-facture>
-                    <tr *ngFor="let c of items4; index as i ">
+                <ng-template pTemplate="body" let-c>
+                    <tr>
                         <td>{{c.ref}}</td>
                         <td>{{c.societeSource.ice}}</td>
                         <td>{{c.societeDistination.ice}}</td>
@@ -391,7 +395,8 @@
                         <td>{{c.annee}}/{{c.mois}}({{c.trim}})</td>
                         <td>{{c.typeOperation}}</td>
                         <td>{{c.compteComptable.code}}</td>
-                        <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(c,items4)"></button></td>
+                        <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(c,items4)"></button>
+                            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 2px" (click)="showDialog(c)"></button></td>
                     </tr>
                 </ng-template>
 
@@ -424,8 +429,8 @@
                         <th>action</th>
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-facture>
-                    <tr *ngFor="let c of items5; index as i ">
+                <ng-template pTemplate="body" let-c>
+                    <tr>
                         <td>{{c.ref}}</td>
                         <td>{{c.societeSource.ice}}</td>
                         <td>{{c.societeDistination.ice}}</td>
@@ -437,7 +442,8 @@
                         <td>{{c.annee}}/{{c.mois}}({{c.trim}})</td>
                         <td>{{c.typeOperation}}</td>
                         <td>{{c.compteComptable.code}}</td>
-                        <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(c,items5)"></button></td>
+                        <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(c,items5)"></button>
+                            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 2px" (click)="showDialog(c)"></button></td>
                     </tr>
                 </ng-template>
 
@@ -470,8 +476,8 @@
                         <th>action</th>
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-facture>
-                    <tr *ngFor="let c of disactivatedFactures; index as i ">
+                <ng-template pTemplate="body" let-c>
+                    <tr>
                         <td>{{c.ref}}</td>
                         <td>{{c.societeSource.ice}}</td>
                         <td>{{c.societeDistination.ice}}</td>
@@ -492,5 +498,6 @@
     </p-tabView>
     <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
 </div>
+<app-facture-edit></app-facture-edit>
 <app-cpc-list></app-cpc-list>
 
