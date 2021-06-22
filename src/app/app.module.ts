@@ -333,7 +333,7 @@ import { FactureJournalComponent } from './view/admin/facture/facture-journal/fa
         CpcComponent,
         CpcListComponent,
         CpcRechercheComponent,
-        CpcViewComponent,CpcChartComponent,
+        CpcViewComponent, CpcChartComponent,
         ClasseEditComponent,
         CompteEditComponent,
         SousEditComponent,

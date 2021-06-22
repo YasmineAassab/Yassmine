@@ -44,25 +44,32 @@ import {DashboardDemoComponent} from "./demo/view/dashboarddemo.component";
 
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import {AcomptesListComponent} from "./view/admin/acomptes/acomptes-list/acomptes-list.component";
+import {FactureJournalComponent} from './view/admin/facture/facture-journal/facture-journal.component';
+import {ClasseComponent} from "./view/admin/classe/classe.component";
+import {CpcViewComponent} from "./view/admin/cpc/cpc-view/cpc-view.component";
+import {CpcRechercheComponent} from "./view/admin/cpc/cpc-recherche/cpc-recherche.component";
+import {CpcChartComponent} from "./view/admin/cpc/cpc-chart/cpc-chart.component";
 
 
 @NgModule({
     imports: [
         RouterModule.forRoot([
-            // {path: '', component: AppLoginComponent},
+           // {path: '', component: AppLoginComponent},
             //{path: 'sign-up', component: SignUpComponent},
             //{path: '', component: FirsthomepageComponent},
-            {path: '', component: FirsthomepageComponent},
-            {path: 'home', component: AppMainComponent,
+            {path: '', component: AppMainComponent,
                 children: [
 
                     {path: '', component: DashboardDemoComponent},
+                    {path: 'classe-comptable', component: ClasseComponent},
+                    {path: 'cpc-view', component: CpcViewComponent},
+                    {path: 'cpc-recherche', component: CpcRechercheComponent},
+                    {path: 'Cpc-Chart', component: CpcChartComponent},
                     //{path: 'sign-up', component: SignUpComponent},
                     //{path: 'home-page', component: HomePageComponent},
                     {path: 'declaration-ir', component: DeclarationIrComponent},
                     {path: 'declaration-ir/list', component: ChercherDeclarationIRComponent},
                     {path: 'comptable', component: ComptableBoardComponent},
-                   // {path: 'paiement/is', component: PaiementComponent},
                     {path: 'declarations', component: DeclarationsComponent},
                     {path: 'traitement', component: ComptableBoardComponent},
                     {path: 'demandes', component: DeclarationsComponent},
@@ -75,6 +82,7 @@ import {AcomptesListComponent} from "./view/admin/acomptes/acomptes-list/acompte
                     {path: 'declarations', component: DeclarationsComponent},
                     {path: 'contact', component: ContactComponent},
                     {path: 'demande/list', component: DemandeListComponent},
+                    {path: 'demande/validation', component: ComptableValidateurComponent},
                     {path: 'vis', component: VisualiserDemandeComponent},
                     {path: 'declaration-is', component: DeclarationsISComponent},
                     {path: 'declarations-is/create', component: DeclarationIsCreateComponent},
@@ -84,6 +92,7 @@ import {AcomptesListComponent} from "./view/admin/acomptes/acomptes-list/acompte
                     {path: 'declarations-is/chart', component: ChartsComponent},
                     {path: 'facture', component: FactureComponent},
                     {path: 'view/facture/create', component: FactureCreateComponent},
+                    {path: 'view/facture/journal', component: FactureJournalComponent},
                     {path: 'declaration-tva', component: DeclarationTvaListComponent},
                     {path: 'declaration-tva/create', component: DeclarationTvaCreateComponent},
                     {path: 'utilities/display', component: DisplayComponent},
@@ -95,7 +104,7 @@ import {AcomptesListComponent} from "./view/admin/acomptes/acomptes-list/acompte
                     {path: 'utilities/spacing', component: SpacingComponent},
                     {path: 'utilities/typography', component: TypographyComponent},
                     {path: 'utilities/text', component: TextComponent}
-                ]
+                    ]
             },
             {path: 'sign-up', component: SignUpComponent},
             {path: 'error', component: AppErrorComponent},

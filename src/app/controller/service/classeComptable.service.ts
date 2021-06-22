@@ -9,8 +9,16 @@ import {SousClasseComptable} from "../Model/sousClasseComptable.model";
   providedIn: 'root'
 })
 export class ClasseComptableService {
+    get updateDialog(): boolean {
+        return this._updateDialog;
+    }
+
+    set updateDialog(value: boolean) {
+        this._updateDialog = value;
+    }
   private _selected: ClasseComptable;
   private _createDialog: boolean;
+  private _updateDialog: boolean;
   private _items2: Array<SousClasseComptable>;
   private _num1: number;
   private _url: string = 'http://localhost:8036/gestion-class/class-comptable/';
@@ -32,8 +40,8 @@ export class ClasseComptableService {
     save(selected: ClasseComptable): Observable<number> {
         return this.http.post<number>('http://localhost:8036/gestion-class/class-comptable/alone/' , selected);
     }
-    update(){
-
+    update(selected: ClasseComptable): Observable<number>{
+return this.http.put<number>('http://localhost:8036/gestion-class/class-comptable/' , selected);
     }
     get create(): number {
         return this._create;

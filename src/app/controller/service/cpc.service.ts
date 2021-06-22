@@ -16,8 +16,42 @@ import {EtatPaiement} from '../model/etat-paiement.model';
   providedIn: 'root'
 })
 export class CpcService {
+  get updload(): boolean {
+    return this._updload;
+  }
+
+  set updload(value: boolean) {
+    this._updload = value;
+  }
+  get selected1(): Facture {
+    if (this._selected1 == null){
+      this._selected1 = new Facture();
+    }
+    return this._selected1;
+  }
+
+  set selected1(value: Facture) {
+    this._selected1 = value;
+  }
+  get updateDialog(): boolean {
+    return this._updateDialog;
+  }
+
+  set updateDialog(value: boolean) {
+    this._updateDialog = value;
+  }
+  private _surImpots: number;
+  private _produitExp: number;
+  private _prodFinance: number;
+  private _prodNCourant: number;
+  private _chargEx: number;
+  private _chargFinance: number;
+  private _chargNCourant: number;
+  private _calCpcVo: CalCpcVo;
   private _url = environment.baseUrl;
   private _viewDialog: boolean;
+  private _updateDialog: boolean;
+  private _updload: boolean;
   private _items: Array<Facture>;
   private _items1: Array<Facture>;
   private _items2: Array<Facture>;
@@ -26,6 +60,7 @@ export class CpcService {
   private _items5: Array<Facture>;
   private _items01: Array<Cpc>;
   private _selected: Facture;
+  private _selected1: Facture;
   private _items001: Array<Societe>;
   private _items002: Array<Societe>;
   private _items0001: Array<Tva>;
@@ -80,6 +115,9 @@ export class CpcService {
   }
   public updateCpcFacture(cpcFacture: CpcFacture): Observable<CpcFacture>{
       return this.http.put<CpcFacture>(this.url + 'cpc-facture/', cpcFacture);
+  }
+  public updateFacture(): Observable<number>{
+    return this.http.put<number>(this.url + 'facture/' , this.selected1);
   }
   public deleteCpc(id: number): Observable<number>{
     return this.http.delete<number>(this.url + 'display-cpc/delete/id/' + id);
@@ -255,5 +293,88 @@ export class CpcService {
 
   set etatsPaiment(value: Array<EtatPaiement>) {
     this._etatsPaiment = value;
+  }
+  get calCpcVo(): CalCpcVo {
+    if (this._calCpcVo == null){
+      this._calCpcVo = new CalCpcVo();
+    }
+    return this._calCpcVo;
+  }
+
+  set calCpcVo(value: CalCpcVo) {
+    this._calCpcVo = value;
+  }
+  get produitExp(): number {
+    if (this._produitExp == null){
+      this._produitExp = 0;
+    }
+    return this._produitExp;
+  }
+
+  set produitExp(value: number) {
+    this._produitExp = value;
+  }
+  get prodNCourant(): number {
+    if (this._prodNCourant == null){
+      this._prodNCourant = 0;
+    }
+    return this._prodNCourant;
+  }
+
+  set prodNCourant(value: number) {
+    this._prodNCourant = value;
+  }
+
+  get chargEx(): number {
+    if (this._chargEx == null){
+      this._chargEx = 0;
+    }
+    return this._chargEx;
+  }
+
+  set chargEx(value: number) {
+    this._chargEx = value;
+  }
+
+  get chargFinance(): number {
+    if (this._chargFinance == null){
+      this._chargFinance = 0;
+    }
+    return this._chargFinance;
+  }
+
+  set chargFinance(value: number) {
+    this._chargFinance = value;
+  }
+
+  get chargNCourant(): number {
+    if (this._chargNCourant == null){
+      this._chargNCourant = 0;
+    }
+    return this._chargNCourant;
+  }
+
+  set chargNCourant(value: number) {
+    this._chargNCourant = value;
+  }
+  get prodFinance(): number {
+    if (this._prodFinance == null){
+      this._prodFinance = 0;
+    }
+    return this._prodFinance;
+  }
+
+  set prodFinance(value: number) {
+    this._prodFinance = value;
+  }
+  get surImpots(): number {
+    if (this._surImpots == null){
+      this._surImpots = 0;
+    }
+    return this._surImpots;
+  }
+
+  set surImpots(value: number) {
+    this._surImpots = value;
   }
 }

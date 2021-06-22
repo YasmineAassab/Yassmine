@@ -16,28 +16,28 @@
             </div>-->
             <div class="p-field p-col-12 p-md-4">
                 <label>Sociéte Source</label>
-                <p-dropdown [options]="items001" [(ngModel)]="selected.societeSource" optionLabel="ice" [filter]="true" filterBy="nom" [showClear]="true" placeholder="societe source" required autofocus>
+                <p-dropdown [options]="items001" [(ngModel)]="selected.societeSource" optionLabel="nom" [filter]="true" filterBy="nom" [showClear]="true" placeholder="societe source" required autofocus>
                     <ng-template pTemplate="selectedItem">
-                        <div class="country-item country-item-value" *ngIf="selected.societeSource.ice">
-                            <div>{{selected.societeSource.ice}}</div>
+                        <div class="country-item country-item-value" *ngIf="selected.societeSource.nom">
+                            <div>{{selected.societeSource.nom}}</div>
                         </div>
                     </ng-template>
                     <ng-template let-items1 pTemplate="item">
-                        <div class="country-item">  <div>{{items1.ice}}</div>
+                        <div class="country-item">  <div>{{items1.nom}}</div>
                         </div>
                     </ng-template>
                 </p-dropdown>
             </div>
             <div class="p-field p-col-12 p-md-4">
                 <label>Sociéte Distination</label>
-                <p-dropdown [options]="items002" [(ngModel)]="selected.societeDistination" optionLabel="ice" [filter]="true" filterBy="nom" [showClear]="true" placeholder="societe distination" required autofocus>
+                <p-dropdown [options]="items002" [(ngModel)]="selected.societeDistination" optionLabel="nom" [filter]="true" filterBy="nom" [showClear]="true" placeholder="societe distination" required autofocus>
                     <ng-template pTemplate="selectedItem">
                         <div class="country-item country-item-value" *ngIf="selected.societeDistination.ice">
-                            <div>{{selected.societeDistination.ice}}</div>
+                            <div>{{selected.societeDistination.nom}}</div>
                         </div>
                     </ng-template>
                     <ng-template let-items1 pTemplate="item">
-                        <div class="country-item">  <div>{{items1.ice}}</div>
+                        <div class="country-item">  <div>{{items1.nom}}</div>
                         </div>
                     </ng-template>
                 </p-dropdown>
@@ -86,7 +86,12 @@
             </div>
             <div class="p-field p-col-12 p-md-4">
             <label>Type d'operation</label><br>
-            <p-dropdown [options]="type" [(ngModel)]="selected.typeOperation" [placeholder]="selected.typeOperation" optionLabel="type" required autofocus>
+              <!--  <select class="form-select" aria-label="Default select example" id="selected.typeOperation" name="selected.typeOperation" [ngModel]="selected.typeOperation">
+                    <option value="1" style="font-family: Garamond;font-size: 15px">CRÉDIT</option>
+                    <option value="2" style="font-family: Garamond;font-size: 15px">DÉBIT</option>
+                </select>-->
+                <p-dropdown [options]="types" [(ngModel)]="typeSelected" optionLabel="name" placeholder="type"></p-dropdown>
+            <!--<p-dropdown [options]="Status" [(ngModel)]="selected.typeOperation"  optionLabel="value" required autofocus>
                 <ng-template pTemplate="selectedItem">
                     <div class="country-item country-item-value" *ngIf="selected.typeOperation">
                         <div>{{selected.typeOperation}}</div>
@@ -96,11 +101,13 @@
                     <div class="country-item">  <div>{{items1}}</div>
                     </div>
                 </ng-template>
-            </p-dropdown>
+            </p-dropdown>-->
            </div>
             <div class="p-field p-col-12 p-md-4">
-                <label for="date">Date</label>
-                <input type="date" pInputText id="date" [(ngModel)]="selected.dateOperation" required autofocus />
+                <label >Date</label>
+                <!--<input type="date" pInputText id="date" [(ngModel)]="selected.dateOperation" required autofocus />-->
+                <p-calendar [(ngModel)]="selected.dateOperation" dateFormat="yy-mm-dd" inputId="dateformat" placeholder="yyyy-mm-dd"></p-calendar>
+
             </div>
          <!--   <div class="p-field p-col-12 p-md-4">
                 <label for="trim">Trim</label>

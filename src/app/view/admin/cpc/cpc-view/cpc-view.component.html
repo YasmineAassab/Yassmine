@@ -63,7 +63,8 @@
                         <td>{{c.annee}}/{{c.mois}}({{c.trim}})</td>
                         <td>{{c.typeOperation}}</td>
                         <td>{{c.compteComptable.code}}</td>
-                        <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(c,items);click()"></button></td>
+                        <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(c,items);click()"></button>
+                            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 2px" (click)="showDialog(c)"></button></td>
                     </tr>
                 </ng-template>
 
@@ -109,7 +110,8 @@
                         <td>{{c.annee}}/{{c.mois}}({{c.trim}})</td>
                         <td>{{c.typeOperation}}</td>
                         <td>{{c.compteComptable.code}}</td>
-                        <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(c,items1);find();init();detaille();click()"></button></td>
+                        <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(c,items1);find();init();detaille();click()"></button>
+                            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 2px" (click)="showDialog(c)"></button></td>
                     </tr>
                 </ng-template>
 
@@ -155,7 +157,8 @@
                         <td>{{c.annee}}/{{c.mois}}({{c.trim}})</td>
                         <td>{{c.typeOperation}}</td>
                         <td>{{c.compteComptable.code}}</td>
-                        <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(c,items2);find();init();detaille();click()"></button></td>
+                        <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(c,items2);find();init();detaille();click()"></button>
+                            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 2px" (click)="showDialog(c)"></button></td>
                     </tr>
                 </ng-template>
 
@@ -201,7 +204,8 @@
                         <td>{{c.annee}}/{{c.mois}}({{c.trim}})</td>
                         <td>{{c.typeOperation}}</td>
                         <td>{{c.compteComptable.code}}</td>
-                        <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(c,items3);find();init();detaille();click()"></button></td>
+                        <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(c,items3);find();init();detaille();click()"></button>
+                            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 2px" (click)="showDialog(c)"></button></td>
                     </tr>
                 </ng-template>
 
@@ -247,7 +251,8 @@
                         <td>{{c.annee}}/{{c.mois}}({{c.trim}})</td>
                         <td>{{c.typeOperation}}</td>
                         <td>{{c.compteComptable.code}}</td>
-                        <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(c,items4);find();init();detaille();click()"></button></td>
+                        <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(c,items4);find();init();detaille();click()"></button>
+                            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 2px" (click)="showDialog(c)"></button></td>
                     </tr>
                 </ng-template>
 
@@ -293,7 +298,8 @@
                         <td>{{c.annee}}/{{c.mois}}({{c.trim}})</td>
                         <td>{{c.typeOperation}}</td>
                         <td>{{c.compteComptable.code}}</td>
-                        <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(c,items5);find();init();detaille();click()"></button></td>
+                        <td><button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" style="margin-right: 2px" (click)="delete(c,items5);find();init();detaille();click()"></button>
+                            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" style="margin-right: 2px" (click)="showDialog(c)"></button></td>
                     </tr>
                 </ng-template>
 
@@ -402,4 +408,4 @@
 
 </div>
 <app-cpc-list></app-cpc-list>
-
+<app-facture-edit></app-facture-edit>
