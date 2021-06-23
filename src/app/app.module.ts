@@ -184,6 +184,7 @@ import { ClasseEditComponent } from './view/admin/classe/classe-comptable/classe
 import { CompteEditComponent } from './view/admin/classe/compte-comptable/compte-edit/compte-edit.component';
 import { SousEditComponent } from './view/admin/classe/sous-classe-comptable/sous-edit/sous-edit.component';
 import { FactureJournalComponent } from './view/admin/facture/facture-journal/facture-journal.component';
+import { PaiementComponent } from './view/admin/paiement/paiement.component';
 @NgModule({
     imports: [
         BrowserModule,
@@ -358,7 +359,8 @@ import { FactureJournalComponent } from './view/admin/facture/facture-journal/fa
         DeclarationTvaViewComponent,
         StatistiqueComponent,
         ChercherDeclarationIRComponent,
-        FactureJournalComponent
+        FactureJournalComponent,
+        PaiementComponent
 
     ],
     providers: [

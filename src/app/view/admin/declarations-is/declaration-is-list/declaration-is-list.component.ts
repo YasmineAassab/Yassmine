@@ -7,6 +7,8 @@ import {Facture} from "../../../../controller/model/facture.model";
 import {DeclarationIsVo} from "../../../../controller/model/declaration-is-vo.model";
 import {AcomptesService} from '../../../../controller/service/acomptes.service';
 import {Acomptes} from '../../../../controller/model/acomptes.model';
+import {Paiement2Service} from '../../../../controller/service/paiement.service';
+import {Paiement2} from '../../../../controller/model/paiement2.model';
 
 @Component({
   selector: 'app-declaration-is-list',
@@ -23,13 +25,17 @@ export class DeclarationIsListComponent implements OnInit {
   file: Blob;
 
   constructor(private messageService: MessageService, private confirmationService: ConfirmationService,
-              private service: DeclarationISService, private serviceAcpt: AcomptesService, private router: Router) {}
+              private service: DeclarationISService, private serviceAcpt: AcomptesService,
+              private servPaiem: Paiement2Service, private router: Router) {}
 
   activeIndex: number = 0;
   navigateToEdit(selected: DeclarationIS) {
     this.selected = selected;
     this.findFactures(selected);
     this.router.navigateByUrl('/declarations-is/edit');
+  }
+  public findByDeclarationISRef(selected: DeclarationIS){
+    return this.servPaiem.findByDeclarationISRef(selected.ref).subscribe(data => this.itemsPaiem = data);
   }
 
   public downloadXmlFile(selected: DeclarationIS){
@@ -259,5 +265,13 @@ export class DeclarationIsListComponent implements OnInit {
 
   set itemsAcpt(value: Array<Acomptes>) {
     this.serviceAcpt.items = value;
+  }
+
+  get itemsPaiem(): Array<Paiement2> {
+    return this.servPaiem.items;
+  }
+
+  set itemsPaiem(value: Array<Paiement2>) {
+    this.servPaiem.items = value;
   }
 }
