@@ -49,7 +49,7 @@ import {ClasseComponent} from "./view/admin/classe/classe.component";
 import {CpcViewComponent} from "./view/admin/cpc/cpc-view/cpc-view.component";
 import {CpcRechercheComponent} from "./view/admin/cpc/cpc-recherche/cpc-recherche.component";
 import {CpcChartComponent} from "./view/admin/cpc/cpc-chart/cpc-chart.component";
-import {PaiementComponent} from './view/admin/paiement/paiement.component';
+import {PaiementListComponent} from './view/admin/paiement/paiement-list/paiement-list.component';
 
 
 @NgModule({
@@ -63,7 +63,7 @@ import {PaiementComponent} from './view/admin/paiement/paiement.component';
                 children: [
 
                     {path: '', component: DashboardDemoComponent},
-                    {path: 'paiement', component: PaiementComponent},
+                    {path: 'paiement/list', component: PaiementListComponent},
                     {path: 'classe-comptable', component: ClasseComponent},
                     {path: 'cpc-view', component: CpcViewComponent},
                     {path: 'cpc-recherche', component: CpcRechercheComponent},

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {Paiement2} from '../../../controller/model/paiement2.model';
-import {Paiement2Service} from '../../../controller/service/paiement.service';
+import {Paiement2Service} from '../../../../controller/service/paiement.service';
+import {Paiement2} from '../../../../controller/model/paiement2.model';
 
 @Component({
-  selector: 'app-paiement',
-  templateUrl: './paiement.component.html',
-  styleUrls: ['./paiement.component.scss']
+  selector: 'app-paiement-list',
+  templateUrl: './paiement-list.component.html',
+  styleUrls: ['./paiement-list.component.scss']
 })
-export class PaiementComponent implements OnInit {
+export class PaiementListComponent implements OnInit {
 
 
   constructor(private service: Paiement2Service) { }
@@ -91,4 +91,5 @@ export class PaiementComponent implements OnInit {
   set selectes(value: Array<Paiement2>) {
     this.service.selectes = value;
   }
+
 }

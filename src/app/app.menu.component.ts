@@ -160,7 +160,7 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Paiement', icon: 'pi pi-fw pi-dollar',
                 items: [
-                    {label: 'Création', icon: 'pi pi-fw pi-plus', routerLink: ['paiement']},
+                    {label: 'Liste des paiements', icon: 'pi pi-fw pi-plus', routerLink: ['paiement/list']},
                 ]
             },
         ];
