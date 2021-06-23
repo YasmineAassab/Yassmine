@@ -17,24 +17,6 @@ export class PaiementCreateComponent implements OnInit {
 
   constructor(private service: Paiement2Service, private messageService: MessageService) { }
 
-
-  /*
-  public save(){
-    this.service.save().subscribe(data => {
-      if (data > 0){
-        this.items.push({...this.selected});
-        this.messageService.add({severity: 'success', summary: 'Succès', detail: 'Paiement enregistré', life: 4000});
-      }
-      else {
-        this.messageService.add({severity:'warn', summary: 'Attention', detail: 'Paiement non enregistré !', life: 4000});
-      }
-    }, error => {
-          this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Paiement non enregistré !', life: 4000});
-
-    })
-  }
-*/
-
   public paiementCriteria(){
     this.service.paiementCriteria().subscribe(
         data =>{
