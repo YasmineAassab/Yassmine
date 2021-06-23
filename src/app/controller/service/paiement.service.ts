@@ -38,7 +38,7 @@ export class Paiement2Service {
   public update(paiement2: Paiement2): Observable<number>{
     return this.http.put<number>(this.url + 'update', paiement2);
   }
-  public delete(paiement2: Paiement2): Observable<number>{
+  public deleteByRef(paiement2: Paiement2): Observable<number>{
     return this.http.delete<number>(this.url + 'ref/' + paiement2.ref);
   }
   public savepaiementtva(): Observable<number>{
@@ -57,6 +57,10 @@ export class Paiement2Service {
       }
     }
     return index;
+  }
+
+  public deleteMultipleByRef(): Observable<number>{
+    return this.http.post<number>(this.url + '/delete-multiple-by-ref/', this.selectes);
   }
 
   public deleteIndexById(id: number) {

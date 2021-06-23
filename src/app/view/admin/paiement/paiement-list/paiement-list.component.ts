@@ -66,16 +66,36 @@ export class PaiementListComponent implements OnInit {
     this.selected = selected;
     this.confirmationService.confirm({
       message: 'Êtes-vous sûr de vouloir supprimer le paiement  ' + selected.ref + '?',
-      header: 'Confirm',
+      header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.service.delete(this.selected).subscribe(data => {
+        this.service.deleteByRef(this.selected).subscribe(data => {
           this.items = this.items.filter(val => val.id !== this.selected.id);
           this.selected = new Paiement2();
           this.messageService.add({
             severity: 'success',
             summary: 'Succès',
             detail: 'Paiement supprimé',
+            life: 3000
+          });
+        });
+      }
+    });
+  }
+
+  public deleteMultiple() {
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete the selected declarations IS?',
+      header: 'Confirm',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.service.deleteMultipleByRef().subscribe(data =>{
+          this.service.deleteMultipleIndexById();
+          this.selectes = null;
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Successful',
+            detail: 'Declarations IS Deleted',
             life: 3000
           });
         });
