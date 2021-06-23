@@ -25,16 +25,20 @@ export class FactureCreateComponent implements OnInit {
         this.submitted = true;
         if (this.selected.ref.trim()) {
             this.service.save().subscribe(data => {
-                this.items.push({...data});
-                this.messageService.add({
-                    severity: 'success',
-                    summary: 'Successful',
-                    detail: 'facture Created',
-                    life: 3000
-                });
+                if (data > 0){
+                    console.log(this.selected);
+                    this.items.push({...this.selected});
+                    console.log(this.items);
+                    this.selected = new Facture();
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Successful',
+                        detail: 'facture Created',
+                        life: 3000
+                    });
+                }
             });
             this.createDialog = false;
-            this.selected = new Facture();
         }
     }
 

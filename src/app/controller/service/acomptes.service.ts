@@ -35,8 +35,8 @@ export class AcomptesService {
     return this.http.post<Array<Acomptes>>(this.url + 'recherche-multi-critere/', this.acomptesVo);
   }
 
-  public findBySocieteIceAndAnneeAndNumero(selected: Acomptes): Observable<Acomptes>{
-    return this.http.get<Acomptes>(this.url + 'ice/'+ selected.societe.ice +'/annee/'+ selected.annee+ '/numero/' + selected.numero);
+  public findBySocieteIceAndAnnee(ice: string, annee: number): Observable<Array<Acomptes>>{
+    return this.http.get<Array<Acomptes>>(this.url + 'ice/'+ ice +'/annee/'+ annee);
   }
 
   public deleteBySocieteIceAndAnneeAndNumero(): Observable<number>{
@@ -80,7 +80,7 @@ export class AcomptesService {
     if (this._selected == null){
       this._selected = new Acomptes();
     }
-  return this._selected;
+    return this._selected;
   }
 
   set selected(value: Acomptes) {

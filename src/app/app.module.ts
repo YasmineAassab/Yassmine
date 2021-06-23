@@ -304,6 +304,7 @@ import { FactureJournalComponent } from './view/admin/facture/facture-journal/fa
         DeclarationIsEditComponent,
         DeclarationIsViewComponent,
         FactureDialogComponent,
+        EditFactureComponent,
         ViewFactureComponent,
         DeclarationsISComponent,
         SignUpComponent,

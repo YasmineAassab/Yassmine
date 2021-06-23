@@ -26,7 +26,7 @@
 
             <div>
                 <p-tabView  [(activeIndex)]="activeIndex">
-                    <p-tabPanel header="Declaration IS">
+                    <p-tabPanel header="Déclaration IS">
                         <div>
                             <p-toolbar styleClass="p-mb-4">
                                 <ng-template pTemplate="left">
@@ -50,14 +50,14 @@
                                         <th style="width: 3rem">
                                             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                                         </th>
-                                        <th pSortableColumn="reference">Reference <p-sortIcon field="reference"></p-sortIcon></th>
+                                        <th pSortableColumn="reference">Référence <p-sortIcon field="reference"></p-sortIcon></th>
                                         <th pSortableColumn="annee" style="width: 9rem">Année <p-sortIcon field="annee"></p-sortIcon></th>
-                                        <th pSortableColumn="societe" style="width: 10rem">Societe <p-sortIcon field="societe"></p-sortIcon></th>
+                                        <th pSortableColumn="societe" style="width: 10rem">Société <p-sortIcon field="societe"></p-sortIcon></th>
                                         <th pSortableColumn="totalHTDiff">Résultat fiscal <p-sortIcon field="totalHTDiff"></p-sortIcon></th>
                                         <th pSortableColumn="montantISCalcule">Montant calculé <p-sortIcon field="montantISCalcule"></p-sortIcon></th>
                                         <th pSortableColumn="montantISPaye">Montant payé <p-sortIcon field="montantISPaye"></p-sortIcon></th>
-                                        <th pSortableColumn="acomptes">Montant acompte <p-sortIcon field="acomptes"></p-sortIcon></th>
                                         <th pSortableColumn="etatDeclaration" style="width: 7rem">État <p-sortIcon field="etatDeclaration"></p-sortIcon></th>
+                                        <th pSortableColumn="acomptes" style="width: 12rem">Acomptes <p-sortIcon field="acomptes"></p-sortIcon></th>
                                         <th pSortableColumn="factures" style="width: 9rem">Factures<p-sortIcon field="factures"></p-sortIcon></th>
                                         <th></th>
                                     </tr>
@@ -74,13 +74,10 @@
                                         <td>{{declarationIS.totalHTDiff | currency: 'MAD&nbsp;'}}</td>
                                         <td>{{declarationIS.montantISCalcule | currency: 'MAD&nbsp;'}}</td>
                                         <td>{{declarationIS.montantISPaye | currency: 'MAD&nbsp;'}}</td>
-                                        <td *ngIf="declarationIS.acomptes != null">
-                                            {{declarationIS.acomptes.montant | currency: 'MAD&nbsp;'}}
-                                        </td>
-                                        <td *ngIf="declarationIS.acomptes == null">
-                                            {{0 | currency: 'MAD&nbsp;'}}
-                                        </td>
                                         <td>{{declarationIS.etatDeclaration.libelle}}</td>
+                                        <td>
+                                            <button type="button" pButton pRipple [pRowToggler]="declarationIS" style="margin-left: 15px;" class="p-button-text p-button-rounded" [icon]="expanded ? 'pi pi-times' : 'pi pi-search'" (click)="findBySocieteIceAndAnnee(declarationIS)" (click)="activeIndex = 3"></button>
+                                        </td>
                                         <td>
                                             <button type="button" pButton pRipple [pRowToggler]="declarationIS" style="margin-left: 15px;" class="p-button-text p-button-rounded" [icon]="expanded ? 'pi pi-times' : 'pi pi-search'" (click)="findFactures(declarationIS)" (click)="activeIndex = 1"></button>
                                         </td>
@@ -102,8 +99,8 @@
                         </div>
 
                     </p-tabPanel>
-                    <p-tabPanel header="Facture">
-                        <p-table [value]="selected.factures" dataKey="id" [rows]="10" [paginator]="true"
+                    <p-tabPanel header="Factures crédit">
+                        <p-table [value]="selected.factureC" dataKey="id" [rows]="10" [paginator]="true"
                                  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
                             <ng-template pTemplate="header">
                                 <tr>
@@ -124,8 +121,74 @@
                                     <td>{{facture.societeSource.ice}}</td>
                                     <td>{{facture.societeDistination.ice}}</td>
 
-                                    <td><span id="typeOperation">{{facture.typeOperation}}</span></td>
+                                    <td><span class="typeOperation">{{facture.typeOperation}}</span></td>
                                     <td><button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info" (click)="viewFact(facture)"></button></td>
+                                </tr>
+                            </ng-template>
+
+                        </p-table>
+                    </p-tabPanel>
+                    <p-tabPanel header="Factures débit">
+                        <p-table [value]="selected.factureD" dataKey="id" [rows]="10" [paginator]="true"
+                                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pSortableColumn="ref" style="width: 10rem">Reference <p-sortIcon field="ref"></p-sortIcon></th>
+                                    <th pSortableColumn="montantHorsTaxe" style="width: 12rem">Montant HT <p-sortIcon field="montantHorsTaxe"></p-sortIcon></th>
+                                    <th pSortableColumn="dateOperation" style="width: 12rem">Date opération <p-sortIcon field="dateOperation"></p-sortIcon></th>
+                                    <th pSortableColumn="societeSource" style="width: 12rem">Societe Source<p-sortIcon field="societeSource"></p-sortIcon></th>
+                                    <th pSortableColumn="societeDestination" style="width: 14rem">Societe Destination<p-sortIcon field="societeDestination"></p-sortIcon></th>
+                                    <th pSortableColumn="typeOperation" style="width: 12rem">Type opération<p-sortIcon field="typeOperation"></p-sortIcon></th>
+                                    <th style="width: 4rem"></th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-facture>
+                                <tr>
+                                    <td>{{facture.ref}}</td>
+                                    <td>{{facture.montantHorsTaxe | currency: 'MAD&nbsp;'}}</td>
+                                    <td>{{facture.dateOperation}}</td>
+                                    <td>{{facture.societeSource.ice}}</td>
+                                    <td>{{facture.societeDistination.ice}}</td>
+
+                                    <td><span class="typeOperation">{{facture.typeOperation}}</span></td>
+                                    <td><button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info" (click)="viewFact(facture)"></button></td>
+                                </tr>
+                            </ng-template>
+
+                        </p-table>
+                    </p-tabPanel>
+                    <p-tabPanel header="Acomptes">
+                        <p-table #dt [value]="itemsAcpt" [rows]="10" [paginator]="true" [rowHover]="true"
+                                 styleClass="p-datatable-customers" [style]="{'margin': '0 40px'}"
+                                 currentPageReportTemplate="Affichage de {first} à {last} des {totalRecords} entrées"
+                                 [showCurrentPageReport]="true" dataKey="id">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pSortableColumn="societe">Société
+                                        <p-sortIcon field="société"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="annee">Année
+                                        <p-sortIcon field="annee"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="numero">Numéro
+                                        <p-sortIcon field="numero"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="montant">Montant
+                                        <p-sortIcon field="montant"></p-sortIcon>
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </ng-template>
+
+                            <ng-template pTemplate="body" let-acomptes let-expanded="expanded">
+                                <tr>
+                                    <td>{{acomptes.societe.ice}}</td>
+                                    <td>{{acomptes.annee}}</td>
+                                    <td>{{acomptes.numero}}</td>
+                                    <td>{{acomptes.montant | currency: 'MAD&nbsp;'}}</td>
+                                    <td>
+                                        <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger p-mr-2"></button>
+                                    </td>
                                 </tr>
                             </ng-template>
 

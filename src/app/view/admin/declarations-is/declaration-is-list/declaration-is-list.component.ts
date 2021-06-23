@@ -5,6 +5,8 @@ import {ConfirmationService, MessageService} from "primeng/api";
 import {Router} from "@angular/router";
 import {Facture} from "../../../../controller/model/facture.model";
 import {DeclarationIsVo} from "../../../../controller/model/declaration-is-vo.model";
+import {AcomptesService} from '../../../../controller/service/acomptes.service';
+import {Acomptes} from '../../../../controller/model/acomptes.model';
 
 @Component({
   selector: 'app-declaration-is-list',
@@ -21,7 +23,7 @@ export class DeclarationIsListComponent implements OnInit {
   file: Blob;
 
   constructor(private messageService: MessageService, private confirmationService: ConfirmationService,
-              private service: DeclarationISService, private router: Router) {}
+              private service: DeclarationISService, private serviceAcpt: AcomptesService, private router: Router) {}
 
   activeIndex: number = 0;
   navigateToEdit(selected: DeclarationIS) {
@@ -60,7 +62,12 @@ export class DeclarationIsListComponent implements OnInit {
       });
   }
 
-
+  public findBySocieteIceAndAnnee(declarationIS: DeclarationIS){
+    this.selected = declarationIS;
+    return this.serviceAcpt.findBySocieteIceAndAnnee(declarationIS.societe.ice, declarationIS.annee).subscribe(data => {
+      this.itemsAcpt = data;
+    })
+  }
 
   navigateToCreate(){
     this.selected = null;
@@ -246,4 +253,11 @@ export class DeclarationIsListComponent implements OnInit {
     this.service.selectedVo = value;
   }
 
+  get itemsAcpt(): Array<Acomptes> {
+    return this.serviceAcpt.items;
+  }
+
+  set itemsAcpt(value: Array<Acomptes>) {
+    this.serviceAcpt.items = value;
+  }
 }
