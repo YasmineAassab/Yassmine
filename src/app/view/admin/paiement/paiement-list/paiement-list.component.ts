@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Paiement2Service} from '../../../../controller/service/paiement.service';
 import {Paiement2} from '../../../../controller/model/paiement2.model';
+import {Observable} from "rxjs";
+import {Paiement2Vo} from "../../../../controller/model/paiement2-vo.model";
 
 @Component({
   selector: 'app-paiement-list',
@@ -36,7 +38,19 @@ export class PaiementListComponent implements OnInit {
     }
     console.log(this.is + '  ' + this.tva);
   }
-
+  public paiementCriteria(){
+    this.service.paiementCriteria().subscribe(
+        data =>{
+          this.items = data;
+          console.log("bravo trouver paiement list");
+        }, error => {
+          console.log("erreur trouver paiement list");
+        }
+    );
+  }
+  get selectedVo(): Paiement2Vo {
+    return this.service.selectedVo;
+  }
   get selected(): Paiement2 {
     return this.service.selected;
   }

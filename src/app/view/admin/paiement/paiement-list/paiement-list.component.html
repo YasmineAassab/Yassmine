@@ -9,7 +9,7 @@
 
                 <div class="p-col-12 p-md-2 p-offset-1" style="font-size: 16px">
                     <div style="margin-bottom: 5px"><label>Référence </label></div>
-                    <input type="text" pInputText placeholder="référence">
+                    <input type="text" pInputText placeholder="référence" [(ngModel)]="selectedVo.ref">
                 </div>
 
                 <div class="p-col-12 p-md-8 p-offset-1" style="font-size: 16px">
@@ -39,29 +39,29 @@
             <div class="p-grid p-fluid" style="margin: 7px 0" *ngIf="is == true">
                 <div class="p-col-12 p-offset-4"><h5>Déclaration IS</h5></div>
                 <div class="p-col-12  p-md-2 p-offset-4"><div style="margin-bottom: 5px"><label> Année</label></div>
-                    <input type="text" pInputText placeholder="annee" >
+                    <input type="text" pInputText placeholder="annee" [(ngModel)]="selectedVo.anneeis">
                 </div>
                 <div class="p-col-12  p-md-2"><div style="margin-bottom: 5px"><label>Société</label></div>
-                    <input type="text" pInputText placeholder="societe" >
+                    <input type="text" pInputText placeholder="societe" [(ngModel)]="selectedVo.societeis" >
                 </div>
             </div>
             <div class="p-grid p-fluid" style="margin: 7px 0" *ngIf="tva == true">
                 <div class="p-col-12 p-offset-2"><h5>Déclaration TVA</h5></div>
                 <div class="p-col-12  p-md-2 p-offset-2"><div style="margin-bottom: 5px"><label> Année</label></div>
-                    <input type="text" pInputText placeholder="annee" >
+                    <input type="text" pInputText placeholder="annee" [(ngModel)]="selectedVo.anneetva">
                 </div>
                 <div class="p-col-12  p-md-2"><div style="margin-bottom: 5px"><label>Société</label></div>
-                    <input type="text" pInputText placeholder="societe" >
+                    <input type="text" pInputText placeholder="societe" [(ngModel)]="selectedVo.societetva">
                 </div>
                 <div class="p-col-12  p-md-2"><div style="margin-bottom: 5px"><label>Mois</label></div>
-                    <input type="text" pInputText placeholder="mois" >
+                    <input type="text" pInputText placeholder="mois" [(ngModel)]="selectedVo.mois">
                 </div>
                 <div class="p-col-12  p-md-2"><div style="margin-bottom: 5px"><label>Trimestre</label></div>
-                    <input type="text" pInputText placeholder="trimestre" >
+                    <input type="text" pInputText placeholder="trimestre" [(ngModel)]="selectedVo.trim">
                 </div>
             </div>
 
-            <div style="margin: 15px"><button pButton pRipple type="button" label="Search" icon="pi pi-search" iconPos="right" style="width:20rem; height: 10px" class="p-col-6 p-mb-2 p-offset-5"></button></div>
+            <div style="margin: 15px"><button pButton pRipple type="button" label="Search" icon="pi pi-search" iconPos="right" style="width:20rem; height: 10px" class="p-col-6 p-mb-2 p-offset-5" (click)="paiementCriteria()"></button></div>
 
             <div class="card">
                 <p-toolbar styleClass="p-mb-4">
