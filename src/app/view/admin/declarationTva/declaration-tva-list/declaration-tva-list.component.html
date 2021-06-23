@@ -18,8 +18,12 @@
                 <div class="p-col-12  p-md-2"><div style="margin-bottom: 5px"><label>trim</label></div>
                     <input type="text" pInputText placeholder="trim" [(ngModel)]="selectedVo.trim">
                 </div>
-                <div class="p-col-12 p-md-2"><div style="margin-bottom: 5px"><label>Type decl Tva</label></div>
-                    <input type="text" pInputText placeholder="Type decl Tva" [(ngModel)]="selectedVo.typedeclarationtva">
+                <div class="p-col-12 p-md-2"><div><label>Type decl Tva</label></div>
+                    <!--<input type="text" pInputText placeholder="Type decl Tva" [(ngModel)]="selectedVo.typedeclarationtva">-->
+                    <select class="w-100 h-50 mt-md-2" [(ngModel)]="selected.typeDeclarationTva">
+                        <option value="TDTV1"  >Trimestriel</option>
+                        <option value="TDTV2" >Mensuelle</option>
+                    </select>
                 </div>
             </div>
             <div style="margin: 15px"><button pButton pRipple type="button" label="Search" icon="pi pi-search" iconPos="right" style="width:20rem; height: 10px" class="p-col-6 p-mb-2 p-offset-5" (click)="finddeclarationTva()"></button></div>
@@ -88,14 +92,44 @@
                             </p-table>
                             <ng-template pTemplate="summary">
                                 <div class="p-d-flex p-ai-center p-jc-between">
-                                    In total there are {{items ? items.length : 0 }} declarations IS.
+                                    In total there are {{items ? items.length : 0 }} declarations TVA.
                                 </div>
                             </ng-template>
                         </div>
 
                     </p-tabPanel>
-                    <p-tabPanel header="Facture">
-                        <p-table [value]="details.listfacturevente" [value]="details.listfactureachat"  dataKey="id" [rows]="3" [paginator]="true"
+                    <p-tabPanel header="Facture Credit">
+                        <p-table [value]="details.listfacturevente" [value]="details.listfacturevente"  dataKey="id" [rows]="3" [paginator]="true"
+                                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pSortableColumn="ref" style="width: 10rem">Reference <p-sortIcon field="ref"></p-sortIcon></th>
+                                    <th pSortableColumn="montantHorsTaxe" style="width: 12rem">Montant HT <p-sortIcon field="montantHorsTaxe"></p-sortIcon></th>
+                                    <th pSortableColumn="dateOperation" style="width: 12rem">Date opération <p-sortIcon field="dateOperation"></p-sortIcon></th>
+                                    <th pSortableColumn="societeSource" style="width: 12rem">Societe Source<p-sortIcon field="societeSource"></p-sortIcon></th>
+                                    <th pSortableColumn="societeDestination" style="width: 14rem">Societe Destination<p-sortIcon field="societeDestination"></p-sortIcon></th>
+                                    <th pSortableColumn="typeOperation" style="width: 12rem">Type opération<p-sortIcon field="typeOperation"></p-sortIcon></th>
+                                    <th style="width: 4rem"></th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-facture>
+                                <tr>
+                                    <td>{{facture.ref}}</td>
+                                    <td>{{facture.montantHorsTaxe | currency: 'MAD&nbsp;'}}</td>
+                                    <td>{{facture.dateOperation}}</td>
+                                    <td>{{facture.societeSource.ice}}</td>
+                                    <td>{{facture.societeDistination.ice}}</td>
+
+                                    <td><span id="typeOperation1">{{facture.typeOperation}}</span></td>
+                                    <td><button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info" (click)="viewFact(facture)"></button></td>
+                                </tr>
+                            </ng-template>
+
+                        </p-table>
+                    </p-tabPanel>
+
+                    <p-tabPanel header="Facture Debit">
+                        <p-table [value]="details.listfactureachat" [value]="details.listfactureachat"  dataKey="id" [rows]="3" [paginator]="true"
                                  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
                             <ng-template pTemplate="header">
                                 <tr>

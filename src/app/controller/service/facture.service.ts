@@ -29,6 +29,9 @@ export class FactureService {
     constructor(private http: HttpClient) {
     }
 
+    public findbysocieteSource(): Observable<Array<Facture>> {
+        return this.http.get<Array<Facture>>(this.url + 'societeSource/ice/' + this.facturevo.refSocieteSource);
+    }
     public findAll(): Observable<Array<Facture>> {
         return this.http.get<Array<Facture>>(this.url);
     }
