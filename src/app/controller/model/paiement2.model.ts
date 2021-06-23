@@ -10,6 +10,7 @@ export class Paiement2 {
     public montantCptTraiteur: number;
     public montantCptValidateur: number;
     public reste: number;
+    public typeTva: number;
     public declarationIS = new DeclarationIS();
     public declarationTva = new DeclarationTva();
     public declarationIR = new DeclarationIR();

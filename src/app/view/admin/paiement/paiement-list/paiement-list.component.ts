@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Paiement2Service} from '../../../../controller/service/paiement.service';
 import {Paiement2} from '../../../../controller/model/paiement2.model';
 import {Paiement2Vo} from "../../../../controller/model/paiement2-vo.model";
+import {Facture} from '../../../../controller/model/facture.model';
 
 @Component({
   selector: 'app-paiement-list',
@@ -49,6 +50,11 @@ export class PaiementListComponent implements OnInit {
     this.selected = new Paiement2();
     this.submitted = false;
     this.createDialog = true;
+  }
+
+  public edit(selected: Paiement2) {
+    this.selected = {...selected};
+    this.editDialog = true;
   }
 
   get selectedVo(): Paiement2Vo {

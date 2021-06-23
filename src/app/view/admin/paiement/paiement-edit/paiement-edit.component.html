@@ -1,1 +1,55 @@
-<p>paiement-edit works!</p>
+<p-dialog [(visible)]="editDialog" [style]="{width: '450px'}" header="Modifier la facture" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="p-grid">
+
+            <div class="p-col-6">
+                <div class="p-field">
+                    <label for="ref">Référence</label>
+                    <input type="text" pInputText id="ref" [(ngModel)]="selected.ref" disabled/>
+                </div>
+            </div>
+
+            <div class="p-col-6">
+                <div class="p-field">
+                    <label for="annee">Date de paiement</label>
+                    <input type="date" pInputText id="annee" [(ngModel)]="selected.datePaiement" />
+                </div>
+            </div>
+
+            <div class="p-col-6">
+                <div class="p-field">
+                    <label for="total">Total</label>
+                    <input type="text" pInputText id="total" [(ngModel)]="selected.total" />
+                </div>
+            </div>
+
+            <div class="p-col-6">
+                <div class="p-field">
+                    <label for="montantCptTraiteur">Montant comptable traitant</label>
+                    <input type="text" pInputText id="montantCptTraiteur" [(ngModel)]="selected.montantCptTraiteur" />
+                </div>
+            </div>
+
+            <div class="p-col-6">
+                <div class="p-field">
+                    <label for="montantCptValidateur">Montant comptable validateur</label>
+                    <input type="text" pInputText id="montantCptValidateur" [(ngModel)]="selected.montantCptValidateur" />
+                </div>
+            </div>
+
+            <!--
+                        <div class="p-col-6">
+                            <div class="p-field">
+                                <label for="classComptable">Classe comptable</label>
+                                <input type="text" pInputText id="classComptable" [(ngModel)]="selectedFact.classComptable.numero" />
+                            </div>
+                        </div>
+            -->
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-text" (click)="hideEditDialog()"></button>
+        <button pButton pRipple label="Modifier" icon="pi pi-check" class="p-button-text" (click)="update()"></button>
+    </ng-template>
+</p-dialog>
