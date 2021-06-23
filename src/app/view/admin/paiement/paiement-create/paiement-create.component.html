@@ -11,8 +11,8 @@
             <div class="p-col-6">
                 <div class="p-field">
                     <label for="date">Date paiement</label>
-                    <input type="date" pInputText id="date" [(ngModel)]="selected.ref" required autofocus />
-                    <small class="p-invalid" *ngIf="submitted && !selected.ref">date de paiement is required.</small>
+                    <input type="date" pInputText id="date" [(ngModel)]="selected.datePaiement" required autofocus />
+                    <small class="p-invalid" *ngIf="submitted && !selected.datePaiement">date de paiement is required.</small>
                 </div>
             </div>
             <div class="p-col-12">
@@ -135,6 +135,7 @@
 
     <ng-template pTemplate="footer">
         <button pButton pRipple label="Fermer" icon="pi pi-times" class="p-button-text" (click)="hideCreateDialog()"></button>
-        <button pButton pRipple label="Enregistrer" icon="pi pi-check" class="p-button-text"></button>
+        <button pButton pRipple (click)="savepaiementis()" label="Enregistrer" icon="pi pi-check" class="p-button-text" *ngIf="is==true"></button>
+        <button pButton pRipple (click)="savepaiementtva()" label="Enregistrer" icon="pi pi-check" class="p-button-text" *ngIf="tva==true"></button>
     </ng-template>
 </p-dialog>

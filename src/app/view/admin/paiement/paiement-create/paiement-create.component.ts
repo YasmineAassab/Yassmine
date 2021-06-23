@@ -35,6 +35,17 @@ export class PaiementCreateComponent implements OnInit {
   }
 */
 
+  public paiementCriteria(){
+    this.service.paiementCriteria().subscribe(
+        data =>{
+          this.items = data;
+          console.log("bravo trouver paiement list");
+        }, error => {
+          console.log("erreur trouver paiement list");
+        }
+    );
+  }
+
   public chooseDeclaration(){
     console.log(this.declaration)
     if (this.declaration == "Déclaration IS"){
@@ -59,7 +70,7 @@ export class PaiementCreateComponent implements OnInit {
     return this.service.savepaiementtva().subscribe(
         data =>{
           if (data > 0){
-            this.items.push({...this.selected});
+            this.paiementCriteria();
             this.messageService.add({severity: 'success', summary: 'Succès', detail: 'Paiement enregistré', life: 4000});
           }
           else {
@@ -74,7 +85,7 @@ export class PaiementCreateComponent implements OnInit {
     return this.service.savepaiementis().subscribe(
         data =>{
           if (data > 0){
-            this.items.push({...this.selected});
+            this.paiementCriteria();
             this.messageService.add({severity: 'success', summary: 'Succès', detail: 'Paiement enregistré', life: 4000});
           }
           else {
