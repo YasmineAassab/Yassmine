@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {FactureService} from '../../../../controller/service/facture.service';
 import {Facture} from '../../../../controller/model/facture.model';
+import {FactureVo} from '../../../../controller/model/facture-vo.model';
 
 @Component({
     selector: 'app-facture-list',
@@ -19,6 +20,23 @@ export class FactureListComponent implements OnInit {
     ngOnInit(): void {
         this.initCol();
         this.service.findAll().subscribe(data => this.items = data); //!!
+    }
+    get facturevo(): FactureVo {
+        return this.service.facturevo;
+    }
+
+    set facturevo(value: FactureVo) {
+        this.service.facturevo = value;
+    }
+    public findbysocieteSource() {
+        if (this.facturevo.refSocieteSource == null) {
+            this.facturevo.refSocieteSource = 'all';
+        }
+        this.service.findbysocieteSource().subscribe(data => {
+            this.items = data;
+            this.facturevo.refSocieteSource = null;
+        });
+        this.createDialog = false;
     }
 
     public delete(selected: Facture) {
