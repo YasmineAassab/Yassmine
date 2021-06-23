@@ -41,6 +41,12 @@ export class Paiement2Service {
   public delete(paiement2: Paiement2): Observable<number>{
     return this.http.delete<number>(this.url + 'ref/' + paiement2.ref);
   }
+  public savepaiementtva(): Observable<number>{
+    return this.http.post<number>(this.url + 'fortva', this.selected);
+  }
+  public savepaiementis(): Observable<number>{
+    return this.http.post<number>(this.url + 'foris', this.selected);
+  }
 
   public findIndexById(id: number): number {
     let index = -1;
