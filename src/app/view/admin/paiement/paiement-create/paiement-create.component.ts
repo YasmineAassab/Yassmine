@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Paiement2Service} from '../../../../controller/service/paiement.service';
 import {Paiement2} from '../../../../controller/model/paiement2.model';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-paiement-create',
@@ -9,7 +10,42 @@ import {Paiement2} from '../../../../controller/model/paiement2.model';
 })
 export class PaiementCreateComponent implements OnInit {
 
-  constructor(private service: Paiement2Service) { }
+  declaration: any;
+  is = false;
+  tva = false;
+
+  constructor(private service: Paiement2Service, private messageService: MessageService) { }
+
+
+  /*
+  public save(){
+    this.service.save().subscribe(data => {
+      if (data > 0){
+        this.items.push({...this.selected});
+        this.messageService.add({severity: 'success', summary: 'Succès', detail: 'Paiement enregistré', life: 4000});
+      }
+      else {
+        this.messageService.add({severity:'warn', summary: 'Attention', detail: 'Paiement non enregistré !', life: 4000});
+      }
+    }, error => {
+          this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Paiement non enregistré !', life: 4000});
+
+    })
+  }
+*/
+
+  public chooseDeclaration(){
+    console.log(this.declaration)
+    if (this.declaration == "Déclaration IS"){
+      this.is = true;
+      this.tva = false
+    }
+    if (this.declaration == "Déclaration TVA"){
+      this.tva = true;
+      this.is = false;
+    }
+    console.log(this.is + '  ' + this.tva);
+  }
 
   ngOnInit(): void {
   }
@@ -50,5 +86,6 @@ export class PaiementCreateComponent implements OnInit {
   set selected(value: Paiement2) {
     this.service.selected = value;
   }
+
 
 }

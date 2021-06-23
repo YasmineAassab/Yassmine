@@ -1,100 +1,127 @@
-<p-dialog [(visible)]="createDialog" [style]="{width: '490px'}" header="Création de facture" [modal]="true" styleClass="p-fluid">
+<p-dialog [(visible)]="createDialog" [style]="{width: '540px'}" header="Création de paiement" [modal]="true" styleClass="p-fluid">
     <ng-template pTemplate="content">
         <div class="p-grid">
             <div class="p-col-6">
                 <div class="p-field">
                     <label for="ref">Référence</label>
-                    <input type="text" pInputText id="ref" placeholder="référence" [(ngModel)]="selectedFact.ref" required autofocus />
-                    <small class="p-invalid" *ngIf="submitted && !selectedFact.ref">ref is required.</small>
+                    <input type="text" pInputText id="ref" placeholder="référence" [(ngModel)]="selected.ref" required autofocus />
+                    <small class="p-invalid" *ngIf="submitted && !selected.ref">ref is required.</small>
                 </div>
             </div>
             <div class="p-col-6">
                 <div class="p-field">
-                    <label for="libelle">Libellé</label>
-                    <input type="text" pInputText id="libelle" placeholder="libellé" [(ngModel)]="selectedFact.libelle" required autofocus />
-                    <small class="p-invalid" *ngIf="submitted && !selectedFact.libelle">libelle is required.</small>
+                    <label for="date">Date paiement</label>
+                    <input type="date" pInputText id="date" [(ngModel)]="selected.ref" required autofocus />
+                    <small class="p-invalid" *ngIf="submitted && !selected.ref">date de paiement is required.</small>
                 </div>
             </div>
-            <div class="p-col-6">
-                <div class="p-field">
-                    <label for="dateOperation">Date opération</label>
-                    <input type="date" pInputText id="dateOperation" [(ngModel)]="selectedFact.dateOperation" required autofocus />
-                    <!--<p-inputMask type="date" mask="99/99/9999" id="dateOperation" [(ngModel)]="selectedFact.dateOperation" placeholder="99/99/9999" slotChar="mm/dd/yyyy"></p-inputMask>-->
-                    <small class="p-invalid" *ngIf="submitted && !selectedFact.dateOperation">date operation is required.</small>
-                </div>
-            </div>
-            <div class="p-col-6">
-                <div class="p-field">
-                    <label for="montantHorsTaxe">Montant hors taxe</label>
-                    <!-- <input type="number" pInputText id="montantHorsTaxe" [(ngModel)]="selectedFact.montantHorsTaxe"  />-->
-                    <p-inputNumber id="montantHorsTaxe" placeholder="montant HT" [(ngModel)]="selectedFact.montantHorsTaxe" required autofocus></p-inputNumber>
-                    <small class="p-invalid" *ngIf="submitted && !selectedFact.montantHorsTaxe">montant hors taxe is required.</small>
-                </div>
-            </div>
-            <div class="p-col-6">
-                <div class="p-field">
-                    <label for="typeOperation">Type opération</label>
-                    <input type="text" pInputText id="typeOperation" placeholder="type opération" [(ngModel)]="selectedFact.typeOperation" required autofocus />
-                    <small class="p-invalid" *ngIf="submitted && !selectedFact.typeOperation">type operation is required.</small>
-                </div>
-            </div>
-            <div class="p-col-6">
-                <div class="p-field">
-                    <label for="societeSource">Sté source</label>
-                    <input type="number" pInputText id="societeSource" placeholder="ice" [(ngModel)]="selectedFact.societeSource.ice" required autofocus />
-                    <small class="p-invalid" *ngIf="submitted && !selectedFact.societeSource.ice">societe source is required.</small>
-                </div>
-            </div>
-            <div class="p-col-6">
-                <div class="p-field">
-                    <label for="societeDistination">Sté destination</label>
-                    <input type="text" pInputText id="societeDistination" placeholder="ice" [(ngModel)]="selectedFact.societeDistination.ice" required autofocus />
-                    <small class="p-invalid" *ngIf="submitted && !selectedFact.societeDistination.ice">societe distination is required.</small>
-                </div>
-            </div>
-            <div class="p-col-6">
-                <div class="p-field">
-                    <label for="tva">Tva</label>
-                    <input type="text" pInputText id="tva" placeholder="référence tva" [(ngModel)]="selectedFact.tva.ref" required autofocus />
-                    <small class="p-invalid" *ngIf="submitted && !selectedFact.tva.ref"> tva is required.</small>
-                </div>
-            </div>
-            <!--
-            <div class="p-col-6">
-                <div class="p-field">
-                    <label for="classComptable">Classe comptable</label>
-                    <input type="text" pInputText id="classComptable" placeholder="numero" [(ngModel)]="selectedFact.classComptable.numero" required autofocus />
-                    <small class="p-invalid" *ngIf="submitted && !selectedFact.classComptable.numero"> classComptable is required.</small>
-                </div>
-            </div>
-            -->
-            <div class="p-col-6">
-                <div class="p-field">
-                    <label for="etatPaiement">État paiement</label>
-                    <input type="text" pInputText id="etatPaiement" placeholder="code" [(ngModel)]="selectedFact.etatPaiement.code" required autofocus />
-                    <small class="p-invalid" *ngIf="submitted && !selectedFact.etatPaiement.code">etat paiement is required.</small>
-                </div>
-            </div>
-            <div class="p-col-6">
-                <div class="p-field">
-                    <label for="etatFacture">État facture</label>
-                    <input type="text" pInputText id="etatFacture" placeholder="code" [(ngModel)]="selectedFact.etatFacture.code" required autofocus />
-                    <small class="p-invalid" *ngIf="submitted && !selectedFact.etatFacture.code">etat facture distination is required.</small>
-                </div>
-            </div>
+            <div class="p-col-12">
 
+                <div class="p-field">
+                    <label style="margin-bottom: 7px">Déclaration </label>
+
+                    <div class="p-grid p-fluid" style="font-size: 15px">
+
+                        <div class="p-field-radiobutton p-col-3 p-md-3">
+                            <p-radioButton name="city" value="Déclaration IS" [(ngModel)]="declaration"></p-radioButton>
+                            <label style="margin-right: 15px">IS </label>
+                        </div>
+                        <div class="p-field-radiobutton p-col-3  p-md-3">
+                            <p-radioButton name="city" value="Déclaration TVA" [(ngModel)]="declaration"></p-radioButton>
+                            <label>TVA </label>
+                        </div>
+                        <div class="p-field-radiobutton p-col-3  p-md-3">
+                            <p-radioButton name="city" value="Déclaration IR" [(ngModel)]="declaration"></p-radioButton>
+                            <label>IR </label>
+                        </div>
+                        <div class="p-col-3  p-md-2">
+                            <button pButton pRipple (click)="chooseDeclaration()" type="button" icon="pi pi-search" iconPos="right" style="width:3rem; height: 3rem" class="p-button-rounde p-mb-2"></button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="p-col-12" *ngIf="is == true">
+                <div class="p-grid">
+                    <div class="p-col-6">
+                        <div class="p-field">
+                            <label for="ice">Société</label>
+                            <input type="text" pInputText id="ice" placeholder="ice" [(ngModel)]="selected.declarationIS.societe.ice" required autofocus />
+                            <small class="p-invalid" *ngIf="submitted && !selected.declarationIS.societe.ice">ice is required.</small>
+                        </div>
+                    </div>
+                    <div class="p-col-6">
+                        <div class="p-field">
+                            <label for="annee">Année</label>
+                            <input type="text" pInputText id="annee" placeholder="annee" [(ngModel)]="selected.declarationIS.annee" required autofocus />
+                            <small class="p-invalid" *ngIf="submitted && !selected.declarationIS.annee">ice is required.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p-col-12" *ngIf="tva == true">
+                <div class="p-grid">
+                    <div class="p-col-6">
+                        <div class="p-field">
+                            <label for="iceste">Société</label>
+                            <input type="text" pInputText id="iceste" placeholder="ice" [(ngModel)]="selected.declarationTva.societe.ice" required autofocus />
+                            <small class="p-invalid" *ngIf="submitted && !selected.declarationTva.societe.ice">ice is required.</small>
+                        </div>
+                    </div>
+                    <div class="p-col-6">
+                        <div class="p-field">
+                            <label for="anneetva">Année</label>
+                            <input type="text" pInputText id="anneetva" placeholder="annee" [(ngModel)]="selected.declarationTva.annee" required autofocus />
+                            <small class="p-invalid" *ngIf="submitted && !selected.declarationTva.annee">ice is required.</small>
+                        </div>
+                    </div>
+                    <div class="p-col-6">
+                        <div class="p-field">
+                            <label for="mois">Mois</label>
+                            <input type="text" pInputText id="mois" placeholder="mois" [(ngModel)]="selected.declarationTva.mois" required autofocus />
+                            <small class="p-invalid" *ngIf="submitted && !selected.declarationTva.mois">ice is required.</small>
+                        </div>
+                    </div><div class="p-col-6">
+                        <div class="p-field">
+                            <label for="trim">Trimestre</label>
+                            <input type="text" pInputText id="trim" placeholder="trimestre" [(ngModel)]="selected.declarationTva.trim" required autofocus />
+                            <small class="p-invalid" *ngIf="submitted && !selected.declarationTva.trim">ice is required.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p-col-6">
+                <div class="p-field">
+                    <label for="total">Total</label>
+                    <input type="text" pInputText id="total" placeholder="total" [(ngModel)]="selected.total" required autofocus />
+                    <small class="p-invalid" *ngIf="submitted && !selected.total">total is required.</small>
+                </div>
+            </div>
+            <div class="p-col-6">
+            <div class="p-field">
+                <label for="montantCptTraiteur">Montant comptable traitant</label>
+                <input type="text" pInputText id="montantCptTraiteur" placeholder="Montant comptable traitant" [(ngModel)]="selected.montantCptTraiteur" required autofocus />
+                <small class="p-invalid" *ngIf="submitted && !selected.montantCptTraiteur">Montant comptable traitant is required.</small>
+            </div>
+            </div>
+            <div class="p-col-6">
+            <div class="p-field">
+                <label for="montantCptValidateur">Montant comptable validateur</label>
+                <input type="text" pInputText id="montantCptValidateur" placeholder="Montant comptable validateur" [(ngModel)]="selected.montantCptValidateur" required autofocus />
+                <small class="p-invalid" *ngIf="submitted && !selected.montantCptValidateur">Montant comptable validateur is required.</small>
+            </div>
         </div>
-
         <!-- <div class="p-formgrid p-grid">
              <div class="p-field p-col">
                  <label for="totalPaye">Total Paye</label>
-                 <p-inputNumber id="totalPaye" [(ngModel)]="selectedFact.totalPaye"></p-inputNumber>
+                 <p-inputNumber id="totalPaye" [(ngModel)]="selected.totalPaye"></p-inputNumber>
              </div>
          </div>-->
+        </div>
     </ng-template>
 
     <ng-template pTemplate="footer">
         <button pButton pRipple label="Fermer" icon="pi pi-times" class="p-button-text" (click)="hideCreateDialog()"></button>
-        <button pButton pRipple label="Enregistrer" icon="pi pi-check" class="p-button-text" (click)="saveFact()"></button>
+        <button pButton pRipple label="Enregistrer" icon="pi pi-check" class="p-button-text"></button>
     </ng-template>
 </p-dialog>

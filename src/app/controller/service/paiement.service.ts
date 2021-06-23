@@ -9,7 +9,7 @@ import {Paiement2Vo} from "../model/paiement2-vo.model";
   providedIn: 'root'
 })
 export class Paiement2Service {
-  
+
   private _url = environment.baseUrl + 'paiement2/';
   private _selected: Paiement2;
   private _items: Array<Paiement2>;
@@ -27,9 +27,7 @@ export class Paiement2Service {
     return this.http.get<Array<Paiement2>>(this.url);
   }
 
-  public save(): Observable<number>{
-    return this.http.post<number>(this.url, this.selected);
-  }
+
 
   public findByDeclarationISRef(ref: string): Observable<Array<Paiement2>>{
     return this.http.get<Array<Paiement2>>(this.url + 'bydeclisref/ref/' + ref);
@@ -148,4 +146,5 @@ export class Paiement2Service {
   set selectedVo(value: Paiement2Vo) {
     this._selectedVo = value;
   }
+
 }

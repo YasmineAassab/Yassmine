@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Paiement2Service} from '../../../../controller/service/paiement.service';
 import {Paiement2} from '../../../../controller/model/paiement2.model';
-import {Observable} from "rxjs";
 import {Paiement2Vo} from "../../../../controller/model/paiement2-vo.model";
 
 @Component({
@@ -20,10 +19,7 @@ export class PaiementListComponent implements OnInit {
 
   selectedCategory: any = null;
 
-  //categories: any[] = [{name: 'Déclaration IS', key: 'IS'}, {name: 'Déclaration TVA', key: 'TVA'}, {name: 'Déclaration IR', key: 'IR'}];
-
   ngOnInit() {
-    //this.selectedCategory = this.categories[1];
   }
 
   public chooseDeclaration(){
@@ -48,6 +44,13 @@ export class PaiementListComponent implements OnInit {
         }
     );
   }
+  public openCreate() {
+    console.log('kaaaydekhl')
+    this.selected = new Paiement2();
+    this.submitted = false;
+    this.createDialog = true;
+  }
+
   get selectedVo(): Paiement2Vo {
     return this.service.selectedVo;
   }
