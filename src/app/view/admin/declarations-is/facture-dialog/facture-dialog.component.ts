@@ -25,34 +25,66 @@ export class FactureDialogComponent implements OnInit {
     this.createDialog = false;
     this.submitted = false;
   }
+  /*
+    public saveFact() {
+      this.submitted = true;
+      if (this.selectedFact.ref.trim()) {
+        this.service.saveFact().subscribe(data => {
+          if (data > 0){
+            if (this.selectedFact.typeOperation == "credit"){
+              this.selected.factureC.push({...this.selectedFact});
+              this.selected.totalHTGain += this.selectedFact.montantHorsTaxe;
+            }
+            if (this.selectedFact.typeOperation == "debit"){
+              this.selected.factureD.push({...this.selectedFact});
+              this.selected.totalHTCharge += this.selectedFact.montantHorsTaxe;
+            }
+            this.selected.factures = this.selected.factureC;
+            this.selected.factures.concat(this.selected.factureD);
+            this.selected.totalHTDiff = this.selected.totalHTGain - this.selected.totalHTCharge;
+            this.calculMontantIS(this.selected.totalHTDiff);
+            this.findTauxIS(this.selected.totalHTDiff);
+            this.montantPaye(this.selected.societe.age, this.selected.tauxIsConfig.cotisationMinimale, this.selected.montantISCalcule);
+            this.itemsFact.push({...this.selectedFact});
+            this.messageService.add({severity: 'success', summary: 'Successful', detail: 'Facture Created', life: 4000});
+            this.selectedFact = null;
+          }
+          else {
+            this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Facture No created ! ( data = ' + data + ' )', life: 4000});
+          }
+        }, error => {
+          this.messageService.add({severity: 'error', summary: 'Error', detail: 'Facture No Created', life: 4000});
+            }
+        );
+        this.createDialog = false;
+      }
+    }
+  */
 
   public saveFact() {
     this.submitted = true;
     if (this.selectedFact.ref.trim()) {
       this.service.saveFact().subscribe(data => {
-        if (data > 0){
-          if (this.selectedFact.typeOperation == "credit"){
-            this.selected.factureC.push({...this.selectedFact});
-            this.selected.totalHTGain += this.selectedFact.montantHorsTaxe;
-          }
-          if (this.selectedFact.typeOperation == "debit"){
-            this.selected.factureD.push({...this.selectedFact});
-            this.selected.totalHTCharge += this.selectedFact.montantHorsTaxe;
-          }
-          this.selected.factures = this.selected.factureC;
-          this.selected.factures.concat(this.selected.factureD);
-          this.selected.totalHTDiff = this.selected.totalHTGain - this.selected.totalHTCharge;
-          this.calculMontantIS(this.selected.totalHTDiff);
-          this.findTauxIS(this.selected.totalHTDiff);
-          this.montantPaye(this.selected.societe.age, this.selected.tauxIsConfig.cotisationMinimale, this.selected.montantISCalcule);
-          this.messageService.add({severity: 'success', summary: 'Successful', detail: 'Facture Created', life: 4000});
-          this.selectedFact = null;
-        }
-        else {
-          this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Facture No created ! ( data = ' + data + ' )', life: 4000});
-        }
-      }, error => {
-        this.messageService.add({severity: 'error', summary: 'Error', detail: 'Facture No Created', life: 4000});
+            if (data > 0){
+              if (this.selectedFact.typeOperation == "credit"){
+                this.selected.factureC.push({...this.selectedFact});
+              }
+              if (this.selectedFact.typeOperation == "debit"){
+                this.selected.factureD.push({...this.selectedFact});
+              }
+              this.selected.factures = this.selected.factureC;
+              this.selected.factures.concat(this.selected.factureD);
+
+              this.itemsFact.push({...this.selectedFact});
+              this.service.afficheObject().subscribe(data => this.selected = data);
+              this.messageService.add({severity: 'success', summary: 'Succès', detail: 'Facture crée', life: 4000});
+              this.selectedFact = null;
+            }
+            else {
+              this.messageService.add({severity:'warn', summary: 'Warn', detail: 'Facture No created ! ( data = ' + data + ' )', life: 4000});
+            }
+          }, error => {
+            this.messageService.add({severity: 'error', summary: 'Error', detail: 'Facture No Created', life: 4000});
           }
       );
       this.createDialog = false;
@@ -75,14 +107,14 @@ export class FactureDialogComponent implements OnInit {
       console.log('montant be3eed '+data);
     });
   }
-/*
-  public calculTotalHTG(fc: Array<Facture>) {
-    return this.service.calculTotalHT(fc).subscribe(data => {
-      console.log('miaou');
-      this.selected.totalHTGain = data;
-    });
-  }
-*/
+  /*
+    public calculTotalHTG(fc: Array<Facture>) {
+      return this.service.calculTotalHT(fc).subscribe(data => {
+        console.log('miaou');
+        this.selected.totalHTGain = data;
+      });
+    }
+  */
   get selectedFact(): Facture {
     return this.service.selectedFact;
   }
@@ -124,11 +156,19 @@ export class FactureDialogComponent implements OnInit {
   }
 
   get object(): DeclarationIsObject {
-      return this.service.object;
-    }
+    return this.service.object;
+  }
 
   set object(value: DeclarationIsObject) {
     this.service.object = value;
+  }
+
+  get itemsFact(): Array<Facture> {
+    return this.service.itemsFact;
+  }
+
+  set itemsFact(value: Array<Facture>) {
+    this.service.itemsFact = value;
   }
 
 }

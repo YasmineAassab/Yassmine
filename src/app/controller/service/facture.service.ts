@@ -42,8 +42,8 @@ export class FactureService {
         return this.http.post<FactureVo>(this.url + '/CalculSomme', this.facturevo);
     }
 
-    public save(): Observable<Facture> {
-        return this.http.post<Facture>(this.url, this.selected);
+    public save(): Observable<number> {
+        return this.http.post<number>(this.url, this.selected);
     }
 
     public edit(): Observable<Facture> {

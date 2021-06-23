@@ -157,6 +157,12 @@ export class AppMenuComponent implements OnInit {
                     {label: 'Statistiques', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/home']},
                 ]
             },
+            {
+                label: 'Paiement', icon: 'pi pi-fw pi-dollar',
+                items: [
+                    {label: 'Liste des paiements', icon: 'pi pi-fw pi-plus', routerLink: ['paiement/list']},
+                ]
+            },
         ];
         this.modelCpt = [
             {
@@ -257,7 +263,7 @@ export class AppMenuComponent implements OnInit {
                 label: 'Demandes', icon: 'pi pi-fw pi-inbox',
                 items: [
                     {
-                        label: 'demandes - s', icon: 'pi pi-fw pi-list',
+                        label: 'Demandes', icon: 'pi pi-fw pi-list',
                         items: [
                             {
                                 label: 'Créer', icon: 'pi pi-fw pi-plus', routerLink: ['demande']

@@ -1,5 +1,5 @@
-<p-dialog [(visible)]="editDialog" [style]="{width: '450px'}" header="Commande Edit" [modal]="true" styleClass="p-fluid">
-<ng-template pTemplate="content">
+<p-dialog [(visible)]="editDialog" [style]="{width: '450px'}" header="Modifier la facture" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
         <div class="p-grid">
 
             <div class="p-col-6">
@@ -85,20 +85,20 @@
                     <input type="text" pInputText id="etatPaiement" [(ngModel)]="selectedFact.etatPaiement.libelle" />
                 </div>
             </div>
-<!--
-            <div class="p-col-6">
-                <div class="p-field">
-                    <label for="classComptable">Classe comptable</label>
-                    <input type="text" pInputText id="classComptable" [(ngModel)]="selectedFact.classComptable.numero" />
-                </div>
-            </div>
--->
+            <!--
+                        <div class="p-col-6">
+                            <div class="p-field">
+                                <label for="classComptable">Classe comptable</label>
+                                <input type="text" pInputText id="classComptable" [(ngModel)]="selectedFact.classComptable.numero" />
+                            </div>
+                        </div>
+            -->
         </div>
     </ng-template>
 
     <ng-template pTemplate="footer">
-        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideEditDialog()"></button>
-        <button pButton pRipple label="Edit" icon="pi pi-check" class="p-button-text" (click)="editFact()"></button>
+        <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-text" (click)="hideEditDialog()"></button>
+        <button pButton pRipple label="Modifier" icon="pi pi-check" class="p-button-text" (click)="editFact()"></button>
     </ng-template>
 </p-dialog>
 

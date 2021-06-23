@@ -1,0 +1,152 @@
+<div class="p-grid">
+    <div class="p-col-12">
+
+        <p-toast></p-toast>
+
+        <div class="card">
+            <h4 style="margin-bottom: 35px">Recherche multi-critère</h4>
+            <div class="p-grid p-fluid">
+
+                <div class="p-col-12 p-md-2 p-offset-1" style="font-size: 16px">
+                    <div style="margin-bottom: 5px"><label>Référence </label></div>
+                    <input type="text" pInputText placeholder="référence">
+                </div>
+
+                <div class="p-col-12 p-md-8 p-offset-1" style="font-size: 16px">
+                    <div style="margin-bottom: 5px"><label style="margin-left: 13%; margin-bottom: 7px">Déclaration </label></div>
+
+                    <div class="p-grid p-fluid" style="font-size: 15px">
+
+                        <div class="p-field-radiobutton p-col-4  p-md-2">
+                            <p-radioButton name="city" value="Déclaration IS" [(ngModel)]="declaration"></p-radioButton>
+                            <label>Déclaration IS</label>
+                        </div>
+                        <div class="p-field-radiobutton p-col-4  p-md-2">
+                            <p-radioButton name="city" value="Déclaration TVA" [(ngModel)]="declaration"></p-radioButton>
+                            <label>Déclaration TVA</label>
+                        </div>
+                        <div class="p-field-radiobutton p-col-4  p-md-2">
+                            <p-radioButton name="city" value="Déclaration IR" [(ngModel)]="declaration"></p-radioButton>
+                            <label>Déclaration IR</label>
+                        </div>
+                        <div class="p-col-12  p-md-2">
+                            <button pButton pRipple (click)="chooseDeclaration()" type="button" icon="pi pi-search" iconPos="right" style="width:3rem; height: 3rem" class="p-button-rounde p-mb-2"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-grid p-fluid" style="margin: 7px 0" *ngIf="is == true">
+                <div class="p-col-12 p-offset-4"><h5>Déclaration IS</h5></div>
+                <div class="p-col-12  p-md-2 p-offset-4"><div style="margin-bottom: 5px"><label> Année</label></div>
+                    <input type="text" pInputText placeholder="annee" >
+                </div>
+                <div class="p-col-12  p-md-2"><div style="margin-bottom: 5px"><label>Société</label></div>
+                    <input type="text" pInputText placeholder="societe" >
+                </div>
+            </div>
+            <div class="p-grid p-fluid" style="margin: 7px 0" *ngIf="tva == true">
+                <div class="p-col-12 p-offset-2"><h5>Déclaration TVA</h5></div>
+                <div class="p-col-12  p-md-2 p-offset-2"><div style="margin-bottom: 5px"><label> Année</label></div>
+                    <input type="text" pInputText placeholder="annee" >
+                </div>
+                <div class="p-col-12  p-md-2"><div style="margin-bottom: 5px"><label>Société</label></div>
+                    <input type="text" pInputText placeholder="societe" >
+                </div>
+                <div class="p-col-12  p-md-2"><div style="margin-bottom: 5px"><label>Mois</label></div>
+                    <input type="text" pInputText placeholder="mois" >
+                </div>
+                <div class="p-col-12  p-md-2"><div style="margin-bottom: 5px"><label>Trimestre</label></div>
+                    <input type="text" pInputText placeholder="trimestre" >
+                </div>
+            </div>
+
+            <div style="margin: 15px"><button pButton pRipple type="button" label="Search" icon="pi pi-search" iconPos="right" style="width:20rem; height: 10px" class="p-col-6 p-mb-2 p-offset-5"></button></div>
+
+            <div class="card">
+                <p-toolbar styleClass="p-mb-4">
+                    <ng-template pTemplate="left">
+                        <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2 p-mb-2" ></button>
+                        <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger p-mb-2" [disabled]="!selectes || !selectes.length"></button>
+                    </ng-template>
+                </p-toolbar>
+
+                <p-table #dt [value]="items" [rows]="10" [paginator]="true" [globalFilterFields]="['reference','annee','societe', 'totalHTDiff','montantISCalcul','montantISPaye', 'etat declaration']"
+                         [(selection)]="selectes" [rowHover]="true"
+                         styleClass="p-datatable-customers"
+                         currentPageReportTemplate="Affichage de {first} à {last} des {totalRecords} entrées" [showCurrentPageReport]="true" dataKey="id">
+
+                    <ng-template pTemplate="caption">
+                        <div class="p-d-flex p-flex-column p-flex-md-row p-jc-md-between table-header">
+                            <h5 class="p-m-0">Paiement</h5>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 3rem">
+                                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                            </th>
+                            <th pSortableColumn="ref" style="width: 6rem">ref
+                                <p-sortIcon field="ref"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="datePaiement" style="width: 14rem">Date de paiement
+                                <p-sortIcon field="datePaiement"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="total" style="width: 8rem">Total
+                                <p-sortIcon field="total"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="montantCptT" style="width: 19rem">Montant comptable traitant
+                                <p-sortIcon field="montantCptT"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="montantCptV" style="width: 20rem">Montant comptable validateur
+                                <p-sortIcon field="montantCptV"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="reste" style="width: 10rem">Reste
+                                <p-sortIcon field="reste"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="reste" style="width: 12rem">Déclaration IS
+                                <p-sortIcon field="reste"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="reste" style="width: 15rem">Déclaration TVA
+                                <p-sortIcon field="reste"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="reste" style="width: 12rem">Déclaration IR
+                                <p-sortIcon field="reste"></p-sortIcon>
+                            </th>
+                            <th></th>
+                        </tr>
+                    </ng-template>
+
+                    <ng-template pTemplate="body" let-paiement let-expanded="expanded">
+                        <tr>
+                            <td>
+                                <p-tableCheckbox [value]="paiement"></p-tableCheckbox>
+                            </td>
+                            <td>{{paiement.ref}}</td>
+                            <td>{{paiement.datePaiement}}</td>
+                            <td>{{paiement.total}}</td>
+                            <td>{{paiement.montantCptTraiteur}}</td>
+                            <td>{{paiement.montantCptValidateur}}</td>
+                            <td>{{paiement.reste}}</td>
+                            <td>
+                                <button type="button" pButton pRipple [pRowToggler]="paiement" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-times' : 'pi pi-search'"></button>
+                            </td>
+                            <td>
+                                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-warning p-mr-2"></button>
+                                <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info p-mr-2"></button>
+                                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger p-mr-2"></button>
+                                <button pButton pRipple icon="pi pi-download" class="p-button-rounded p-button-help p-button-info"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="summary">
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            En total il y a {{items ? items.length : 0 }} paiements.
+                        </div>
+                    </ng-template>
+
+                </p-table>
+            </div>
+        </div>
+    </div>
+</div>

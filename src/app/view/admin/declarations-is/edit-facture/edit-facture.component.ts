@@ -25,10 +25,11 @@ export class EditFactureComponent implements OnInit {
             if (this.selectedFact.typeOperation == "debit"){
               this.selected.factureD[this.service.findFacturesIndexById(this.selectedFact.id, this.selected.factureD)] = this.selectedFact;
             }
+            this.service.afficheObject().subscribe(data => this.selected = data);
             this.messageService.add({
               severity: 'success',
-              summary: 'Successful',
-              detail: 'Facture Updated',
+              summary: 'Succès',
+              detail: 'Facture modifée',
               life: 3000
             });
           }else console.log(data);
@@ -66,7 +67,6 @@ export class EditFactureComponent implements OnInit {
   set selected(value: DeclarationIS) {
     this.service.selected = value;
   }
-
 
   ngOnInit(): void {
   }
