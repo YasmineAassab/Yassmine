@@ -7,6 +7,7 @@ import {DeclarationTvaCriteria} from "../../../../controller/model/declaration-t
 import {DeclarationTvaVo2} from "../../../../controller/model/declaration-tva-vo2.model";
 import {Facture} from "../../../../controller/model/facture.model";
 import {DeclarationIS} from "../../../../controller/model/declaration-is.model";
+import {Paiement2} from "../../../../controller/model/paiement2.model";
 
 @Component({
   selector: 'app-declaration-tva-list',
@@ -94,6 +95,16 @@ export class DeclarationTvaListComponent implements OnInit {
             }
         });
     }
+    public findpaiement(declarationTva: DeclarationTva){
+      this.service.findpaiement(declarationTva).subscribe(
+          data =>{
+              this.paiements = data;
+              console.log('bravo trouver paiement2 pour declarationTva');
+          }, error => {
+              console.log('erreur trouver paiement2 pour declarationTva');
+          }
+      );
+    }
     get viewDialog(): boolean {
         return this.service.viewDialog;
     }
@@ -145,5 +156,10 @@ export class DeclarationTvaListComponent implements OnInit {
   set selectes(value: Array<DeclarationTva>) {
     this.service.selectes = value;
   }
-
+  get paiements(): Array<Paiement2> {
+      return this.service.paiements;
+  }
+  set paiements(value: Array<Paiement2>){
+      this.service.paiements = value;
+  }
 }

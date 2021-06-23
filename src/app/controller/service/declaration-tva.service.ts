@@ -8,6 +8,7 @@ import {DeclarationTvaVo2} from "../model/declaration-tva-vo2.model";
 import {Facture} from "../model/facture.model";
 import {Observable} from "rxjs";
 import {DeclarationTvaCriteria} from "../model/declaration-tva-criteria.model";
+import {Paiement2} from "../model/paiement2.model";
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,7 @@ export class DeclarationTvaService {
   private _details: DeclarationTvaVo2;
   private _selectes: Array<DeclarationTva>;
   private _selectedFact: Facture;
+  private _paiements: Array<Paiement2>;
   constructor(private http: HttpClient) { }
   public findAll(): Observable<Array<DeclarationIS>> {
     return this.http.get<Array<DeclarationIS>>(this._url);
@@ -294,5 +296,21 @@ export class DeclarationTvaService {
   //delete facture
   public deleteFacture(selectedFact: Facture): Observable<number> {
     return this.http.delete<number>(environment.baseUrl + 'facture/ref/' + selectedFact.ref);
+  }
+
+  //trouver les paiements d'une declarationTva
+  public findpaiement(declarationTva: DeclarationTva): Observable<Array<Paiement2>>{
+    return this.http.get<Array<Paiement2>>(environment.baseUrl + 'paiement2/bydecltvaref/ref/' + declarationTva.ref);
+  }
+
+  get paiements(): Array<Paiement2> {
+    if (this._paiements == null){
+      this._paiements = new Array<Paiement2>();
+    }
+    return this._paiements;
+  }
+
+  set paiements(value: Array<Paiement2>) {
+    this._paiements = value;
   }
 }

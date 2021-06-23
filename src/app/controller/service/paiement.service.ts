@@ -3,6 +3,7 @@ import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Paiement2} from '../model/paiement2.model';
+import {Paiement2Vo} from "../model/paiement2-vo.model";
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class Paiement2Service {
   private _selected: Paiement2;
   private _items: Array<Paiement2>;
   private _selectes: Array<Paiement2>;
+  private _selectedVo: Paiement2Vo;
 
   private _createDialog: boolean;
   private _editDialog: boolean;
@@ -31,6 +33,15 @@ export class Paiement2Service {
 
   public findByDeclarationISRef(ref: string): Observable<Array<Paiement2>>{
     return this.http.get<Array<Paiement2>>(this.url + 'bydeclisref/ref/' + ref);
+  }
+  public paiementCriteria(): Observable<Array<Paiement2>>{
+    return this.http.post<Array<Paiement2>>(this.url + 'criteria', this.selectedVo);
+  }
+  public update(paiement2: Paiement2): Observable<number>{
+    return this.http.put<number>(this.url + 'update', paiement2);
+  }
+  public delete(paiement2: Paiement2): Observable<number>{
+    return this.http.delete<number>(this.url + 'ref/' + paiement2.ref);
   }
 
   public findIndexById(id: number): number {
@@ -127,4 +138,14 @@ export class Paiement2Service {
     this._items = value;
   }
 
+  get selectedVo(): Paiement2Vo {
+    if (this._selectedVo == null){
+      this._selectedVo = new Paiement2Vo();
+    }
+    return this._selectedVo;
+  }
+
+  set selectedVo(value: Paiement2Vo) {
+    this._selectedVo = value;
+  }
 }
