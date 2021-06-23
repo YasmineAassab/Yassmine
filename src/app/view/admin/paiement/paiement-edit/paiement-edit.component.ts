@@ -18,14 +18,31 @@ export class PaiementEditComponent implements OnInit {
   public update(){
     this.service.update(this.selected).subscribe(data => {
       if (data > 0){
+        this.paiementCriteria();
         this.messageService.add({severity: 'success', summary: 'Succès', detail: 'Paiement modifié', life: 4000});
       }
     }, error => {
           this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Paiement non modifié !', life: 4000});
         }
-        )
+        );
+  }
+  public paiementCriteria(){
+    this.service.paiementCriteria().subscribe(
+        data =>{
+          this.items = data;
+          console.log("bravo trouver paiement list");
+        }, error => {
+          console.log("erreur trouver paiement list");
+        }
+    );
+  }
+  get items(): Array<Paiement2> {
+    return this.service.items;
   }
 
+  set items(value: Array<Paiement2>) {
+    this.service.items = value;
+  }
   public hideEditDialog() {
     this.editDialog = false;
   }
