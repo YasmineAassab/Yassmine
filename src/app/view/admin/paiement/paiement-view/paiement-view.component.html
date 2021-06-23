@@ -1,0 +1,97 @@
+<p-dialog [(visible)]="viewDialog" [style]="{width: '450px'}" header="Détails de paiement" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="p-grid">
+
+            <div class="p-col-6">
+                <div class="p-field">
+                    <label for="ref">Référence</label>
+                    <input type="text" pInputText id="ref" [(ngModel)]="selected.ref" disabled />
+                </div>
+            </div>
+
+            <div class="p-col-6">
+                <div class="p-field">
+                    <label for="date">Date de paiement</label>
+                    <input type="date" pInputText id="date" [(ngModel)]="selected.datePaiement" disabled />
+                </div>
+            </div>
+
+            <div class="p-col-6">
+                <div class="p-field">
+                    <label for="total">Total</label>
+                    <input type="text" pInputText id="total" [(ngModel)]="selected.total" disabled />
+                </div>
+            </div>
+            <div class="p-col-6">
+                <div class="p-field">
+                    <label for="montantCptTraiteur">Montant comptable traitant</label>
+                    <input type="text" pInputText id="montantCptTraiteur" [(ngModel)]="selected.montantCptTraiteur" disabled />
+                </div>
+            </div>
+            <div class="p-col-6">
+                <div class="p-field">
+                    <label for="montantCptValidateur">Montant comptable validateur</label>
+                    <input type="text" pInputText id="montantCptValidateur" [(ngModel)]="selected.montantCptValidateur" disabled />
+                </div>
+            </div>
+            <div class="p-col-6">
+                <div class="p-field">
+                    <label for="reste">Reste</label>
+                    <input type="text" pInputText id="reste" [(ngModel)]="selected.reste" disabled />
+                </div>
+            </div>
+            <div class="p-col-12" *ngIf="selected.declarationIS != null">
+                <div class="p-grid">
+                    <div class="p-col-12"><h5>Déclaration IS</h5></div>
+                    <div class="p-col-6">
+                        <div class="p-field">
+                            <label for="ste">Société</label>
+                            <input type="text" pInputText id="ste" [(ngModel)]="selected.declarationIS.societe.ice" disabled />
+                        </div>
+                    </div>
+                    <div class="p-col-6">
+                        <div class="p-field">
+                            <label for="annee">Année</label>
+                            <input type="text" pInputText id="annee" [(ngModel)]="selected.declarationIS.annee" disabled />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="p-col-6" *ngIf="selected.declarationTva != null">
+                <div><h5>Déclaration TVA</h5></div>
+                <div class="p-field">
+                    <label for="stee">Société</label>
+                    <input type="text" pInputText id="stee" [(ngModel)]="selected.declarationTva.societe.ice" disabled />
+                </div>
+                <div class="p-field">
+                    <label for="anneetva">Année</label>
+                    <input type="text" pInputText id="anneetva" [(ngModel)]="selected.declarationTva.annee" disabled />
+                </div>
+                <div class="p-field">
+                    <label for="mois">Mois</label>
+                    <input type="text" pInputText id="mois" [(ngModel)]="selected.declarationTva.mois" disabled />
+                </div>
+                <div class="p-field">
+                    <label for="trim">Société</label>
+                    <input type="text" pInputText id="trim" [(ngModel)]="selected.declarationTva.trim" disabled />
+                </div>
+            </div>
+
+            <!--
+                        <div class="p-col-6">
+                            <div class="p-field">
+                                <label for="classComptable">Classe comptable</label>
+                                <input type="text" pInputText id="classComptable" [(ngModel)]="selectedFact.classComptable.numero" disabled />
+                            </div>
+                        </div>
+            -->
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Fermer" icon="pi pi-times" class="p-button-text" (click)="hideViewDialog()"></button>
+    </ng-template>
+</p-dialog>
+

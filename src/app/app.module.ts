@@ -187,6 +187,7 @@ import { FactureJournalComponent } from './view/admin/facture/facture-journal/fa
 import { PaiementCreateComponent } from './view/admin/paiement/paiement-create/paiement-create.component';
 import { PaiementListComponent } from './view/admin/paiement/paiement-list/paiement-list.component';
 import { PaiementEditComponent } from './view/admin/paiement/paiement-edit/paiement-edit.component';
+import { PaiementViewComponent } from './view/admin/paiement/paiement-view/paiement-view.component';
 @NgModule({
     imports: [
         BrowserModule,
@@ -364,7 +365,8 @@ import { PaiementEditComponent } from './view/admin/paiement/paiement-edit/paiem
         FactureJournalComponent,
         PaiementCreateComponent,
         PaiementListComponent,
-        PaiementEditComponent
+        PaiementEditComponent,
+        PaiementViewComponent
 
     ],
     providers: [

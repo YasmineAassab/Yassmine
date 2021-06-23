@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Paiement2Service} from '../../../../controller/service/paiement.service';
 import {Paiement2} from '../../../../controller/model/paiement2.model';
 import {Paiement2Vo} from "../../../../controller/model/paiement2-vo.model";
-import {Facture} from '../../../../controller/model/facture.model';
+import {ConfirmationService, MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-paiement-list',
@@ -12,7 +12,7 @@ import {Facture} from '../../../../controller/model/facture.model';
 export class PaiementListComponent implements OnInit {
 
 
-  constructor(private service: Paiement2Service) { }
+  constructor(private service: Paiement2Service, private confirmationService: ConfirmationService, private messageService: MessageService) { }
 
   declaration: any;
   is = false;
@@ -55,6 +55,32 @@ export class PaiementListComponent implements OnInit {
   public edit(selected: Paiement2) {
     this.selected = {...selected};
     this.editDialog = true;
+  }
+
+  public view(selected: Paiement2) {
+    this.selected = {...selected};
+    this.viewDialog = true;
+  }
+
+  public delete(selected: Paiement2) {
+    this.selected = selected;
+    this.confirmationService.confirm({
+      message: 'Êtes-vous sûr de vouloir supprimer le paiement  ' + selected.ref + '?',
+      header: 'Confirm',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.service.delete(this.selected).subscribe(data => {
+          this.items = this.items.filter(val => val.id !== this.selected.id);
+          this.selected = new Paiement2();
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Succès',
+            detail: 'Paiement supprimé',
+            life: 3000
+          });
+        });
+      }
+    });
   }
 
   get selectedVo(): Paiement2Vo {
