@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {Paiement2Service} from '../../../../controller/service/paiement.service';
 import {Paiement2} from '../../../../controller/model/paiement2.model';
 import {MessageService} from 'primeng/api';
-import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-paiement-create',
@@ -56,7 +55,7 @@ export class PaiementCreateComponent implements OnInit {
             this.messageService.add({severity: 'success', summary: 'Succès', detail: 'Paiement enregistré', life: 4000});
           }
           else {
-            this.messageService.add({severity: 'warn', summary: 'Attention', detail: 'Paiement non enregistré !', life: 4000});
+            this.messageService.add({severity: 'warn', summary: 'Attention', detail: 'Paiement non enregistré !' + data , life: 4000});
           }
         }, error => {
           this.messageService.add({severity: 'error', summary: 'Erreur', detail: 'Paiement non enregistré !', life: 4000});
