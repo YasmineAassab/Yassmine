@@ -146,15 +146,15 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Plan comptable', icon: 'pi pi-fw pi-slack',
                 items: [
-                    {label: 'Plan comptable', icon: 'pi pi-fw pi-check', routerLink: ['/home']},
+                    {label: 'Plan comptable', icon: 'pi pi-fw pi-check', routerLink: ['classe-comptable']},
                 ]
             },
             {
                 label: 'CPC', icon: 'pi pi-fw pi-dollar',
                 items: [
-                    {label: 'Créer', icon: 'pi pi-fw pi-plus', routerLink: ['/home']},
-                    {label: 'Rechercher', icon: 'pi pi-fw pi-search', routerLink: ['/home']},
-                    {label: 'Statistiques', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/home']},
+                    {label: 'Créer', icon: 'pi pi-fw pi-plus', routerLink: ['cpc-view']},
+                    {label: 'Rechercher', icon: 'pi pi-fw pi-search', routerLink: ['cpc-recherche']},
+                    {label: 'Statistiques', icon: 'pi pi-fw pi-chart-bar', routerLink: ['Cpc-Chart']},
                 ]
             },
             {
@@ -240,15 +240,15 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Plan comptable', icon: 'pi pi-fw pi-slack',
                 items: [
-                    {label: 'Plan comptable', icon: 'pi pi-fw pi-check', routerLink: ['/home']},
+                    {label: 'Plan comptable', icon: 'pi pi-fw pi-check', routerLink: ['classe-comptable']},
                 ]
             },
             {
                 label: 'CPC', icon: 'pi pi-fw pi-dollar',
                 items: [
-                    {label: 'Créer', icon: 'pi pi-fw pi-plus', routerLink: ['/home']},
-                    {label: 'Rechercher', icon: 'pi pi-fw pi-search', routerLink: ['/home']},
-                    {label: 'Statistiques', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/home']},
+                    {label: 'Créer', icon: 'pi pi-fw pi-plus', routerLink: ['cpc-view']},
+                    {label: 'Rechercher', icon: 'pi pi-fw pi-search', routerLink: ['cpc-recherche']},
+                    {label: 'Statistiques', icon: 'pi pi-fw pi-chart-bar', routerLink: ['Cpc-Chart']},
                 ]
             },
         ];
@@ -312,20 +312,6 @@ export class AppMenuComponent implements OnInit {
                 label: 'Acomptes', icon: 'bi bi-cash-coin',
                 items: [
                     {label: 'Liste des acomptes', icon: 'pi pi-fw pi-list', routerLink: ['acomptes/list']},
-                ]
-            },
-            {
-                label: 'Plan comptable', icon: 'pi pi-fw pi-slack',
-                items: [
-                    {label: 'Plan comptable', icon: 'pi pi-fw pi-check', routerLink: ['/home']},
-                ]
-            },
-            {
-                label: 'CPC', icon: 'pi pi-fw pi-dollar',
-                items: [
-                    {label: 'Créer', icon: 'pi pi-fw pi-plus', routerLink: ['/home']},
-                    {label: 'Rechercher', icon: 'pi pi-fw pi-search', routerLink: ['/home']},
-                    {label: 'Statistiques', icon: 'pi pi-fw pi-chart-bar', routerLink: ['/home']},
                 ]
             },
         ];
