@@ -93,8 +93,7 @@ export class AppMenuComponent implements OnInit {
                 label: 'Factures', icon: 'bi bi-clipboard-check',
                 items: [
                     {label: 'Créer', icon: 'pi pi-fw pi-plus', routerLink: ['facture']},
-                    {label: 'Rechercher', icon: 'pi pi-fw pi-search', routerLink: ['/home']},
-                    {label: 'Journal', icon: 'bi bi-journals', routerLink: ['/home']},
+                    {label: 'Journal', icon: 'bi bi-journals', routerLink: ['view/facture/journal']},
                 ]
             },
             {
@@ -187,8 +186,7 @@ export class AppMenuComponent implements OnInit {
                 label: 'Factures', icon: 'bi bi-clipboard-check',
                 items: [
                     {label: 'Créer', icon: 'pi pi-fw pi-plus', routerLink: ['facture']},
-                    {label: 'Rechercher', icon: 'pi pi-fw pi-search', routerLink: ['/home']},
-                    {label: 'Journal', icon: 'bi bi-journals', routerLink: ['/home']},
+                    {label: 'Journal', icon: 'bi bi-journals', routerLink: ['view/facture/journal']},
                 ]
             },
             {
@@ -279,8 +277,7 @@ export class AppMenuComponent implements OnInit {
                 label: 'Factures', icon: 'bi bi-clipboard-check',
                 items: [
                     {label: 'Créer', icon: 'pi pi-fw pi-plus', routerLink: ['facture']},
-                    {label: 'Rechercher', icon: 'pi pi-fw pi-search', routerLink: ['/home']},
-                    {label: 'Journal', icon: 'bi bi-journals', routerLink: ['/home']},
+                    {label: 'Journal', icon: 'bi bi-journals', routerLink: ['view/facture/journal']},
                 ]
             },
             {
