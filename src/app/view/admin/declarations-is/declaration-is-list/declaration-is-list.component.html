@@ -56,10 +56,11 @@
                                         <th pSortableColumn="totalHTDiff">Résultat fiscal <p-sortIcon field="totalHTDiff"></p-sortIcon></th>
                                         <th pSortableColumn="montantISCalcule">Montant calculé <p-sortIcon field="montantISCalcule"></p-sortIcon></th>
                                         <th pSortableColumn="montantISPaye">Montant payé <p-sortIcon field="montantISPaye"></p-sortIcon></th>
-                                        <th pSortableColumn="etatDeclaration" style="width: 7rem">État <p-sortIcon field="etatDeclaration"></p-sortIcon></th>
+                                        <th pSortableColumn="etatDeclaration" style="width: 10rem">État <p-sortIcon field="etatDeclaration"></p-sortIcon></th>
+                                        <!--
                                         <th pSortableColumn="acomptes" style="width: 12rem">Acomptes <p-sortIcon field="acomptes"></p-sortIcon></th>
                                         <th pSortableColumn="factures" style="width: 9rem">Factures<p-sortIcon field="factures"></p-sortIcon></th>
-                                        <th pSortableColumn="paiement" style="width: 9rem">Paiement<p-sortIcon field="paiement"></p-sortIcon></th>
+                                        <th pSortableColumn="paiement" style="width: 9rem">Paiement<p-sortIcon field="paiement"></p-sortIcon></th> -->
                                         <th></th>
                                     </tr>
                                 </ng-template>
@@ -71,23 +72,27 @@
                                         </td>
                                         <td>{{declarationIS.ref}}</td>
                                         <td>{{declarationIS.annee}}</td>
-                                        <td>{{declarationIS.societe.ice}}</td>
+                                        <td>{{declarationIS.societe.raisonSociale}} ({{declarationIS.societe.ice}})</td>
                                         <td>{{declarationIS.totalHTDiff | currency: 'MAD&nbsp;'}}</td>
                                         <td>{{declarationIS.montantISCalcule | currency: 'MAD&nbsp;'}}</td>
                                         <td>{{declarationIS.montantISPaye | currency: 'MAD&nbsp;'}}</td>
                                         <td>{{declarationIS.etatDeclaration.libelle}}</td>
+                                       <!--
                                         <td>
                                             <button type="button" pButton pRipple [pRowToggler]="declarationIS" style="margin-left: 15px;" class="p-button-text p-button-rounded" [icon]="expanded ? 'pi pi-times' : 'pi pi-search'" (click)="findBySocieteIceAndAnnee(declarationIS)" (click)="activeIndex = 3"></button>
-                                        </td>
+                                        </td> -->
+                                        <!--
                                         <td>
-                                            <button type="button" pButton pRipple [pRowToggler]="declarationIS" style="margin-left: 15px;" class="p-button-text p-button-rounded" [icon]="expanded ? 'pi pi-times' : 'pi pi-search'" (click)="findFactures(declarationIS)" (click)="activeIndex = 1"></button>
-                                        </td>
+                                            <button type="button" pButton pRipple [pRowToggler]="declarationIS" style="margin-left: 15px;" class="p-button-text p-button-rounded" [icon]="expanded ? 'pi pi-times' : 'pi pi-search'" (click)="findFactures(declarationIS)" (click)="findByDeclarationISRef(declarationIS)" (click)="findBySocieteIceAndAnnee(declarationIS)" (click)="activeIndex = 1"></button>
+                                        </td> -->
+                                        <!--
                                         <td>
                                             <button type="button" pButton pRipple [pRowToggler]="declarationIS" style="margin-left: 15px;" class="p-button-text p-button-rounded" [icon]="expanded ? 'pi pi-times' : 'pi pi-search'" (click)="findByDeclarationISRef(declarationIS)" (click)="activeIndex = 4"></button>
-                                        </td>
+                                        </td> -->
                                         <td>
                                             <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-warning p-mr-2" (click)="navigateToEdit(declarationIS)"></button>
-                                            <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info p-mr-2" (click)="view(declarationIS)"></button>
+                                            <!--<button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info p-mr-2" (click)="view(declarationIS)"></button>-->
+                                            <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info p-mr-2" (click)="findFactures(declarationIS)" (click)="findByDeclarationISRef(declarationIS)" (click)="findBySocieteIceAndAnnee(declarationIS)" (click)="activeIndex = 1"></button>
                                             <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger p-mr-2" (click)="delete(declarationIS)"></button>
                                             <button pButton pRipple icon="pi pi-download" class="p-button-rounded p-button-help p-button-info" (click)="downloadXmlFile(declarationIS)"></button>
                                         </td>

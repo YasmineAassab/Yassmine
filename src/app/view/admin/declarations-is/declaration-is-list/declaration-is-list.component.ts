@@ -32,7 +32,7 @@ export class DeclarationIsListComponent implements OnInit {
   navigateToEdit(selected: DeclarationIS) {
     this.selected = selected;
     this.findFactures(selected);
-    this.router.navigateByUrl('/declarations-is/edit');
+    this.router.navigateByUrl('home/declarations-is/edit');
   }
   public findByDeclarationISRef(selected: DeclarationIS){
     return this.servPaiem.findByDeclarationISRef(selected.ref).subscribe(data => this.itemsPaiem = data);
@@ -70,7 +70,7 @@ export class DeclarationIsListComponent implements OnInit {
 
   public findBySocieteIceAndAnnee(declarationIS: DeclarationIS){
     this.selected = declarationIS;
-    return this.serviceAcpt.findBySocieteIceAndAnnee(declarationIS.societe.ice, declarationIS.annee).subscribe(data => {
+    return this.serviceAcpt.findBySocieteIceAndAnnee(declarationIS.societe.ice, declarationIS.annee + 1).subscribe(data => {
       this.itemsAcpt = data;
     })
   }
