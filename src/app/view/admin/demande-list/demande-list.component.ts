@@ -105,13 +105,13 @@ export class DemandeListComponent implements OnInit {
 
     );
     if (selected.operation == 'Declaration IS'){
-      this.router.navigateByUrl('declarations-is/create');
+      this.router.navigateByUrl('home/declarations-is/create');
     }
     if (selected.operation == 'Declaration IR'){
-      this.router.navigateByUrl('declaration-ir');
+      this.router.navigateByUrl('home/declaration-ir');
     }
     if (selected.operation == 'Declaration TVA'){
-      this.router.navigateByUrl('declaration-tva/create');
+      this.router.navigateByUrl('home/declaration-tva/create');
     }
 
   }

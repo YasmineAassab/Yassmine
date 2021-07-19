@@ -32,13 +32,13 @@
             </ul>
         </div>
         <ul class="layout-menu" *ngIf="admin==true">
-            <li app-menuitem *ngFor="let item of modelAdmin; let i = index;" [item]="item" [index]="i" [root]="true" style="font-size: 17px"></li>
+            <li app-menuitem *ngFor="let item of modelAdmin; let i = index;" [item]="item" [index]="i" [root]="true" style="font-size: 15px"></li>
         </ul>
         <ul class="layout-menu" *ngIf="cpt==true">
-            <li app-menuitem *ngFor="let item of modelCpt; let i = index;" [item]="item" [index]="i" [root]="true"></li>
+            <li app-menuitem *ngFor="let item of modelCpt; let i = index;" [item]="item" [index]="i" [root]="true" style="font-size: 15px"></li>
         </ul>
         <ul class="layout-menu" *ngIf="ste==true">
-            <li app-menuitem *ngFor="let item of modelSociete; let i = index;" [item]="item" [index]="i" [root]="true"></li>
+            <li app-menuitem *ngFor="let item of modelSociete; let i = index;" [item]="item" [index]="i" [root]="true" style="font-size: 15px"></li>
         </ul>
     </div>
 </div>
